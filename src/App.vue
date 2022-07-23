@@ -6,7 +6,9 @@ import NavbarComponent from '@/components/NavbarComponent.vue'
 </script>
 
 <template>
-  <NavbarComponent />
+<NavbarComponent />
+<div class="container">
+</div>
 </template>
 
 <style scoped>
