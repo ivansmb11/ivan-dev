@@ -1,7 +1,9 @@
 <template>
-<nav class="navbar navbar-dark bg-dark">
-  <router-link :to="{name: 'home'}" class="no-style">Home</router-link>
-</nav>
+<div class="container-fluid">
+  <nav class="navbar navbar-dark bg-dark">
+    <router-link :to="{name: 'home'}" class="navbar-brand no-style ms-4">Home</router-link>
+  </nav>
+</div>
 </template>
 
 <style>
