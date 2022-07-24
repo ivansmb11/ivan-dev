@@ -1,9 +1,11 @@
 <template>
-  Home
+  Stack
 </template>
 
 <script>
+export default {
 
+}
 </script>
 
 <style>
