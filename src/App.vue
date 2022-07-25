@@ -1,12 +1,35 @@
 <script>
 import NavbarComponent from '@/components/NavbarComponent.vue'
 import { navbarWidth } from '@/components/state.js'
+import { computed } from '@vue/reactivity';
+import { useRoute } from 'vue-router';
+import { watch } from 'vue';
 
 export default {
   components: { NavbarComponent },
   setup() {
+    const route = useRoute();
+    const currentRoute = computed(() => {
+      const { path } = route;
+      switch (path) {
+        case '/':
+          return '/home.jpg';
+        case '/about':
+          return '/about.jpg';
+        case '/stack':
+          return '/stack.jpg';
+        default:
+          return '/portfolio.jpg';
+      }
+    });
+    watch(currentRoute, (curr, old) => {
+      if (curr !== old) {
+        console.log(currentRoute.value);
+      }
+    });
     return {
-      navbarWidth
+      navbarWidth,
+      currentRoute
     }
   },
 }
@@ -14,9 +37,11 @@ export default {
 </script>
 
 <template>
-<NavbarComponent />
-<div :style="{ 'margin-left': sidebarWidth }">
+<div :style="{ 'background-image': `url('./assets${ currentRoute.value }')` }">
+  <NavbarComponent />
+  <div :style="{ 'margin-left': navbarWidth }">
     <router-view />
+  </div>
 </div>
 </template>
 
