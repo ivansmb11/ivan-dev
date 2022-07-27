@@ -37,7 +37,7 @@ export default {
 </script>
 
 <template>
-<div :style="{ 'background-image': `url('./assets${ currentRoute.value }')` }">
+<div class="container" :style="{ 'background-image': 'url(./assets'+currentRoute+');' }">
   <NavbarComponent />
   <div :style="{ 'margin-left': navbarWidth }">
     <router-view />
