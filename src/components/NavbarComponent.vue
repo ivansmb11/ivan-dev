@@ -46,7 +46,7 @@ export default {
 }
 
 :root {
-  --sidebar-bg-color: #010431;
+  --sidebar-bg-color: #010431b3;
   --sidebar-item-hover: #010754;
   --sidebar-item-active: #000214;
 }
