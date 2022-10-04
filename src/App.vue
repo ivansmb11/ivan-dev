@@ -10,17 +10,8 @@ export default {
   setup() {
     const route = useRoute();
     const currentRoute = computed(() => {
-      const { path } = route;
-      switch (path) {
-        case '/':
-          return '/home.jpg';
-        case '/about':
-          return '/about.jpg';
-        case '/stack':
-          return '/stack.jpg';
-        default:
-          return '/portfolio.jpg';
-      }
+      const { name } = route;
+      return name;
     });
     watch(currentRoute, (curr, old) => {
       if (curr !== old) {
@@ -37,7 +28,7 @@ export default {
 </script>
 
 <template>
-<div class="container" :style="{ 'background-image': 'url(./assets'+currentRoute+');' }">
+<div :class="currentRoute">
   <NavbarComponent />
   <div :style="{ 'margin-left': navbarWidth }">
     <router-view />
@@ -51,16 +42,36 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #42b8838f;
 }
 #nav {
   padding: 30px;
 }
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: #42b883;
 }
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+</style>
+
+<style scoped>
+.home {
+  background-image: url(./assets/home.jpg);
+  background-size: cover;
+}
+.about {
+  background-image: url(./assets/about.jpg);
+  background-size: cover;
+}
+.stack {
+  background-image: url(./assets/stack.jpg);
+  background-size: cover;
+}
+.portfolio {
+  background-image: url(./assets/portfolio.jpg);
+  background-size: cover;
 }
 </style>
