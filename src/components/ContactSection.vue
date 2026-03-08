@@ -1,6 +1,6 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { Github, Linkedin, Twitter, Mail, Facebook, Heart } from 'lucide-vue-next'
+import { Github, Linkedin, Twitter, Mail, Facebook } from 'lucide-vue-next'
 
 const { t } = useI18n()
 
@@ -39,7 +39,7 @@ const socials = [
         v-motion
         :initial="{ opacity: 0, y: 20 }"
         :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: 400 } }"
-        class="flex items-center justify-center gap-4 mb-8"
+        class="flex items-center justify-center gap-6 mb-8"
       >
         <a
           v-for="social in socials"
@@ -48,13 +48,9 @@ const socials = [
           target="_blank"
           rel="noopener noreferrer"
           :aria-label="social.label"
-          class="group p-4 rounded-2xl bg-surface border border-zinc-800 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1"
+          class="text-zinc-500 hover:text-primary transition-colors duration-300"
         >
-          <component
-            :is="social.icon"
-            :size="22"
-            class="text-zinc-400 group-hover:text-primary transition-colors duration-300"
-          />
+          <component :is="social.icon" :size="22" />
         </a>
       </div>
 
@@ -70,12 +66,5 @@ const socials = [
       </a>
     </div>
 
-    <!-- Footer -->
-    <div class="mt-24 pt-8 border-t border-zinc-800/50 text-center">
-      <p class="text-sm text-zinc-600 flex items-center justify-center gap-1">
-        {{ t('footer.built', { icon: '' }) }}
-        <Heart :size="14" class="text-primary" />
-      </p>
-    </div>
   </section>
 </template>

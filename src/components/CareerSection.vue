@@ -1,7 +1,10 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Briefcase, MapPin, Calendar, Tag } from 'lucide-vue-next'
+import { MapPin, Calendar } from 'lucide-vue-next'
+import zazpayLogo from '@/assets/logos/zazpay.png'
+import prestavaleLogo from '@/assets/logos/prestavale.png'
+import geLogo from '@/assets/logos/ge.jpg'
 
 const { t } = useI18n()
 
@@ -16,6 +19,7 @@ const jobs = computed(() => [
     mode: t('career.zazpay.mode'),
     description: t('career.zazpay.description'),
     skills: t('career.zazpay.skills').split(', '),
+    logo: zazpayLogo,
     current: true,
   },
   {
@@ -29,6 +33,7 @@ const jobs = computed(() => [
     mode: t('career.prestavale.mode'),
     description: t('career.prestavale.description'),
     skills: t('career.prestavale.skills').split(', '),
+    logo: prestavaleLogo,
     current: false,
   },
   {
@@ -42,6 +47,7 @@ const jobs = computed(() => [
     mode: t('career.ge.mode'),
     description: t('career.ge.description'),
     skills: t('career.ge.skills').split(', '),
+    logo: geLogo,
     current: false,
   },
 ])
@@ -49,10 +55,7 @@ const jobs = computed(() => [
 
 <template>
   <section id="career" class="relative py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-zinc-950/90" />
-
-    <div class="relative z-10 max-w-4xl mx-auto px-6">
-      <!-- Section header -->
+    <div class="max-w-4xl mx-auto px-6">
       <div
         v-motion
         :initial="{ opacity: 0, y: 30 }"
@@ -66,10 +69,9 @@ const jobs = computed(() => [
 
       <!-- Timeline -->
       <div class="relative">
-        <!-- Vertical line -->
         <div class="absolute left-[19px] md:left-[23px] top-2 bottom-2 w-px bg-zinc-800" />
 
-        <div class="space-y-12">
+        <div class="space-y-14">
           <div
             v-for="(job, i) in jobs"
             :key="job.key"
@@ -79,74 +81,70 @@ const jobs = computed(() => [
             class="relative pl-12 md:pl-16"
           >
             <!-- Timeline dot -->
-            <div
-              class="absolute left-0 top-1.5 flex items-center justify-center"
-            >
+            <div class="absolute left-0 top-1.5 flex items-center justify-center">
               <div
                 class="w-[10px] h-[10px] md:w-[12px] md:h-[12px] rounded-full border-2"
                 :class="job.current
                   ? 'bg-primary border-primary shadow-[0_0_8px_rgba(16,185,129,0.4)]'
                   : 'bg-zinc-950 border-zinc-600'"
               />
-              <!-- Ping animation for current job -->
               <div
                 v-if="job.current"
                 class="absolute w-[10px] h-[10px] md:w-[12px] md:h-[12px] rounded-full bg-primary/50 animate-ping"
               />
             </div>
 
-            <!-- Card -->
-            <div
-              class="group p-6 rounded-2xl bg-surface border border-zinc-800 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
-            >
-              <!-- Header -->
-              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                <div>
-                  <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors">
-                    {{ job.role }}
-                  </h3>
+            <!-- Content -->
+            <div>
+              <!-- Header with logo -->
+              <div class="flex items-start gap-4 mb-2">
+                <img
+                  :src="job.logo"
+                  :alt="job.company"
+                  class="w-8 h-8 rounded-md shrink-0 opacity-80 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                  :class="job.key === 'ge' ? 'p-1.5 bg-white object-contain' : 'object-cover'"
+                />
+                <div class="min-w-0">
+                  <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-3">
+                    <h3 class="text-lg font-semibold text-white">{{ job.role }}</h3>
+                    <span
+                      v-if="job.current"
+                      class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary"
+                    >
+                      <span class="w-1.5 h-1.5 rounded-full bg-primary" />
+                      {{ t('career.present') }}
+                    </span>
+                  </div>
                   <p class="text-primary/80 font-medium text-sm">
                     {{ job.company }}
-                    <span class="text-zinc-500"> &middot; {{ job.type }}</span>
+                    <span class="text-zinc-600"> &middot; {{ job.type }}</span>
                   </p>
                 </div>
-                <span
-                  v-if="job.current"
-                  class="inline-flex items-center self-start gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap"
-                >
-                  <span class="w-1.5 h-1.5 rounded-full bg-primary" />
-                  {{ t('career.present') }}
-                </span>
               </div>
 
-              <!-- Meta -->
-              <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-zinc-500 mb-4">
+              <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-zinc-500 mb-3">
                 <span class="flex items-center gap-1.5">
-                  <Calendar :size="14" />
+                  <Calendar :size="13" />
                   {{ job.period }}
                   <span v-if="job.duration" class="text-zinc-600">&middot; {{ job.duration }}</span>
                 </span>
                 <span v-if="job.location" class="flex items-center gap-1.5">
-                  <MapPin :size="14" />
+                  <MapPin :size="13" />
                   {{ job.location }}
                 </span>
                 <span v-if="job.mode" class="text-zinc-600">{{ job.mode }}</span>
               </div>
 
-              <!-- Description -->
-              <p v-if="job.description" class="text-sm text-zinc-400 leading-relaxed mb-4">
+              <p v-if="job.description" class="text-sm text-zinc-400 leading-relaxed mb-3">
                 {{ job.description }}
               </p>
 
-              <!-- Skills -->
-              <div class="flex flex-wrap gap-2">
+              <div class="flex flex-wrap gap-x-2 gap-y-1">
                 <span
-                  v-for="skill in job.skills"
+                  v-for="(skill, si) in job.skills"
                   :key="skill"
-                  class="text-xs font-mono px-2.5 py-1 rounded-full bg-zinc-800/80 text-zinc-400"
-                >
-                  {{ skill }}
-                </span>
+                  class="text-xs font-mono text-zinc-500"
+                >{{ skill }}<span v-if="si < job.skills.length - 1" class="text-zinc-700"> &middot;</span></span>
               </div>
             </div>
           </div>

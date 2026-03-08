@@ -1,9 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ExternalLink, Github, FolderOpen } from 'lucide-vue-next'
-import portfolioImg from '@/assets/portfolio.jpg'
-
+import { ExternalLink, Github } from 'lucide-vue-next'
 const { t } = useI18n()
 
 const projects = computed(() => [
@@ -31,15 +29,7 @@ const projects = computed(() => [
 
 <template>
   <section id="portfolio" class="relative py-32 overflow-hidden">
-    <!-- Parallax background -->
-    <div
-      class="absolute inset-0 parallax-bg opacity-5"
-      :style="{ backgroundImage: `url(${portfolioImg})` }"
-    />
-    <div class="absolute inset-0 bg-zinc-950/80" />
-
-    <div class="relative z-10 max-w-6xl mx-auto px-6">
-      <!-- Section header -->
+    <div class="max-w-6xl mx-auto px-6">
       <div
         v-motion
         :initial="{ opacity: 0, y: 30 }"
@@ -51,22 +41,21 @@ const projects = computed(() => [
         <div class="mt-4 h-1 w-16 bg-primary rounded-full" />
       </div>
 
-      <!-- Project cards -->
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="space-y-12">
         <div
           v-for="(project, i) in projects"
           :key="project.title"
           v-motion
-          :initial="{ opacity: 0, y: 40 }"
+          :initial="{ opacity: 0, y: 30 }"
           :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: i * 150 } }"
-          class="group relative p-6 rounded-2xl bg-surface border border-zinc-800 hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/5"
-          :class="{ 'opacity-60': project.placeholder }"
+          class="group"
+          :class="{ 'opacity-50': project.placeholder }"
         >
-          <div class="flex items-start justify-between mb-4">
-            <div class="p-2.5 rounded-xl bg-primary/10 text-primary">
-              <FolderOpen :size="24" />
-            </div>
-            <div class="flex gap-3" v-if="!project.placeholder">
+          <div class="flex items-start justify-between mb-2">
+            <h3 class="text-xl font-semibold text-white group-hover:text-primary transition-colors">
+              {{ project.title }}
+            </h3>
+            <div class="flex gap-3 shrink-0 ml-4" v-if="!project.placeholder">
               <a
                 v-if="project.github"
                 :href="project.github"
@@ -74,7 +63,7 @@ const projects = computed(() => [
                 rel="noopener noreferrer"
                 class="text-zinc-500 hover:text-primary transition-colors"
               >
-                <Github :size="20" />
+                <Github :size="18" />
               </a>
               <a
                 v-if="project.live"
@@ -83,27 +72,24 @@ const projects = computed(() => [
                 rel="noopener noreferrer"
                 class="text-zinc-500 hover:text-primary transition-colors"
               >
-                <ExternalLink :size="20" />
+                <ExternalLink :size="18" />
               </a>
             </div>
           </div>
 
-          <h3 class="text-xl font-semibold mb-2 text-white group-hover:text-primary transition-colors">
-            {{ project.title }}
-          </h3>
-          <p class="text-sm text-zinc-400 leading-relaxed mb-6">
+          <p class="text-sm text-zinc-400 leading-relaxed mb-3 max-w-2xl">
             {{ project.description }}
           </p>
 
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-x-2 gap-y-1">
             <span
-              v-for="tag in project.tags"
+              v-for="(tag, ti) in project.tags"
               :key="tag"
-              class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-800 text-zinc-400"
-            >
-              {{ tag }}
-            </span>
+              class="text-xs font-mono text-zinc-500"
+            >{{ tag }}<span v-if="ti < project.tags.length - 1" class="text-zinc-700"> &middot;</span></span>
           </div>
+
+          <div v-if="i < projects.length - 1" class="mt-10 border-b border-zinc-800/50" />
         </div>
       </div>
     </div>

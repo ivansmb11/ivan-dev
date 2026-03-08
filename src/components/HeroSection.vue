@@ -1,7 +1,8 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { Github, Linkedin, Twitter, Mail, Facebook, ChevronDown } from 'lucide-vue-next'
+import { Github, Linkedin, Twitter, Mail, Facebook, ChevronDown, MapPin } from 'lucide-vue-next'
 import profileImg from '@/assets/me.jpg'
+
 
 const { t } = useI18n()
 
@@ -19,13 +20,11 @@ const socials = [
     id="hero"
     class="relative min-h-screen flex items-center justify-center overflow-hidden"
   >
-    <!-- Parallax background -->
+    <!-- Background photo -->
     <div
-      class="absolute inset-0 parallax-bg"
+      class="absolute inset-0 parallax-bg opacity-20"
       :style="{ backgroundImage: `url(${profileImg})` }"
     />
-    <!-- Dark overlay with gradient -->
-    <div class="absolute inset-0 bg-gradient-to-b from-zinc-950/70 via-zinc-950/80 to-zinc-950" />
 
     <!-- Content -->
     <div class="relative z-10 text-center px-6 max-w-3xl mx-auto">
@@ -55,12 +54,24 @@ const socials = [
         v-motion
         :initial="{ opacity: 0, y: 20 }"
         :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 600 } }"
-        class="text-lg md:text-xl text-zinc-400 mb-8 leading-relaxed"
+        class="text-lg md:text-xl text-zinc-400 mb-6 leading-relaxed max-w-xl mx-auto"
       >
         {{ t('hero.subtitle') }}
-        <br class="hidden md:block" />
-        {{ t('hero.subtitle2') }}
       </p>
+
+      <!-- Location pin -->
+      <div
+        v-motion
+        :initial="{ opacity: 0, y: 10 }"
+        :enter="{ opacity: 1, y: 0, transition: { delay: 750, duration: 500 } }"
+        class="flex items-center justify-center gap-1.5 mb-8"
+      >
+        <span class="relative flex items-center justify-center">
+          <MapPin :size="14" class="text-primary" />
+          <span class="absolute w-3 h-3 rounded-full bg-primary/30 animate-ping" />
+        </span>
+        <span class="text-sm font-mono text-zinc-500">{{ t('hero.location') }}</span>
+      </div>
 
       <!-- Social links -->
       <div

@@ -8,9 +8,9 @@ const { t, locale } = useI18n()
 const links = [
   { key: 'nav.home', href: '#hero' },
   { key: 'nav.about', href: '#about' },
-  { key: 'nav.stack', href: '#stack' },
-  { key: 'nav.portfolio', href: '#portfolio' },
   { key: 'nav.career', href: '#career' },
+  { key: 'nav.portfolio', href: '#portfolio' },
+  { key: 'nav.achievements', href: '#achievements' },
   { key: 'nav.contact', href: '#contact' },
 ]
 
@@ -48,7 +48,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
         @click.prevent="scrollTo('#hero')"
         class="text-xl font-bold font-mono tracking-tight text-primary hover:text-primary-light transition-colors"
       >
-        ivan.dev
+        ivanmendoza.dev
       </a>
 
       <!-- Desktop links -->

@@ -2,15 +2,15 @@ export default {
   nav: {
     home: 'Home',
     about: 'About',
-    stack: 'Stack',
     portfolio: 'Portfolio',
     career: 'Career',
+    achievements: 'Achievements',
     contact: 'Contact',
   },
   hero: {
     greeting: "Hi, I'm {name}.",
-    subtitle: 'Full-Stack Software Developer from Sinaloa, México.',
-    subtitle2: 'Currently living in Querétaro, México.',
+    subtitle: 'Software Engineer building fintech products — from mobile apps to scalable platforms.',
+    location: 'Mexico City, MX',
   },
   about: {
     label: 'Get to know me',
@@ -20,18 +20,9 @@ export default {
     education: 'Education',
     educationText: 'BSC in Computer Science Engineering and Digital Businesses at Universidad Anáhuac, Querétaro.',
     experience: 'Experience',
-    experienceText: 'Software Developer at General Electric Aviation, building fullstack web applications for engineering and quality purposes.',
+    experienceText: 'Software Engineer at Zazpay, a BNPL fintech, building core systems across frontend and mobile environments.',
     location: 'Location',
-    locationText: 'Originally from Sinaloa, México. Currently based in Querétaro, México.',
-  },
-  stack: {
-    label: 'Technologies',
-    title: 'Tech Stack',
-    languages: 'Languages',
-    frontend: 'Frontend',
-    backend: 'Backend & DevOps',
-    databases: 'Databases',
-    tools: 'Tools',
+    locationText: 'Originally from Sinaloa, México. Currently based in Mexico City, México.',
   },
   portfolio: {
     label: 'My work',
@@ -53,7 +44,7 @@ export default {
       location: 'Mexico City Metropolitan Area',
       mode: 'Hybrid',
       description: 'Software engineer at Zazpay, a Buy Now, Pay Later (BNPL) fintech, where I design, build, and maintain core systems across the platform, mainly frontend and mobile environments. I work on core features that ensure reliable and scalable solutions that serve both end users and internal teams.',
-      skills: 'Engineering, Databases, React Native, TypeScript, Node.js, PostgreSQL, REST APIs, Agile, Git, CI/CD',
+      skills: 'Engineering, Databases, React Native, TypeScript, Node.js, PostgreSQL, REST APIs, CI/CD',
     },
     prestavale: {
       role: 'Software Engineer',
@@ -63,8 +54,8 @@ export default {
       duration: '1 yr 7 mos',
       location: '',
       mode: 'Hybrid',
-      description: '',
-      skills: 'React Native, Scrum, TypeScript, REST APIs, Git, Agile, Mobile Development, CI/CD',
+      description: 'Software engineer at Presta Vale, a micro-lending financial institution, where I developed and maintained mobile and web applications for credit origination, loan management, and collections. Focused on delivering reliable user experiences for both borrowers and internal operations teams.',
+      skills: 'React Native, TypeScript, REST APIs, Mobile Development, CI/CD',
     },
     ge: {
       role: 'Software Developer Intern',
@@ -78,6 +69,23 @@ export default {
       skills: 'Vue.js, Spring Boot',
     },
   },
+  achievements: {
+    label: 'Milestones',
+    title: 'Achievements',
+    saa: {
+      title: 'Sociedad de Alumnos Anáhuac',
+      issuer: 'Universidad Anáhuac Querétaro',
+      date: 'Nov 2022',
+      credential: '7CC14A8DA001',
+    },
+    gcloud: {
+      title: 'Google Cloud Computing Foundations: Cloud Computing Fundamentals',
+      issuer: 'Google Cloud Skills Boost',
+      date: 'Sep 2022',
+      credential: '2619947',
+    },
+    verify: 'Certificate',
+  },
   contact: {
     label: 'Get in touch',
     title: 'Contact',
@@ -85,6 +93,9 @@ export default {
     cta: 'Say Hello',
   },
   footer: {
-    built: 'Built with {icon} by Ivan Mendoza',
+    available: 'Available for new opportunities',
+    designed: 'Designed & built by Ivan Mendoza',
+    source: 'Source',
+    rights: '© {year} Ivan Mendoza. All rights reserved.',
   },
 }

@@ -2,8 +2,6 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { GraduationCap, Briefcase, MapPin } from 'lucide-vue-next'
-import aboutImg from '@/assets/about.jpg'
-
 const { t } = useI18n()
 
 const highlights = computed(() => [
@@ -27,15 +25,8 @@ const highlights = computed(() => [
 
 <template>
   <section id="about" class="relative py-32 overflow-hidden">
-    <!-- Parallax background -->
-    <div
-      class="absolute inset-0 parallax-bg opacity-10"
-      :style="{ backgroundImage: `url(${aboutImg})` }"
-    />
-    <div class="absolute inset-0 bg-zinc-950/90" />
 
-    <div class="relative z-10 max-w-6xl mx-auto px-6">
-      <!-- Section header -->
+    <div class="max-w-6xl mx-auto px-6">
       <div
         v-motion
         :initial="{ opacity: 0, y: 30 }"
@@ -48,7 +39,6 @@ const highlights = computed(() => [
       </div>
 
       <div class="grid md:grid-cols-2 gap-12 items-start">
-        <!-- Text -->
         <div
           v-motion
           :initial="{ opacity: 0, x: -40 }"
@@ -62,24 +52,19 @@ const highlights = computed(() => [
           </p>
         </div>
 
-        <!-- Highlight cards -->
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-8">
           <div
             v-for="(item, i) in highlights"
             :key="item.title"
             v-motion
             :initial="{ opacity: 0, x: 40 }"
             :visible-once="{ opacity: 1, x: 0, transition: { duration: 500, delay: 300 + i * 150 } }"
-            class="group p-5 rounded-2xl bg-surface border border-zinc-800 hover:border-primary/30 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5"
+            class="flex items-start gap-4"
           >
-            <div class="flex items-start gap-4">
-              <div class="p-2.5 rounded-xl bg-primary/10 text-primary shrink-0">
-                <component :is="item.icon" :size="22" />
-              </div>
-              <div>
-                <h3 class="font-semibold text-white mb-1">{{ item.title }}</h3>
-                <p class="text-sm text-zinc-400 leading-relaxed">{{ item.text }}</p>
-              </div>
+            <component :is="item.icon" :size="20" class="text-primary shrink-0 mt-0.5" />
+            <div>
+              <h3 class="font-semibold text-white mb-1">{{ item.title }}</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed">{{ item.text }}</p>
             </div>
           </div>
         </div>
