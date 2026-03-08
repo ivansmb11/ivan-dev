@@ -1,20 +1,23 @@
 {
   "name": "ivan-dev",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1",
-    "animate.css": "^4.1.1",
-    "bootstrap": "^5.2.0",
-    "vue": "^3.2.37",
-    "vue-router": "^4.1.2"
+    "@vueuse/motion": "^2.2.6",
+    "lucide-vue-next": "^0.474.0",
+    "vue": "^3.5.13",
+    "vue-i18n": "^11.3.0",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^3.0.1",
-    "vite": "^3.0.1"
+    "@tailwindcss/vite": "^4.1.3",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "tailwindcss": "^4.1.3",
+    "vite": "^6.2.5"
   }
 }
