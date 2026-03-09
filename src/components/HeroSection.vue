@@ -1,10 +1,11 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { Github, Linkedin, Twitter, Mail, Facebook, ChevronDown, MapPin } from 'lucide-vue-next'
-import profileImg from '@/assets/me.jpg'
-
+import { useTheme } from '@/stores/useThemeStore'
+import profileImg from '@/assets/me.webp'
 
 const { t } = useI18n()
+const { theme } = useTheme()
 
 const socials = [
   { icon: Facebook, href: 'https://www.facebook.com/ivansmb11', label: 'Facebook' },
@@ -22,7 +23,8 @@ const socials = [
   >
     <!-- Background photo -->
     <div
-      class="absolute inset-0 parallax-bg opacity-20"
+      class="absolute inset-0 parallax-bg"
+      :class="theme === 'dark' ? 'opacity-20' : 'opacity-10'"
       :style="{ backgroundImage: `url(${profileImg})` }"
     />
 
@@ -46,6 +48,7 @@ const socials = [
         :initial="{ opacity: 0, y: 30 }"
         :enter="{ opacity: 1, y: 0, transition: { delay: 400, duration: 600 } }"
         class="text-5xl md:text-7xl font-bold tracking-tight mb-4"
+        :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
       >
         {{ t('hero.greeting', { name: 'Ivan' }) }}
       </h1>
@@ -54,7 +57,8 @@ const socials = [
         v-motion
         :initial="{ opacity: 0, y: 20 }"
         :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 600 } }"
-        class="text-lg md:text-xl text-zinc-400 mb-6 leading-relaxed max-w-xl mx-auto"
+        class="text-lg md:text-xl mb-6 leading-relaxed max-w-xl mx-auto"
+        :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'"
       >
         {{ t('hero.subtitle') }}
       </p>
@@ -70,7 +74,7 @@ const socials = [
           <MapPin :size="14" class="text-primary" />
           <span class="absolute w-3 h-3 rounded-full bg-primary/30 animate-ping" />
         </span>
-        <span class="text-sm font-mono text-zinc-500">{{ t('hero.location') }}</span>
+        <span class="text-sm font-mono" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">{{ t('hero.location') }}</span>
       </div>
 
       <!-- Social links -->
@@ -87,12 +91,16 @@ const socials = [
           target="_blank"
           rel="noopener noreferrer"
           :aria-label="social.label"
-          class="group p-3 rounded-xl bg-zinc-800/50 hover:bg-primary/20 border border-zinc-700/50 hover:border-primary/50 transition-all duration-300"
+          class="group p-3 rounded-xl border transition-all duration-300"
+          :class="theme === 'dark'
+            ? 'bg-zinc-800/50 hover:bg-primary/20 border-zinc-700/50 hover:border-primary/50'
+            : 'bg-white/80 hover:bg-primary/10 border-zinc-200 hover:border-primary/50'"
         >
           <component
             :is="social.icon"
             :size="20"
-            class="text-zinc-400 group-hover:text-primary transition-colors duration-300"
+            class="group-hover:text-primary transition-colors duration-300"
+            :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'"
           />
         </a>
       </div>
@@ -101,8 +109,9 @@ const socials = [
     <!-- Scroll indicator -->
     <a
       href="#about"
-      @click.prevent="document.querySelector('#about').scrollIntoView({ behavior: 'smooth' })"
-      class="absolute bottom-8 left-1/2 -translate-x-1/2 text-zinc-500 hover:text-primary transition-colors animate-bounce"
+      @click.prevent="document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })"
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 hover:text-primary transition-colors animate-bounce"
+      :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
     >
       <ChevronDown :size="28" />
     </a>

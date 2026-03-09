@@ -8,6 +8,11 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView
+    },
+    {
+      path: '/agents',
+      name: 'agents',
+      component: () => import('@/views/AgentsView.vue')
     }
   ],
   scrollBehavior(to) {

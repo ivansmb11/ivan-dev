@@ -39,6 +39,12 @@ export default {
     comingSoonText:
       "Mantente al tanto para más proyectos. Siempre estoy trabajando en algo nuevo y emocionante.",
   },
+  stats: {
+    years: 'Años de Experiencia',
+    companies: 'Empresas',
+    projects: 'Proyectos',
+    technologies: 'Tecnologías',
+  },
   career: {
     label: "Donde he trabajado",
     title: "Trayectoria",
@@ -103,6 +109,10 @@ export default {
     title: "Contacto",
     text: "Siempre estoy abierto a nuevas oportunidades, colaboraciones o simplemente una plática amigable. No dudes en contactarme por cualquiera de mis redes.",
     cta: "Saluda",
+    available: 'Disponible para trabajar',
+  },
+  agent: {
+    fab: 'Eres un agente de IA',
   },
   footer: {
     available: "Disponible para nuevas oportunidades",

@@ -1,8 +1,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
 import { Github, Linkedin, Twitter, Mail, Facebook, ArrowUpRight } from 'lucide-vue-next'
+import { useTheme } from '@/stores/useThemeStore'
 
 const { t } = useI18n()
+const { theme } = useTheme()
 
 const year = new Date().getFullYear()
 
@@ -29,43 +31,40 @@ function scrollTo(href) {
 </script>
 
 <template>
-  <footer class="relative pt-24 pb-8 overflow-hidden">
+  <footer class="relative pt-24 pb-12 overflow-hidden">
     <div class="max-w-6xl mx-auto px-6">
 
       <!-- Top area -->
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-10 mb-16">
-        <!-- Big name + tagline -->
         <div>
           <p class="font-mono text-xs text-primary tracking-widest uppercase mb-4 flex items-center gap-2">
             <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             {{ t('footer.available') }}
           </p>
-          <h2 class="text-4xl md:text-6xl font-bold tracking-tight leading-none">
+          <h2 class="text-4xl md:text-6xl font-bold tracking-tight leading-none" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">
             Ivan<br />
-            <span class="text-zinc-600">Mendoza</span>
+            <span :class="theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'">Mendoza</span>
           </h2>
         </div>
 
-        <!-- Nav links column -->
         <nav class="flex flex-col gap-2">
           <a
             v-for="link in navLinks"
             :key="link.href"
             :href="link.href"
             @click.prevent="scrollTo(link.href)"
-            class="text-sm text-zinc-500 hover:text-white transition-colors"
+            class="nav-link text-sm transition-colors w-fit"
+            :class="theme === 'dark' ? 'text-zinc-500 hover:text-white' : 'text-zinc-400 hover:text-zinc-900'"
           >
             {{ t(link.key) }}
           </a>
         </nav>
       </div>
 
-      <!-- Divider -->
-      <div class="border-t border-zinc-800/60 mb-8" />
+      <div class="border-t mb-8" :class="theme === 'dark' ? 'border-zinc-800/60' : 'border-zinc-200'" />
 
       <!-- Bottom bar -->
       <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
-        <!-- Socials -->
         <div class="flex items-center gap-5">
           <a
             v-for="social in socials"
@@ -74,26 +73,27 @@ function scrollTo(href) {
             target="_blank"
             rel="noopener noreferrer"
             :aria-label="social.label"
-            class="text-zinc-600 hover:text-primary transition-colors duration-300"
+            class="hover:text-primary transition-colors duration-300"
+            :class="theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'"
           >
             <component :is="social.icon" :size="18" />
           </a>
         </div>
 
-        <!-- Credits -->
-        <div class="flex flex-col sm:flex-row items-center gap-3 text-xs text-zinc-600">
+        <div class="flex flex-col sm:flex-row items-center gap-3 text-xs" :class="theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'">
           <span>{{ t('footer.designed') }}</span>
-          <span class="hidden sm:inline text-zinc-800">/</span>
+          <span class="hidden sm:inline" :class="theme === 'dark' ? 'text-zinc-800' : 'text-zinc-300'">/</span>
           <a
             href="https://github.com/ivansmb11/ivan-dev"
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-zinc-500 hover:text-primary transition-colors"
+            class="inline-flex items-center gap-1 hover:text-primary transition-colors"
+            :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
           >
             {{ t('footer.source') }}
             <ArrowUpRight :size="12" />
           </a>
-          <span class="hidden sm:inline text-zinc-800">/</span>
+          <span class="hidden sm:inline" :class="theme === 'dark' ? 'text-zinc-800' : 'text-zinc-300'">/</span>
           <span>{{ t('footer.rights', { year }) }}</span>
         </div>
       </div>

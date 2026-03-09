@@ -2,10 +2,12 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Calendar, ExternalLink, Hash } from 'lucide-vue-next'
+import { useTheme } from '@/stores/useThemeStore'
 import anahuacLogo from '@/assets/logos/anahuac.png'
 import gcloudLogo from '@/assets/logos/gcloud.png'
 
 const { t } = useI18n()
+const { theme } = useTheme()
 
 const achievements = computed(() => [
   {
@@ -31,11 +33,16 @@ const achievements = computed(() => [
 
 <template>
   <section id="achievements" class="relative py-32 overflow-hidden">
+    <!-- Section number -->
+    <span
+      class="absolute top-8 right-8 text-[80px] font-bold leading-none pointer-events-none select-none"
+      :class="theme === 'dark' ? 'text-zinc-800/30' : 'text-zinc-300/40'"
+    >04</span>
+
     <div class="max-w-4xl mx-auto px-6">
-      <div v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
-        class="mb-16">
+      <div v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }" class="mb-16">
         <p class="text-primary font-mono text-sm tracking-widest uppercase mb-3">{{ t('achievements.label') }}</p>
-        <h2 class="text-4xl md:text-5xl font-bold tracking-tight">{{ t('achievements.title') }}</h2>
+        <h2 class="text-4xl md:text-5xl font-bold tracking-tight" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">{{ t('achievements.title') }}</h2>
         <div class="mt-4 h-1 w-16 bg-primary rounded-full" />
       </div>
 
@@ -43,7 +50,6 @@ const achievements = computed(() => [
         <div v-for="(item, i) in achievements" :key="item.key" v-motion :initial="{ opacity: 0, x: -30 }"
           :visible-once="{ opacity: 1, x: 0, transition: { duration: 500, delay: i * 150 } }"
           class="group flex items-start gap-5">
-          <!-- Logo -->
           <img
             :src="item.logo"
             :alt="item.issuer"
@@ -51,17 +57,14 @@ const achievements = computed(() => [
             :class="item.key === 'gcloud' ? 'p-1.5 bg-white object-contain' : 'object-cover'"
           />
 
-          <!-- Content -->
           <div class="min-w-0">
-            <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+            <h3 class="text-lg font-semibold group-hover:text-primary transition-colors" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">
               {{ item.title }}
             </h3>
 
-            <p class="text-sm text-primary/80 font-medium mb-2">
-              {{ item.issuer }}
-            </p>
+            <p class="text-sm text-primary/80 font-medium mb-2">{{ item.issuer }}</p>
 
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-zinc-500 mb-3">
+            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm mb-3" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">
               <span class="flex items-center gap-1.5">
                 <Calendar :size="13" />
                 {{ item.date }}

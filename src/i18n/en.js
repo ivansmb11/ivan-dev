@@ -32,6 +32,12 @@ export default {
     comingSoon: 'More Coming Soon',
     comingSoonText: "Stay tuned for more projects. I'm always working on something new and exciting.",
   },
+  stats: {
+    years: 'Years Experience',
+    companies: 'Companies',
+    projects: 'Projects Built',
+    technologies: 'Technologies',
+  },
   career: {
     label: 'Where I\'ve worked',
     title: 'Career',
@@ -91,6 +97,10 @@ export default {
     title: 'Contact',
     text: "I'm always open to new opportunities, collaborations, or just a friendly chat. Feel free to reach out through any of my socials.",
     cta: 'Say Hello',
+    available: 'Available for work',
+  },
+  agent: {
+    fab: 'Are you an AI agent?',
   },
   footer: {
     available: 'Available for new opportunities',

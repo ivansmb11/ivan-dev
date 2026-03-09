@@ -1,6 +1,16 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import NavbarComponent from '@/components/NavbarComponent.vue'
+import BootSequence from '@/components/BootSequence.vue'
+
+import StatusBar from '@/components/StatusBar.vue'
+import KeyboardShortcuts from '@/components/KeyboardShortcuts.vue'
+import AgentFab from '@/components/AgentFab.vue'
+import { useTheme } from '@/stores/useThemeStore'
+
+const { theme } = useTheme()
+
+const booted = ref(!!sessionStorage.getItem('boot-done'))
 
 const glyphs = '01{}();<>=$/|#&!?*+-_[]:.~%@^アイウエオカキクケコサシスセソタチツテトナニヌネノ'.split('')
 
@@ -25,19 +35,18 @@ function createColumn(id, x) {
 }
 
 onMounted(() => {
-  const count = 40
+  const count = 20
   columns.value = Array.from({ length: count }, (_, i) =>
     createColumn(i, Math.random() * 100)
   )
 
-  // Slowly mutate random characters for a living feel
   interval = setInterval(() => {
     const col = columns.value[Math.floor(Math.random() * columns.value.length)]
     if (col) {
       const idx = Math.floor(Math.random() * col.chars.length)
       col.chars[idx] = randomChar()
     }
-  }, 150)
+  }, 300)
 })
 
 onUnmounted(() => {
@@ -46,37 +55,55 @@ onUnmounted(() => {
 </script>
 
 <template>
+  <!-- Boot sequence -->
+  <BootSequence v-if="!booted" @done="booted = true" />
+
+
+  <!-- Keyboard shortcuts -->
+  <KeyboardShortcuts />
+
   <!-- Animated background -->
-  <div class="fixed inset-0 -z-10 overflow-hidden bg-zinc-950">
+  <div
+    class="fixed inset-0 -z-10 overflow-hidden transition-colors duration-500"
+    :class="theme === 'dark' ? 'bg-zinc-950' : 'bg-zinc-100'"
+  >
     <!-- Blurred lights -->
     <div class="light light-1" />
     <div class="light light-2" />
     <div class="light light-3" />
     <div class="light light-4" />
 
-    <!-- Matrix rain columns -->
-    <div
-      v-for="col in columns"
-      :key="col.id"
-      class="rain-column font-mono select-none pointer-events-none"
-      :style="{
-        left: col.x + '%',
-        fontSize: col.size + 'px',
-        opacity: col.opacity,
-        animationDuration: col.duration + 's',
-        animationDelay: col.delay + 's',
-      }"
-    ><span
-        v-for="(ch, ci) in col.chars"
-        :key="ci"
-        class="block leading-tight"
-        :style="{ opacity: 1 - (ci / col.chars.length) * 0.7 }"
-      >{{ ch }}</span>
-    </div>
+    <!-- Matrix rain columns (dark mode only) -->
+    <template v-if="theme === 'dark'">
+      <div
+        v-for="col in columns"
+        :key="col.id"
+        class="rain-column font-mono select-none pointer-events-none"
+        :style="{
+          left: col.x + '%',
+          fontSize: col.size + 'px',
+          opacity: col.opacity,
+          animationDuration: col.duration + 's',
+          animationDelay: col.delay + 's',
+        }"
+      ><span
+          v-for="(ch, ci) in col.chars"
+          :key="ci"
+          class="block leading-tight"
+          :style="{ opacity: 1 - (ci / col.chars.length) * 0.7 }"
+        >{{ ch }}</span>
+      </div>
+    </template>
   </div>
 
   <NavbarComponent />
   <router-view />
+
+  <!-- Agent FAB -->
+  <AgentFab />
+
+  <!-- Status bar -->
+  <StatusBar />
 </template>
 
 <style scoped>
@@ -84,9 +111,14 @@ onUnmounted(() => {
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
-  opacity: 0.15;
   will-change: transform;
+  transition: opacity 0.5s;
 }
+
+/* Dark mode lights */
+:root:not(.light) .light { opacity: 0.15; }
+/* Light mode lights — much subtler */
+.light { opacity: 0.08; }
 
 .light-1 {
   width: 600px;
@@ -135,12 +167,8 @@ onUnmounted(() => {
 }
 
 @keyframes rain {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(120vh);
-  }
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(120vh); }
 }
 
 @keyframes drift1 {

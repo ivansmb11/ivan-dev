@@ -3,6 +3,7 @@
 @theme {
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-display: 'Space Grotesk', sans-serif;
   --color-primary: #10b981;
   --color-primary-light: #34d399;
   --color-primary-dark: #059669;
@@ -19,6 +20,14 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding-bottom: 24px;
+  background: #09090b;
+  color: #fafafa;
+}
+
+html.light body {
+  background: #f4f4f5;
+  color: #18181b;
 }
 
 /* Parallax utility */
@@ -28,7 +37,7 @@ body {
   background-size: cover;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - dark */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -41,4 +50,66 @@ body {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #52525b;
+}
+
+/* ===================== */
+/* LIGHT THEME OVERRIDES */
+/* ===================== */
+html.light body {
+  color: #18181b;
+}
+
+html.light ::-webkit-scrollbar-track {
+  background: #f4f4f5;
+}
+html.light ::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+}
+html.light ::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+}
+
+/* ==================== */
+/* ENHANCED HOVER EFFECTS */
+/* ==================== */
+
+/* Underline sweep on nav links */
+.nav-link {
+  position: relative;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Button sweep effect */
+.btn-sweep {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+.btn-sweep::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+  z-index: -1;
+}
+.btn-sweep:hover::before {
+  transform: scaleX(1);
 }
