@@ -20,7 +20,7 @@ const { theme } = useTheme()
 ## Software Engineer
 
 Location: Mexico City, MX
-Email: ivan.mendoza32@anahuac.mx
+Email: ivanmendozabaca@gmail.com
 GitHub: https://github.com/ivansmb11
 LinkedIn: https://www.linkedin.com/in/iván-sebastián-mendoza-baca-078429231/
 Twitter: https://twitter.com/ivannsmb
@@ -115,7 +115,7 @@ Vue.js, React Native, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Vite, REST 
 
 ## Availability
 Status: Available for new opportunities
-Contact: ivan.mendoza32@anahuac.mx
+Contact: ivanmendozabaca@gmail.com
       </pre>
     </div>
   </div>

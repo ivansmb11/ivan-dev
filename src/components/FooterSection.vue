@@ -13,7 +13,7 @@ const socials = [
   { icon: Github, href: 'https://github.com/ivansmb11', label: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/iv%C3%A1n-sebasti%C3%A1n-mendoza-baca-078429231/', label: 'LinkedIn' },
   { icon: Twitter, href: 'https://twitter.com/ivannsmb', label: 'Twitter' },
-  { icon: Mail, href: 'mailto:ivan.mendoza32@anahuac.mx', label: 'Email' },
+  { icon: Mail, href: 'mailto:ivanmendozabaca@gmail.com', label: 'Email' },
 ]
 
 const navLinks = [
