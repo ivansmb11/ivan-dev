@@ -9,7 +9,7 @@ export default {
   },
   hero: {
     greeting: "Hi, I'm {name}.",
-    subtitle: 'Lead Software Engineer building fintech products — from mobile apps to scalable platforms. AI engineer focused on agentic coding and developer productivity.',
+    subtitle: 'Lead Software Engineer building fintech products, from mobile apps to scalable platforms. AI engineer focused on agentic coding and developer productivity.',
     location: 'Mexico City, MX',
   },
   about: {

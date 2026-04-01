@@ -10,20 +10,20 @@ export default {
   hero: {
     greeting: "Hola, soy {name}.",
     subtitle:
-      "Ingeniero de Software construyendo productos fintech — desde apps móviles hasta plataformas escalables.",
+      "Ingeniero de Software Lead construyendo productos fintech, desde apps móviles hasta plataformas escalables. AI Engineer con enfoque en agentic coding y productividad del desarrollador.",
     location: "Ciudad de México, MX",
   },
   about: {
     label: "Conóceme",
     title: "Sobre mí",
-    bio1: "Desde mis primeros días en la preparatoria, me ha fascinado el mundo de la tecnología, los videojuegos y el mundo digital. Siempre curioso sobre cómo desarrollamos y usamos la tecnología para resolver problemas modernos y hacer la vida más simple.",
-    bio2: "Me apasiona construir software limpio y de alto rendimiento que genere impacto. Desde interfaces frontend hasta sistemas backend, disfruto todo el espectro del desarrollo de software.",
+    bio1: "Ingeniero de Software Lead en una fintech mexicana de BNPL y crédito comercial, responsable de la arquitectura móvil y frontend, con contribuciones a lo largo del full stack, desde publicaciones en tres app stores hasta servicios backend en GCP.",
+    bio2: "Más allá de escribir código, me enfoco en elevar cómo trabajan los equipos de ingeniería: mejorando procesos, elevando estándares de calidad de código e impulsando la adopción de herramientas de desarrollo asistido por IA. Previamente en General Electric Aerospace, donde construí servicios backend en Spring Boot y Java.",
     education: "Educación",
     educationText:
-      "Licenciatura en Ingeniería en Ciencias de la Computación y Negocios Digitales en la Universidad Anáhuac, Querétaro.",
+      "Ingeniería en Tecnologías de la Información y Negocios Digitales en la Universidad Anáhuac, Querétaro. Líder electo del consejo estudiantil del programa de Ingeniería.",
     experience: "Experiencia",
     experienceText:
-      "Ingeniero de Software en Zazpay, una fintech BNPL, construyendo sistemas centrales en entornos frontend y móviles.",
+      "Lead Software Engineer en Zazpay, una fintech BNPL, responsable de la arquitectura móvil y frontend con contribuciones a lo largo del full stack.",
     location: "Ubicación",
     locationText:
       "Originario de Sinaloa, México. Actualmente en la Ciudad de México.",
@@ -50,16 +50,16 @@ export default {
     title: "Trayectoria",
     present: "Presente",
     zazpay: {
-      role: "Ingeniero de Software",
+      role: "Lead Software Engineer",
       company: "ZAZPAY",
       type: "Tiempo completo",
       period: "Jun 2023 - Presente",
       location: "Zona Metropolitana de la Ciudad de México",
       mode: "Híbrido",
       description:
-        "Ingeniero de software en Zazpay, una fintech de Compra Ahora, Paga Después (BNPL), donde diseño, construyo y mantengo sistemas centrales de la plataforma, principalmente en entornos frontend y móviles. Trabajo en funcionalidades clave que aseguran soluciones confiables y escalables tanto para usuarios finales como para equipos internos.",
+        "Lead Engineer de arquitectura Mobile y Frontend para una fintech BNPL, gestionando el código base en Expo y publicando versiones en Play Store, App Store y App Gallery bajo flujos de CI/CD de nivel empresarial. Impulso de mejoras en procesos de ingeniería como colíder del equipo. Promoción en la early-adoption de desarrollo asistido por IA, introduciendo Cursor y Claude Code. Representación del equipo en el AI Engineer Code Summit en NYC.",
       skills:
-        "Ingeniería, Bases de Datos, React Native, TypeScript, Node.js, PostgreSQL, REST APIs, CI/CD",
+        "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD, AI Agents, MCP",
     },
     prestavale: {
       role: "Ingeniero de Software",
@@ -77,13 +77,13 @@ export default {
       role: "Desarrollador de Software (Pasante)",
       company: "GE Aerospace",
       type: "Pasantía",
-      period: "Jun 2022 - Jul 2023",
-      duration: "1 año 2 meses",
+      period: "Jun 2022 - Jun 2023",
+      duration: "1 año",
       location: "El Marqués, Querétaro, México",
       mode: "",
       description:
-        "Pasante full-stack desarrollando aplicaciones web internas dentro del área aeroespacial para manejo de recursos humanos, procesos de ingeniería y documentación para los sites de Querétaro y Cincinnati.",
-      skills: "Vue.js, Spring Boot",
+        "Desarrollo de servicios backend para operaciones de aviación e ingeniería usando Spring Boot, Java y PostgreSQL, trabajando junto a ingenieros senior que enfatizaban arquitectura limpia, revisiones de código rigurosas y flujos de trabajo disciplinados en Git. Contribución a procesos de entrega Agile/Lean desde el primer día.",
+      skills: "Spring Boot, Java, PostgreSQL, Vue.js, Agile/Lean",
     },
   },
   achievements: {
@@ -101,6 +101,12 @@ export default {
       issuer: "Google Cloud Skills Boost",
       date: "Sep 2022",
       credential: "2619947",
+    },
+    summit: {
+      title: "AI Engineer Code Summit",
+      issuer: "AI Engineer",
+      date: "2025",
+      location: "Nueva York",
     },
     verify: "Certificado",
   },
