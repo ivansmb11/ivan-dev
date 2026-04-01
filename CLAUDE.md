@@ -52,6 +52,29 @@ Theme colors defined in `src/style.css` under `@theme`:
 
 All sections use `v-motion` with `:visible-once` for scroll-reveal animations. Hero uses `:enter` for load animations. Parallax backgrounds use `background-attachment: fixed` via `.parallax-bg` class.
 
+## Content Sync Rules (CRITICAL)
+
+When updating portfolio content, **ALL** of the following must be kept in sync:
+
+| Source | What it contains |
+|--------|-----------------|
+| `src/i18n/en.js` | English text for all sections |
+| `src/i18n/es.js` | Spanish text for all sections (must mirror en.js structure) |
+| `src/views/AgentsView.vue` | Hardcoded plain-text version of all content for AI agents/crawlers |
+| `index.html` | Page `<title>` and `<meta name="description">` |
+
+Additionally, some content is hardcoded in Vue components (not i18n):
+- `src/components/TechTicker.vue` — tech list array
+- `src/components/AboutSection.vue` — stats counter values (years, companies, projects, technologies)
+- `src/components/AchievementsSection.vue` — achievement entries array (logos, URLs, type)
+- `src/components/CareerSection.vue` — job entries array (logos, git metadata)
+
+**Never update content in only one place.** Always check all locations above.
+
+## Style Rules
+
+- Never use em dashes (—) in any user-facing text. Use commas or pipes instead.
+
 ## Deployment
 
 Firebase Hosting (project: `ivan-d3277`). GitHub Actions auto-deploy on push to master and on PRs. Build output goes to `dist/`.

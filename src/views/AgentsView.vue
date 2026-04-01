@@ -8,7 +8,7 @@ const { theme } = useTheme()
     <div class="max-w-3xl mx-auto font-mono text-sm leading-relaxed" :class="theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'">
 
       <div class="mb-8">
-        <h1 class="text-2xl font-bold mb-2" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">ivanmendoza.dev — Agent Context</h1>
+        <h1 class="text-2xl font-bold mb-2" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">ivanmendoza.dev | Agent Context</h1>
         <p :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">This page provides structured plain-text information about Ivan Mendoza for AI agents, crawlers, and assistants.</p>
         <router-link to="/" class="text-primary hover:text-primary-light text-xs mt-2 inline-block">← Back to site</router-link>
       </div>
@@ -17,7 +17,7 @@ const { theme } = useTheme()
 
       <pre class="whitespace-pre-wrap break-words">
 # Ivan Mendoza
-## Software Engineer
+## Lead Software Engineer
 
 Location: Mexico City, MX
 Email: ivanmendozabaca@gmail.com
@@ -30,28 +30,25 @@ Website: https://ivanmendoza.dev
 
 ## Summary
 
-Software Engineer building fintech products — from mobile apps to scalable platforms.
-Originally from Sinaloa, México. Currently based in Mexico City, México.
-
-Passionate about building clean, performant software that makes an impact.
-From frontend interfaces to backend systems, enjoys the full spectrum of software development.
+Lead Software Engineer at a Mexican BNPL and commercial-lending fintech, owning mobile and frontend architecture while contributing across the full stack and backend services. Drives engineering process improvements and code quality standards across teams. AI engineer with a focus on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
 
 ---
 
 ## Education
 
-BSC in Computer Science Engineering and Digital Businesses
-Universidad Anáhuac, Querétaro
+Bachelor of Engineering in IT and Digital Business
+Universidad Anahuac, Queretaro (Aug 2019 - May 2023)
+Elected student council leader for the Engineering program.
 
 ---
 
 ## Career
 
-### v3.0 — ZAZPAY | Software Engineer (Full-time)
+### v3.0 — ZAZPAY | Lead Software Engineer (Full-time)
 Period: Jun 2023 - Present
 Location: Mexico City Metropolitan Area | Hybrid
-Description: Software engineer at Zazpay, a Buy Now, Pay Later (BNPL) fintech, where I design, build, and maintain core systems across the platform, mainly frontend and mobile environments. I work on core features that ensure reliable and scalable solutions that serve both end users and internal teams.
-Skills: Engineering, Databases, React Native, TypeScript, Node.js, PostgreSQL, REST APIs, CI/CD
+Description: Lead mobile and frontend engineering for a BNPL fintech, owning the Expo codebase and shipping releases across Play Store, App Store, and App Gallery. Drove engineering process improvements, championed AI-assisted development adoption (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
+Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD, AI Agents, MCP
 
 ### v2.0 — PRESTA VALE | Software Engineer (Full-time)
 Period: Jun 2023 - Dec 2024 (1 yr 7 mos)
@@ -60,10 +57,10 @@ Description: Software engineer at Presta Vale, a micro-lending financial institu
 Skills: React Native, TypeScript, REST APIs, Mobile Development, CI/CD
 
 ### v1.0 — GE Aerospace | Software Developer Intern
-Period: Jun 2022 - Jul 2023 (1 yr 2 mos)
-Location: El Marqués, Querétaro, Mexico
-Description: Full-stack intern building internal web applications within the aerospace division for human resources management, engineering processes, and documentation for the Querétaro and Cincinnati sites.
-Skills: Vue.js, Spring Boot
+Period: Jun 2022 - Jun 2023 (1 yr)
+Location: El Marques, Queretaro, Mexico
+Description: Developed backend services for aviation and engineering operations using Spring Boot, Java, and PostgreSQL. Worked alongside senior engineers in a high-standards environment emphasizing clean architecture, thorough code reviews, and disciplined Git workflows.
+Skills: Spring Boot, Java, PostgreSQL, Vue.js, Agile/Lean
 
 ---
 
@@ -85,8 +82,13 @@ Live: https://ivanmendoza.dev
 
 ## Achievements
 
-### Sociedad de Alumnos Anáhuac
-Issuer: Universidad Anáhuac Querétaro
+### AI Engineer Code Summit
+Issuer: AI Engineer
+Date: 2025
+Location: New York City
+
+### Sociedad de Alumnos Anahuac
+Issuer: Universidad Anahuac Queretaro
 Date: Nov 2022
 Credential ID: 7CC14A8DA001
 Verify: https://wallet.xertify.co/certificates/7CC14A8DA001
@@ -101,12 +103,25 @@ Verify: https://www.skills.google/public_profiles/63a74ab3-4ba1-4a97-bcdc-83f0ef
 
 ## Tech Stack
 
-Vue.js, React Native, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Vite, REST APIs, Firebase, CI/CD, Git, Spring Boot, Expo, JavaScript, HTML/CSS, Zustand, React Query, Docker, Figma
+Vue.js, React Native, TypeScript, Node.js, NestJS, PostgreSQL, Tailwind CSS, Vite, REST APIs, Firebase, CI/CD, Git, Spring Boot, Expo, JavaScript, Zustand, React Query, Docker, Python, Redis, Neo4J, MCP, AI Agents
+
+---
+
+## Skills
+Languages: TypeScript, Java, Python
+Tools/Frameworks: NestJS, Expo, Spring, Docker, MCP
+Databases: PostgreSQL, Neo4J, Redis
+Other: Leadership, AI Agents, Cloud services (GCP)
+
+---
+
+## Conference
+AI Engineer Code Summit, New York City, 2025
 
 ---
 
 ## Stats
-- 3+ Years of Experience
+- 4+ Years of Experience
 - 3 Companies
 - 5+ Projects Built
 - 15+ Technologies
