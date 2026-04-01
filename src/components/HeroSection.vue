@@ -24,7 +24,7 @@ const socials = [
     <!-- Background photo -->
     <div
       class="absolute inset-0 parallax-bg"
-      :class="theme === 'dark' ? 'opacity-20' : 'opacity-10'"
+      :class="theme === 'dark' ? 'opacity-20' : 'opacity-30'"
       :style="{ backgroundImage: `url(${profileImg})` }"
     />
 
@@ -58,7 +58,7 @@ const socials = [
         :initial="{ opacity: 0, y: 20 }"
         :enter="{ opacity: 1, y: 0, transition: { delay: 600, duration: 600 } }"
         class="text-lg md:text-xl mb-6 leading-relaxed max-w-xl mx-auto"
-        :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'"
+        :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-700'"
       >
         {{ t('hero.subtitle') }}
       </p>
@@ -74,7 +74,7 @@ const socials = [
           <MapPin :size="14" class="text-primary" />
           <span class="absolute w-3 h-3 rounded-full bg-primary/30 animate-ping" />
         </span>
-        <span class="text-sm font-mono" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">{{ t('hero.location') }}</span>
+        <span class="text-sm font-mono" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-600'">{{ t('hero.location') }}</span>
       </div>
 
       <!-- Social links -->
@@ -100,7 +100,7 @@ const socials = [
             :is="social.icon"
             :size="20"
             class="group-hover:text-primary transition-colors duration-300"
-            :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'"
+            :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
           />
         </a>
       </div>
@@ -112,7 +112,7 @@ const socials = [
       @click.prevent="document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })"
       aria-label="Scroll to About section"
       class="absolute bottom-8 left-1/2 -translate-x-1/2 hover:text-primary transition-colors animate-bounce"
-      :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
+      :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-600'"
     >
       <ChevronDown :size="28" />
     </a>
