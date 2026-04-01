@@ -77,6 +77,7 @@ const projects = computed(() => [
                     :href="project.github"
                     target="_blank"
                     rel="noopener noreferrer"
+                    :aria-label="project.title + ' source code on GitHub'"
                     class="text-zinc-500 hover:text-primary transition-colors"
                   >
                     <Github :size="18" />
@@ -86,6 +87,7 @@ const projects = computed(() => [
                     :href="project.live"
                     target="_blank"
                     rel="noopener noreferrer"
+                    :aria-label="project.title + ' live demo'"
                     class="text-zinc-500 hover:text-primary transition-colors"
                   >
                     <ExternalLink :size="18" />
@@ -117,6 +119,8 @@ const projects = computed(() => [
                 :alt="project.title + ' preview'"
                 loading="lazy"
                 decoding="async"
+                width="256"
+                height="160"
                 class="w-full h-auto object-cover"
               />
             </div>

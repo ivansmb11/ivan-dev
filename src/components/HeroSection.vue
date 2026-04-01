@@ -110,6 +110,7 @@ const socials = [
     <a
       href="#about"
       @click.prevent="document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' })"
+      aria-label="Scroll to About section"
       class="absolute bottom-8 left-1/2 -translate-x-1/2 hover:text-primary transition-colors animate-bounce"
       :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
     >

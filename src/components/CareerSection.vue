@@ -139,7 +139,7 @@ const jobs = computed(() => [
                     : theme === 'dark' ? 'bg-zinc-800 text-zinc-500 border border-zinc-700' : 'bg-zinc-100 text-zinc-500 border border-zinc-200'"
                 >{{ job.branch }}</span>
                 <span class="font-mono text-[10px] px-1.5 py-0.5 rounded"
-                  :class="theme === 'dark' ? 'bg-zinc-800/60 text-zinc-600' : 'bg-zinc-100 text-zinc-400'"
+                  :class="theme === 'dark' ? 'bg-zinc-800/60 text-zinc-400' : 'bg-zinc-100 text-zinc-500'"
                 >{{ job.version }}</span>
               </div>
 

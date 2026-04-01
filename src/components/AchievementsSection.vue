@@ -1,15 +1,27 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Calendar, ExternalLink, Hash } from 'lucide-vue-next'
+import { Calendar, ExternalLink, Hash, MapPin } from 'lucide-vue-next'
 import { useTheme } from '@/stores/useThemeStore'
 import anahuacLogo from '@/assets/logos/anahuac.png'
 import gcloudLogo from '@/assets/logos/gcloud.png'
+import aieLogo from '@/assets/logos/aie-logo.png'
 
 const { t } = useI18n()
 const { theme } = useTheme()
 
 const achievements = computed(() => [
+  {
+    key: 'summit',
+    title: t('achievements.summit.title'),
+    issuer: t('achievements.summit.issuer'),
+    date: t('achievements.summit.date'),
+    location: t('achievements.summit.location'),
+    logo: aieLogo,
+    url: '',
+    credential: '',
+    type: 'conference',
+  },
   {
     key: 'saa',
     title: t('achievements.saa.title'),
@@ -69,13 +81,17 @@ const achievements = computed(() => [
                 <Calendar :size="13" />
                 {{ item.date }}
               </span>
-              <span class="flex items-center gap-1.5">
+              <span v-if="item.location" class="flex items-center gap-1.5">
+                <MapPin :size="13" />
+                {{ item.location }}
+              </span>
+              <span v-if="item.credential" class="flex items-center gap-1.5">
                 <Hash :size="13" />
                 {{ item.credential }}
               </span>
             </div>
 
-            <a :href="item.url" target="_blank" rel="noopener noreferrer"
+            <a v-if="item.url" :href="item.url" target="_blank" rel="noopener noreferrer"
               class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 hover:text-primary transition-colors">
               {{ t('achievements.verify') }}
               <ExternalLink :size="12" />

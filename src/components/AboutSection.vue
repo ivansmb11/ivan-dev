@@ -15,7 +15,7 @@ const highlights = computed(() => [
 
 // Animated counters
 const stats = [
-  { key: 'years', value: 3, suffix: '+' },
+  { key: 'years', value: 4, suffix: '+' },
   { key: 'companies', value: 3, suffix: '' },
   { key: 'projects', value: 5, suffix: '+' },
   { key: 'technologies', value: 15, suffix: '+' },

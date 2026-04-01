@@ -98,6 +98,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
         class="md:hidden transition-colors"
         :class="theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'"
         @click="mobileOpen = !mobileOpen"
+        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
       >
         <Menu v-if="!mobileOpen" :size="24" />
         <X v-else :size="24" />

@@ -3,9 +3,10 @@ import { useTheme } from '@/stores/useThemeStore'
 const { theme } = useTheme()
 
 const techs = [
-  'Vue.js', 'React Native', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS',
-  'Vite', 'REST APIs', 'Firebase', 'CI/CD', 'Git', 'Spring Boot', 'Expo',
-  'JavaScript', 'HTML/CSS', 'Zustand', 'React Query', 'Docker', 'Figma',
+  'Vue.js', 'React Native', 'TypeScript', 'Node.js', 'NestJS', 'PostgreSQL',
+  'Tailwind CSS', 'Vite', 'REST APIs', 'Firebase', 'CI/CD', 'Git', 'Spring Boot',
+  'Expo', 'JavaScript', 'Zustand', 'React Query', 'Docker', 'Python', 'Redis',
+  'Neo4J', 'MCP', 'AI Agents',
 ]
 // Duplicate for seamless loop
 const tickerItems = [...techs, ...techs]
