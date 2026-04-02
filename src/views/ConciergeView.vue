@@ -1,10 +1,12 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 import ConciergeDoc from '@/components/concierge/ConciergeDoc.vue'
 import NetworkDiagram from '@/components/concierge/NetworkDiagram.vue'
 import ConciergeChat from '@/components/concierge/ConciergeChat.vue'
 import { useTheme } from '@/stores/useThemeStore'
 import { ArrowLeft, Github } from 'lucide-vue-next'
 
+const { t } = useI18n()
 const { theme } = useTheme()
 
 function scrollToSection(id) {
@@ -23,7 +25,7 @@ function scrollToSection(id) {
         :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
       >
         <ArrowLeft :size="16" />
-        Back to Portfolio
+        {{ t('concierge.back') }}
       </router-link>
 
       <!-- Hero -->
@@ -33,21 +35,19 @@ function scrollToSection(id) {
           <span
             class="text-xs font-mono uppercase tracking-widest"
             :class="theme === 'dark' ? 'text-primary' : 'text-primary-dark'"
-          >Live Demo</span>
+          >{{ t('concierge.badge') }}</span>
         </div>
         <h1
           class="text-4xl sm:text-5xl font-display font-bold mb-4"
           :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
         >
-          VIP Data Concierge
+          {{ t('concierge.title') }}
         </h1>
         <p
           class="text-lg max-w-2xl mb-5"
           :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
         >
-          A Zero-Trust AI Agent that routes queries to isolated databases
-          based on user identity. Built on GCP with Hub-and-Spoke networking,
-          Private Service Connect, and Vertex AI.
+          {{ t('concierge.subtitle') }}
         </p>
         <a
           href="https://github.com/ivansmb11/vip-data-concierge"
@@ -59,7 +59,7 @@ function scrollToSection(id) {
             : 'bg-white border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-primary/40 shadow-sm'"
         >
           <Github :size="16" />
-          View Source Code
+          {{ t('concierge.viewSource') }}
         </a>
       </div>
 
@@ -69,10 +69,10 @@ function scrollToSection(id) {
         :class="theme === 'dark' ? 'bg-surface-light' : 'bg-zinc-200'"
       >
         <button
-          v-for="{ label, id } in [
-            { label: 'Documentation', id: 'documentation' },
-            { label: 'Architecture', id: 'architecture' },
-            { label: 'Demo', id: 'live-chat' },
+          v-for="{ labelKey, id } in [
+            { labelKey: 'concierge.navDocs', id: 'documentation' },
+            { labelKey: 'concierge.navArch', id: 'architecture' },
+            { labelKey: 'concierge.navDemo', id: 'live-chat' },
           ]"
           :key="id"
           @click="scrollToSection(id)"
@@ -80,7 +80,7 @@ function scrollToSection(id) {
           :class="theme === 'dark'
             ? 'text-zinc-400 hover:text-white hover:bg-surface-lighter'
             : 'text-zinc-600 hover:text-zinc-900 hover:bg-white'"
-        >{{ label }}</button>
+        >{{ t(labelKey) }}</button>
       </div>
 
       <!-- Documentation -->
@@ -93,7 +93,7 @@ function scrollToSection(id) {
         <NetworkDiagram />
       </section>
 
-      <!-- Live Chat -->
+      <!-- Demo -->
       <section id="live-chat">
         <ConciergeChat />
       </section>

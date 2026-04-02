@@ -1,7 +1,9 @@
 <script setup>
+import { useI18n } from 'vue-i18n'
 import { useTheme } from '@/stores/useThemeStore'
 import { Shield, Users, DollarSign, ShieldAlert } from 'lucide-vue-next'
 
+const { t } = useI18n()
 const { theme } = useTheme()
 const YOUTUBE_ID = '3ATSpNSdtiw'
 
@@ -11,21 +13,21 @@ const scenarios = [
     label: 'HR User',
     email: 'hr@example.com',
     color: 'emerald',
-    description: 'Queries employee records, salaries, and department summaries from the HR database via PSC endpoint 10.0.0.50',
+    descKey: 'concierge.scenarioHr',
   },
   {
     icon: DollarSign,
     label: 'Finance User',
     email: 'finance@example.com',
     color: 'blue',
-    description: 'Queries invoices, budgets, and overdue payments from the Finance database via PSC endpoint 10.0.0.51',
+    descKey: 'concierge.scenarioFin',
   },
   {
     icon: ShieldAlert,
     label: 'Unauthorized User',
     email: 'hacker@evil.com',
     color: 'red',
-    description: 'Rejected immediately with 401. No database access, no tools loaded, no data exposed.',
+    descKey: 'concierge.scenarioHacker',
   },
 ]
 </script>
@@ -35,11 +37,11 @@ const scenarios = [
     <h2
       class="text-2xl font-display font-bold mb-2"
       :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >Live Demo</h2>
+    >{{ t('concierge.demoTitle') }}</h2>
     <p
       class="mb-8"
       :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-    >Watch the agent route queries to isolated databases based on user identity.</p>
+    >{{ t('concierge.demoSubtitle') }}</p>
 
     <!-- Scenario cards -->
     <div class="grid sm:grid-cols-3 gap-3 mb-8">
@@ -76,7 +78,7 @@ const scenarios = [
         <p
           class="text-xs leading-relaxed"
           :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-        >{{ s.description }}</p>
+        >{{ t(s.descKey) }}</p>
       </div>
     </div>
 
@@ -101,9 +103,7 @@ const scenarios = [
     >
       <Shield :size="12" class="mt-0.5 shrink-0" />
       <span>
-        This demo uses simulated identity headers (X-User-Email).
-        In production, IAP would inject verified Google identity claims.
-        The agent cannot access databases outside the authenticated user's department.
+        {{ t('concierge.securityNote') }}
       </span>
     </div>
   </div>

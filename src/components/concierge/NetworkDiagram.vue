@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useTheme } from '@/stores/useThemeStore'
 
+const { t } = useI18n()
 const { theme } = useTheme()
 const activeNode = ref(null)
 
@@ -54,11 +56,11 @@ const nodes = {
     <h2
       class="text-2xl font-display font-bold mb-2"
       :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >Architecture</h2>
+    >{{ t('concierge.archTitle') }}</h2>
     <p
       class="mb-6"
       :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-    >Click any component to learn more. All traffic stays on Google's private backbone.</p>
+    >{{ t('concierge.archSubtitle') }}</p>
 
     <!-- Info panel -->
     <transition
