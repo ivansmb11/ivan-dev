@@ -6,6 +6,11 @@ import { useTheme } from '@/stores/useThemeStore'
 import { ArrowLeft } from 'lucide-vue-next'
 
 const { theme } = useTheme()
+
+function scrollToSection(id) {
+  const el = document.getElementById(id)
+  if (el) el.scrollIntoView({ behavior: 'smooth' })
+}
 </script>
 
 <template>
@@ -51,15 +56,19 @@ const { theme } = useTheme()
         class="flex gap-1 p-1 rounded-lg mb-12 w-fit"
         :class="theme === 'dark' ? 'bg-surface-light' : 'bg-zinc-200'"
       >
-        <a
-          v-for="section in ['Documentation', 'Architecture', 'Live Chat']"
-          :key="section"
-          :href="'#' + section.toLowerCase().replace(' ', '-')"
-          class="px-4 py-2 rounded-md text-sm font-medium transition-colors"
+        <button
+          v-for="{ label, id } in [
+            { label: 'Documentation', id: 'documentation' },
+            { label: 'Architecture', id: 'architecture' },
+            { label: 'Live Chat', id: 'live-chat' },
+          ]"
+          :key="id"
+          @click="scrollToSection(id)"
+          class="px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer"
           :class="theme === 'dark'
             ? 'text-zinc-400 hover:text-white hover:bg-surface-lighter'
             : 'text-zinc-600 hover:text-zinc-900 hover:bg-white'"
-        >{{ section }}</a>
+        >{{ label }}</button>
       </div>
 
       <!-- Documentation -->

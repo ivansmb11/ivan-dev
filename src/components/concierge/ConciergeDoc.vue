@@ -148,18 +148,18 @@ const timeline = [
       class="text-lg font-bold mb-6"
       :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
     >Request Flow</h3>
-    <div class="relative pl-8 mb-4">
+    <div class="relative pl-12 mb-4">
       <div
-        class="absolute left-3 top-0 bottom-0 w-px"
+        class="absolute left-4 top-0 bottom-0 w-px"
         :class="theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-300'"
       />
       <div
         v-for="item in timeline"
         :key="item.step"
-        class="relative mb-6 last:mb-0"
+        class="relative mb-8 last:mb-0"
       >
         <div
-          class="absolute -left-5 top-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold"
+          class="absolute -left-8 top-0.5 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
           :class="theme === 'dark'
             ? 'bg-primary/20 text-primary border border-primary/30'
             : 'bg-primary/10 text-primary-dark border border-primary/20'"
