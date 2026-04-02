@@ -29,6 +29,7 @@ export default {
     title: 'Portfolio',
     ivanDev: 'Personal portfolio website built with Vue 3, Vite, and Tailwind CSS. Features parallax scrolling, smooth animations, and responsive design.',
     vibebify: 'A music-focused social media web app with a punk/rock aesthetic. Sign in with Spotify, explore your listening stats, share posts about songs, follow other users, view your Genre DNA, compete in song duels, and maintain daily posting streaks.',
+    vipConcierge: 'A Zero-Trust AI Agent on GCP that routes queries to isolated databases based on user identity. Hub-and-Spoke VPC networking with NCC, Private Service Connect, Vertex AI Gemini, and LangChain Function Calling.',
     comingSoon: 'More Coming Soon',
     comingSoonText: "Stay tuned for more projects. I'm always working on something new and exciting.",
   },

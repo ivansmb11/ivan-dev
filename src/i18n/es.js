@@ -35,6 +35,8 @@ export default {
       "Sitio web de portafolio personal construido con Vue 3, Vite y Tailwind CSS. Con scroll parallax, animaciones suaves y diseño responsivo.",
     vibebify:
       "Una app web social enfocada en música con estética punk/rock. Inicia sesión con Spotify, explora tus estadísticas de escucha, comparte posts sobre canciones, sigue a otros usuarios, descubre tu ADN de Género, compite en duelos de canciones y mantén rachas de publicaciones diarias.",
+    vipConcierge:
+      "Un Agente de IA con Zero-Trust en GCP que enruta consultas a bases de datos aisladas segun la identidad del usuario. Redes VPC Hub-and-Spoke con NCC, Private Service Connect, Vertex AI Gemini y LangChain Function Calling.",
     comingSoon: "Próximamente",
     comingSoonText:
       "Mantente al tanto para más proyectos. Siempre estoy trabajando en algo nuevo y emocionante.",

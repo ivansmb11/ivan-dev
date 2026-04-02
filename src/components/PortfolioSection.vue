@@ -26,6 +26,13 @@ const projects = computed(() => [
     image: ivanmendozaImg,
   },
   {
+    title: 'VIP Data Concierge',
+    description: t('portfolio.vipConcierge'),
+    tags: ['GCP', 'Vertex AI', 'LangChain', 'Cloud Run', 'PostgreSQL', 'Zero-Trust'],
+    github: 'https://github.com/ivansmb11/vip-data-concierge',
+    live: '#/concierge',
+  },
+  {
     title: t('portfolio.comingSoon'),
     description: t('portfolio.comingSoonText'),
     tags: ['In Progress'],

@@ -148,30 +148,28 @@ const timeline = [
       class="text-lg font-bold mb-6"
       :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
     >Request Flow</h3>
-    <div class="relative pl-12 mb-4">
-      <div
-        class="absolute left-4 top-0 bottom-0 w-px"
-        :class="theme === 'dark' ? 'bg-zinc-800' : 'bg-zinc-300'"
-      />
+    <div class="space-y-6 mb-4">
       <div
         v-for="item in timeline"
         :key="item.step"
-        class="relative mb-8 last:mb-0"
+        class="flex items-start gap-4"
       >
         <div
-          class="absolute -left-8 top-0.5 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+          class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5"
           :class="theme === 'dark'
             ? 'bg-primary/20 text-primary border border-primary/30'
             : 'bg-primary/10 text-primary-dark border border-primary/20'"
         >{{ item.step }}</div>
-        <h4
-          class="font-bold text-sm mb-1"
-          :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-        >{{ item.title }}</h4>
-        <p
-          class="text-sm"
-          :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-        >{{ item.detail }}</p>
+        <div>
+          <h4
+            class="font-bold text-sm mb-0.5"
+            :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
+          >{{ item.title }}</h4>
+          <p
+            class="text-sm"
+            :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
+          >{{ item.detail }}</p>
+        </div>
       </div>
     </div>
   </div>

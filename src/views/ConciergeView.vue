@@ -3,7 +3,7 @@ import ConciergeDoc from '@/components/concierge/ConciergeDoc.vue'
 import NetworkDiagram from '@/components/concierge/NetworkDiagram.vue'
 import ConciergeChat from '@/components/concierge/ConciergeChat.vue'
 import { useTheme } from '@/stores/useThemeStore'
-import { ArrowLeft } from 'lucide-vue-next'
+import { ArrowLeft, Github } from 'lucide-vue-next'
 
 const { theme } = useTheme()
 
@@ -42,13 +42,25 @@ function scrollToSection(id) {
           VIP Data Concierge
         </h1>
         <p
-          class="text-lg max-w-2xl"
+          class="text-lg max-w-2xl mb-5"
           :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
         >
           A Zero-Trust AI Agent that routes queries to isolated databases
           based on user identity. Built on GCP with Hub-and-Spoke networking,
           Private Service Connect, and Vertex AI.
         </p>
+        <a
+          href="https://github.com/ivansmb11/vip-data-concierge"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border"
+          :class="theme === 'dark'
+            ? 'bg-surface-light border-zinc-700 text-zinc-300 hover:text-white hover:border-primary/40'
+            : 'bg-white border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-primary/40 shadow-sm'"
+        >
+          <Github :size="16" />
+          View Source Code
+        </a>
       </div>
 
       <!-- Section nav -->
@@ -60,7 +72,7 @@ function scrollToSection(id) {
           v-for="{ label, id } in [
             { label: 'Documentation', id: 'documentation' },
             { label: 'Architecture', id: 'architecture' },
-            { label: 'Live Chat', id: 'live-chat' },
+            { label: 'Demo', id: 'live-chat' },
           ]"
           :key="id"
           @click="scrollToSection(id)"
