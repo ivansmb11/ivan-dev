@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/agents',
       name: 'agents',
       component: () => import('@/views/AgentsView.vue')
+    },
+    {
+      path: '/concierge',
+      name: 'concierge',
+      component: () => import('@/views/ConciergeView.vue')
     }
   ],
   scrollBehavior(to) {
