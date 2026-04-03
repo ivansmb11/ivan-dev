@@ -34,7 +34,7 @@ export default {
     ivanDev:
       "Sitio web de portafolio personal construido con Vue 3, Vite y Tailwind CSS. Con scroll parallax, animaciones suaves y diseño responsivo.",
     vibebify:
-      "Una app web social enfocada en música con estética punk/rock. Inicia sesión con Spotify, explora tus estadísticas de escucha, comparte posts sobre canciones, sigue a otros usuarios, descubre tu ADN de Género, compite en duelos de canciones y mantén rachas de publicaciones diarias.",
+      "Una app web social enfocada en musica con estetica punk/rock. Construida con Next.js 16, Supabase y PostgreSQL. Inicia sesion con Spotify, explora tus estadisticas de escucha, comparte posts sobre canciones, sigue a otros usuarios, descubre tu ADN de Genero, compite en duelos de canciones y manten rachas de publicaciones diarias.",
     vipConcierge:
       "Un Agente de IA con Zero-Trust en GCP que enruta consultas a bases de datos aisladas segun la identidad del usuario. Redes VPC Hub-and-Spoke con NCC, Private Service Connect, Vertex AI Gemini y LangChain Function Calling.",
     comingSoon: "Próximamente",
@@ -175,6 +175,60 @@ export default {
     scenarioHr: 'Consulta registros de empleados, salarios y resumenes por departamento desde la base de datos de RH via PSC endpoint 10.0.0.50',
     scenarioFin: 'Consulta facturas, presupuestos y pagos vencidos desde la base de datos de Finanzas via PSC endpoint 10.0.0.51',
     scenarioHacker: 'Rechazado inmediatamente con 401. Sin acceso a bases de datos, sin herramientas cargadas, sin datos expuestos.',
+  },
+  vibebify: {
+    badge: 'Proyecto Personal',
+    title: 'Vibebify',
+    subtitle: 'Una app web social enfocada en musica con estetica punk/rock. Inicia sesion con Spotify, explora tus estadisticas de escucha, comparte posts sobre canciones, compite en duelos de canciones y manten rachas de publicaciones diarias.',
+    back: 'Volver al Portafolio',
+    viewSource: 'Ver Codigo Fuente',
+    liveApp: 'Probar en Vivo',
+    inspirationLabel: 'Historia de Origen',
+    inspirationText: 'Vibebify fue inspirado inicialmente por ',
+    inspirationBy: ' de Michelle Liu, que convierte tu historial de escucha de Spotify en un recibo. Quise llevar ese concepto mas alla: de una imagen estatica a una experiencia social completa donde compartes musica, compites en duelos de canciones y visualizas tu identidad de generos.',
+    featuresLabel: 'Que hace',
+    featuresTitle: 'Funcionalidades',
+    features: {
+      spotify: {
+        title: 'Integracion con Spotify',
+        short: 'Tus estadisticas de escucha, visualizadas',
+        detail: 'Inicia sesion con Spotify OAuth. Vibebify obtiene tus canciones recientes, artistas y tracks favoritos en tres rangos de tiempo (ultimas 4 semanas, 6 meses, todo el tiempo). Los tokens se refrescan automaticamente al expirar.',
+      },
+      feed: {
+        title: 'Feed Social',
+        short: 'Posts, likes, comentarios',
+        detail: 'Dos modos de feed: Feed (posts de personas que sigues) y Discover (global). Crea posts con canciones adjuntas seleccionadas de tu historial de Spotify o buscadas via MusicBrainz. Da like, comenta y elimina tus propios posts.',
+      },
+      dna: {
+        title: 'Tarjeta de ADN de Genero',
+        short: 'Tu identidad de generos, compartible',
+        detail: 'Un grafico de dona visualizando tus generos principales basado en tus artistas favoritos. Omite generos con los que no te identificas. Comparte como imagen Canvas de 1080x1920 (tamano de historia de Instagram) con tu foto de perfil, top 3 artistas y marca de agua de Vibebify.',
+      },
+      duels: {
+        title: 'Duelos de Canciones',
+        short: 'Reta a la comunidad',
+        detail: 'Elige una cancion y reta a la comunidad. Un oponente acepta y elige la suya, luego todos votan por 24 horas. Visualizacion de barras de votos en vivo con una corona en el lado ganador.',
+      },
+      streaks: {
+        title: 'Rachas de Publicacion',
+        short: 'Se constante, sube de nivel',
+        detail: 'Publica diario para construir tu racha. Rastreada automaticamente via un trigger de base de datos que verifica dias consecutivos. Niveles de color: default, naranja (3+), cyan (7+), morado (30+).',
+      },
+      compose: {
+        title: 'Busqueda y Composicion',
+        short: 'Adjunta cualquier cancion a tu post',
+        detail: 'Crea posts con un selector de canciones que busca en tus tracks recientes de Spotify o recurre a MusicBrainz para cualquier cancion del mundo. El modal de composicion soporta texto con cancion adjunta opcional.',
+      },
+    },
+    stackLabel: 'Construido con',
+    stackTitle: 'Stack Tecnologico',
+    archLabel: 'Por dentro',
+    archTitle: 'Arquitectura',
+    archSubtitle: 'Haz clic en cualquier componente para saber mas. Arquitectura client-first con llamadas directas a Supabase.',
+    archLegendDirect: 'Llamadas directas a Supabase (cliente)',
+    archLegendServer: 'Rutas API del servidor',
+    archLegendInternal: 'Interno / flujo de auth',
+    archFootnote: 'Client-first: 18 operaciones DB directas via lib/db.ts | Solo 3 rutas API (secretos del servidor)',
   },
   agent: {
     fab: 'Eres un agente de IA',

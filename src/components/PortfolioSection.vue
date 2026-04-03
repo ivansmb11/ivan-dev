@@ -13,9 +13,9 @@ const projects = computed(() => [
   {
     title: 'Vibebify',
     description: t('portfolio.vibebify'),
-    tags: ['Spotify API', 'Social Media', 'Web App'],
+    tags: ['Next.js 16', 'Supabase', 'PostgreSQL', 'Spotify API', 'Social Media'],
     github: 'https://github.com/ivansmb11/vibebify',
-    live: 'https://vibebify.ivanmendoza.dev',
+    live: '#/vibebify',
     image: vibebifyImg,
   },
   {

@@ -18,6 +18,11 @@ const router = createRouter({
       path: '/concierge',
       name: 'concierge',
       component: () => import('@/views/ConciergeView.vue')
+    },
+    {
+      path: '/vibebify',
+      name: 'vibebify',
+      component: () => import('@/views/VibebifyView.vue')
     }
   ],
   scrollBehavior(to) {

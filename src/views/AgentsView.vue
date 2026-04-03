@@ -67,10 +67,11 @@ Skills: Spring Boot, Java, PostgreSQL, Vue.js, Agile/Lean
 ## Projects
 
 ### Vibebify
-A music-focused social media web app with a punk/rock aesthetic. Sign in with Spotify, explore your listening stats, share posts about songs, follow other users, view your Genre DNA, compete in song duels, and maintain daily posting streaks.
-Tech: Spotify API, Social Media, Web App
+A music-focused social media web app with a punk/rock aesthetic. Sign in with Spotify, explore your listening stats, share posts about songs, follow other users, view your Genre DNA, compete in song duels, and maintain daily posting streaks. Early-inspired by Receiptify (https://github.com/michellexliu/receiptify) by Michelle Liu. Built with Next.js 16, TypeScript, Supabase (PostgreSQL + RLS), Spotify OAuth, React Aria, Tailwind CSS v4, Zod v4, Bun, and deployed on Vercel. Client-first architecture with direct Supabase calls, only 3 API routes for server secrets.
+Tech: Next.js 16, Supabase, PostgreSQL, Spotify API, Social Media
 GitHub: https://github.com/ivansmb11/vibebify
 Live: https://vibebify.ivanmendoza.dev
+Showcase: https://ivanmendoza.dev/#/vibebify
 
 ### ivanmendoza.dev
 Personal portfolio website built with Vue 3, Vite, and Tailwind CSS. Features parallax scrolling, smooth animations, and responsive design.

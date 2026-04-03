@@ -1,11 +1,14 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter, useRoute } from 'vue-router'
 import { Menu, X, Languages, Sun, Moon } from 'lucide-vue-next'
 import { useTheme } from '@/stores/useThemeStore'
 
 const { t, locale } = useI18n()
 const { theme, toggle: toggleTheme } = useTheme()
+const router = useRouter()
+const route = useRoute()
 
 const links = [
   { key: 'nav.home', href: '#hero' },
@@ -25,6 +28,10 @@ function onScroll() {
 
 function scrollTo(href) {
   mobileOpen.value = false
+  if (route.path !== '/') {
+    router.push('/' + href)
+    return
+  }
   const el = document.querySelector(href)
   if (el) el.scrollIntoView({ behavior: 'smooth' })
 }
