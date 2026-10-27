@@ -1,20 +1,19 @@
 import { ref, watch } from 'vue'
 
-const theme = ref(localStorage.getItem('theme') || 'dark')
+// Light is the reference look and the default; dark is opt-in. A new key so the old site's
+// auto-saved 'theme' value doesn't silently put returning visitors in dark mode.
+const STORAGE_KEY = 'theme-choice'
 
-function applyTheme(t) {
-  document.documentElement.classList.toggle('dark', t === 'dark')
-  document.documentElement.classList.toggle('light', t === 'light')
-}
+const theme = ref(localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light')
 
-watch(theme, (val) => {
-  localStorage.setItem('theme', val)
-  applyTheme(val)
+watch(theme, (value) => {
+  document.documentElement.classList.toggle('dark', value === 'dark')
 }, { immediate: true })
 
 export function useTheme() {
   function toggle() {
     theme.value = theme.value === 'dark' ? 'light' : 'dark'
+    localStorage.setItem(STORAGE_KEY, theme.value)
   }
   return { theme, toggle }
 }

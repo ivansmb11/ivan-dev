@@ -1,21 +1,30 @@
 <script setup>
-import { useTheme } from '@/stores/useThemeStore'
-const { theme } = useTheme()
+import { ArrowLeft } from 'lucide-vue-next'
+import PageHeader from '@/components/ui/PageHeader.vue'
 </script>
 
 <template>
-  <div class="min-h-screen py-24 px-6">
-    <div class="max-w-3xl mx-auto font-mono text-sm leading-relaxed" :class="theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'">
+  <main id="main" tabindex="-1" class="outline-none">
+    <div class="container-site pt-32 pb-24 md:pt-40 md:pb-32">
+      <PageHeader title="Agent context" kicker="ivanmendoza.dev" />
 
-      <div class="mb-8">
-        <h1 class="text-2xl font-bold mb-2" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">ivanmendoza.dev | Agent Context</h1>
-        <p :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">This page provides structured plain-text information about Ivan Mendoza for AI agents, crawlers, and assistants.</p>
-        <router-link to="/" class="text-primary hover:text-primary-light text-xs mt-2 inline-block">← Back to site</router-link>
-      </div>
+      <div class="mt-12 grid gap-8 md:mt-16 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-4">
+          <div class="flex flex-col gap-5 lg:sticky lg:top-32">
+            <p class="max-w-[28rem] text-base leading-relaxed text-graphite md:text-lg">
+              This page provides structured plain-text information about Ivan Mendoza for AI agents, crawlers, and assistants.
+            </p>
+            <router-link
+              to="/"
+              class="group -ml-1 inline-flex min-h-11 w-fit items-center gap-2 px-1 text-sm font-medium uppercase tracking-[0.01em] text-graphite transition-colors hover:text-ink"
+            >
+              <ArrowLeft :size="16" aria-hidden="true" class="transition-transform duration-300 group-hover:-translate-x-0.5" />
+              <span class="link-underline">Back to site</span>
+            </router-link>
+          </div>
+        </div>
 
-      <hr :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200'" class="my-6" />
-
-      <pre class="whitespace-pre-wrap break-words">
+        <pre class="block min-w-0 border border-line bg-card p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink [overflow-wrap:anywhere] md:p-8 lg:col-span-8">
 # Ivan Mendoza
 ## Lead Software Engineer
 
@@ -24,6 +33,7 @@ Email: ivanmendozabaca@gmail.com
 GitHub: https://github.com/ivansmb11
 LinkedIn: https://www.linkedin.com/in/iván-sebastián-mendoza-baca-078429231/
 Twitter: https://twitter.com/ivannsmb
+Facebook: https://www.facebook.com/ivansmb11
 Website: https://ivanmendoza.dev
 
 ---
@@ -44,19 +54,19 @@ Elected student council leader for the Engineering program.
 
 ## Career
 
-### v3.0 — ZAZPAY | Lead Software Engineer (Full-time)
+### v3.0 | ZAZPAY | Lead Software Engineer (Full-time)
 Period: Jun 2023 - Present
 Location: Mexico City Metropolitan Area | Hybrid
 Description: Lead mobile and frontend engineering for a BNPL fintech, owning the Expo codebase and shipping releases across Play Store, App Store, and App Gallery. Drove engineering process improvements, championed AI-assisted development adoption (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
 Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD, AI Agents, MCP
 
-### v2.0 — PRESTA VALE | Software Engineer (Full-time)
+### v2.0 | PRESTA VALE | Software Engineer (Full-time)
 Period: Jun 2023 - Dec 2024 (1 yr 7 mos)
 Mode: Hybrid
 Description: Software engineer at Presta Vale, a micro-lending financial institution, where I developed and maintained mobile and web applications for credit origination, loan management, and collections. Focused on delivering reliable user experiences for both borrowers and internal operations teams.
 Skills: React Native, TypeScript, REST APIs, Mobile Development, CI/CD
 
-### v1.0 — GE Aerospace | Software Developer Intern
+### v1.0 | GE Aerospace | Software Developer Intern
 Period: Jun 2022 - Jun 2023 (1 yr)
 Location: El Marques, Queretaro, Mexico
 Description: Developed backend services for aviation and engineering operations using Spring Boot, Java, and PostgreSQL. Worked alongside senior engineers in a high-standards environment emphasizing clean architecture, thorough code reviews, and disciplined Git workflows.
@@ -73,9 +83,15 @@ GitHub: https://github.com/ivansmb11/vibebify
 Live: https://vibebify.ivanmendoza.dev
 Showcase: https://ivanmendoza.dev/#/vibebify
 
+### VIP Data Concierge
+A Zero-Trust AI Agent on GCP that routes queries to isolated databases based on user identity. Hub-and-Spoke VPC networking with NCC, Private Service Connect, Vertex AI Gemini, and LangChain Function Calling.
+Tech: GCP, Vertex AI, LangChain, Cloud Run, PostgreSQL, Zero-Trust
+GitHub: https://github.com/ivansmb11/vip-data-concierge
+Showcase: https://ivanmendoza.dev/#/concierge
+
 ### ivanmendoza.dev
-Personal portfolio website built with Vue 3, Vite, and Tailwind CSS. Features parallax scrolling, smooth animations, and responsive design.
-Tech: Vue 3, Tailwind CSS, Vite
+Bilingual personal portfolio built with Vue 3, Vite, and Tailwind CSS v4. A bold, type-led layout with scroll-reveal animations and a plain-text page for AI agents.
+Tech: Vue 3, Vite, Tailwind CSS v4, vue-i18n
 GitHub: https://github.com/ivansmb11/ivan-dev
 Live: https://ivanmendoza.dev
 
@@ -131,8 +147,8 @@ AI Engineer Code Summit, New York City, 2025
 
 ## Availability
 Status: Available for new opportunities
-Contact: ivanmendozabaca@gmail.com
-      </pre>
+Contact: ivanmendozabaca@gmail.com</pre>
+      </div>
     </div>
-  </div>
+  </main>
 </template>

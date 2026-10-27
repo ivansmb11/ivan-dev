@@ -1,23 +1,25 @@
 <script setup>
 import HeroSection from '@/components/HeroSection.vue'
+import TrustedSection from '@/components/TrustedSection.vue'
 import AboutSection from '@/components/AboutSection.vue'
-import PortfolioSection from '@/components/PortfolioSection.vue'
+import TechTicker from '@/components/TechTicker.vue'
 import CareerSection from '@/components/CareerSection.vue'
+import PortfolioSection from '@/components/PortfolioSection.vue'
 import AchievementsSection from '@/components/AchievementsSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
-import TechTicker from '@/components/TechTicker.vue'
 </script>
 
 <template>
-  <main>
+  <main id="main" tabindex="-1" class="outline-none">
     <HeroSection />
-    <TechTicker />
+    <TrustedSection />
     <AboutSection />
+    <TechTicker />
     <CareerSection />
     <PortfolioSection />
     <AchievementsSection />
     <ContactSection />
-    <FooterSection />
   </main>
+  <FooterSection />
 </template>

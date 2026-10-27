@@ -21,36 +21,41 @@ npm run preview    # Preview production build on port 4173
 - **Tailwind CSS v4** via `@tailwindcss/vite` plugin
 - **@vueuse/motion** for scroll-triggered animations (`v-motion` directive)
 - **Lucide Vue Next** for icons
-- Fonts: Inter (body), JetBrains Mono (accents) via Google Fonts
+- **vue-i18n** for English/Spanish (`src/i18n/`)
+- Font: Inter (variable, `opsz` axis) via Google Fonts; large sizes switch to the display cut automatically
 
 ### Structure
 
 ```
 src/
-├── App.vue                      # Root: navbar + router-view
-├── main.js                      # Entry: Vue + MotionPlugin + router
-├── style.css                    # Tailwind import + custom theme (colors, fonts, scrollbar)
-├── router/index.js              # Single route (/) with smooth scroll behavior
+├── App.vue                      # Root: skip link, intro loader, shortcuts, navbar, router-view, agent badge
+├── main.js                      # Entry: Vue + MotionPlugin + router + i18n
+├── style.css                    # Tailwind import, design tokens (@theme), dark palette (html.dark), utilities
+├── motion.js                    # reveal() / enter() variants for v-motion (respect reduced motion)
+├── router/index.js              # /, /concierge, /vibebify, /agents (hash history)
+├── stores/useThemeStore.js      # Light default, opt-in dark; toggles html.dark
+├── content/links.js             # Email, socials, home section ids
+├── assets/
+│   ├── slots.js                 # Image slot manifest (id → label, recommended size)
+│   └── images/                  # Files named <slot-id>.<ext> fill the matching slot
 ├── components/
-│   ├── NavbarComponent.vue      # Fixed top nav, transparent → blur on scroll, mobile hamburger
-│   ├── HeroSection.vue          # Full-screen parallax hero with photo + social links
-│   ├── AboutSection.vue         # Bio + highlight cards (education, experience, location)
-│   ├── StackSection.vue         # Tech stack grid grouped by category, logos from assets/logos/
-│   ├── PortfolioSection.vue     # Project cards with tags + links
-│   └── ContactSection.vue       # Social links + CTA + footer
-├── views/HomeView.vue           # Composes all sections into single-page scroll
-└── assets/                      # Profile photo, background images, tech logos
+│   ├── ui/                      # AssetSlot, AsteriskMark, SectionChip, SplitHeading, ArrowButton, PageHeader
+│   ├── HeroSection.vue … FooterSection.vue   # Home sections, in HomeView order
+│   ├── concierge/, vibebify/    # Case-study page components
+│   └── BootSequence.vue, KeyboardShortcuts.vue, AgentFab.vue
+└── views/                       # HomeView, ConciergeView, VibebifyView, AgentsView
 ```
 
 ### Design System
 
-Theme colors defined in `src/style.css` under `@theme`:
-- `primary` (emerald green), `surface` / `surface-light` / `surface-lighter` (zinc grays)
-- Dark-only design on `zinc-950` background
+Visual source of truth: a Framer "Personal Portfolio" reference (orange hero, off-white paper, heavy uppercase display type, gray chips with a red-orange asterisk).
+- Tokens live in `src/style.css` `@theme`: `paper`, `card`, `mist`, `mist-soft`, `line`, `muted`, `graphite`, `ink` (neutrals), `onyx` (fixed near-black), `ember-deep` / `ember` / `ember-bright` (hero and footer orange), `accent` / `accent-deep`, `night`. Display sizes: `text-display-hero|xl|lg|md`. Utilities: `container-site`, `link-underline`, `placeholder-hatch`.
+- Light is the default. Dark mode is opt-in (navbar toggle, menu, `D` key): `html.dark` overrides only the neutral tokens. To stay dark-safe, use `bg-card` (not `bg-white`) for raised surfaces, `text-paper` on `bg-ink`, and fixed colors (`text-white`, `bg-onyx`, `text-onyx`) only on the orange hero/footer, photos and `bg-night`. No `theme === 'dark'` branches in components.
+- Images go through `AssetSlot` with an id from `src/assets/slots.js`. Until `src/assets/images/<id>.<ext>` exists it renders a labeled placeholder. Vibebify's product screenshots and diagram tech logos are real files imported directly.
 
 ### Animations
 
-All sections use `v-motion` with `:visible-once` for scroll-reveal animations. Hero uses `:enter` for load animations. Parallax backgrounds use `background-attachment: fixed` via `.parallax-bg` class.
+Use `v-motion="reveal(delay)"` for scroll reveals and `v-motion="enter(delay)"` above the fold (`src/motion.js`); both turn off under `prefers-reduced-motion`.
 
 ## Content Sync Rules (CRITICAL)
 
@@ -64,10 +69,12 @@ When updating portfolio content, **ALL** of the following must be kept in sync:
 | `index.html` | Page `<title>` and `<meta name="description">` |
 
 Additionally, some content is hardcoded in Vue components (not i18n):
-- `src/components/TechTicker.vue` — tech list array
-- `src/components/AboutSection.vue` — stats counter values (years, companies, projects, technologies)
-- `src/components/AchievementsSection.vue` — achievement entries array (logos, URLs, type)
-- `src/components/CareerSection.vue` — job entries array (logos, git metadata)
+- `src/components/TechTicker.vue`: tech list array
+- `src/components/AboutSection.vue`: stats counter values (years, companies, projects, technologies)
+- `src/components/AchievementsSection.vue`: achievement entries array (URLs, credentials, logo slot ids)
+- `src/components/CareerSection.vue`: job entries array (image slot ids)
+- `src/components/PortfolioSection.vue`: project entries (tags, GitHub and case-study links)
+- `src/components/TrustedSection.vue`: logo strip entries
 
 **Never update content in only one place.** Always check all locations above.
 

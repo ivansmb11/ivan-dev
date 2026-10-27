@@ -1,102 +1,150 @@
 <script setup>
+import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { ArrowLeft } from 'lucide-vue-next'
 import ConciergeDoc from '@/components/concierge/ConciergeDoc.vue'
 import NetworkDiagram from '@/components/concierge/NetworkDiagram.vue'
 import ConciergeChat from '@/components/concierge/ConciergeChat.vue'
-import { useTheme } from '@/stores/useThemeStore'
-import { ArrowLeft, Github } from 'lucide-vue-next'
+import PageHeader from '@/components/ui/PageHeader.vue'
+import SectionChip from '@/components/ui/SectionChip.vue'
+import SplitHeading from '@/components/ui/SplitHeading.vue'
+import ArrowButton from '@/components/ui/ArrowButton.vue'
+import { enter, reveal } from '@/motion'
 
 const { t } = useI18n()
-const { theme } = useTheme()
 
+const REPO_URL = 'https://github.com/ivansmb11/vip-data-concierge'
+const portfolioRoute = { path: '/', hash: '#portfolio' }
+
+const sections = computed(() => [
+  {
+    id: 'documentation',
+    nav: t('concierge.navDocs'),
+    chip: t('concierge.docsTitle'),
+    lead: t('concierge.docsHeadingLead', 'Zero trust'),
+    rest: t('concierge.docsHeadingRest', 'by design'),
+    intro: t('concierge.docsSubtitle'),
+    component: ConciergeDoc,
+  },
+  {
+    id: 'architecture',
+    nav: t('concierge.navArch'),
+    chip: t('concierge.archTitle'),
+    lead: t('concierge.archHeadingLead', 'One hub,'),
+    rest: t('concierge.archHeadingRest', 'isolated spokes'),
+    intro: t('concierge.archSubtitle'),
+    component: NetworkDiagram,
+  },
+  {
+    id: 'live-chat',
+    nav: t('concierge.navDemo'),
+    chip: t('concierge.demoTitle'),
+    lead: t('concierge.demoHeadingLead', 'See it'),
+    rest: t('concierge.demoHeadingRest', 'in action'),
+    intro: t('concierge.demoSubtitle'),
+    component: ConciergeChat,
+  },
+])
+
+// Focus follows the scroll so the next Tab continues inside the chosen section
+// instead of returning to this nav and scrolling the page back to the top.
 function scrollToSection(id) {
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  const target = document.getElementById(id)
+  if (!target) return
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' })
+  target.focus({ preventScroll: true })
 }
 </script>
 
 <template>
-  <div class="min-h-screen pt-24 pb-16 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Back link -->
+  <main id="main" tabindex="-1" class="outline-none">
+    <header class="container-site pt-32 pb-16 md:pt-40 md:pb-24">
       <router-link
-        to="/"
-        class="inline-flex items-center gap-2 mb-8 text-sm font-medium transition-colors"
-        :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
+        v-motion="enter(0, 12)"
+        :to="portfolioRoute"
+        class="group -ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm font-medium uppercase tracking-[0.01em] text-graphite transition-colors hover:text-ink"
       >
-        <ArrowLeft :size="16" />
-        {{ t('concierge.back') }}
+        <ArrowLeft :size="16" aria-hidden="true" class="transition-transform duration-300 group-hover:-translate-x-0.5" />
+        <span class="link-underline">{{ t('concierge.back') }}</span>
       </router-link>
 
-      <!-- Hero -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 rounded-full bg-primary animate-pulse" />
-          <span
-            class="text-xs font-mono uppercase tracking-widest"
-            :class="theme === 'dark' ? 'text-primary' : 'text-primary-dark'"
-          >{{ t('concierge.badge') }}</span>
-        </div>
-        <h1
-          class="text-4xl sm:text-5xl font-display font-bold mb-4"
-          :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-        >
-          {{ t('concierge.title') }}
-        </h1>
-        <p
-          class="text-lg max-w-2xl mb-5"
-          :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-        >
-          {{ t('concierge.subtitle') }}
-        </p>
-        <a
-          href="https://github.com/ivansmb11/vip-data-concierge"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border"
-          :class="theme === 'dark'
-            ? 'bg-surface-light border-zinc-700 text-zinc-300 hover:text-white hover:border-primary/40'
-            : 'bg-white border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-primary/40 shadow-sm'"
-        >
-          <Github :size="16" />
-          {{ t('concierge.viewSource') }}
-        </a>
-      </div>
+      <PageHeader
+        v-motion="enter(120)"
+        class="mt-8 md:mt-10 max-sm:[&_h1]:text-[length:min(3.4rem,13.5vw)]"
+        :title="t('concierge.title')"
+        :kicker="t('concierge.badge')"
+      />
 
-      <!-- Section nav -->
       <div
-        class="flex gap-1 p-1 rounded-lg mb-12 w-fit"
-        :class="theme === 'dark' ? 'bg-surface-light' : 'bg-zinc-200'"
+        v-motion="enter(260)"
+        class="mt-12 grid grid-cols-1 gap-10 border-t border-line pt-10 md:mt-16 xl:grid-cols-12 xl:gap-6"
       >
-        <button
-          v-for="{ labelKey, id } in [
-            { labelKey: 'concierge.navDocs', id: 'documentation' },
-            { labelKey: 'concierge.navArch', id: 'architecture' },
-            { labelKey: 'concierge.navDemo', id: 'live-chat' },
-          ]"
-          :key="id"
-          @click="scrollToSection(id)"
-          class="px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer"
-          :class="theme === 'dark'
-            ? 'text-zinc-400 hover:text-white hover:bg-surface-lighter'
-            : 'text-zinc-600 hover:text-zinc-900 hover:bg-white'"
-        >{{ t(labelKey) }}</button>
+        <div class="xl:col-span-7">
+          <p class="max-w-2xl text-lg leading-relaxed text-graphite md:text-xl">{{ t('concierge.subtitle') }}</p>
+          <ArrowButton :href="REPO_URL" external class="mt-8">{{ t('concierge.viewSource') }}</ArrowButton>
+        </div>
+
+        <nav
+          :aria-label="t('concierge.navLabel', 'On this page')"
+          class="xl:col-span-5 xl:col-start-8 xl:self-end"
+        >
+          <ul class="flex flex-wrap gap-2 xl:justify-end">
+            <li v-for="(section, i) in sections" :key="section.id">
+              <button
+                type="button"
+                class="group inline-flex min-h-11 cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-[3px] bg-mist px-4 text-xs font-medium uppercase tracking-[0.02em] text-ink transition-colors duration-300 hover:bg-ink hover:text-paper active:translate-y-px"
+                @click="scrollToSection(section.id)"
+              >
+                <span class="tabular-nums text-graphite transition-colors duration-300 group-hover:text-paper/60">0{{ i + 1 }}</span>
+                {{ section.nav }}
+              </button>
+            </li>
+          </ul>
+        </nav>
       </div>
+    </header>
 
-      <!-- Documentation -->
-      <section id="documentation" class="mb-20">
-        <ConciergeDoc />
-      </section>
+    <section
+      v-for="section in sections"
+      :id="section.id"
+      :key="section.id"
+      :aria-labelledby="`${section.id}-heading`"
+      tabindex="-1"
+      class="scroll-mt-[5.25rem] border-t border-line py-20 outline-none! md:py-28"
+    >
+      <div class="container-site">
+        <div v-motion="reveal()" class="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-6">
+          <SectionChip class="self-start lg:col-span-3 lg:mt-3">{{ section.chip }}</SectionChip>
+          <div class="lg:col-span-9">
+            <SplitHeading
+              :id="`${section.id}-heading`"
+              :lead="section.lead"
+              :rest="section.rest"
+              size="md"
+              class="text-balance"
+            />
+            <p class="mt-6 max-w-xl text-base leading-relaxed text-graphite md:text-lg">{{ section.intro }}</p>
+          </div>
+        </div>
 
-      <!-- Architecture Diagram -->
-      <section id="architecture" class="mb-20">
-        <NetworkDiagram />
-      </section>
+        <div class="mt-14 md:mt-20">
+          <component :is="section.component" />
+        </div>
+      </div>
+    </section>
 
-      <!-- Demo -->
-      <section id="live-chat">
-        <ConciergeChat />
-      </section>
+    <div class="border-t border-line">
+      <div class="container-site flex flex-col gap-6 py-12 sm:flex-row sm:items-center sm:justify-between md:py-16">
+        <router-link
+          :to="portfolioRoute"
+          class="group -ml-1 inline-flex min-h-11 w-fit items-center gap-2 px-1 text-sm font-medium uppercase tracking-[0.01em] text-graphite transition-colors hover:text-ink"
+        >
+          <ArrowLeft :size="16" aria-hidden="true" class="transition-transform duration-300 group-hover:-translate-x-0.5" />
+          <span class="link-underline">{{ t('concierge.back') }}</span>
+        </router-link>
+        <ArrowButton :href="REPO_URL" external tone="ink" class="w-fit">{{ t('concierge.viewSource') }}</ArrowButton>
+      </div>
     </div>
-  </div>
+  </main>
 </template>

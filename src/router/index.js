@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import { scrollBehavior } from '@/motion'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -23,13 +24,14 @@ const router = createRouter({
       path: '/vibebify',
       name: 'vibebify',
       component: () => import('@/views/VibebifyView.vue')
-    }
+    },
+    { path: '/:pathMatch(.*)*', redirect: '/' }
   ],
   scrollBehavior(to) {
     if (to.hash) {
-      return { el: to.hash, behavior: 'smooth' }
+      return { el: to.hash, behavior: scrollBehavior() }
     }
-    return { top: 0, behavior: 'smooth' }
+    return { top: 0, behavior: scrollBehavior() }
   }
 })
 

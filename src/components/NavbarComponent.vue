@@ -1,167 +1,236 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { scrollBehavior } from '@/motion'
+import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter, useRoute } from 'vue-router'
-import { Menu, X, Languages, Sun, Moon } from 'lucide-vue-next'
+import { Sun, Moon } from 'lucide-vue-next'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import { sections, socials, email } from '@/content/links'
 import { useTheme } from '@/stores/useThemeStore'
+
+const emit = defineEmits(['menu-change'])
 
 const { t, locale } = useI18n()
 const { theme, toggle: toggleTheme } = useTheme()
 const router = useRouter()
 const route = useRoute()
 
-const links = [
-  { key: 'nav.home', href: '#hero' },
-  { key: 'nav.about', href: '#about' },
-  { key: 'nav.career', href: '#career' },
-  { key: 'nav.portfolio', href: '#portfolio' },
-  { key: 'nav.achievements', href: '#achievements' },
-  { key: 'nav.contact', href: '#contact' },
-]
+const inlineLinks = sections.filter((s) => s.id !== 'achievements')
 
 const scrolled = ref(false)
-const mobileOpen = ref(false)
+const menuOpen = ref(false)
+const menuButton = ref(null)
+const menuPanel = ref(null)
+
+const overHero = computed(() => route.path === '/' && !scrolled.value && !menuOpen.value)
+
+function hrefFor(id) {
+  return router.resolve({ path: '/', hash: '#' + id }).href
+}
 
 function onScroll() {
-  scrolled.value = window.scrollY > 50
+  scrolled.value = window.scrollY > window.innerHeight - 90
 }
 
-function scrollTo(href) {
-  mobileOpen.value = false
+function go(id) {
+  menuOpen.value = false
   if (route.path !== '/') {
-    router.push('/' + href)
+    router.push({ path: '/', hash: '#' + id })
     return
   }
-  const el = document.querySelector(href)
-  if (el) el.scrollIntoView({ behavior: 'smooth' })
+  document.getElementById(id)?.scrollIntoView({ behavior: scrollBehavior() })
 }
 
-function toggleLocale() {
-  const next = locale.value === 'en' ? 'es' : 'en'
-  locale.value = next
-  localStorage.setItem('locale', next)
+function setLocale(value) {
+  locale.value = value
+  localStorage.setItem('locale', value)
 }
 
-onMounted(() => window.addEventListener('scroll', onScroll))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
+function onKey(e) {
+  if (e.key === 'Escape' && menuOpen.value) menuOpen.value = false
+}
+
+watch(menuOpen, async (open) => {
+  emit('menu-change', open)
+  document.documentElement.style.overflow = open ? 'hidden' : ''
+  await nextTick()
+  if (open) menuPanel.value?.querySelector('a, button')?.focus()
+  else menuButton.value?.focus({ preventScroll: true })
+})
+
+watch(() => route.path, () => {
+  menuOpen.value = false
+  nextTick(onScroll)
+})
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('keydown', onKey)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+  window.removeEventListener('keydown', onKey)
+  document.documentElement.style.overflow = ''
+})
 </script>
 
 <template>
-  <nav
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-    :class="scrolled
-      ? theme === 'dark'
-        ? 'bg-zinc-950/90 backdrop-blur-md shadow-lg shadow-black/20'
-        : 'bg-white/90 backdrop-blur-md shadow-lg shadow-black/5'
-      : 'bg-transparent'"
+  <header
+    class="fixed inset-x-0 top-0 z-50 transition-[background-color,color,box-shadow] duration-300"
+    :class="overHero
+      ? 'text-white [&_:focus-visible]:outline-white!'
+      : menuOpen
+        ? 'text-ink'
+        : 'bg-paper/85 text-ink shadow-[0_1px_0_var(--color-line)] backdrop-blur-md'"
   >
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav class="container-site flex h-[5.25rem] items-center justify-between gap-6" aria-label="Primary">
       <a
-        href="#hero"
-        @click.prevent="scrollTo('#hero')"
-        class="text-xl font-bold font-display tracking-tight text-primary hover:text-primary-light transition-colors"
+        :href="hrefFor('hero')"
+        class="flex shrink-0 items-start text-lg font-bold tracking-tight sm:text-xl"
+        @click.prevent="go('hero')"
       >
-        ivanmendoza<span :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">.dev</span>
+        Ivan Mendoza<AsteriskMark class="ml-0.5 size-2.5" :class="overHero ? 'text-white' : 'text-accent'" :weight="2.4" />
       </a>
 
-      <!-- Desktop links -->
-      <div class="hidden md:flex items-center gap-8">
-        <a
-          v-for="link in links"
-          :key="link.href"
-          :href="link.href"
-          @click.prevent="scrollTo(link.href)"
-          class="nav-link text-sm font-medium transition-colors"
-          :class="theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'"
-        >
-          {{ t(link.key) }}
-        </a>
+      <ul class="hidden flex-1 items-center justify-evenly lg:flex">
+        <li v-for="link in inlineLinks" :key="link.id">
+          <a
+            :href="hrefFor(link.id)"
+            class="link-underline pb-0.5 text-[15px] font-medium"
+            @click.prevent="go(link.id)"
+          >{{ t(link.key) }}</a>
+        </li>
+      </ul>
 
-        <!-- Theme toggle -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Active language is underlined, not dimmed: dimmed white on the hero orange drops to ~2.6:1 -->
+        <div class="flex items-center gap-1.5 text-sm font-medium max-[359px]:hidden" role="group" :aria-label="t('nav.language')">
+          <button
+            type="button"
+            class="cursor-pointer px-0.5 decoration-[1.5px] underline-offset-[5px]"
+            :class="locale === 'en' ? 'underline' : 'hover:underline hover:decoration-current/40'"
+            :aria-pressed="locale === 'en'"
+            @click="setLocale('en')"
+          >EN</button>
+          <span aria-hidden="true" class="opacity-40">/</span>
+          <button
+            type="button"
+            class="cursor-pointer px-0.5 decoration-[1.5px] underline-offset-[5px]"
+            :class="locale === 'es' ? 'underline' : 'hover:underline hover:decoration-current/40'"
+            :aria-pressed="locale === 'es'"
+            @click="setLocale('es')"
+          >ES</button>
+        </div>
+
         <button
+          type="button"
+          class="grid size-11 cursor-pointer place-items-center transition-opacity hover:opacity-70"
+          :aria-label="theme === 'dark' ? t('nav.lightMode') : t('nav.darkMode')"
+          :title="theme === 'dark' ? t('nav.lightMode') : t('nav.darkMode')"
           @click="toggleTheme"
-          class="transition-colors cursor-pointer"
-          :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
-          :title="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
         >
-          <Sun v-if="theme === 'dark'" :size="16" />
-          <Moon v-else :size="16" />
+          <Sun v-if="theme === 'dark'" :size="18" aria-hidden="true" />
+          <Moon v-else :size="18" aria-hidden="true" />
         </button>
 
-        <!-- Language toggle -->
         <button
-          @click="toggleLocale"
-          class="flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer"
-          :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
-          :title="locale === 'en' ? 'Cambiar a Español' : 'Switch to English'"
+          ref="menuButton"
+          type="button"
+          class="flex h-11 w-11 cursor-pointer flex-col items-end justify-center gap-[7px]"
+          aria-controls="site-menu"
+          :aria-expanded="menuOpen"
+          @click="menuOpen = !menuOpen"
         >
-          <Languages :size="16" />
-          <span class="uppercase">{{ locale }}</span>
+          <span class="sr-only">{{ menuOpen ? t('nav.close') : t('nav.menu') }}</span>
+          <span
+            class="block h-[2px] w-9 bg-current transition-transform duration-300"
+            :class="menuOpen && 'translate-y-[4.5px] rotate-45'"
+          />
+          <span
+            class="block h-[2px] w-9 bg-current transition-transform duration-300"
+            :class="menuOpen && '-translate-y-[4.5px] -rotate-45'"
+          />
         </button>
       </div>
+    </nav>
+  </header>
 
-      <!-- Mobile toggle -->
-      <button
-        class="md:hidden transition-colors"
-        :class="theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-600 hover:text-zinc-900'"
-        @click="mobileOpen = !mobileOpen"
-        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
-      >
-        <Menu v-if="!mobileOpen" :size="24" />
-        <X v-else :size="24" />
-      </button>
-    </div>
-
-    <!-- Mobile menu -->
-    <transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="opacity-0 -translate-y-2"
-      enter-to-class="opacity-100 translate-y-0"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100 translate-y-0"
-      leave-to-class="opacity-0 -translate-y-2"
+  <transition
+    enter-active-class="transition duration-300 ease-out"
+    enter-from-class="opacity-0 -translate-y-3"
+    leave-active-class="transition duration-200 ease-in"
+    leave-to-class="opacity-0 -translate-y-3"
+  >
+    <!-- No aria-modal: the close button lives in the header, outside this element, and would be hidden from
+         screen readers. App.vue makes the page behind inert instead. -->
+    <div
+      v-if="menuOpen"
+      id="site-menu"
+      ref="menuPanel"
+      class="fixed inset-0 z-40 overflow-y-auto bg-paper text-ink"
+      role="dialog"
+      :aria-label="t('nav.menu')"
     >
-      <div
-        v-if="mobileOpen"
-        class="md:hidden backdrop-blur-md border-t"
-        :class="theme === 'dark'
-          ? 'bg-zinc-950/95 border-zinc-800'
-          : 'bg-white/95 border-zinc-200'"
-      >
-        <div class="px-6 py-4 flex flex-col gap-4">
-          <a
-            v-for="link in links"
-            :key="link.href"
-            :href="link.href"
-            @click.prevent="scrollTo(link.href)"
-            class="text-sm font-medium transition-colors"
-            :class="theme === 'dark' ? 'text-zinc-400 hover:text-white' : 'text-zinc-500 hover:text-zinc-900'"
-          >
-            {{ t(link.key) }}
-          </a>
-
-          <div class="flex items-center gap-4">
-            <button
-              @click="toggleTheme"
-              class="flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer"
-              :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
+      <div class="container-site flex min-h-full flex-col justify-between gap-12 pt-28 pb-10">
+        <ul class="flex flex-col">
+          <li v-for="link in sections" :key="link.id" class="border-b border-line">
+            <a
+              :href="hrefFor(link.id)"
+              class="group flex items-center justify-between py-3 font-display text-display-md uppercase transition-colors hover:text-accent"
+              @click.prevent="go(link.id)"
             >
-              <Sun v-if="theme === 'dark'" :size="16" />
-              <Moon v-else :size="16" />
-              <span>{{ theme === 'dark' ? 'Light' : 'Dark' }}</span>
-            </button>
+              {{ t(link.key) }}
+              <AsteriskMark class="size-6 text-accent opacity-0 transition-opacity group-hover:opacity-100" />
+            </a>
+          </li>
+        </ul>
 
-            <button
-              @click="toggleLocale"
-              class="flex items-center gap-1.5 text-sm font-medium transition-colors cursor-pointer"
-              :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
-            >
-              <Languages :size="16" />
-              <span>{{ locale === 'en' ? 'Español' : 'English' }}</span>
-            </button>
+        <div class="flex flex-col gap-5 text-sm sm:flex-row sm:items-end sm:justify-between">
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-wrap items-center gap-x-4 font-medium">
+              <div class="flex items-center gap-1.5" role="group" :aria-label="t('nav.language')">
+                <button
+                  type="button"
+                  class="min-h-11 cursor-pointer px-1"
+                  :class="locale === 'en' ? 'text-ink' : 'text-graphite hover:text-ink'"
+                  :aria-pressed="locale === 'en'"
+                  @click="setLocale('en')"
+                >English</button>
+                <span aria-hidden="true" class="text-muted">/</span>
+                <button
+                  type="button"
+                  class="min-h-11 cursor-pointer px-1"
+                  :class="locale === 'es' ? 'text-ink' : 'text-graphite hover:text-ink'"
+                  :aria-pressed="locale === 'es'"
+                  @click="setLocale('es')"
+                >Español</button>
+              </div>
+              <button
+                type="button"
+                class="flex min-h-11 cursor-pointer items-center gap-2 whitespace-nowrap text-graphite hover:text-ink"
+                @click="toggleTheme"
+              >
+                <Sun v-if="theme === 'dark'" :size="16" aria-hidden="true" />
+                <Moon v-else :size="16" aria-hidden="true" />
+                {{ theme === 'dark' ? t('nav.lightMode') : t('nav.darkMode') }}
+              </button>
+            </div>
+            <a :href="`mailto:${email}`" class="link-underline w-fit text-base font-medium">{{ email }}</a>
           </div>
+          <ul class="flex flex-wrap gap-x-6 gap-y-2">
+            <li v-for="social in socials" :key="social.label">
+              <a
+                :href="social.href"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="link-underline font-medium text-graphite hover:text-ink"
+              >{{ social.label }}</a>
+            </li>
+          </ul>
         </div>
       </div>
-    </transition>
-  </nav>
+    </div>
+  </transition>
 </template>

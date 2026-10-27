@@ -1,104 +1,122 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { Calendar, ExternalLink, Hash, MapPin } from 'lucide-vue-next'
-import { useTheme } from '@/stores/useThemeStore'
-import anahuacLogo from '@/assets/logos/anahuac.png'
-import gcloudLogo from '@/assets/logos/gcloud.png'
-import aieLogo from '@/assets/logos/aie-logo.png'
+import { ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
+import AssetSlot from '@/components/ui/AssetSlot.vue'
+import SectionChip from '@/components/ui/SectionChip.vue'
+import SplitHeading from '@/components/ui/SplitHeading.vue'
+import { slotSrc } from '@/assets/slots'
+import { reveal } from '@/motion'
 
 const { t } = useI18n()
-const { theme } = useTheme()
+
+// A labeled placeholder needs more room than the final single-color logo to stay legible.
+const logoBox = (id) => (slotSrc(id) ? 'h-10 w-36' : 'h-20 w-48')
 
 const achievements = computed(() => [
   {
     key: 'summit',
+    slot: 'logo-ai-engineer',
+    brand: 'AI Engineer',
     title: t('achievements.summit.title'),
     issuer: t('achievements.summit.issuer'),
     date: t('achievements.summit.date'),
     location: t('achievements.summit.location'),
-    logo: aieLogo,
     url: '',
     credential: '',
     type: 'conference',
   },
   {
     key: 'saa',
+    slot: 'logo-anahuac',
+    brand: 'Anáhuac',
     title: t('achievements.saa.title'),
     issuer: t('achievements.saa.issuer'),
     date: t('achievements.saa.date'),
     credential: t('achievements.saa.credential'),
-    logo: anahuacLogo,
     url: 'https://wallet.xertify.co/certificates/7CC14A8DA001',
   },
   {
     key: 'gcloud',
+    slot: 'logo-google-cloud',
+    brand: 'Google Cloud',
     title: t('achievements.gcloud.title'),
     issuer: t('achievements.gcloud.issuer'),
     date: t('achievements.gcloud.date'),
     credential: t('achievements.gcloud.credential'),
-    logo: gcloudLogo,
     url: 'https://www.skills.google/public_profiles/63a74ab3-4ba1-4a97-bcdc-83f0efdb5d28',
   },
 ])
 </script>
 
 <template>
-  <section id="achievements" class="relative py-32 overflow-hidden">
-    <!-- Section number -->
-    <span
-      class="absolute top-8 right-8 text-[80px] font-bold leading-none pointer-events-none select-none"
-      :class="theme === 'dark' ? 'text-zinc-800/30' : 'text-zinc-300/40'"
-    >04</span>
-
-    <div class="max-w-4xl mx-auto px-6">
-      <div v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }" class="mb-16">
-        <p class="text-primary font-mono text-sm tracking-widest uppercase mb-3">{{ t('achievements.label') }}</p>
-        <h2 class="text-4xl md:text-5xl font-bold tracking-tight" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">{{ t('achievements.title') }}</h2>
-        <div class="mt-4 h-1 w-16 bg-primary rounded-full" />
+  <section id="achievements" aria-labelledby="achievements-heading" class="py-24 md:py-32">
+    <div class="container-site">
+      <div v-motion="reveal()" class="flex flex-col gap-5 md:gap-6">
+        <SectionChip>{{ t('achievements.label') }}</SectionChip>
+        <SplitHeading
+          id="achievements-heading"
+          :lead="t('achievements.headingLead')"
+          :rest="t('achievements.headingRest')"
+          size="lg"
+          class="text-balance"
+        />
       </div>
 
-      <div class="space-y-10">
-        <div v-for="(item, i) in achievements" :key="item.key" v-motion :initial="{ opacity: 0, x: -30 }"
-          :visible-once="{ opacity: 1, x: 0, transition: { duration: 500, delay: i * 150 } }"
-          class="group flex items-start gap-5">
-          <img
-            :src="item.logo"
-            :alt="item.issuer"
-            class="w-12 h-12 rounded-lg shrink-0"
-            :class="item.key === 'gcloud' ? 'p-1.5 bg-white object-contain' : 'object-cover'"
-          />
+      <!-- Subgrid rows keep logos, titles and certificate links level across cards whose titles differ in length. -->
+      <ul class="mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-0">
+        <li
+          v-for="(item, i) in achievements"
+          :key="item.key"
+          v-motion="reveal(i * 120)"
+          class="group flex flex-col rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
+        >
+          <div class="flex items-start justify-between gap-4">
+            <AssetSlot
+              :id="item.slot"
+              :alt="item.issuer"
+              :fallback-text="item.brand"
+              compact
+              fit="contain"
+              position="left center"
+              class="min-w-0 [&_img]:opacity-70 [&_img]:grayscale [&_img]:transition-[filter,opacity] [&_img]:duration-500 group-hover:[&_img]:opacity-100 group-hover:[&_img]:grayscale-0 dark:[&_img]:invert"
+              :class="logoBox(item.slot)"
+            />
+            <span class="shrink-0 whitespace-nowrap rounded-[2px] bg-mist px-2 py-1 text-xs leading-none text-ink">{{ item.date }}</span>
+          </div>
 
-          <div class="min-w-0">
-            <h3 class="text-lg font-semibold group-hover:text-primary transition-colors" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">
+          <div class="mt-8 md:mt-10">
+            <h3 class="text-[17px] font-bold uppercase leading-[1.2] tracking-[-0.02em] [overflow-wrap:anywhere]">
               {{ item.title }}
             </h3>
-
-            <p class="text-sm text-primary/80 font-medium mb-2">{{ item.issuer }}</p>
-
-            <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm mb-3" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'">
-              <span class="flex items-center gap-1.5">
-                <Calendar :size="13" />
-                {{ item.date }}
+            <p class="mt-3 text-sm font-medium">{{ item.issuer }}</p>
+            <p
+              v-if="item.location || item.credential"
+              class="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-[13px] text-graphite"
+            >
+              <span v-if="item.location" class="inline-flex items-center gap-1.5">
+                <MapPin :size="13" aria-hidden="true" />{{ item.location }}
               </span>
-              <span v-if="item.location" class="flex items-center gap-1.5">
-                <MapPin :size="13" />
-                {{ item.location }}
+              <span v-if="item.credential" class="inline-flex items-center gap-1.5">
+                <Hash :size="13" aria-hidden="true" />{{ item.credential }}
               </span>
-              <span v-if="item.credential" class="flex items-center gap-1.5">
-                <Hash :size="13" />
-                {{ item.credential }}
-              </span>
-            </div>
+            </p>
+          </div>
 
-            <a v-if="item.url" :href="item.url" target="_blank" rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500 hover:text-primary transition-colors">
-              {{ t('achievements.verify') }}
-              <ExternalLink :size="12" />
+          <div v-if="item.url" class="mt-6 flex items-end">
+            <a
+              :href="item.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm font-medium uppercase tracking-[0.01em]"
+            >
+              <span class="link-underline group-hover/link:bg-[length:100%_1px]">{{ t('achievements.verify') }}</span>
+              <ArrowUpRight :size="16" :stroke-width="2" aria-hidden="true" class="transition-[color,translate] duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-accent" />
+              <span class="sr-only">: {{ item.title }}</span>
             </a>
           </div>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>

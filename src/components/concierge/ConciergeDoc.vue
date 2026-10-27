@@ -1,11 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useTheme } from '@/stores/useThemeStore'
-import { Shield, Network, Brain, Lock, ChevronDown } from 'lucide-vue-next'
+import { Shield, Network, Brain, Lock, Plus } from 'lucide-vue-next'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import { reveal } from '@/motion'
 
 const { t } = useI18n()
-const { theme } = useTheme()
 
 const expandedCard = ref(null)
 
@@ -20,217 +20,146 @@ const principles = [
   { id: 'psc', icon: Lock },
 ]
 
+const details = [
+  { key: 'why', labelKey: 'concierge.whyLabel', fallback: 'Why' },
+  { key: 'how', labelKey: 'concierge.howLabel', fallback: 'How it works in this project' },
+  { key: 'useCases', labelKey: 'concierge.useCasesLabel', fallback: 'Other use cases' },
+]
+
 const stack = [
-  { label: 'Orchestration', value: 'Google Cloud NCC' },
-  { label: 'Compute', value: 'Cloud Run (serverless)' },
-  { label: 'Database', value: 'Cloud SQL PostgreSQL 15' },
-  { label: 'AI Model', value: 'Vertex AI Gemini 2.5 Flash' },
-  { label: 'Framework', value: 'LangChain + Function Calling' },
-  { label: 'Security', value: 'IAP, VPC-SC, PSC, IAM' },
-  { label: 'CI/CD', value: 'GitHub Actions + WIF' },
-  { label: 'IaC', value: 'gcloud CLI scripts' },
+  { key: 'orchestration', label: 'Orchestration', value: 'Google Cloud NCC' },
+  { key: 'compute', label: 'Compute', value: 'Cloud Run (serverless)' },
+  { key: 'database', label: 'Database', value: 'Cloud SQL PostgreSQL 15' },
+  { key: 'aiModel', label: 'AI Model', value: 'Vertex AI Gemini 2.5 Flash' },
+  { key: 'framework', label: 'Framework', value: 'LangChain + Function Calling' },
+  { key: 'security', label: 'Security', value: 'IAP, VPC-SC, PSC, IAM' },
+  { key: 'cicd', label: 'CI/CD', value: 'GitHub Actions + WIF' },
+  { key: 'iac', label: 'IaC', value: 'gcloud CLI scripts' },
 ]
 
 const flowSteps = ['s1', 's2', 's3', 's4', 's5', 's6']
+
+const pad = (n) => String(n).padStart(2, '0')
 </script>
 
 <template>
-  <div>
-    <h2
-      class="text-2xl font-display font-bold mb-2"
-      :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >{{ t('concierge.docsTitle') }}</h2>
-    <p
-      class="mb-10"
-      :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-    >{{ t('concierge.docsSubtitle') }}</p>
-
-    <!-- Problem statement -->
+  <div class="flex flex-col gap-20 md:gap-28">
     <div
-      class="rounded-xl p-6 mb-10 border"
-      :class="theme === 'dark'
-        ? 'bg-surface-light/50 border-zinc-800'
-        : 'bg-white border-zinc-200 shadow-sm'"
+      v-motion="reveal()"
+      class="grid grid-cols-1 gap-6 rounded-[3px] bg-mist p-6 sm:p-8 md:p-10 lg:grid-cols-12 lg:gap-6 lg:p-12"
     >
-      <h3
-        class="text-lg font-bold mb-3"
-        :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-      >{{ t('concierge.problemTitle') }}</h3>
-      <p
-        class="text-sm leading-relaxed"
-        :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-      >{{ t('concierge.problemText') }}</p>
+      <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.02em] lg:col-span-3 lg:items-start">
+        <AsteriskMark class="size-3.5 shrink-0 text-accent lg:mt-0.5" />{{ t('concierge.problemTitle') }}
+      </h3>
+      <p class="text-lg leading-[1.45] font-medium tracking-[-0.01em] text-ink md:text-2xl md:leading-[1.4] lg:col-span-9">
+        {{ t('concierge.problemText') }}
+      </p>
     </div>
 
-    <!-- Design principles (expandable cards) -->
-    <h3
-      class="text-lg font-bold mb-6"
-      :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >{{ t('concierge.principlesTitle') }}</h3>
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h3 class="text-sm font-semibold uppercase tracking-[0.02em] lg:sticky lg:top-28 lg:col-span-3 lg:self-start">
+        <span aria-hidden="true" class="mr-2 tabular-nums text-graphite">01</span>{{ t('concierge.principlesTitle') }}
+      </h3>
 
-    <div class="space-y-4 mb-12">
-      <div
-        v-for="p in principles"
-        :key="p.id"
-        class="rounded-xl border overflow-hidden transition-colors"
-        :class="theme === 'dark'
-          ? expandedCard === p.id
-            ? 'bg-surface-light/50 border-primary/30'
-            : 'bg-surface-light/30 border-zinc-800 hover:border-zinc-700'
-          : expandedCard === p.id
-            ? 'bg-white border-primary/30 shadow-md'
-            : 'bg-white border-zinc-200 hover:border-zinc-300 shadow-sm'"
-      >
-        <!-- Card header (always visible) -->
-        <button
-          @click="toggleCard(p.id)"
-          class="w-full flex items-center gap-4 p-5 cursor-pointer text-left"
+      <ul class="flex flex-col gap-3 lg:col-span-9">
+        <li
+          v-for="(p, i) in principles"
+          :key="p.id"
+          class="rounded-[3px] border bg-card transition-[border-color,box-shadow] duration-300"
+          :class="expandedCard === p.id
+            ? 'border-ink shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--color-onyx)_35%,transparent)]'
+            : 'border-line hover:border-graphite'"
         >
-          <div
-            class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-            :class="expandedCard === p.id ? 'bg-primary/20' : 'bg-primary/10'"
+          <button
+            :id="`principle-${p.id}-toggle`"
+            type="button"
+            class="group flex w-full cursor-pointer items-center gap-4 p-4 text-left sm:gap-5 sm:p-6"
+            :aria-expanded="expandedCard === p.id"
+            :aria-controls="`principle-${p.id}-panel`"
+            @click="toggleCard(p.id)"
           >
-            <component
-              :is="p.icon"
-              :size="20"
-              class="text-primary"
-            />
-          </div>
-          <div class="flex-1 min-w-0">
-            <h4
-              class="font-bold text-sm"
-              :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-            >{{ t(`concierge.${p.id}.title`) }}</h4>
-          </div>
-          <ChevronDown
-            :size="18"
-            class="shrink-0 transition-transform duration-300"
-            :class="[
-              expandedCard === p.id ? 'rotate-180' : '',
-              theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'
-            ]"
-          />
-        </button>
-
-        <!-- Expanded content -->
-        <transition
-          enter-active-class="transition-all duration-300 ease-out"
-          enter-from-class="max-h-0 opacity-0"
-          enter-to-class="max-h-[600px] opacity-100"
-          leave-active-class="transition-all duration-200 ease-in"
-          leave-from-class="max-h-[600px] opacity-100"
-          leave-to-class="max-h-0 opacity-0"
-        >
-          <div
-            v-if="expandedCard === p.id"
-            class="overflow-hidden"
-          >
-            <div class="px-5 pb-5 space-y-4">
-              <!-- Divider -->
-              <div
-                class="border-t"
-                :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200'"
+            <span class="grid size-11 shrink-0 place-items-center rounded-[3px] bg-mist text-accent">
+              <component :is="p.icon" :size="20" :stroke-width="1.75" aria-hidden="true" />
+            </span>
+            <span class="min-w-0 flex-1">
+              <span class="block text-xs tabular-nums text-graphite">{{ pad(i + 1) }}</span>
+              <span class="mt-0.5 block text-base font-bold uppercase leading-tight tracking-[-0.01em] sm:text-lg">
+                {{ t(`concierge.${p.id}.title`) }}
+              </span>
+            </span>
+            <span
+              class="grid size-8 shrink-0 place-items-center rounded-[2px] transition-colors duration-300"
+              :class="expandedCard === p.id ? 'bg-accent text-white' : 'bg-mist text-ink group-hover:bg-ink group-hover:text-paper'"
+            >
+              <Plus
+                :size="16"
+                :stroke-width="2"
+                aria-hidden="true"
+                class="transition-transform duration-300"
+                :class="expandedCard === p.id ? 'rotate-45' : ''"
               />
+            </span>
+          </button>
 
-              <!-- Why -->
-              <div>
-                <span
-                  class="text-xs font-mono uppercase tracking-widest mb-2 block"
-                  :class="theme === 'dark' ? 'text-primary' : 'text-primary-dark'"
-                >Why</span>
-                <p
-                  class="text-sm leading-relaxed"
-                  :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-                >{{ t(`concierge.${p.id}.why`) }}</p>
-              </div>
-
-              <!-- How it works here -->
-              <div>
-                <span
-                  class="text-xs font-mono uppercase tracking-widest mb-2 block"
-                  :class="theme === 'dark' ? 'text-primary' : 'text-primary-dark'"
-                >How it works in this project</span>
-                <p
-                  class="text-sm leading-relaxed"
-                  :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-                >{{ t(`concierge.${p.id}.how`) }}</p>
-              </div>
-
-              <!-- Other use cases -->
-              <div>
-                <span
-                  class="text-xs font-mono uppercase tracking-widest mb-2 block"
-                  :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-                >Other use cases</span>
-                <p
-                  class="text-sm leading-relaxed italic"
-                  :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-                >{{ t(`concierge.${p.id}.useCases`) }}</p>
-              </div>
+          <transition
+            enter-active-class="transition-all duration-300 ease-out overflow-hidden"
+            enter-from-class="max-h-0 opacity-0"
+            enter-to-class="max-h-[900px] opacity-100"
+            leave-active-class="transition-all duration-200 ease-in overflow-hidden"
+            leave-from-class="max-h-[900px] opacity-100"
+            leave-to-class="max-h-0 opacity-0"
+          >
+            <div
+              v-if="expandedCard === p.id"
+              :id="`principle-${p.id}-panel`"
+              role="region"
+              :aria-labelledby="`principle-${p.id}-toggle`"
+            >
+              <dl class="mx-4 grid grid-cols-1 gap-6 border-t border-line pt-6 pb-6 sm:mx-6 md:grid-cols-3 md:gap-8 md:pb-8">
+                <div v-for="d in details" :key="d.key">
+                  <dt class="text-xs font-semibold uppercase tracking-[0.02em] text-ink">{{ t(d.labelKey, d.fallback) }}</dt>
+                  <dd class="mt-2.5 text-sm leading-relaxed text-graphite">{{ t(`concierge.${p.id}.${d.key}`) }}</dd>
+                </div>
+              </dl>
             </div>
-          </div>
-        </transition>
-      </div>
+          </transition>
+        </li>
+      </ul>
     </div>
 
-    <!-- Tech stack -->
-    <h3
-      class="text-lg font-bold mb-6"
-      :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >{{ t('concierge.stackTitle') }}</h3>
-    <div
-      class="rounded-xl border overflow-hidden mb-12"
-      :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200 shadow-sm'"
-    >
-      <div
-        v-for="(item, i) in stack"
-        :key="item.label"
-        class="flex items-center px-5 py-3 text-sm"
-        :class="[
-          theme === 'dark'
-            ? i % 2 === 0 ? 'bg-surface-light/30' : 'bg-surface/50'
-            : i % 2 === 0 ? 'bg-zinc-50' : 'bg-white',
-        ]"
-      >
-        <span
-          class="w-32 shrink-0 font-mono text-xs uppercase tracking-wider"
-          :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-        >{{ item.label }}</span>
-        <span
-          class="font-medium"
-          :class="theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'"
-        >{{ item.value }}</span>
-      </div>
-    </div>
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h3 class="text-sm font-semibold uppercase tracking-[0.02em] lg:col-span-3">
+        <span aria-hidden="true" class="mr-2 tabular-nums text-graphite">02</span>{{ t('concierge.stackTitle') }}
+      </h3>
 
-    <!-- Data flow timeline -->
-    <h3
-      class="text-lg font-bold mb-6"
-      :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >{{ t('concierge.flowTitle') }}</h3>
-    <div class="space-y-6 mb-4">
-      <div
-        v-for="(key, i) in flowSteps"
-        :key="key"
-        class="flex items-start gap-4"
-      >
+      <dl class="grid grid-cols-1 border-t border-line lg:col-span-9 xl:grid-cols-2 xl:gap-x-10">
         <div
-          class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0 mt-0.5"
-          :class="theme === 'dark'
-            ? 'bg-primary/20 text-primary border border-primary/30'
-            : 'bg-primary/10 text-primary-dark border border-primary/20'"
-        >{{ i + 1 }}</div>
-        <div>
-          <h4
-            class="font-bold text-sm mb-0.5"
-            :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-          >{{ t(`concierge.flow.${key}.title`) }}</h4>
-          <p
-            class="text-sm"
-            :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-          >{{ t(`concierge.flow.${key}.detail`) }}</p>
+          v-for="item in stack"
+          :key="item.key"
+          class="grid grid-cols-1 gap-1 border-b border-line py-4 min-[400px]:grid-cols-[minmax(0,8.5rem)_minmax(0,1fr)] min-[400px]:items-baseline min-[400px]:gap-4 sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)]"
+        >
+          <dt class="text-xs font-medium uppercase tracking-[0.02em] text-graphite">{{ t(`concierge.stackLabels.${item.key}`, item.label) }}</dt>
+          <dd class="text-[15px] font-semibold tracking-[-0.01em] text-ink">{{ item.value }}</dd>
         </div>
-      </div>
+      </dl>
+    </div>
+
+    <div class="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-6">
+      <h3 class="text-sm font-semibold uppercase tracking-[0.02em] lg:col-span-3">
+        <span aria-hidden="true" class="mr-2 tabular-nums text-graphite">03</span>{{ t('concierge.flowTitle') }}
+      </h3>
+
+      <ol class="border-t border-line lg:col-span-9">
+        <li
+          v-for="(key, i) in flowSteps"
+          :key="key"
+          class="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-1 border-b border-line py-5 sm:grid-cols-[4.5rem_minmax(0,1fr)] md:grid-cols-[4.5rem_minmax(0,1fr)_minmax(0,1fr)] md:items-baseline md:gap-x-8"
+        >
+          <span class="row-span-2 font-display text-3xl leading-none font-bold tracking-[-0.04em] text-accent tabular-nums md:row-span-1 md:text-4xl">{{ pad(i + 1) }}</span>
+          <span class="text-base font-bold uppercase leading-snug tracking-[-0.01em] md:text-lg">{{ t(`concierge.flow.${key}.title`) }}</span>
+          <span class="text-sm leading-relaxed text-graphite md:text-[15px]">{{ t(`concierge.flow.${key}.detail`) }}</span>
+        </li>
+      </ol>
     </div>
   </div>
 </template>

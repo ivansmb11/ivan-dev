@@ -1,141 +1,171 @@
 <script setup>
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { ExternalLink, Github } from 'lucide-vue-next'
-import { useTheme } from '@/stores/useThemeStore'
-import vibebifyImg from '@/assets/vibebify.webp'
-import ivanmendozaImg from '@/assets/ivanmendoza.webp'
+import { ArrowUpRight, Play } from 'lucide-vue-next'
+import AssetSlot from '@/components/ui/AssetSlot.vue'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import SectionChip from '@/components/ui/SectionChip.vue'
+import SplitHeading from '@/components/ui/SplitHeading.vue'
+import ArrowButton from '@/components/ui/ArrowButton.vue'
+import { reveal } from '@/motion'
 
 const { t } = useI18n()
-const { theme } = useTheme()
+const year = new Date().getFullYear()
 
 const projects = computed(() => [
   {
+    key: 'vibebify',
+    kind: 'framed',
+    slot: 'project-vibebify',
     title: 'Vibebify',
     description: t('portfolio.vibebify'),
     tags: ['Next.js 16', 'Supabase', 'PostgreSQL', 'Spotify API', 'Social Media'],
     github: 'https://github.com/ivansmb11/vibebify',
-    live: '#/vibebify',
-    image: vibebifyImg,
+    caseStudy: '/vibebify',
   },
   {
-    title: 'ivanmendoza.dev',
-    description: t('portfolio.ivanDev'),
-    tags: ['Vue 3', 'Tailwind CSS', 'Vite'],
-    github: 'https://github.com/ivansmb11/ivan-dev',
-    image: ivanmendozaImg,
-  },
-  {
+    key: 'concierge',
+    kind: 'video',
+    slot: 'project-concierge',
     title: 'VIP Data Concierge',
     description: t('portfolio.vipConcierge'),
     tags: ['GCP', 'Vertex AI', 'LangChain', 'Cloud Run', 'PostgreSQL', 'Zero-Trust'],
     github: 'https://github.com/ivansmb11/vip-data-concierge',
-    live: '#/concierge',
+    caseStudy: '/concierge',
   },
   {
+    key: 'ivan-dev',
+    kind: 'framed',
+    slot: 'project-ivan-dev',
+    title: 'ivanmendoza.dev',
+    description: t('portfolio.ivanDev'),
+    tags: ['Vue 3', 'Tailwind CSS', 'Vite'],
+    github: 'https://github.com/ivansmb11/ivan-dev',
+  },
+  {
+    key: 'soon',
+    kind: 'soon',
     title: t('portfolio.comingSoon'),
     description: t('portfolio.comingSoonText'),
-    tags: ['In Progress'],
-    placeholder: true,
+    tags: [t('portfolio.inProgress', 'In progress')],
   },
 ])
 </script>
 
 <template>
-  <section id="portfolio" class="relative py-32 overflow-hidden">
-    <!-- Section number -->
-    <span
-      class="absolute top-8 right-8 text-[80px] font-bold leading-none pointer-events-none select-none"
-      :class="theme === 'dark' ? 'text-zinc-800/30' : 'text-zinc-300/40'"
-    >03</span>
-
-    <div class="max-w-6xl mx-auto px-6">
-      <div
-        v-motion
-        :initial="{ opacity: 0, y: 30 }"
-        :visible-once="{ opacity: 1, y: 0, transition: { duration: 600 } }"
-        class="mb-16"
-      >
-        <p class="text-primary font-mono text-sm tracking-widest uppercase mb-3">{{ t('portfolio.label') }}</p>
-        <h2 class="text-4xl md:text-5xl font-bold tracking-tight" :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'">{{ t('portfolio.title') }}</h2>
-        <div class="mt-4 h-1 w-16 bg-primary rounded-full" />
+  <section id="portfolio" aria-labelledby="portfolio-heading" class="py-24 md:py-32">
+    <div class="container-site">
+      <div v-motion="reveal()" class="flex flex-col gap-5 md:gap-6">
+        <SectionChip>{{ t('portfolio.label') }}</SectionChip>
+        <SplitHeading
+          id="portfolio-heading"
+          :lead="t('portfolio.headingLead')"
+          :rest="t('portfolio.headingRest')"
+          size="lg"
+          class="max-w-[16ch] text-balance"
+        />
       </div>
 
-      <div class="space-y-16">
-        <div
+      <!-- Each project spans two subgrid rows (media, text) so both cards in a row share heights. -->
+      <ul class="mt-14 grid grid-cols-1 gap-x-5 md:mt-20 md:grid-cols-2 lg:gap-x-8">
+        <li
           v-for="(project, i) in projects"
-          :key="project.title"
-          v-motion
-          :initial="{ opacity: 0, y: 30 }"
-          :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, delay: i * 150 } }"
-          class="group"
-          :class="{ 'opacity-50': project.placeholder }"
+          :key="project.key"
+          v-motion="reveal((i % 2) * 140)"
+          class="flex flex-col pb-14 last:pb-0 md:row-span-2 md:grid md:grid-cols-1 md:grid-rows-subgrid md:gap-y-0 md:pb-0"
+          :class="i >= 2 ? 'md:mt-20 lg:mt-24' : ''"
         >
-          <div class="flex flex-col md:flex-row md:items-start md:gap-8">
-            <!-- Content (left) -->
-            <div class="flex-1 min-w-0">
-              <div class="flex items-start justify-between mb-2">
-                <h3 class="text-xl font-semibold transition-colors" :class="theme === 'dark' ? 'text-white group-hover:text-primary' : 'text-zinc-900 group-hover:text-primary'">
-                  {{ project.title }}
-                </h3>
-                <div class="flex gap-3 shrink-0 ml-4" v-if="!project.placeholder">
-                  <a
-                    v-if="project.github"
-                    :href="project.github"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    :aria-label="project.title + ' source code on GitHub'"
-                    class="text-zinc-500 hover:text-primary transition-colors"
-                  >
-                    <Github :size="18" />
-                  </a>
-                  <a
-                    v-if="project.live"
-                    :href="project.live"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    :aria-label="project.title + ' live demo'"
-                    class="text-zinc-500 hover:text-primary transition-colors"
-                  >
-                    <ExternalLink :size="18" />
-                  </a>
-                </div>
-              </div>
-
-              <p class="text-sm leading-relaxed mb-3" :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-500'">
-                {{ project.description }}
-              </p>
-
-              <div class="flex flex-wrap gap-x-2 gap-y-1">
-                <span
-                  v-for="(tag, ti) in project.tags"
-                  :key="tag"
-                  class="text-xs font-mono" :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-                >{{ tag }}<span v-if="ti < project.tags.length - 1" :class="theme === 'dark' ? 'text-zinc-700' : 'text-zinc-300'"> &middot;</span></span>
-              </div>
-            </div>
-
-            <!-- Screenshot (right) -->
-            <div
-              v-if="project.image"
-              class="mt-4 md:mt-0 w-full md:w-64 shrink-0 rounded-xl overflow-hidden border transition-colors duration-300"
-              :class="theme === 'dark' ? 'border-zinc-800/60 group-hover:border-primary/30' : 'border-zinc-200 group-hover:border-primary/30'"
-            >
-              <img
-                :src="project.image"
-                :alt="project.title + ' preview'"
-                loading="lazy"
-                decoding="async"
-                width="256"
-                height="160"
-                class="w-full h-auto object-cover"
+          <component
+            v-if="project.kind === 'framed'"
+            :is="project.caseStudy ? 'router-link' : 'div'"
+            v-bind="project.caseStudy ? { to: project.caseStudy, tabindex: -1, 'aria-hidden': 'true' } : {}"
+            class="group block bg-card p-2 shadow-[0_18px_40px_-24px_var(--color-night)] shadow-night/35 sm:p-3"
+          >
+            <span class="block overflow-hidden">
+              <AssetSlot
+                :id="project.slot"
+                :alt="`${project.title} preview`"
+                class="aspect-[4/3] w-full transition-transform duration-700 ease-out-quint"
+                :class="project.caseStudy ? 'group-hover:scale-[1.02]' : ''"
               />
-            </div>
+            </span>
+            <span class="mt-2 flex items-center justify-between gap-3 bg-mist-soft px-3 py-2.5 text-[13px] text-graphite sm:mt-3 sm:text-[15px]">
+              <span class="flex min-w-0 items-center gap-2 uppercase text-ink">
+                <AsteriskMark class="size-3.5 shrink-0 text-accent" />
+                <span class="truncate">{{ project.title }}</span>
+              </span>
+              <span class="shrink-0">/{{ t('portfolio.sideProject') }}</span>
+            </span>
+          </component>
+
+          <router-link
+            v-else-if="project.kind === 'video'"
+            :to="project.caseStudy"
+            :aria-label="`${project.title}: ${t('portfolio.watchDemo')}`"
+            class="group relative isolate block aspect-[4/3] overflow-hidden rounded-md bg-night text-white md:aspect-auto"
+          >
+            <!-- The play button sits dead center, so the placeholder's slot label moves to the top edge (no effect once the image exists). -->
+            <AssetSlot
+              :id="project.slot"
+              tone="dark"
+              compact
+              class="absolute inset-0 -z-20 transition-transform duration-700 ease-out-quint group-hover:scale-[1.03] [&>div]:justify-start [&>div]:pt-3"
+            />
+            <span aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-t from-night/70 via-night/10 to-night/20" />
+            <span class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+              <span class="grid size-14 place-items-center rounded-full bg-white text-onyx shadow-[0_10px_30px_-10px_var(--color-night)] transition-transform duration-500 ease-out-quint group-hover:scale-110 group-active:scale-100">
+                <Play :size="18" fill="currentColor" :stroke-width="0" class="translate-x-px" aria-hidden="true" />
+              </span>
+              <span class="text-[15px] font-semibold tracking-[-0.01em]">{{ t('portfolio.watchDemo') }}</span>
+            </span>
+            <span class="absolute bottom-5 left-5 text-[13px] font-semibold sm:bottom-6 sm:left-6">©{{ year }} {{ project.title }}</span>
+          </router-link>
+
+          <div
+            v-else
+            class="relative flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-md border border-dashed border-muted/60 p-8 text-center md:aspect-auto"
+          >
+            <span class="absolute top-4 left-4 rounded-[2px] bg-mist px-2 py-1 text-[11px] font-medium uppercase leading-none tracking-[0.02em] text-graphite">
+              {{ project.tags[0] }}
+            </span>
+            <AsteriskMark class="size-20 text-line md:size-28" :weight="1.2" />
+            <h3 class="font-display text-2xl font-bold uppercase leading-none tracking-[-0.035em] md:text-[1.75rem]">
+              {{ project.title }}
+            </h3>
+            <p class="max-w-[22rem] text-sm leading-relaxed text-graphite">{{ project.description }}</p>
           </div>
 
-          <div v-if="i < projects.length - 1" class="mt-12 border-b" :class="theme === 'dark' ? 'border-zinc-800/50' : 'border-zinc-200'" />
-        </div>
-      </div>
+          <div v-if="project.kind !== 'soon'" class="flex flex-col items-start pt-6">
+            <h3 class="font-display text-2xl font-bold uppercase leading-none tracking-[-0.035em] md:text-[1.75rem]">
+              {{ project.title }}
+            </h3>
+            <p class="mt-3 max-w-[38rem] text-[15px] leading-relaxed text-graphite">{{ project.description }}</p>
+            <ul class="mt-5 flex flex-wrap gap-1.5">
+              <li
+                v-for="tag in project.tags"
+                :key="tag"
+                class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+              >{{ tag }}</li>
+            </ul>
+            <div class="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
+              <ArrowButton v-if="project.caseStudy" :to="project.caseStudy">
+                {{ t('portfolio.caseStudy') }}<span class="sr-only">: {{ project.title }}</span>
+              </ArrowButton>
+              <a
+                v-if="project.github"
+                :href="project.github"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group/src inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm font-medium uppercase tracking-[0.01em]"
+              >
+                <span class="link-underline group-hover/src:bg-[length:100%_1px]">{{ t('portfolio.source') }}</span>
+                <ArrowUpRight :size="16" :stroke-width="2" aria-hidden="true" class="transition-[color,translate] duration-300 group-hover/src:-translate-y-0.5 group-hover/src:translate-x-0.5 group-hover/src:text-accent" />
+                <span class="sr-only">: {{ project.title }} (GitHub)</span>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 </template>

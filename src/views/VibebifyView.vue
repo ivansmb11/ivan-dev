@@ -1,9 +1,13 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useTheme } from '@/stores/useThemeStore'
-import { ArrowLeft, Github, ExternalLink, Music, Users, Dna, Swords, Flame, Search } from 'lucide-vue-next'
+import { ArrowLeft, Music, Users, Dna, Swords, Flame, Search } from 'lucide-vue-next'
 import ArchitectureDiagram from '@/components/vibebify/ArchitectureDiagram.vue'
+import PageHeader from '@/components/ui/PageHeader.vue'
+import SectionChip from '@/components/ui/SectionChip.vue'
+import ArrowButton from '@/components/ui/ArrowButton.vue'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import { enter, reveal } from '@/motion'
 
 import landingImg from '@/assets/vibebify/landing.webp'
 import feedImg from '@/assets/vibebify/feed.webp'
@@ -14,7 +18,6 @@ import profileImg from '@/assets/vibebify/profile.webp'
 import composeImg from '@/assets/vibebify/compose.webp'
 
 const { t } = useI18n()
-const { theme } = useTheme()
 
 const features = [
   { key: 'spotify', icon: Music, img: statsImg },
@@ -26,237 +29,242 @@ const features = [
 ]
 
 const activeFeature = ref(0)
+const current = computed(() => features[activeFeature.value])
+const tabRefs = ref([])
+
+const pad = (n) => String(n).padStart(2, '0')
+
+async function selectFeature(i, focus = false) {
+  activeFeature.value = (i + features.length) % features.length
+  if (focus) {
+    await nextTick()
+    tabRefs.value[activeFeature.value]?.focus()
+  }
+}
+
+function onTabKey(e) {
+  const moves = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }
+  if (e.key in moves) selectFeature(activeFeature.value + moves[e.key], true)
+  else if (e.key === 'Home') selectFeature(0, true)
+  else if (e.key === 'End') selectFeature(features.length - 1, true)
+  else return
+  e.preventDefault()
+}
 
 const stack = [
-  { name: 'Next.js 16', category: 'Framework' },
-  { name: 'TypeScript', category: 'Language' },
-  { name: 'Supabase', category: 'Backend' },
-  { name: 'PostgreSQL', category: 'Database' },
-  { name: 'Spotify OAuth', category: 'Auth' },
-  { name: 'React Aria', category: 'UI' },
-  { name: 'Tailwind CSS v4', category: 'Styling' },
-  { name: 'Zod v4', category: 'Validation' },
-  { name: 'Bun', category: 'Runtime' },
-  { name: 'Vercel', category: 'Hosting' },
+  { name: 'Next.js 16', key: 'framework', category: 'Framework' },
+  { name: 'TypeScript', key: 'language', category: 'Language' },
+  { name: 'Supabase', key: 'backend', category: 'Backend' },
+  { name: 'PostgreSQL', key: 'database', category: 'Database' },
+  { name: 'Spotify OAuth', key: 'auth', category: 'Auth' },
+  { name: 'React Aria', key: 'ui', category: 'UI' },
+  { name: 'Tailwind CSS v4', key: 'styling', category: 'Styling' },
+  { name: 'Zod v4', key: 'validation', category: 'Validation' },
+  { name: 'Bun', key: 'runtime', category: 'Runtime' },
+  { name: 'Vercel', key: 'hosting', category: 'Hosting' },
 ]
+
+const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
+
+// Keeps the decorative "(06)" counter on the same line as the last word, so it never wraps alone.
+function splitLast(text) {
+  const i = text.lastIndexOf(' ')
+  return i < 0 ? ['', text] : [text.slice(0, i + 1), text.slice(i + 1)]
+}
+const featuresHeading = computed(() => splitLast(t('vibebify.featuresTitle')))
+const stackHeading = computed(() => splitLast(t('vibebify.stackTitle')))
+
+// display-lg bottoms out at 40px; long Spanish words ("FUNCIONALIDADES") need it smaller below sm.
+const headingClass = 'font-display text-display-lg uppercase [overflow-wrap:anywhere] max-sm:text-[length:min(2.5rem,9.6vw)] lg:col-span-9'
+const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semibold tracking-normal text-graphite sm:inline-block'
 </script>
 
 <template>
-  <div class="min-h-screen pt-24 pb-16 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto">
-      <!-- Back link -->
+  <main id="main" tabindex="-1" class="outline-none">
+    <header class="container-site pt-32 md:pt-40">
       <router-link
-        to="/"
-        class="inline-flex items-center gap-2 mb-8 text-sm font-medium transition-colors"
-        :class="theme === 'dark' ? 'text-zinc-400 hover:text-primary' : 'text-zinc-500 hover:text-primary'"
+        :to="{ path: '/', hash: '#portfolio' }"
+        class="group -ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm font-medium uppercase tracking-[0.01em] text-graphite transition-colors hover:text-ink"
       >
-        <ArrowLeft :size="16" />
-        {{ t('vibebify.back') }}
+        <ArrowLeft :size="16" aria-hidden="true" class="transition-transform duration-300 group-hover:-translate-x-0.5" />
+        <span class="link-underline">{{ t('vibebify.back') }}</span>
       </router-link>
 
-      <!-- Hero -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-4">
-          <div class="w-3 h-3 rounded-full bg-pink-500 animate-pulse" />
-          <span
-            class="text-xs font-mono uppercase tracking-widest"
-            :class="theme === 'dark' ? 'text-pink-400' : 'text-pink-600'"
-          >{{ t('vibebify.badge') }}</span>
-        </div>
-        <h1
-          class="text-4xl sm:text-5xl font-display font-bold mb-4"
-          :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-        >
-          {{ t('vibebify.title') }}
-        </h1>
-        <p
-          class="text-lg max-w-2xl mb-5"
-          :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-        >
+      <PageHeader v-motion="enter(100)" class="mt-6 md:mt-8" :title="t('vibebify.title')" :kicker="t('vibebify.badge')" />
+
+      <div v-motion="enter(250)" class="mt-10 grid gap-8 md:mt-14 lg:grid-cols-12 lg:items-end">
+        <p class="max-w-[40rem] text-lg leading-relaxed text-graphite md:text-xl lg:col-span-7">
           {{ t('vibebify.subtitle') }}
         </p>
-        <div class="flex gap-3">
-          <a
-            href="https://github.com/ivansmb11/vibebify"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border"
-            :class="theme === 'dark'
-              ? 'bg-surface-light border-zinc-700 text-zinc-300 hover:text-white hover:border-pink-500/40'
-              : 'bg-white border-zinc-300 text-zinc-700 hover:text-zinc-900 hover:border-pink-500/40 shadow-sm'"
-          >
-            <Github :size="16" />
-            {{ t('vibebify.viewSource') }}
-          </a>
-          <a
-            href="https://vibebify.ivanmendoza.dev"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors border"
-            :class="theme === 'dark'
-              ? 'bg-pink-500/10 border-pink-500/30 text-pink-400 hover:bg-pink-500/20 hover:border-pink-500/50'
-              : 'bg-pink-50 border-pink-200 text-pink-700 hover:bg-pink-100 hover:border-pink-300'"
-          >
-            <ExternalLink :size="16" />
-            {{ t('vibebify.liveApp') }}
-          </a>
+        <div class="flex flex-col gap-3 sm:flex-row sm:flex-wrap lg:col-span-5 lg:justify-end">
+          <ArrowButton class="w-full sm:w-auto" href="https://github.com/ivansmb11/vibebify" external>{{ t('vibebify.viewSource') }}</ArrowButton>
+          <ArrowButton class="w-full sm:w-auto" href="https://vibebify.ivanmendoza.dev" tone="ink" external>{{ t('vibebify.liveApp') }}</ArrowButton>
         </div>
       </div>
+    </header>
 
-      <!-- Landing screenshot -->
-      <div class="mb-20">
-        <div
-          class="rounded-xl overflow-hidden border"
-          :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200'"
-        >
-          <img
-            :src="landingImg"
-            alt="Vibebify Landing Page"
-            class="w-full h-auto"
-            loading="eager"
-          />
+    <div class="container-site mt-12 md:mt-16">
+      <figure v-motion="enter(400)" class="bg-card p-2 md:p-3" :class="frameShadow">
+        <img
+          :src="landingImg"
+          :alt="t('vibebify.landingAlt', 'Vibebify landing page')"
+          width="3020"
+          height="1724"
+          class="block h-auto w-full bg-mist"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+          <span class="flex items-center gap-1.5 uppercase text-ink">
+            <AsteriskMark class="size-3 text-accent" />Vibebify
+          </span>
+          <span class="truncate">/vibebify.ivanmendoza.dev</span>
+        </figcaption>
+      </figure>
+    </div>
+
+    <section aria-labelledby="vb-origin" class="container-site mt-20 md:mt-32">
+      <div v-motion="reveal()" class="grid gap-8 bg-mist p-6 sm:p-8 md:p-12 lg:grid-cols-12 lg:gap-10">
+        <div class="flex flex-col justify-between gap-10 lg:col-span-4">
+          <h2 id="vb-origin">
+            <SectionChip class="bg-card! text-ink!">{{ t('vibebify.inspirationLabel') }}</SectionChip>
+          </h2>
+          <AsteriskMark class="hidden size-24 text-muted/45 lg:block" :weight="1.1" />
         </div>
+        <p class="max-w-[46rem] text-lg leading-[1.55] font-medium tracking-[-0.01em] text-ink md:text-[1.375rem] lg:col-span-8">
+          {{ t('vibebify.inspirationText') }}<a
+            href="https://github.com/michellexliu/receiptify"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-semibold underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:text-accent-deep"
+          >Receiptify</a>{{ t('vibebify.inspirationBy') }}
+        </p>
+      </div>
+    </section>
+
+    <section aria-labelledby="vb-features" class="container-site mt-24 md:mt-40">
+      <div v-motion="reveal()" class="grid gap-5 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3 lg:pt-3">
+          <SectionChip>{{ t('vibebify.featuresLabel') }}</SectionChip>
+        </div>
+        <h2 id="vb-features" :class="headingClass">
+          {{ featuresHeading[0] }}<span class="sm:whitespace-nowrap">{{ featuresHeading[1] }}<span aria-hidden="true" :class="counterClass">({{ pad(features.length) }})</span></span>
+        </h2>
       </div>
 
-      <!-- Inspiration -->
-      <section class="mb-20">
+      <div class="mt-10 grid gap-6 md:mt-16 lg:grid-cols-12 lg:gap-10">
         <div
-          class="rounded-xl p-6 border"
-          :class="theme === 'dark'
-            ? 'bg-surface-light/50 border-zinc-800'
-            : 'bg-zinc-50 border-zinc-200'"
+          role="tablist"
+          aria-orientation="vertical"
+          :aria-label="t('vibebify.featuresTitle')"
+          class="flex flex-col gap-1.5 lg:col-span-4"
+          @keydown="onTabKey"
         >
-          <p
-            class="text-sm font-mono uppercase tracking-widest mb-3"
-            :class="theme === 'dark' ? 'text-pink-400' : 'text-pink-600'"
-          >{{ t('vibebify.inspirationLabel') }}</p>
-          <p
-            class="text-sm leading-relaxed"
-            :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
+          <button
+            v-for="(feature, i) in features"
+            :id="`vb-tab-${feature.key}`"
+            :key="feature.key"
+            :ref="(el) => (tabRefs[i] = el)"
+            type="button"
+            role="tab"
+            :aria-selected="activeFeature === i"
+            aria-controls="vb-feature-panel"
+            :tabindex="activeFeature === i ? 0 : -1"
+            class="group flex min-h-11 w-full cursor-pointer items-start gap-3.5 rounded-[3px] border-l-[3px] px-4 py-3.5 text-left transition-colors duration-200 active:translate-y-px"
+            :class="activeFeature === i
+              ? 'border-accent bg-ink text-paper'
+              : 'border-transparent bg-card text-ink hover:border-line hover:bg-mist'"
+            @click="selectFeature(i)"
           >
-            {{ t('vibebify.inspirationText') }}
-            <a
-              href="https://github.com/michellexliu/receiptify"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-medium transition-colors"
-              :class="theme === 'dark' ? 'text-pink-400 hover:text-pink-300' : 'text-pink-600 hover:text-pink-700'"
-            >Receiptify</a>
-            {{ t('vibebify.inspirationBy') }}
+            <component
+              :is="feature.icon"
+              :size="18"
+              aria-hidden="true"
+              class="mt-0.5 shrink-0 transition-colors"
+              :class="activeFeature === i ? 'text-accent' : 'text-graphite group-hover:text-ink'"
+            />
+            <span class="min-w-0 flex-1">
+              <span class="block text-[15px] font-semibold leading-snug">{{ t(`vibebify.features.${feature.key}.title`) }}</span>
+              <span
+                class="mt-0.5 block text-[13px] leading-snug"
+                :class="activeFeature === i ? 'text-paper/70' : 'text-graphite'"
+              >{{ t(`vibebify.features.${feature.key}.short`) }}</span>
+            </span>
+            <span
+              aria-hidden="true"
+              class="mt-0.5 shrink-0 text-xs font-medium tabular-nums"
+              :class="activeFeature === i ? 'text-paper/60' : 'text-graphite'"
+            >{{ pad(i + 1) }}</span>
+          </button>
+        </div>
+
+        <div
+          id="vb-feature-panel"
+          role="tabpanel"
+          tabindex="0"
+          :aria-labelledby="`vb-tab-${current.key}`"
+          class="min-w-0 lg:col-span-8"
+        >
+          <figure class="bg-card p-2 md:p-3" :class="frameShadow">
+            <div class="relative aspect-[3020/1720] overflow-hidden bg-mist">
+              <transition
+                enter-active-class="transition-opacity duration-300 ease-out"
+                enter-from-class="opacity-0"
+                leave-active-class="absolute inset-0 transition-opacity duration-200 ease-in"
+                leave-to-class="opacity-0"
+              >
+                <img
+                  :key="current.key"
+                  :src="current.img"
+                  :alt="t(`vibebify.features.${current.key}.title`)"
+                  width="3020"
+                  height="1720"
+                  class="absolute inset-0 block size-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </transition>
+            </div>
+            <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+              <span class="flex min-w-0 items-center gap-1.5 uppercase text-ink">
+                <AsteriskMark class="size-3 shrink-0 text-accent" />
+                <span class="truncate">{{ t(`vibebify.features.${current.key}.title`) }}</span>
+              </span>
+              <span class="shrink-0 tabular-nums">{{ pad(activeFeature + 1) }} / {{ pad(features.length) }}</span>
+            </figcaption>
+          </figure>
+          <p class="mt-6 max-w-[44rem] text-base leading-relaxed text-graphite md:mt-8 md:text-lg">
+            {{ t(`vibebify.features.${current.key}.detail`) }}
           </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Features showcase -->
-      <section class="mb-20">
-        <p
-          class="text-sm font-mono uppercase tracking-widest mb-3"
-          :class="theme === 'dark' ? 'text-pink-400' : 'text-pink-600'"
-        >{{ t('vibebify.featuresLabel') }}</p>
-        <h2
-          class="text-3xl font-bold mb-2"
-          :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-        >{{ t('vibebify.featuresTitle') }}</h2>
-        <div class="mt-4 h-1 w-16 bg-pink-500 rounded-full mb-12" />
-
-        <!-- Feature tabs -->
-        <div class="flex flex-col lg:flex-row gap-8">
-          <!-- Tab list -->
-          <div class="lg:w-80 shrink-0 space-y-2">
-            <button
-              v-for="(feature, i) in features"
-              :key="feature.key"
-              @click="activeFeature = i"
-              class="w-full text-left px-4 py-3 rounded-lg transition-all cursor-pointer flex items-start gap-3"
-              :class="activeFeature === i
-                ? theme === 'dark'
-                  ? 'bg-pink-500/10 border border-pink-500/30'
-                  : 'bg-pink-50 border border-pink-200'
-                : theme === 'dark'
-                  ? 'hover:bg-surface-light border border-transparent'
-                  : 'hover:bg-zinc-100 border border-transparent'"
-            >
-              <component
-                :is="feature.icon"
-                :size="18"
-                class="mt-0.5 shrink-0"
-                :class="activeFeature === i
-                  ? theme === 'dark' ? 'text-pink-400' : 'text-pink-600'
-                  : theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-              />
-              <div>
-                <p
-                  class="font-medium text-sm"
-                  :class="activeFeature === i
-                    ? theme === 'dark' ? 'text-white' : 'text-zinc-900'
-                    : theme === 'dark' ? 'text-zinc-300' : 'text-zinc-700'"
-                >{{ t(`vibebify.features.${feature.key}.title`) }}</p>
-                <p
-                  class="text-xs mt-0.5"
-                  :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-                >{{ t(`vibebify.features.${feature.key}.short`) }}</p>
-              </div>
-            </button>
-          </div>
-
-          <!-- Active feature content -->
-          <div class="flex-1 min-w-0">
-            <div
-              class="rounded-xl overflow-hidden border mb-4"
-              :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200'"
-            >
-              <img
-                :src="features[activeFeature].img"
-                :alt="t(`vibebify.features.${features[activeFeature].key}.title`)"
-                class="w-full h-auto"
-                loading="lazy"
-              />
-            </div>
-            <p
-              class="text-sm leading-relaxed"
-              :class="theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'"
-            >{{ t(`vibebify.features.${features[activeFeature].key}.detail`) }}</p>
-          </div>
+    <section aria-labelledby="vb-stack" class="container-site mt-24 md:mt-40">
+      <div v-motion="reveal()" class="grid gap-5 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-3 lg:pt-3">
+          <SectionChip>{{ t('vibebify.stackLabel') }}</SectionChip>
         </div>
-      </section>
+        <h2 id="vb-stack" :class="headingClass">
+          {{ stackHeading[0] }}<span class="sm:whitespace-nowrap">{{ stackHeading[1] }}<span aria-hidden="true" :class="counterClass">({{ pad(stack.length) }})</span></span>
+        </h2>
+      </div>
 
-      <!-- Tech Stack -->
-      <section class="mb-20">
-        <p
-          class="text-sm font-mono uppercase tracking-widest mb-3"
-          :class="theme === 'dark' ? 'text-pink-400' : 'text-pink-600'"
-        >{{ t('vibebify.stackLabel') }}</p>
-        <h2
-          class="text-3xl font-bold mb-2"
-          :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-        >{{ t('vibebify.stackTitle') }}</h2>
-        <div class="mt-4 h-1 w-16 bg-pink-500 rounded-full mb-10" />
+      <!-- 10 items only divide evenly into 2 or 5 columns; 3 would orphan the last card. -->
+      <ul v-motion="reveal(120)" class="mt-10 grid grid-cols-2 gap-2 md:mt-16 md:gap-3 lg:grid-cols-5">
+        <li
+          v-for="tech in stack"
+          :key="tech.name"
+          class="flex min-h-32 flex-col justify-between gap-6 bg-card p-4 md:p-5 lg:min-h-40"
+        >
+          <span class="text-[13px] text-graphite">{{ t(`vibebify.stackCategories.${tech.key}`, tech.category) }}</span>
+          <span class="text-base leading-tight font-bold tracking-[-0.01em] uppercase md:text-lg">{{ tech.name }}</span>
+        </li>
+      </ul>
+    </section>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-          <div
-            v-for="tech in stack"
-            :key="tech.name"
-            class="rounded-lg p-3 border text-center transition-colors"
-            :class="theme === 'dark'
-              ? 'bg-surface-light border-zinc-800 hover:border-pink-500/30'
-              : 'bg-white border-zinc-200 hover:border-pink-300 shadow-sm'"
-          >
-            <p
-              class="text-sm font-medium"
-              :class="theme === 'dark' ? 'text-zinc-200' : 'text-zinc-800'"
-            >{{ tech.name }}</p>
-            <p
-              class="text-xs mt-1"
-              :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-400'"
-            >{{ tech.category }}</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Architecture Diagram -->
-      <section class="mb-20">
-        <ArchitectureDiagram />
-      </section>
-    </div>
-  </div>
+    <section aria-labelledby="vb-arch" class="container-site mt-24 pb-24 md:mt-40 md:pb-40">
+      <ArchitectureDiagram heading-id="vb-arch" />
+    </section>
+  </main>
 </template>

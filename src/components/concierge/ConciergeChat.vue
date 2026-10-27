@@ -1,110 +1,85 @@
 <script setup>
 import { useI18n } from 'vue-i18n'
-import { useTheme } from '@/stores/useThemeStore'
 import { Shield, Users, DollarSign, ShieldAlert } from 'lucide-vue-next'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import { reveal } from '@/motion'
 
 const { t } = useI18n()
-const { theme } = useTheme()
 const YOUTUBE_ID = '3ATSpNSdtiw'
 
 const scenarios = [
   {
     icon: Users,
     label: 'HR User',
+    labelKey: 'concierge.scenarioHrLabel',
     email: 'hr@example.com',
-    color: 'emerald',
     descKey: 'concierge.scenarioHr',
   },
   {
     icon: DollarSign,
     label: 'Finance User',
+    labelKey: 'concierge.scenarioFinLabel',
     email: 'finance@example.com',
-    color: 'blue',
     descKey: 'concierge.scenarioFin',
   },
   {
     icon: ShieldAlert,
     label: 'Unauthorized User',
+    labelKey: 'concierge.scenarioHackerLabel',
     email: 'hacker@evil.com',
-    color: 'red',
     descKey: 'concierge.scenarioHacker',
+    denied: true,
   },
 ]
 </script>
 
 <template>
-  <div>
-    <h2
-      class="text-2xl font-display font-bold mb-2"
-      :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-    >{{ t('concierge.demoTitle') }}</h2>
-    <p
-      class="mb-8"
-      :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-    >{{ t('concierge.demoSubtitle') }}</p>
-
-    <!-- Scenario cards -->
-    <div class="grid sm:grid-cols-3 gap-3 mb-8">
-      <div
-        v-for="s in scenarios"
-        :key="s.label"
-        class="rounded-xl p-4 border transition-colors"
-        :class="theme === 'dark'
-          ? 'bg-surface-light/30 border-zinc-800'
-          : 'bg-white border-zinc-200 shadow-sm'"
-      >
-        <div class="flex items-center gap-2.5 mb-2">
-          <div
-            class="w-8 h-8 rounded-lg flex items-center justify-center"
-            :class="s.color === 'emerald' ? 'bg-emerald-500/10' : s.color === 'blue' ? 'bg-blue-500/10' : 'bg-red-500/10'"
-          >
-            <component
-              :is="s.icon"
-              :size="16"
-              :class="s.color === 'emerald' ? 'text-emerald-400' : s.color === 'blue' ? 'text-blue-400' : 'text-red-400'"
-            />
-          </div>
-          <div>
-            <h4
-              class="text-sm font-bold"
-              :class="theme === 'dark' ? 'text-white' : 'text-zinc-900'"
-            >{{ s.label }}</h4>
-            <span
-              class="text-xs font-mono"
-              :class="theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'"
-            >{{ s.email }}</span>
-          </div>
-        </div>
-        <p
-          class="text-xs leading-relaxed"
-          :class="theme === 'dark' ? 'text-zinc-500' : 'text-zinc-500'"
-        >{{ t(s.descKey) }}</p>
-      </div>
-    </div>
-
-    <!-- YouTube embed -->
-    <div
-      class="rounded-xl border overflow-hidden"
-      :class="theme === 'dark' ? 'border-zinc-800' : 'border-zinc-200 shadow-sm'"
-    >
+  <div class="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
+    <figure v-motion="reveal()" class="rounded-[3px] bg-onyx p-2 text-white lg:col-span-8 dark:ring-1 dark:ring-line">
       <iframe
         :src="`https://www.youtube.com/embed/${YOUTUBE_ID}?rel=0`"
-        class="w-full aspect-video"
-        frameborder="0"
+        :title="`${t('concierge.title')} | ${t('concierge.demoTitle')}`"
+        class="block aspect-video w-full rounded-[2px] border-0 bg-night"
+        loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       />
-    </div>
+      <figcaption class="flex items-center justify-between gap-4 px-1.5 pt-2.5 pb-1 text-[13px]">
+        <span class="flex min-w-0 items-center gap-1.5 font-medium uppercase">
+          <AsteriskMark class="size-3 shrink-0 text-accent" />
+          <span class="truncate">{{ t('concierge.title') }}</span>
+        </span>
+        <span class="shrink-0 text-white/70">/{{ t('concierge.demoTitle') }}</span>
+      </figcaption>
+    </figure>
 
-    <!-- Security note -->
-    <div
-      class="mt-4 flex items-start gap-2 text-xs"
-      :class="theme === 'dark' ? 'text-zinc-600' : 'text-zinc-400'"
-    >
-      <Shield :size="12" class="mt-0.5 shrink-0" />
-      <span>
-        {{ t('concierge.securityNote') }}
-      </span>
-    </div>
+    <ul class="grid grid-cols-1 gap-3 md:grid-cols-3 lg:col-span-4 lg:grid-cols-1 lg:grid-rows-3">
+      <li
+        v-for="s in scenarios"
+        :key="s.label"
+        class="flex min-h-[11rem] flex-col justify-between gap-6 rounded-[3px] bg-mist p-5 lg:min-h-0"
+      >
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="text-sm text-graphite">{{ t(s.labelKey, s.label) }}:</h3>
+          <component
+            :is="s.icon"
+            :size="18"
+            :stroke-width="1.75"
+            aria-hidden="true"
+            class="shrink-0"
+            :class="s.denied ? 'text-accent' : 'text-ink'"
+          />
+        </div>
+        <div>
+          <p class="text-lg leading-tight font-bold tracking-[-0.02em] [overflow-wrap:anywhere] md:max-lg:text-base">{{ s.email }}</p>
+          <p class="mt-2 text-[13px] leading-relaxed text-graphite">{{ t(s.descKey) }}</p>
+        </div>
+      </li>
+    </ul>
+
+    <p class="flex items-start gap-3 rounded-[3px] border border-l-[3px] border-line border-l-accent bg-card p-4 text-sm leading-relaxed text-graphite sm:p-5 lg:col-span-8">
+      <Shield :size="18" :stroke-width="1.75" aria-hidden="true" class="mt-0.5 shrink-0 text-accent" />
+      <span>{{ t('concierge.securityNote') }}</span>
+    </p>
   </div>
 </template>

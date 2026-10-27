@@ -1,106 +1,93 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
+import { useI18n } from 'vue-i18n'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 
+const { t } = useI18n()
 const emit = defineEmits(['done'])
 
-const lines = [
-  '> initializing system...',
-  '> loading modules: vue@3.5, vite@6.2, tailwind@4.1',
-  '> connecting to ivanmendoza.dev',
-  '> compiling portfolio assets...',
-  '> mounting components...',
-  '> establishing secure connection...',
-  '> system ready.',
-]
+const COUNT_MS = 1350
 
-const visibleLines = ref([])
-const progress = ref(0)
-const done = ref(false)
-const skipped = ref(false)
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+const visible = ref(!sessionStorage.getItem('boot-done') && !reduceMotion)
+const count = ref(0)
+
+let frame = 0
+let timer = 0
+let start = 0
+
+function finish() {
+  if (!visible.value) return
+  cancelAnimationFrame(frame)
+  clearTimeout(timer)
+  sessionStorage.setItem('boot-done', '1')
+  document.documentElement.style.overflow = ''
+  count.value = 100
+  visible.value = false
+}
 
 function skip() {
-  skipped.value = true
-  done.value = true
-  sessionStorage.setItem('boot-done', '1')
-  emit('done')
+  finish()
+}
+
+function step(now) {
+  start ||= now
+  const p = Math.min((now - start) / COUNT_MS, 1)
+  count.value = Math.round(100 * (1 - Math.pow(1 - p, 3)))
+  if (p < 1) frame = requestAnimationFrame(step)
+  else timer = setTimeout(finish, 220)
 }
 
 onMounted(() => {
-  if (sessionStorage.getItem('boot-done')) {
-    skip()
+  if (!visible.value) {
+    sessionStorage.setItem('boot-done', '1')
+    emit('done')
     return
   }
+  document.documentElement.style.overflow = 'hidden'
+  frame = requestAnimationFrame(step)
+})
 
-  let i = 0
-  const lineInterval = setInterval(() => {
-    if (skipped.value) { clearInterval(lineInterval); return }
-    if (i < lines.length) {
-      visibleLines.value.push(lines[i])
-      progress.value = ((i + 1) / lines.length) * 100
-      i++
-    } else {
-      clearInterval(lineInterval)
-      setTimeout(() => {
-        if (!skipped.value) {
-          done.value = true
-          sessionStorage.setItem('boot-done', '1')
-          emit('done')
-        }
-      }, 400)
-    }
-  }, 280)
+onUnmounted(() => {
+  cancelAnimationFrame(frame)
+  clearTimeout(timer)
+  document.documentElement.style.overflow = ''
 })
 </script>
 
 <template>
   <transition
-    leave-active-class="transition-opacity duration-500"
-    leave-to-class="opacity-0"
+    leave-active-class="transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]"
+    leave-to-class="-translate-y-full"
+    @after-leave="emit('done')"
   >
     <div
-      v-if="!done"
-      class="fixed inset-0 z-[9999] bg-zinc-950 flex flex-col items-center justify-center px-6"
+      v-if="visible"
+      class="boot-bg fixed inset-0 z-[9999] flex flex-col text-white"
+      aria-busy="true"
     >
-      <!-- Scanline overlay -->
-      <div class="absolute inset-0 pointer-events-none opacity-[0.03] bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(255,255,255,0.1)_2px,rgba(255,255,255,0.1)_4px)]" />
+      <div class="container-site flex h-[5.25rem] items-center">
+        <p class="flex items-start text-lg font-bold tracking-tight sm:text-xl">
+          Ivan Mendoza<AsteriskMark class="ml-0.5 size-2.5" :weight="2.4" />
+        </p>
+      </div>
 
-      <div class="w-full max-w-md">
-        <!-- Terminal lines -->
-        <div class="font-mono text-sm space-y-2 mb-8">
-          <p
-            v-for="(line, i) in visibleLines"
-            :key="i"
-            class="text-primary/80 animate-[fadeSlide_0.3s_ease-out]"
-            :class="i === visibleLines.length - 1 && visibleLines.length === lines.length ? 'text-primary font-bold' : ''"
-          >
-            {{ line }}
-          </p>
-          <span v-if="visibleLines.length < lines.length" class="inline-block w-2 h-4 bg-primary/70 animate-pulse" />
-        </div>
-
-        <!-- Progress bar -->
-        <div class="w-full h-1 bg-zinc-800 rounded-full overflow-hidden mb-6">
-          <div
-            class="h-full bg-primary rounded-full transition-all duration-300 ease-out"
-            :style="{ width: progress + '%' }"
-          />
-        </div>
-
-        <!-- Skip -->
+      <div class="container-site mt-auto flex items-end justify-between gap-6 pb-6 md:pb-10">
+        <p aria-hidden="true" class="font-display text-display-hero tabular-nums">{{ count }}</p>
         <button
+          type="button"
+          class="min-h-11 shrink-0 cursor-pointer whitespace-nowrap rounded-[3px] bg-ember-deep px-4 text-sm font-medium text-white transition-colors duration-300 hover:bg-onyx focus-visible:outline-white! active:translate-y-px"
           @click="skip"
-          class="text-xs font-mono text-zinc-600 hover:text-zinc-400 transition-colors cursor-pointer"
-        >
-          [skip]
-        </button>
+        >[{{ t('boot.skip') }}]</button>
       </div>
     </div>
   </transition>
 </template>
 
 <style scoped>
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+.boot-bg {
+  background:
+    radial-gradient(40% 55% at 62% 50%, var(--color-ember-bright), transparent 70%),
+    linear-gradient(90deg, var(--color-ember-deep), var(--color-ember));
 }
 </style>

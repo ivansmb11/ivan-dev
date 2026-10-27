@@ -1,115 +1,167 @@
+/* Hallmark · studied: yes · DNA-source: image (Framer "Personal Portfolio" reference, Dribbble 27497608)
+ * tone: bold editorial · anchor hue: ember 40° · display + body: Inter (opsz 14..32, display cut at large sizes)
+ */
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --font-sans: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Space Grotesk', sans-serif;
-  --color-primary: #10b981;
-  --color-primary-light: #34d399;
-  --color-primary-dark: #059669;
-  --color-surface: #18181b;
-  --color-surface-light: #27272a;
-  --color-surface-lighter: #3f3f46;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Paper and ink, sampled from the references. These neutrals flip in dark mode (see html.dark below). */
+  --color-paper: oklch(97.6% 0 0);
+  --color-card: oklch(100% 0 0);
+  --color-mist-soft: oklch(95.2% 0 0);
+  --color-mist: oklch(93.1% 0 0);
+  --color-line: oklch(89.4% 0 0);
+  --color-muted: oklch(64% 0 0);
+  --color-graphite: oklch(51% 0 0);
+  --color-ink: oklch(12.2% 0 0);
+  /* Fixed near-black for surfaces that stay dark in both themes (e.g. cards sitting on the orange hero) */
+  --color-onyx: oklch(12.2% 0 0);
+
+  /* Hero orange and the red-orange accent used for asterisks, rules and arrow squares */
+  --color-ember-deep: oklch(52.9% 0.13 39.2);
+  --color-ember: oklch(62.9% 0.15 40.6);
+  --color-ember-bright: oklch(65.5% 0.154 43.1);
+  --color-accent: oklch(63.6% 0.201 34.5);
+  --color-accent-deep: oklch(56.4% 0.18 34.5);
+  --color-night: oklch(15.8% 0.037 26.2);
+
+  --text-display-hero: clamp(6rem, 15vw, 14.5rem);
+  --text-display-hero--line-height: 0.8;
+  --text-display-hero--letter-spacing: -0.055em;
+  --text-display-hero--font-weight: 800;
+
+  --text-display-xl: clamp(2.5rem, 11vw, 10rem);
+  --text-display-xl--line-height: 0.86;
+  --text-display-xl--letter-spacing: -0.05em;
+  --text-display-xl--font-weight: 800;
+
+  --text-display-lg: clamp(2.125rem, 6.2vw, 5.75rem);
+  --text-display-lg--line-height: 0.92;
+  --text-display-lg--letter-spacing: -0.045em;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-md: clamp(2.25rem, 4.6vw, 4rem);
+  --text-display-md--line-height: 0.95;
+  --text-display-md--letter-spacing: -0.04em;
+  --text-display-md--font-weight: 700;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 45s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@utility container-site {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+}
+
+/* Diagonal hatch for unfilled image slots, so placeholders never read as finished art */
+@utility placeholder-hatch {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 10px,
+    color-mix(in oklch, currentColor 9%, transparent) 10px 11px
+  );
+}
+
+@utility link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s var(--ease-out-quint);
+
+  &:hover,
+  &:focus-visible {
+    background-size: 100% 1px;
+  }
 }
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+/* Dark option: warm near-black tinted toward the ember hue so it stays on-brand. Orange, accent and onyx do not change. */
+html.dark {
+  color-scheme: dark;
+  --color-paper: oklch(15.5% 0.011 45);
+  --color-card: oklch(19.5% 0.012 45);
+  --color-mist-soft: oklch(21% 0.012 45);
+  --color-mist: oklch(24% 0.013 45);
+  --color-line: oklch(31% 0.013 45);
+  --color-muted: oklch(56% 0.012 50);
+  --color-graphite: oklch(73% 0.01 55);
+  --color-ink: oklch(95.5% 0.005 70);
+}
+
+/* Uppercase Spanish accents (Ó, Á, Ñ) collide with the line above at the reference's tight leading */
+:lang(es) .text-display-xl {
+  line-height: 0.95;
+}
+:lang(es) .text-display-lg,
+:lang(es) .text-display-md {
+  line-height: 1.02;
 }
 
 body {
   font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-bottom: 24px;
-  background: #09090b;
-  color: #fafafa;
 }
 
-html.light body {
-  background: #f4f4f5;
-  color: #18181b;
+::selection {
+  background: var(--color-accent);
+  color: white;
 }
 
-/* Parallax utility */
-.parallax-bg {
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }
 
-/* Custom scrollbar - dark */
+/* Programmatic focus targets (skip link to #main, jumps to #contact) should not draw a ring */
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: var(--color-paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 3px;
+  background: var(--color-line);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #52525b;
+  background: var(--color-muted);
 }
 
-/* ===================== */
-/* LIGHT THEME OVERRIDES */
-/* ===================== */
-html.light body {
-  color: #18181b;
-}
-
-html.light ::-webkit-scrollbar-track {
-  background: #f4f4f5;
-}
-html.light ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
-}
-html.light ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1aa;
-}
-
-/* ==================== */
-/* ENHANCED HOVER EFFECTS */
-/* ==================== */
-
-/* Underline sweep on nav links */
-.nav-link {
-  position: relative;
-}
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 1.5px;
-  background: var(--color-primary);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s cubic-bezier(0.76, 0, 0.24, 1);
-}
-.nav-link:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-/* Button sweep effect */
-.btn-sweep {
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
-}
-.btn-sweep::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255,255,255,0.15);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
-  z-index: -1;
-}
-.btn-sweep:hover::before {
-  transform: scaleX(1);
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
