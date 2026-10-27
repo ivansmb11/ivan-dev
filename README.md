@@ -1,29 +1,24 @@
 # ivan-dev
 
-This template should help get you started developing with Vue 3 in Vite.
+Source for [ivanmendoza.dev](https://ivanmendoza.dev), built with Nuxt 4 and Tailwind CSS v4 and prerendered to static HTML for Firebase Hosting.
 
-## Recommended IDE Setup
+## Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+Requires Node 24 (see `.nvmrc`).
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+## Development
 
 ```sh
 npm run dev
 ```
 
-### Compile and Minify for Production
+## Production build
 
 ```sh
-npm run build
+npm run build     # static site in .output/public
+npm run preview   # serve it on port 4173
 ```

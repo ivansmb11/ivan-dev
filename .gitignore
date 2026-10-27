@@ -33,3 +33,10 @@ stats.html
 
 # Claude Code
 .claude/
+
+# Nuxt
+.nuxt
+.output
+.data
+.nitro
+.cache
