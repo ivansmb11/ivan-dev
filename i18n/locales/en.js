@@ -73,7 +73,8 @@ export default {
     headingLead: 'Shipping software for',
     headingRest: 'fintech and aerospace',
     present: 'Present',
-    previously: 'Previously',
+    promotedFrom: 'Promoted from',
+    previousDetails: 'Show details',
     zazpay: {
       role: 'AI Engineer',
       company: 'ZAZPAY',

@@ -1,11 +1,14 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { ArrowUp, Plus } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
+// The earlier role starts collapsed so the ZAZPAY card stays as tall as its neighbours.
+const previousOpen = ref(false)
 
 const jobs = computed(() => [
   {
@@ -127,13 +130,42 @@ const jobs = computed(() => [
             </ul>
 
             <div v-if="job.previous" class="mt-8 border-t border-line pt-5">
-              <p class="text-[11px] font-semibold uppercase tracking-[0.04em] text-graphite">{{ t('career.previously') }}</p>
-              <h4 class="mt-2 text-base font-bold uppercase leading-[1.1] tracking-[-0.02em]">{{ job.previous.role }}</h4>
-              <p class="mt-1 text-[13px] text-graphite">
-                {{ [`${job.previous.period} · ${job.previous.duration}`, job.previous.mode].join(' · ') }}
+              <p class="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-accent">
+                <ArrowUp :size="12" :stroke-width="2.5" aria-hidden="true" />{{ t('career.promotedFrom') }}
               </p>
-              <p class="mt-3 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.previous.description }}</p>
-              <p class="mt-3 text-[12px] leading-relaxed text-graphite">{{ job.previous.skills }}</p>
+              <button
+                type="button"
+                :aria-expanded="previousOpen"
+                :aria-controls="`${job.key}-previous`"
+                class="group mt-2 flex w-full items-start justify-between gap-4 text-left"
+                @click="previousOpen = !previousOpen"
+              >
+                <span>
+                  <span class="block text-base font-bold uppercase leading-[1.1] tracking-[-0.02em]">{{ job.previous.role }}</span>
+                  <span class="mt-1 block text-[13px] text-graphite">
+                    {{ [`${job.previous.period} · ${job.previous.duration}`, job.previous.mode].join(' · ') }}
+                  </span>
+                  <span class="sr-only">{{ t('career.previousDetails') }}</span>
+                </span>
+                <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-graphite transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
+                  <Plus
+                    :size="16"
+                    aria-hidden="true"
+                    class="transition-transform duration-500 ease-out-quint motion-reduce:transition-none"
+                    :class="previousOpen ? 'rotate-45' : ''"
+                  />
+                </span>
+              </button>
+              <div
+                :id="`${job.key}-previous`"
+                class="grid transition-[grid-template-rows] duration-500 ease-out-quint motion-reduce:transition-none"
+                :class="previousOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
+              >
+                <div class="overflow-hidden" :inert="!previousOpen">
+                  <p class="mt-3 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.previous.description }}</p>
+                  <p class="mt-3 text-[12px] leading-relaxed text-graphite">{{ job.previous.skills }}</p>
+                </div>
+              </div>
             </div>
           </div>
         </li>
