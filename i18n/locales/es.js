@@ -16,12 +16,12 @@ export default {
   hero: {
     greeting: "Hola, soy {name}.",
     subtitle:
-      "Ingeniero de Software Lead construyendo productos fintech, desde apps móviles hasta plataformas escalables. AI Engineer con enfoque en agentic coding y productividad del desarrollador.",
+      "AI Engineer y Lead de Mobile y Frontend construyendo productos fintech, desde agentes de IA y servidores MCP hasta apps móviles y plataformas escalables.",
     location: "Ciudad de México, MX",
     tagline: "Construyo productos fintech, desde apps móviles hasta plataformas escalables",
     featuredType: "Proyecto personal",
     letsTalk: "Hablemos",
-    role: "Lead Software Engineer",
+    role: "AI Engineer {'|'} Mobile & Frontend Lead",
     scroll: "Desliza para explorar",
   },
   trusted: {
@@ -32,16 +32,16 @@ export default {
     title: "Sobre mí",
     headingLead: "Construyendo fintech",
     headingRest: "del móvil a la plataforma",
-    roleCardText: "AI Engineer con enfoque en agentic coding y productividad del desarrollador.",
+    roleCardText: "Construyo agentes de IA, servidores MCP y herramientas con LLMs, con enfoque en agentic coding y productividad del desarrollador.",
     statsLabel: "En números",
-    bio1: "Ingeniero de Software Lead en una fintech mexicana de BNPL y crédito comercial, responsable de la arquitectura móvil y frontend, con contribuciones a lo largo del full stack, desde publicaciones en tres app stores hasta servicios backend en GCP.",
+    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial, donde construyo agentes de IA, servidores MCP y herramientas con LLMs para ingeniería y operaciones financieras. También lidero mobile y frontend con un equipo de dos personas, desde publicaciones en tres app stores hasta servicios backend en GCP.",
     bio2: "Más allá de escribir código, me enfoco en elevar cómo trabajan los equipos de ingeniería: mejorando procesos, elevando estándares de calidad de código e impulsando la adopción de herramientas de desarrollo asistido por IA. Previamente en General Electric Aerospace, donde construí servicios backend en Spring Boot y Java.",
     education: "Educación",
     educationText:
       "Ingeniería en Tecnologías de la Información y Negocios Digitales en la Universidad Anáhuac, Querétaro. Líder electo del consejo estudiantil del programa de Ingeniería.",
     experience: "Experiencia",
     experienceText:
-      "Lead Software Engineer en Zazpay, una fintech BNPL, responsable de la arquitectura móvil y frontend con contribuciones a lo largo del full stack.",
+      "AI Engineer en ZAZPAY, una fintech BNPL, construyendo agentes y servidores MCP mientras lidero mobile y frontend con un equipo de dos personas.",
     location: "Ubicación",
     locationText:
       "Originario de Sinaloa, México. Actualmente en la Ciudad de México.",
@@ -58,8 +58,6 @@ export default {
     caseStudy: "Caso de estudio",
     source: "Código",
     watchDemo: "Ver el demo",
-    ivanDev:
-      "Portafolio personal bilingüe construido con Nuxt 4, Vue 3 y Tailwind CSS v4. Un diseño tipográfico y audaz con animaciones al hacer scroll y una página en texto plano para agentes de IA.",
     vibebify:
       "Una app web social enfocada en música con estética punk/rock. Construida con Next.js 16, Supabase y PostgreSQL. Inicia sesión con Spotify, explora tus estadísticas de escucha, comparte posts sobre canciones, sigue a otros usuarios, descubre tu ADN de Género, compite en duelos de canciones y mantén rachas de publicaciones diarias.",
     vipConcierge:
@@ -81,17 +79,26 @@ export default {
     headingLead: "Construyendo software para",
     headingRest: "fintech y aeroespacial",
     present: "Presente",
+    previously: "Anteriormente",
     zazpay: {
-      role: "Lead Software Engineer",
+      role: "AI Engineer",
       company: "ZAZPAY",
       type: "Tiempo completo",
-      period: "Jun 2023 - Presente",
-      location: "Zona Metropolitana de la Ciudad de México",
-      mode: "Híbrido",
+      period: "Ago 2026 - Presente",
+      location: "Ciudad de México, México",
+      mode: "Presencial",
       description:
-        "Lead Engineer de arquitectura Mobile y Frontend para una fintech BNPL, gestionando el código base en Expo y publicando versiones en Play Store, App Store y App Gallery bajo flujos de CI/CD de nivel empresarial. Impulso de mejoras en procesos de ingeniería como colíder del equipo. Promoción en la early-adoption de desarrollo asistido por IA, introduciendo Cursor y Claude Code. Representación del equipo en el AI Engineer Code Summit en NYC.",
-      skills:
-        "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD, AI Agents, MCP",
+        "Construyo agentes de IA y herramientas con LLMs para una fintech BNPL: los servidores MCP principales que usan nuestros desarrolladores, servidores MCP que auditan todas las operaciones financieras y agentes que resuelven tareas de ingeniería dentro del código. Hice el onboarding de los principales proveedores de IA de la empresa. Sigo liderando mobile y frontend con un equipo de dos personas.",
+      skills: "Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes",
+      previous: {
+        role: "Lead Software Engineer",
+        period: "Jun 2023 - Ago 2026",
+        duration: "3 años 3 meses",
+        mode: "Híbrido",
+        description:
+          "Lead Engineer de arquitectura Mobile y Frontend, gestionando el código base en Expo y publicando versiones en Play Store, App Store y App Gallery. Impulsé mejoras en procesos de ingeniería como colíder del equipo, promoví la adopción temprana de desarrollo asistido por IA (Cursor, Claude Code) y representé al equipo en el AI Engineer Code Summit en NYC.",
+        skills: "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD",
+      },
     },
     prestavale: {
       role: "Ingeniero de Software",
@@ -136,6 +143,12 @@ export default {
       issuer: "Google Cloud Skills Boost",
       date: "Sep 2022",
       credential: "2619947",
+    },
+    nyc2026: {
+      title: "AI Engineer New York",
+      issuer: "AI Engineer",
+      date: "Oct 2026",
+      location: "Nueva York",
     },
     summit: {
       title: "AI Engineer Code Summit",

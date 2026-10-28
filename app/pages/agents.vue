@@ -26,7 +26,7 @@ import PageHeader from '@/components/ui/PageHeader.vue'
 
         <pre class="block min-w-0 border border-line bg-card p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink [overflow-wrap:anywhere] md:p-8 lg:col-span-8">
 # Ivan Mendoza
-## Lead Software Engineer
+## AI Engineer | Mobile & Frontend Lead
 
 Location: Mexico City, MX
 Email: ivanmendozabaca@gmail.com
@@ -40,7 +40,7 @@ Website: https://ivanmendoza.dev
 
 ## Summary
 
-Lead Software Engineer at a Mexican BNPL and commercial-lending fintech, owning mobile and frontend architecture while contributing across the full stack and backend services. Drives engineering process improvements and code quality standards across teams. AI engineer with a focus on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
+AI Engineer at a Mexican BNPL and commercial-lending fintech, building AI agents, MCP servers and LLM tooling for engineering and financial operations. Also leads mobile and frontend with a team of two, owning the mobile and frontend architecture while contributing across the full stack. Focused on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
 
 ---
 
@@ -54,11 +54,17 @@ Elected student council leader for the Engineering program.
 
 ## Career
 
+### v3.1 | ZAZPAY | AI Engineer (Full-time)
+Period: Aug 2026 - Present
+Location: Mexico City, Mexico | On-site
+Description: Build AI agents and LLM tooling for a BNPL fintech: the core MCP servers our developers use, MCP servers that audit every financial operation, and agents that take on engineering tasks inside the codebase. Onboarded the company's main AI providers. Still lead mobile and frontend, managing a team of two.
+Skills: Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes
+
 ### v3.0 | ZAZPAY | Lead Software Engineer (Full-time)
-Period: Jun 2023 - Present
+Period: Jun 2023 - Aug 2026 (3 yrs 3 mos)
 Location: Mexico City Metropolitan Area | Hybrid
-Description: Lead mobile and frontend engineering for a BNPL fintech, owning the Expo codebase and shipping releases across Play Store, App Store, and App Gallery. Drove engineering process improvements, championed AI-assisted development adoption (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
-Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD, AI Agents, MCP
+Description: Led mobile and frontend engineering, owning the Expo codebase and shipping releases across Play Store, App Store, and App Gallery. Drove engineering process improvements, championed AI-assisted development (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
+Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD
 
 ### v2.0 | PRESTA VALE | Software Engineer (Full-time)
 Period: Jun 2023 - Dec 2024 (1 yr 7 mos)
@@ -89,15 +95,14 @@ Tech: GCP, Vertex AI, LangChain, Cloud Run, PostgreSQL, Zero-Trust
 GitHub: https://github.com/ivansmb11/vip-data-concierge
 Showcase: https://ivanmendoza.dev/concierge
 
-### ivanmendoza.dev
-Bilingual personal portfolio built with Nuxt 4, Vue 3, and Tailwind CSS v4. A bold, type-led layout with scroll-reveal animations and a plain-text page for AI agents.
-Tech: Nuxt 4, Vue 3, Tailwind CSS v4, Nuxt i18n
-GitHub: https://github.com/ivansmb11/ivan-dev
-Live: https://ivanmendoza.dev
-
 ---
 
 ## Achievements
+
+### AI Engineer New York
+Issuer: AI Engineer
+Date: Oct 2026
+Location: New York City
 
 ### AI Engineer Code Summit
 Issuer: AI Engineer
@@ -126,13 +131,14 @@ Vue.js, React Native, TypeScript, Node.js, NestJS, PostgreSQL, Tailwind CSS, Vit
 
 ## Skills
 Languages: TypeScript, Java, Python
-Tools/Frameworks: NestJS, Expo, Spring, Docker, MCP
+Tools/Frameworks: NestJS, Expo, Spring, Docker, Kubernetes, MCP, LangChain, LangSmith, Langfuse
 Databases: PostgreSQL, Neo4J, Redis
-Other: Leadership, AI Agents, Cloud services (GCP)
+Other: Leadership, AI Agents, LLMs (Claude, Gemini), Evals, Cloud services (GCP)
 
 ---
 
-## Conference
+## Conferences
+AI Engineer New York, New York City, 2026
 AI Engineer Code Summit, New York City, 2025
 
 ---

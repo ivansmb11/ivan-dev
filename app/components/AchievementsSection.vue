@@ -9,10 +9,22 @@ import { reveal } from '@/motion'
 
 const { t } = useI18n()
 
-// A labeled placeholder needs more room than the final single-color logo to stay legible.
+// A labeled placeholder needs more room than the final logo to stay legible.
 const logoBox = (id) => (slotSrc(id) ? 'h-10 w-36' : 'h-20 w-48')
 
 const achievements = computed(() => [
+  {
+    key: 'nyc2026',
+    slot: 'logo-ai-engineer',
+    brand: 'AI Engineer',
+    title: t('achievements.nyc2026.title'),
+    issuer: t('achievements.nyc2026.issuer'),
+    date: t('achievements.nyc2026.date'),
+    location: t('achievements.nyc2026.location'),
+    url: '',
+    credential: '',
+    type: 'conference',
+  },
   {
     key: 'summit',
     slot: 'logo-ai-engineer',
@@ -63,12 +75,12 @@ const achievements = computed(() => [
       </div>
 
       <!-- Subgrid rows keep logos, titles and certificate links level across cards whose titles differ in length. -->
-      <ul class="mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-3 lg:gap-x-6 lg:gap-y-0">
+      <ul class="mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-0">
         <li
           v-for="(item, i) in achievements"
           :key="item.key"
           v-motion="reveal(i * 120)"
-          class="group flex flex-col rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
+          class="group flex flex-col rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:nth-[n+3]:mt-6 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
         >
           <div class="flex items-start justify-between gap-4">
             <AssetSlot
@@ -78,7 +90,7 @@ const achievements = computed(() => [
               compact
               fit="contain"
               position="left center"
-              class="min-w-0 [&_img]:opacity-70 [&_img]:grayscale [&_img]:transition-[filter,opacity] [&_img]:duration-500 group-hover:[&_img]:opacity-100 group-hover:[&_img]:grayscale-0 dark:[&_img]:invert"
+              class="min-w-0"
               :class="logoBox(item.slot)"
             />
             <span class="shrink-0 whitespace-nowrap rounded-[2px] bg-mist px-2 py-1 text-xs leading-none text-ink">{{ item.date }}</span>

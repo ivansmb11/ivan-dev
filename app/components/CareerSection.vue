@@ -20,6 +20,14 @@ const jobs = computed(() => [
     description: t('career.zazpay.description'),
     skills: t('career.zazpay.skills').split(', '),
     current: true,
+    previous: {
+      role: t('career.zazpay.previous.role'),
+      period: t('career.zazpay.previous.period'),
+      duration: t('career.zazpay.previous.duration'),
+      mode: t('career.zazpay.previous.mode'),
+      description: t('career.zazpay.previous.description'),
+      skills: t('career.zazpay.previous.skills'),
+    },
   },
   {
     key: 'prestavale',
@@ -108,13 +116,26 @@ const jobs = computed(() => [
 
           <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.description }}</p>
 
-          <ul class="mt-5 flex flex-wrap content-start gap-1.5">
-            <li
-              v-for="skill in job.skills"
-              :key="skill"
-              class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
-            >{{ skill }}</li>
-          </ul>
+          <!-- One wrapper so an earlier role at the same company stays inside the card's last subgrid row. -->
+          <div>
+            <ul class="mt-5 flex flex-wrap content-start gap-1.5">
+              <li
+                v-for="skill in job.skills"
+                :key="skill"
+                class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+              >{{ skill }}</li>
+            </ul>
+
+            <div v-if="job.previous" class="mt-8 border-t border-line pt-5">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.04em] text-graphite">{{ t('career.previously') }}</p>
+              <h4 class="mt-2 text-base font-bold uppercase leading-[1.1] tracking-[-0.02em]">{{ job.previous.role }}</h4>
+              <p class="mt-1 text-[13px] text-graphite">
+                {{ [`${job.previous.period} · ${job.previous.duration}`, job.previous.mode].join(' · ') }}
+              </p>
+              <p class="mt-3 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.previous.description }}</p>
+              <p class="mt-3 text-[12px] leading-relaxed text-graphite">{{ job.previous.skills }}</p>
+            </div>
+          </div>
         </li>
       </ol>
     </div>

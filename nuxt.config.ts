@@ -22,11 +22,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Ivan Mendoza | Lead Software Engineer',
+      title: 'Ivan Mendoza | AI Engineer | Mobile & Frontend Lead',
       meta: [
         {
           name: 'description',
-          content: 'Lead Software Engineer building fintech products, from mobile apps to scalable platforms. AI engineer focused on agentic coding and developer productivity.',
+          content: 'AI Engineer and Mobile & Frontend Lead building fintech products, from AI agents and MCP servers to mobile apps and scalable platforms.',
         },
         { name: 'theme-color', content: '#d2643a' },
       ],

@@ -27,7 +27,7 @@ const logos = [
             :fallback-text="logo.name"
             compact
             fit="contain"
-            class="mx-auto h-14 w-full max-w-[11rem] [&_img]:opacity-60 [&_img]:grayscale dark:[&_img]:invert"
+            class="mx-auto h-14 w-full max-w-[11rem]"
           />
         </li>
       </ul>

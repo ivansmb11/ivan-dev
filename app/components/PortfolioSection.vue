@@ -34,15 +34,6 @@ const projects = computed(() => [
     caseStudy: '/concierge',
   },
   {
-    key: 'ivan-dev',
-    kind: 'framed',
-    slot: 'project-ivan-dev',
-    title: 'ivanmendoza.dev',
-    description: t('portfolio.ivanDev'),
-    tags: ['Nuxt', 'Vue 3', 'Tailwind CSS'],
-    github: 'https://github.com/ivansmb11/ivan-dev',
-  },
-  {
     key: 'soon',
     kind: 'soon',
     title: t('portfolio.comingSoon'),

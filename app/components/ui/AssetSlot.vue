@@ -15,6 +15,8 @@ const props = defineProps({
 })
 
 const src = computed(() => slotSrc(props.id))
+// An optional `<id>-dark` file replaces the image under html.dark, so logos stay legible without a theme branch.
+const darkSrc = computed(() => slotSrc(`${props.id}-dark`))
 const meta = computed(() => slots[props.id] ?? { label: props.id, size: '' })
 
 const tones = {
@@ -35,6 +37,16 @@ const tones = {
       :fetchpriority="eager ? 'high' : undefined"
       decoding="async"
       class="block size-full"
+      :class="darkSrc ? 'dark:hidden' : ''"
+      :style="{ objectFit: fit, objectPosition: position }"
+    />
+    <img
+      v-if="src && darkSrc"
+      :src="darkSrc"
+      :alt="alt"
+      loading="lazy"
+      decoding="async"
+      class="hidden size-full dark:block"
       :style="{ objectFit: fit, objectPosition: position }"
     />
     <div
