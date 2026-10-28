@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static',
     prerender: {
-      routes: ['/', '/concierge', '/vibebify', '/agents'],
+      routes: ['/', '/concierge', '/vibebify', '/agent-platform', '/agents'],
       autoSubfolderIndex: false,
     },
   },

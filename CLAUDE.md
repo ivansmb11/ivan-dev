@@ -40,7 +40,7 @@ Every component also runs on the server during `nuxt generate`, where `window`, 
 ```
 app/
 ├── app.vue                      # Root: skip link, intro loader, shortcuts, navbar, <NuxtPage>, agent badge
-├── pages/                       # index (home), concierge, vibebify, agents, [...slug] (redirects home)
+├── pages/                       # index (home), concierge, vibebify, agent-platform, agents, [...slug] (redirects home)
 ├── composables/useTheme.js      # Light default, opt-in dark; toggles html.dark
 ├── motion.js                    # reveal() / enter() variants for v-motion (respect reduced motion)
 ├── content/links.js             # Email, socials, home section ids
@@ -66,7 +66,7 @@ Visual source of truth: a Framer "Personal Portfolio" reference (orange hero, of
 - Tokens live in `app/assets/css/main.css` `@theme`: `paper`, `card`, `mist`, `mist-soft`, `line`, `muted`, `graphite`, `ink` (neutrals), `onyx` (fixed near-black), `ember-deep` / `ember` / `ember-bright` (hero and footer orange), `accent` / `accent-deep`, `night`. Display sizes: `text-display-hero|xl|lg|md`. Utilities: `container-site`, `link-underline`, `placeholder-hatch`.
 - Light is the default. Dark mode is opt-in (navbar toggle, menu, `D` key): `html.dark` overrides only the neutral tokens. To stay dark-safe, use `bg-card` (not `bg-white`) for raised surfaces, `text-paper` on `bg-ink`, and fixed colors (`text-white`, `bg-onyx`, `text-onyx`) only on the orange hero/footer, photos and `bg-night`. No `theme === 'dark'` branches in components.
 - Images are served from the public `assets` bucket of the Supabase project `ivan-dev` (`ctqzhlionfyyhujzzped`), not bundled. `app/assets/bucket.json` lists what's in the bucket; `slotSrc(id)` and `assetUrl(path)` in `app/assets/slots.js` turn it into URLs. After adding or replacing an image (locally in `app/assets/` or straight in the bucket), run `npm run assets:sync` and commit `bucket.json`.
-- Layout images go through `AssetSlot` with an id from `app/assets/slots.js`. Until `images/<id>.<ext>` is in the bucket it renders a labeled placeholder. Vibebify's screenshots and diagram logos use `assetUrl('vibebify/…')` / `assetUrl('logos/…')`. Favicons live under `meta/` in the bucket (copies stay in `public/` for `/favicon.ico`).
+- Layout images go through `AssetSlot` with an id from `app/assets/slots.js`. Until `images/<id>.<ext>` is in the bucket it renders a labeled placeholder. Case-study screenshots use `assetUrl('<page>/…')` (`vibebify/`, `agent-platform/`), diagram logos `assetUrl('logos/…')`. Favicons live under `meta/` in the bucket (copies stay in `public/` for `/favicon.ico`).
 
 ### Animations
 

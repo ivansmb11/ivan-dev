@@ -34,6 +34,15 @@ const projects = computed(() => [
     caseStudy: '/concierge',
   },
   {
+    key: 'agentPlatform',
+    kind: 'framed',
+    slot: 'project-agent-platform',
+    title: 'Agent Platform',
+    description: t('portfolio.agentPlatform'),
+    tags: ['NestJS', 'React 19', 'Vertex AI', 'pgvector', 'RAG', 'Evals'],
+    caseStudy: '/agent-platform',
+  },
+  {
     key: 'soon',
     kind: 'soon',
     title: t('portfolio.comingSoon'),

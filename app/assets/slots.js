@@ -25,6 +25,7 @@ export const slots = {
 
   'project-vibebify': { label: 'Project cover, Vibebify', size: '1600 × 1200' },
   'project-concierge': { label: 'Video poster, VIP Data Concierge', size: '1600 × 1200' },
+  'project-agent-platform': { label: 'Project cover, Agent Platform', size: '1600 × 1200' },
   'project-coming-soon': { label: 'Coming soon card, workbench line drawing', size: '1600 × 1200' },
   'concierge-problem': { label: 'Flat network with one compromised server', size: '900 × 900' },
   'concierge-principle-hub-spoke': { label: 'Full mesh vs hub-and-spoke comparison', size: '1600 × 600' },
