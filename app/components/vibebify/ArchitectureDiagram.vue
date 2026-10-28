@@ -4,12 +4,14 @@ import { X, MoveHorizontal } from 'lucide-vue-next'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import { reveal } from '@/motion'
-import reactLogo from '@/assets/logos/react.svg'
-import supabaseLogo from '@/assets/logos/supabase.svg'
-import postgresLogo from '@/assets/logos/postgres.svg'
-import nextLogo from '@/assets/logos/next.svg'
-import spotifyLogo from '@/assets/logos/spotify.svg'
-import musicbrainzLogo from '@/assets/logos/musicbrainz.svg'
+import { assetUrl } from '@/assets/slots'
+
+const reactLogo = assetUrl('logos/react.svg')
+const supabaseLogo = assetUrl('logos/supabase.svg')
+const postgresLogo = assetUrl('logos/postgres.svg')
+const nextLogo = assetUrl('logos/next.svg')
+const spotifyLogo = assetUrl('logos/spotify.svg')
+const musicbrainzLogo = assetUrl('logos/musicbrainz.svg')
 
 defineProps({
   headingId: { type: String, default: 'vb-arch' },

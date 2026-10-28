@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { assetUrl } from './app/assets/slots'
 
 const fonts = 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap'
 
@@ -31,7 +32,8 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#d2643a' },
       ],
       link: [
-        { rel: 'icon', href: '/favicon.ico' },
+        { rel: 'icon', href: assetUrl('meta/favicon.ico') },
+        { rel: 'apple-touch-icon', href: assetUrl('meta/apple-touch-icon.png') },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'preload', as: 'style', href: fonts },

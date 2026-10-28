@@ -40,3 +40,6 @@ stats.html
 .data
 .nitro
 .cache
+
+# Supabase CLI
+supabase/.temp

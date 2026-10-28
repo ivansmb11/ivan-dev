@@ -7,14 +7,15 @@ import SectionChip from '@/components/ui/SectionChip.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import { enter, reveal } from '@/motion'
+import { assetUrl } from '@/assets/slots'
 
-import landingImg from '@/assets/vibebify/landing.webp'
-import feedImg from '@/assets/vibebify/feed.webp'
-import dnaImg from '@/assets/vibebify/dna.webp'
-import duelsImg from '@/assets/vibebify/duels.webp'
-import statsImg from '@/assets/vibebify/stats.webp'
-import profileImg from '@/assets/vibebify/profile.webp'
-import composeImg from '@/assets/vibebify/compose.webp'
+const landingImg = assetUrl('vibebify/landing.webp')
+const feedImg = assetUrl('vibebify/feed.webp')
+const dnaImg = assetUrl('vibebify/dna.webp')
+const duelsImg = assetUrl('vibebify/duels.webp')
+const statsImg = assetUrl('vibebify/stats.webp')
+const profileImg = assetUrl('vibebify/profile.webp')
+const composeImg = assetUrl('vibebify/compose.webp')
 
 const { t } = useI18n()
 

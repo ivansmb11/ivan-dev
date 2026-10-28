@@ -1,10 +1,8 @@
-// Every image the layout needs. To fill a slot, drop `<id>.<ext>` into app/assets/images/
-// and AssetSlot picks it up on the next build. Until then it renders a labeled placeholder.
-// An optional `<id>-dark.<ext>` is shown instead in dark mode.
-const files = import.meta.glob('./images/*.{png,jpg,jpeg,webp,avif,svg}', {
-  eager: true,
-  import: 'default',
-})
+import bucket from './bucket.json'
+
+// Every image the layout needs. Images are served from the Supabase `assets` bucket: to fill a slot, put
+// `images/<id>.<ext>` in the bucket (or in app/assets/images/) and run `npm run assets:sync`. Until then
+// AssetSlot renders a labeled placeholder. An optional `<id>-dark.<ext>` is shown instead in dark mode.
 
 export const slots = {
   'hero-portrait': { label: 'Hero portrait, transparent cutout', size: '1231 × 1278' },
@@ -31,7 +29,13 @@ export const slots = {
   'contact-backdrop': { label: 'Contact form backdrop', size: '2400 × 1400' },
 }
 
+// The ?v= is the file's ETag, so replacing a file under the same name gets past the CDN cache.
+export function assetUrl(path) {
+  const version = bucket.files[path]
+  return version ? `${bucket.base}/${path}?v=${version}` : null
+}
+
 export function slotSrc(id) {
-  const key = Object.keys(files).find((path) => path.slice('./images/'.length).replace(/\.[^.]+$/, '') === id)
-  return key ? files[key] : null
+  const path = Object.keys(bucket.files).find((p) => p.startsWith('images/') && p.slice(7).replace(/\.[^.]+$/, '') === id)
+  return path ? assetUrl(path) : null
 }
