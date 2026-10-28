@@ -6,7 +6,7 @@ import bucket from './bucket.json'
 
 export const slots = {
   'hero-portrait': { label: 'Hero portrait, transparent cutout', size: '1231 × 1278' },
-  'hero-featured-project': { label: 'Hero featured project card (Vibebify)', size: '1200 × 1400' },
+  'hero-featured-project': { label: 'Hero featured project card (Agent Platform)', size: '1200 × 1400' },
 
   'logo-zazpay': { label: 'ZAZPAY logo, transparent PNG', size: 'max 600 × 160' },
   'logo-prestavale': { label: 'Presta Vale logo, transparent PNG', size: 'max 600 × 160' },
