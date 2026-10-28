@@ -40,7 +40,7 @@ Website: https://ivanmendoza.dev
 
 ## Summary
 
-AI Engineer at a Mexican BNPL and commercial-lending fintech, building AI agents, MCP servers and LLM tooling for engineering and financial operations. Also leads mobile and frontend with a team of two, owning the mobile and frontend architecture while contributing across the full stack. Focused on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
+AI Engineer at a Mexican BNPL and commercial-lending fintech, building AI agents, MCP servers and LLM tooling for engineering and financial operations. Also owns the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating (1.2K+ reviews), including the KYC onboarding flow and the provider integrations that approve applicants and catch fraud. Focused on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
 
 ---
 
@@ -57,13 +57,13 @@ Elected student council leader for the Engineering program.
 ### v3.1 | ZAZPAY | AI Engineer (Full-time)
 Period: Aug 2026 - Present
 Location: Mexico City, Mexico | On-site
-Description: Build AI agents and LLM tooling for a BNPL fintech: the core MCP servers our developers use, MCP servers that audit every financial operation, and agents that take on engineering tasks inside the codebase. Onboarded the company's main AI providers. Still lead mobile and frontend, managing a team of two.
+Description: Build AI agents and LLM tooling for a BNPL fintech: the core MCP servers our developers use, MCP servers that audit every financial operation, and agents that take on engineering tasks inside the codebase. Onboarded the company's main AI providers. Still own the mobile and frontend architecture.
 Skills: Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes
 
 ### v3.0 | ZAZPAY | Lead Software Engineer (Full-time)
 Period: Jun 2023 - Aug 2026 (3 yrs 3 mos)
 Location: Mexico City Metropolitan Area | Hybrid
-Description: Led mobile and frontend engineering, owning the Expo codebase and shipping releases across Play Store, App Store, and App Gallery. Drove engineering process improvements, championed AI-assisted development (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
+Description: Owned the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating from 1.2K+ reviews, shipping releases across Play Store, App Store, and App Gallery. Designed the KYC onboarding flow and the integrations with verification and risk providers that approve applicants and catch fraud. Drove engineering process improvements, championed AI-assisted development (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
 Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD
 
 ### v2.0 | PRESTA VALE | Software Engineer (Full-time)

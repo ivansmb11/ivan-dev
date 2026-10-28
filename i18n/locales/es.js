@@ -34,14 +34,14 @@ export default {
     headingRest: "del móvil a la plataforma",
     roleCardText: "Construyo agentes de IA, servidores MCP y herramientas con LLMs, con enfoque en agentic coding y productividad del desarrollador.",
     statsLabel: "En números",
-    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial, donde construyo agentes de IA, servidores MCP y herramientas con LLMs para ingeniería y operaciones financieras. También lidero mobile y frontend con un equipo de dos personas, desde publicaciones en tres app stores hasta servicios backend en GCP.",
+    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial, donde construyo agentes de IA, servidores MCP y herramientas con LLMs para ingeniería y operaciones financieras. También soy responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas entre Google Play y App Store, incluyendo el flujo de onboarding KYC y las integraciones con proveedores que aprueban solicitantes y detectan fraude.",
     bio2: "Más allá de escribir código, me enfoco en elevar cómo trabajan los equipos de ingeniería: mejorando procesos, elevando estándares de calidad de código e impulsando la adopción de herramientas de desarrollo asistido por IA. Previamente en General Electric Aerospace, donde construí servicios backend en Spring Boot y Java.",
     education: "Educación",
     educationText:
       "Ingeniería en Tecnologías de la Información y Negocios Digitales en la Universidad Anáhuac, Querétaro. Líder electo del consejo estudiantil del programa de Ingeniería.",
     experience: "Experiencia",
     experienceText:
-      "AI Engineer en ZAZPAY, una fintech BNPL, construyendo agentes y servidores MCP mientras lidero mobile y frontend con un equipo de dos personas.",
+      "AI Engineer en ZAZPAY, una fintech BNPL, construyendo agentes y servidores MCP, y responsable de la app móvil con más de 120 mil descargas entre Google Play y App Store.",
     location: "Ubicación",
     locationText:
       "Originario de Sinaloa, México. Actualmente en la Ciudad de México.",
@@ -88,7 +88,7 @@ export default {
       location: "Ciudad de México, México",
       mode: "Presencial",
       description:
-        "Construyo agentes de IA y herramientas con LLMs para una fintech BNPL: los servidores MCP principales que usan nuestros desarrolladores, servidores MCP que auditan todas las operaciones financieras y agentes que resuelven tareas de ingeniería dentro del código. Hice el onboarding de los principales proveedores de IA de la empresa. Sigo liderando mobile y frontend con un equipo de dos personas.",
+        "Construyo agentes de IA y herramientas con LLMs para una fintech BNPL: los servidores MCP principales que usan nuestros desarrolladores, servidores MCP que auditan todas las operaciones financieras y agentes que resuelven tareas de ingeniería dentro del código. Hice el onboarding de los principales proveedores de IA de la empresa. Sigo a cargo de la arquitectura móvil y frontend.",
       skills: "Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes",
       previous: {
         role: "Lead Software Engineer",
@@ -96,7 +96,7 @@ export default {
         duration: "3 años 3 meses",
         mode: "Híbrido",
         description:
-          "Lead Engineer de arquitectura Mobile y Frontend, gestionando el código base en Expo y publicando versiones en Play Store, App Store y App Gallery. Impulsé mejoras en procesos de ingeniería como colíder del equipo, promoví la adopción temprana de desarrollo asistido por IA (Cursor, Claude Code) y representé al equipo en el AI Engineer Code Summit en NYC.",
+          "Responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas (100 mil en Google Play y 20 mil en App Store) y 4.8 estrellas en App Store con más de 1.2 mil calificaciones, publicando versiones en Play Store, App Store y App Gallery. Diseñé el flujo de onboarding KYC y las integraciones con proveedores de verificación y riesgo que aprueban solicitantes y detectan fraude. Impulsé mejoras en procesos de ingeniería, promoví la adopción temprana de desarrollo asistido por IA (Cursor, Claude Code) y representé al equipo en el AI Engineer Code Summit en NYC.",
         skills: "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD",
       },
     },
