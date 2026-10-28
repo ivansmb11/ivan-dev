@@ -2,7 +2,6 @@
 import { computed } from 'vue'
 import { ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
-import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import { slotSrc } from '@/assets/slots'
@@ -57,14 +56,6 @@ const achievements = computed(() => [
     date: t('achievements.gcloud.date'),
     url: 'https://www.skills.google/public_profiles/63a74ab3-4ba1-4a97-bcdc-83f0efdb5d28',
     linkLabel: t('achievements.gcloud.linkLabel'),
-    // Badge names stay in English in both languages: they are Google's course titles.
-    badges: [
-      'Elastic Google Cloud Infrastructure: Scaling and Automation',
-      'Essential Google Cloud Infrastructure: Core Services',
-      'Google Cloud Fundamentals: Core Infrastructure',
-      'Google Cloud Computing Foundations: Infrastructure in Google Cloud',
-      'Google Cloud Computing Foundations: Cloud Computing Fundamentals',
-    ],
   },
 ])
 </script>
@@ -126,11 +117,6 @@ const achievements = computed(() => [
                 <Hash :size="13" aria-hidden="true" />{{ item.credential }}
               </span>
             </p>
-            <ul v-if="item.badges" class="mt-4 flex flex-col gap-1.5 text-[13px] leading-snug text-graphite">
-              <li v-for="badge in item.badges" :key="badge" class="flex gap-2">
-                <AsteriskMark class="mt-[3px] size-2.5 shrink-0 text-accent" :weight="2.4" />{{ badge }}
-              </li>
-            </ul>
           </div>
 
           <div v-if="item.url" class="mt-6 flex items-end">

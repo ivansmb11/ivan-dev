@@ -123,12 +123,6 @@ Verify: https://wallet.xertify.co/certificates/7CC14A8DA001
 ### Google Cloud Skill Badges
 Issuer: Google Skills (5 badges, Gold League)
 Date: 2022 - 2026
-Badges:
-- Elastic Google Cloud Infrastructure: Scaling and Automation (May 2026)
-- Essential Google Cloud Infrastructure: Core Services (Mar 2026)
-- Google Cloud Fundamentals: Core Infrastructure (Mar 2026)
-- Google Cloud Computing Foundations: Infrastructure in Google Cloud (Oct 2022)
-- Google Cloud Computing Foundations: Cloud Computing Fundamentals (Sep 2022)
 Profile: https://www.skills.google/public_profiles/63a74ab3-4ba1-4a97-bcdc-83f0efdb5d28
 
 ---
