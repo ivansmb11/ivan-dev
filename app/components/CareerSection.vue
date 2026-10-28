@@ -1,14 +1,12 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { ArrowUp, Plus } from 'lucide-vue-next'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { ArrowRight } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
-// The earlier role starts collapsed so the ZAZPAY card stays as tall as its neighbours.
-const previousOpen = ref(false)
 
 const jobs = computed(() => [
   {
@@ -25,11 +23,13 @@ const jobs = computed(() => [
     current: true,
     previous: {
       role: t('career.zazpay.previous.role'),
+      company: t('career.zazpay.company'),
+      type: t('career.zazpay.type'),
       period: t('career.zazpay.previous.period'),
       duration: t('career.zazpay.previous.duration'),
       mode: t('career.zazpay.previous.mode'),
       description: t('career.zazpay.previous.description'),
-      skills: t('career.zazpay.previous.skills'),
+      skills: t('career.zazpay.previous.skills').split(', '),
     },
   },
   {
@@ -61,6 +61,37 @@ const jobs = computed(() => [
     current: false,
   },
 ])
+
+// The ZAZPAY card is a cube: the current role on the front face, the earlier one on the side face.
+const turned = ref(false)
+const faceEls = ref([])
+const faceHeights = ref([])
+let hoverLocked = false
+let lastPointer = ''
+let observer
+
+// Hover turns the cube once per visit, so the face that comes in can't turn it straight back.
+function onArrowEnter(event) {
+  if (event.pointerType !== 'mouse' || hoverLocked) return
+  hoverLocked = true
+  turned.value = !turned.value
+}
+function onArrowLeave() {
+  hoverLocked = false
+}
+// Mouse users already turned it on hover; taps and the keyboard turn it on click.
+function onArrowClick() {
+  if (lastPointer !== 'mouse') turned.value = !turned.value
+  lastPointer = ''
+}
+
+onMounted(() => {
+  observer = new ResizeObserver(() => {
+    faceHeights.value = faceEls.value.map((el) => el.offsetHeight)
+  })
+  faceEls.value.forEach((el) => observer.observe(el))
+})
+onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
@@ -85,7 +116,10 @@ const jobs = computed(() => [
           v-for="(job, i) in jobs"
           :key="job.key"
           v-motion="reveal(i * 120)"
-          class="flex flex-col md:row-span-6 md:grid md:grid-cols-1 md:grid-rows-subgrid md:gap-y-0"
+          class="flex flex-col md:row-span-6"
+          :class="job.previous
+            ? 'relative z-10 md:block md:h-0 md:min-h-0'
+            : 'md:grid md:grid-cols-1 md:grid-rows-subgrid md:gap-y-0'"
         >
           <AssetSlot
             :id="job.slot"
@@ -93,34 +127,123 @@ const jobs = computed(() => [
             class="aspect-[4/3] w-full rounded-[3px]"
           />
 
-          <div class="mt-6 flex items-center justify-between gap-3 text-[13px] text-graphite">
-            <p>
-              {{ job.period }}<template v-if="job.duration"> · {{ job.duration }}</template>
-            </p>
-            <span
-              v-if="job.current"
-              class="shrink-0 rounded-[2px] bg-accent-deep px-2 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-white"
-            >{{ t('career.present') }}</span>
+          <!-- Zero height on md+ keeps the turning cube out of the shared row sizing, so the neighbours never shift. -->
+          <div
+            v-if="job.previous"
+            class="relative mt-6 [container-type:inline-size] [perspective:1800px] transition-[height] duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+            :style="faceHeights.length ? { height: `${faceHeights[turned ? 1 : 0]}px` } : undefined"
+          >
+            <button
+              type="button"
+              :aria-pressed="turned"
+              class="group absolute top-0 right-0 z-10 inline-flex items-center gap-1.5 rounded-[2px] border border-line bg-paper px-2 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-graphite transition-colors duration-300 hover:border-accent hover:text-accent"
+              @pointerenter="onArrowEnter"
+              @pointerleave="onArrowLeave"
+              @pointerdown="lastPointer = $event.pointerType"
+              @click="onArrowClick"
+            >
+              <span class="relative grid">
+                <span
+                  class="col-start-1 row-start-1 transition-opacity duration-500"
+                  :class="turned ? 'opacity-0' : 'opacity-100'"
+                  :aria-hidden="turned"
+                >{{ t('career.showPrevious') }}</span>
+                <span
+                  class="col-start-1 row-start-1 text-right transition-opacity duration-500"
+                  :class="turned ? 'opacity-100' : 'opacity-0'"
+                  :aria-hidden="!turned"
+                >{{ t('career.showCurrent') }}</span>
+              </span>
+              <ArrowRight
+                :size="13"
+                :stroke-width="2.25"
+                aria-hidden="true"
+                class="transition-transform duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+                :class="turned ? '-scale-x-100' : ''"
+              />
+            </button>
+
+            <div
+              class="relative [transform-style:preserve-3d] transition-transform duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+              :style="{ transform: `translateZ(-50cqw) rotateY(${turned ? -90 : 0}deg)` }"
+            >
+              <div
+                v-for="(face, f) in [job, job.previous]"
+                :key="f"
+                ref="faceEls"
+                class="bg-paper [backface-visibility:hidden]"
+                :class="f === 0 ? 'relative' : 'absolute inset-x-0 top-0'"
+                :style="{ transform: `rotateY(${f * 90}deg) translateZ(50cqw)` }"
+                :inert="(f === 1) !== turned"
+                :aria-hidden="(f === 1) !== turned"
+              >
+                <div class="flex min-h-[22px] items-center gap-3 pr-36 text-[13px] text-graphite">
+                  <p>
+                    {{ face.period }}<template v-if="face.duration"> · <span class="whitespace-nowrap">{{ face.duration }}</span></template>
+                  </p>
+                  <span
+                    v-if="f === 0"
+                    class="shrink-0 rounded-[2px] bg-accent-deep px-2 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-white"
+                  >{{ t('career.present') }}</span>
+                </div>
+
+                <h3 class="mt-3 font-display text-xl font-bold uppercase leading-[1.05] tracking-[-0.03em] lg:text-2xl">
+                  {{ face.role }}
+                </h3>
+
+                <div class="mt-3 text-sm">
+                  <p>
+                    <span class="font-semibold">{{ face.company }}</span>
+                    <span class="text-graphite"> · {{ face.type }}</span>
+                  </p>
+                  <p v-if="face.location || face.mode" class="mt-0.5 text-graphite">
+                    {{ [face.location, face.mode].filter(Boolean).join(' · ') }}
+                  </p>
+                </div>
+
+                <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ face.description }}</p>
+
+                <ul class="mt-5 flex flex-wrap content-start gap-1.5">
+                  <li
+                    v-for="skill in face.skills"
+                    :key="skill"
+                    class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+                  >{{ skill }}</li>
+                </ul>
+
+                <!-- Fades the face that is turning away, which is what sells the depth. -->
+                <span
+                  aria-hidden="true"
+                  class="pointer-events-none absolute inset-0 bg-paper transition-opacity duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
+                  :class="(f === 1) === turned ? 'opacity-0' : 'opacity-70'"
+                />
+              </div>
+            </div>
           </div>
 
-          <h3 class="mt-3 font-display text-xl font-bold uppercase leading-[1.05] tracking-[-0.03em] lg:text-2xl">
-            {{ job.role }}
-          </h3>
+          <template v-else>
+            <div class="mt-6 flex items-center justify-between gap-3 text-[13px] text-graphite">
+              <p>
+                {{ job.period }}<template v-if="job.duration"> · {{ job.duration }}</template>
+              </p>
+            </div>
 
-          <div class="mt-3 text-sm">
-            <p>
-              <span class="font-semibold">{{ job.company }}</span>
-              <span class="text-graphite"> · {{ job.type }}</span>
-            </p>
-            <p v-if="job.location || job.mode" class="mt-0.5 text-graphite">
-              {{ [job.location, job.mode].filter(Boolean).join(' · ') }}
-            </p>
-          </div>
+            <h3 class="mt-3 font-display text-xl font-bold uppercase leading-[1.05] tracking-[-0.03em] lg:text-2xl">
+              {{ job.role }}
+            </h3>
 
-          <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.description }}</p>
+            <div class="mt-3 text-sm">
+              <p>
+                <span class="font-semibold">{{ job.company }}</span>
+                <span class="text-graphite"> · {{ job.type }}</span>
+              </p>
+              <p v-if="job.location || job.mode" class="mt-0.5 text-graphite">
+                {{ [job.location, job.mode].filter(Boolean).join(' · ') }}
+              </p>
+            </div>
 
-          <!-- One wrapper so an earlier role at the same company stays inside the card's last subgrid row. -->
-          <div>
+            <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.description }}</p>
+
             <ul class="mt-5 flex flex-wrap content-start gap-1.5">
               <li
                 v-for="skill in job.skills"
@@ -128,46 +251,7 @@ const jobs = computed(() => [
                 class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
               >{{ skill }}</li>
             </ul>
-
-            <div v-if="job.previous" class="mt-8 border-t border-line pt-5">
-              <p class="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.04em] text-accent">
-                <ArrowUp :size="12" :stroke-width="2.5" aria-hidden="true" />{{ t('career.promotedFrom') }}
-              </p>
-              <button
-                type="button"
-                :aria-expanded="previousOpen"
-                :aria-controls="`${job.key}-previous`"
-                class="group mt-2 flex w-full items-start justify-between gap-4 text-left"
-                @click="previousOpen = !previousOpen"
-              >
-                <span>
-                  <span class="block text-base font-bold uppercase leading-[1.1] tracking-[-0.02em]">{{ job.previous.role }}</span>
-                  <span class="mt-1 block text-[13px] text-graphite">
-                    {{ [`${job.previous.period} · ${job.previous.duration}`, job.previous.mode].join(' · ') }}
-                  </span>
-                  <span class="sr-only">{{ t('career.previousDetails') }}</span>
-                </span>
-                <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-graphite transition-colors duration-300 group-hover:border-accent group-hover:text-accent">
-                  <Plus
-                    :size="16"
-                    aria-hidden="true"
-                    class="transition-transform duration-500 ease-out-quint motion-reduce:transition-none"
-                    :class="previousOpen ? 'rotate-45' : ''"
-                  />
-                </span>
-              </button>
-              <div
-                :id="`${job.key}-previous`"
-                class="grid transition-[grid-template-rows] duration-500 ease-out-quint motion-reduce:transition-none"
-                :class="previousOpen ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
-              >
-                <div class="overflow-hidden" :inert="!previousOpen">
-                  <p class="mt-3 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.previous.description }}</p>
-                  <p class="mt-3 text-[12px] leading-relaxed text-graphite">{{ job.previous.skills }}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          </template>
         </li>
       </ol>
     </div>
