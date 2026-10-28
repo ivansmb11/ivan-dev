@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { Shield, Network, Brain, Lock, Plus } from 'lucide-vue-next'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import AssetSlot from '@/components/ui/AssetSlot.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
@@ -14,7 +15,7 @@ function toggleCard(id) {
 
 const principles = [
   { id: 'zeroTrust', icon: Shield },
-  { id: 'hubSpoke', icon: Network },
+  { id: 'hubSpoke', icon: Network, figure: 'concierge-principle-hub-spoke' },
   { id: 'identityRouting', icon: Brain },
   { id: 'psc', icon: Lock },
 ]
@@ -47,9 +48,17 @@ const pad = (n) => String(n).padStart(2, '0')
       v-motion="reveal()"
       class="grid grid-cols-1 gap-6 rounded-[3px] bg-mist p-6 sm:p-8 md:p-10 lg:grid-cols-12 lg:gap-6 lg:p-12"
     >
-      <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.02em] lg:col-span-3 lg:items-start">
-        <AsteriskMark class="size-3.5 shrink-0 text-accent lg:mt-0.5" />{{ t('concierge.problemTitle') }}
-      </h3>
+      <div class="flex flex-col justify-between gap-8 lg:col-span-3">
+        <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.02em] lg:items-start">
+          <AsteriskMark class="size-3.5 shrink-0 text-accent lg:mt-0.5" />{{ t('concierge.problemTitle') }}
+        </h3>
+        <!-- Blending drops the image's own gray background into the card's, in both themes. -->
+        <AssetSlot
+          id="concierge-problem"
+          class="hidden aspect-square w-full max-w-60 mix-blend-multiply lg:block dark:mix-blend-lighten"
+          fit="contain"
+        />
+      </div>
       <p class="text-lg leading-[1.45] font-medium tracking-[-0.01em] text-ink md:text-2xl md:leading-[1.4] lg:col-span-9">
         {{ t('concierge.problemText') }}
       </p>
@@ -114,6 +123,13 @@ const pad = (n) => String(n).padStart(2, '0')
               role="region"
               :aria-labelledby="`principle-${p.id}-toggle`"
             >
+              <AssetSlot
+                v-if="p.figure"
+                :id="p.figure"
+                :alt="t(`concierge.${p.id}.figureAlt`)"
+                class="mx-4 mb-2 aspect-[8/3] border-t border-line pt-6 mix-blend-multiply sm:mx-6 dark:mix-blend-lighten"
+                fit="contain"
+              />
               <dl class="mx-4 grid grid-cols-1 gap-6 border-t border-line pt-6 pb-6 sm:mx-6 md:grid-cols-3 md:gap-8 md:pb-8">
                 <div v-for="d in details" :key="d.key">
                   <dt class="text-xs font-semibold uppercase tracking-[0.02em] text-ink">{{ t(d.labelKey, d.fallback) }}</dt>

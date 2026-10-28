@@ -25,6 +25,15 @@ export const slots = {
 
   'project-vibebify': { label: 'Project cover, Vibebify', size: '1600 × 1200' },
   'project-concierge': { label: 'Video poster, VIP Data Concierge', size: '1600 × 1200' },
+  'project-coming-soon': { label: 'Coming soon card, workbench line drawing', size: '1600 × 1200' },
+  'concierge-problem': { label: 'Flat network with one compromised server', size: '900 × 900' },
+  'concierge-principle-hub-spoke': { label: 'Full mesh vs hub-and-spoke comparison', size: '1600 × 600' },
+  'concierge-hero': { label: 'Concierge page hero, hub-and-spoke illustration', size: '1659 × 948' },
+
+  'about-location-map': { label: 'Line map of Mexico, Sinaloa to CDMX, transparent', size: '1000 × 626' },
+  'contact-map-cdmx': { label: 'Line street map of central CDMX, transparent', size: '1000 × 626' },
+  'achievement-stamp': { label: 'Decorative stamp with asterisk, transparent', size: '600 × 600' },
+  'vibebify-receipt': { label: 'Receipt cutout with lightning sticker, transparent', size: '600 × 1451' },
 
   'contact-backdrop': { label: 'Contact form backdrop', size: '2400 × 1400' },
 }

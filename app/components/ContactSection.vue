@@ -68,9 +68,15 @@ function submit() {
           <div
             v-for="card in cards"
             :key="card.key"
-            class="flex min-w-0 flex-col justify-between gap-6 rounded-[3px] bg-mist p-3.5 sm:aspect-[16/11] sm:p-5 lg:aspect-[16/15]"
+            class="relative isolate flex min-w-0 flex-col justify-between gap-6 overflow-hidden rounded-[3px] bg-mist p-3.5 sm:aspect-[16/11] sm:p-5 lg:aspect-[16/15]"
             :class="card.wide ? 'col-span-2 min-h-32 sm:col-span-1' : 'aspect-[16/15]'"
           >
+            <AssetSlot
+              v-if="card.key === 'location'"
+              id="contact-map-cdmx"
+              class="absolute inset-0 -z-10 opacity-35"
+              position="70% 45%"
+            />
             <dt class="flex items-center justify-between gap-2 text-[13px] text-graphite sm:text-sm">
               {{ t(card.label) }}
               <span v-if="card.key === 'status'" aria-hidden="true" class="relative flex size-2">

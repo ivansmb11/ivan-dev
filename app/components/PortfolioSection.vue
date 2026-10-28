@@ -114,12 +114,12 @@ const projects = computed(() => [
 
           <div
             v-else
-            class="relative flex aspect-[4/3] flex-col items-center justify-center gap-4 rounded-md border border-dashed border-muted/60 p-8 text-center md:aspect-auto"
+            class="relative isolate flex aspect-[4/3] flex-col items-center justify-start gap-4 overflow-hidden rounded-md border border-dashed border-muted/60 p-8 pt-14 text-center md:pt-20"
           >
+            <AssetSlot id="project-coming-soon" class="absolute inset-0 -z-10" position="bottom" />
             <span class="absolute top-4 left-4 rounded-[2px] bg-mist px-2 py-1 text-[11px] font-medium uppercase leading-none tracking-[0.02em] text-graphite">
               {{ project.tags[0] }}
             </span>
-            <AsteriskMark class="size-20 text-line md:size-28" :weight="1.2" />
             <h3 class="font-display text-2xl font-bold uppercase leading-none tracking-[-0.035em] md:text-[1.75rem]">
               {{ project.title }}
             </h3>

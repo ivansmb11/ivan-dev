@@ -138,11 +138,10 @@ export default {
       credential: "7CC14A8DA001",
     },
     gcloud: {
-      title:
-        "Google Cloud Computing Foundations: Fundamentos de Computación en la Nube",
-      issuer: "Google Cloud Skills Boost",
-      date: "Sep 2022",
-      credential: "2619947",
+      title: "Badges de Google Cloud",
+      issuer: "Google Skills · 5 badges · Liga Oro",
+      date: "2022 - 2026",
+      linkLabel: "Ver todas mis badges en Google Skills",
     },
     nyc2026: {
       title: "AI Engineer New York",
@@ -191,6 +190,7 @@ export default {
   concierge: {
     badge: 'Demo en Vivo',
     title: 'VIP Data Concierge',
+    heroAlt: 'Un agente de IA central conectado a dos bóvedas aisladas que no pueden comunicarse entre sí',
     subtitle: 'Un Agente de IA con Zero-Trust que enruta consultas a bases de datos aisladas según la identidad del usuario. Construido en GCP con redes Hub-and-Spoke, Private Service Connect y Vertex AI.',
     back: 'Volver al Portafolio',
     viewSource: 'Ver Código Fuente',
@@ -210,6 +210,7 @@ export default {
     },
     hubSpoke: {
       title: 'Topología Hub-and-Spoke',
+      figureAlt: 'Izquierda: cada red conectada con todas las demás en una malla densa. Derecha: las mismas redes conectadas una sola vez a un hub central.',
       why: 'La alternativa es VPC Peering: un enlace directo entre cada par de redes. Con 3 VPCs necesitas 3 peerings. Con 10, necesitas 45. Con 50, necesitas 1,225. No escala, y el peering no soporta enrutamiento transitivo: si A tiene peering con B y B con C, A aún no puede alcanzar C.',
       how: 'Network Connectivity Center (NCC) actúa como router central. Cada VPC se registra como "spoke" y el hub intercambia rutas automáticamente entre todos vía BGP. Agregar un nuevo departamento es un solo comando, no una matriz de conexiones de peering.',
       useCases: 'Redes empresariales conectando oficinas regionales, configuraciones multi-cloud uniendo AWS y GCP, empresas de gaming aislando servidores por región mientras comparten un servicio central de matchmaking.',

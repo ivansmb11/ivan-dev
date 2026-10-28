@@ -6,8 +6,16 @@ import PageHeader from '@/components/ui/PageHeader.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import AssetSlot from '@/components/ui/AssetSlot.vue'
 import { enter, reveal } from '@/motion'
 import { assetUrl } from '@/assets/slots'
+
+useSeoMeta({
+  ogUrl: 'https://ivanmendoza.dev/vibebify',
+  ogImage: assetUrl('meta/og-vibebify.jpg'),
+  ogImageAlt: 'Vibebify, music social app',
+  twitterImage: assetUrl('meta/og-vibebify.jpg'),
+})
 
 const landingImg = assetUrl('vibebify/landing.webp')
 const feedImg = assetUrl('vibebify/feed.webp')
@@ -129,7 +137,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
           <h2 id="vb-origin">
             <SectionChip class="bg-card! text-ink!">{{ t('vibebify.inspirationLabel') }}</SectionChip>
           </h2>
-          <AsteriskMark class="hidden size-24 text-muted/45 lg:block" :weight="1.1" />
+          <AssetSlot id="vibebify-receipt" class="hidden aspect-[2/3] w-full max-w-52 lg:block dark:mix-blend-lighten" fit="contain" />
         </div>
         <p class="max-w-[46rem] text-lg leading-[1.55] font-medium tracking-[-0.01em] text-ink md:text-[1.375rem] lg:col-span-8">
           {{ t('vibebify.inspirationText') }}<a

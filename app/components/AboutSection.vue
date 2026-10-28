@@ -169,6 +169,12 @@ function toContact() {
             <component :is="item.icon" :size="22" :stroke-width="1.75" class="shrink-0 text-accent" aria-hidden="true" />
             <h3 class="mt-7 text-[15px] font-semibold uppercase tracking-[0.01em] text-ink">{{ item.title }}</h3>
             <p class="mt-2.5 text-sm leading-relaxed text-graphite">{{ item.text }}</p>
+            <AssetSlot
+              v-if="item.key === 'location'"
+              id="about-location-map"
+              class="mt-auto aspect-[1000/626] w-full pt-6"
+              fit="contain"
+            />
           </div>
         </div>
       </div>

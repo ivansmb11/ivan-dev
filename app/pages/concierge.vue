@@ -8,9 +8,21 @@ import PageHeader from '@/components/ui/PageHeader.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
+import AssetSlot from '@/components/ui/AssetSlot.vue'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import { enter, reveal } from '@/motion'
+import { assetUrl } from '@/assets/slots'
 
 const { t } = useI18n()
+
+useSeoMeta({
+  ogUrl: 'https://ivanmendoza.dev/concierge',
+  ogImage: assetUrl('meta/og-concierge.jpg'),
+  ogImageAlt: 'VIP Data Concierge, zero-trust AI agent',
+  twitterImage: assetUrl('meta/og-concierge.jpg'),
+})
+
+const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
 
 const REPO_URL = 'https://github.com/ivansmb11/vip-data-concierge'
 const portfolioRoute = { path: '/', hash: '#portfolio' }
@@ -103,6 +115,23 @@ function scrollToSection(id) {
         </nav>
       </div>
     </header>
+
+    <div class="container-site mt-12 mb-20 md:mt-16 md:mb-28">
+      <figure v-motion="enter(400)" class="bg-card p-2 md:p-3" :class="frameShadow">
+        <AssetSlot
+          id="concierge-hero"
+          :alt="t('concierge.heroAlt')"
+          class="aspect-[1659/948] bg-mist"
+          eager
+        />
+        <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+          <span class="flex items-center gap-1.5 uppercase text-ink">
+            <AsteriskMark class="size-3 text-accent" />VIP Data Concierge
+          </span>
+          <span class="truncate">/github.com/ivansmb11/vip-data-concierge</span>
+        </figcaption>
+      </figure>
+    </div>
 
     <section
       v-for="section in sections"

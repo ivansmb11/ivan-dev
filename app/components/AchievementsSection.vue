@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
+import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import { slotSrc } from '@/assets/slots'
@@ -54,8 +55,16 @@ const achievements = computed(() => [
     title: t('achievements.gcloud.title'),
     issuer: t('achievements.gcloud.issuer'),
     date: t('achievements.gcloud.date'),
-    credential: t('achievements.gcloud.credential'),
     url: 'https://www.skills.google/public_profiles/63a74ab3-4ba1-4a97-bcdc-83f0efdb5d28',
+    linkLabel: t('achievements.gcloud.linkLabel'),
+    // Badge names stay in English in both languages: they are Google's course titles.
+    badges: [
+      'Elastic Google Cloud Infrastructure: Scaling and Automation',
+      'Essential Google Cloud Infrastructure: Core Services',
+      'Google Cloud Fundamentals: Core Infrastructure',
+      'Google Cloud Computing Foundations: Infrastructure in Google Cloud',
+      'Google Cloud Computing Foundations: Cloud Computing Fundamentals',
+    ],
   },
 ])
 </script>
@@ -80,8 +89,13 @@ const achievements = computed(() => [
           v-for="(item, i) in achievements"
           :key="item.key"
           v-motion="reveal(i * 120)"
-          class="group flex flex-col rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:nth-[n+3]:mt-6 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
+          class="group relative isolate flex flex-col overflow-hidden rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:nth-[n+3]:mt-6 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
         >
+          <AssetSlot
+            id="achievement-stamp"
+            class="pointer-events-none absolute -right-8 -bottom-8 -z-10 size-36 rotate-12 opacity-15 transition-opacity duration-500 group-hover:opacity-30 md:size-44"
+            fit="contain"
+          />
           <div class="flex items-start justify-between gap-4">
             <AssetSlot
               :id="item.slot"
@@ -112,6 +126,11 @@ const achievements = computed(() => [
                 <Hash :size="13" aria-hidden="true" />{{ item.credential }}
               </span>
             </p>
+            <ul v-if="item.badges" class="mt-4 flex flex-col gap-1.5 text-[13px] leading-snug text-graphite">
+              <li v-for="badge in item.badges" :key="badge" class="flex gap-2">
+                <AsteriskMark class="mt-[3px] size-2.5 shrink-0 text-accent" :weight="2.4" />{{ badge }}
+              </li>
+            </ul>
           </div>
 
           <div v-if="item.url" class="mt-6 flex items-end">
@@ -121,7 +140,7 @@ const achievements = computed(() => [
               rel="noopener noreferrer"
               class="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm font-medium uppercase tracking-[0.01em]"
             >
-              <span class="link-underline group-hover/link:bg-[length:100%_1px]">{{ t('achievements.verify') }}</span>
+              <span class="link-underline group-hover/link:bg-[length:100%_1px]">{{ item.linkLabel ?? t('achievements.verify') }}</span>
               <ArrowUpRight :size="16" :stroke-width="2" aria-hidden="true" class="transition-[color,translate] duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-accent" />
               <span class="sr-only">: {{ item.title }}</span>
             </a>

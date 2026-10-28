@@ -1,6 +1,10 @@
 import tailwindcss from '@tailwindcss/vite'
 import { assetUrl } from './app/assets/slots'
 
+const title = 'Ivan Mendoza | AI Engineer | Mobile & Frontend Lead'
+const description =
+  'AI Engineer and Mobile & Frontend Lead building fintech products, from AI agents and MCP servers to mobile apps and scalable platforms.'
+
 const fonts = 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap'
 
 // Runs before first paint. Old hash-router links (/#/concierge) jump to the real page before anything
@@ -23,17 +27,28 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
-      title: 'Ivan Mendoza | AI Engineer | Mobile & Frontend Lead',
+      title,
       meta: [
-        {
-          name: 'description',
-          content: 'AI Engineer and Mobile & Frontend Lead building fintech products, from AI agents and MCP servers to mobile apps and scalable platforms.',
-        },
+        { name: 'description', content: description },
         { name: 'theme-color', content: '#d2643a' },
+        // Link previews (LinkedIn, X, Slack). The bucket URL is absolute, which og:image requires.
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'Ivan Mendoza' },
+        { property: 'og:url', content: 'https://ivanmendoza.dev/' },
+        { property: 'og:title', content: title },
+        { property: 'og:description', content: description },
+        { property: 'og:image', content: assetUrl('meta/og-home.jpg') },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:image:alt', content: 'Ivan Mendoza, AI Engineer, Mobile & Frontend Lead' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:image', content: assetUrl('meta/og-home.jpg') },
       ],
       link: [
         { rel: 'icon', href: assetUrl('meta/favicon.ico') },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: assetUrl('meta/favicon-32x32.png') },
         { rel: 'apple-touch-icon', href: assetUrl('meta/apple-touch-icon.png') },
+        { rel: 'manifest', href: '/site.webmanifest' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         { rel: 'preload', as: 'style', href: fonts },

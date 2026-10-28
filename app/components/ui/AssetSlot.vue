@@ -50,7 +50,7 @@ const tones = {
       :style="{ objectFit: fit, objectPosition: position }"
     />
     <div
-      v-else
+      v-if="!src"
       :role="alt ? 'img' : undefined"
       :aria-label="alt ? `${alt} (image placeholder)` : undefined"
       :aria-hidden="alt ? undefined : 'true'"

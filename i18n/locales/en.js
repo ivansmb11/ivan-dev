@@ -127,10 +127,10 @@ export default {
       credential: '7CC14A8DA001',
     },
     gcloud: {
-      title: 'Google Cloud Computing Foundations: Cloud Computing Fundamentals',
-      issuer: 'Google Cloud Skills Boost',
-      date: 'Sep 2022',
-      credential: '2619947',
+      title: 'Google Cloud Skill Badges',
+      issuer: 'Google Skills · 5 badges · Gold League',
+      date: '2022 - 2026',
+      linkLabel: 'See all my badges on Google Skills',
     },
     nyc2026: {
       title: 'AI Engineer New York',
@@ -179,6 +179,7 @@ export default {
   concierge: {
     badge: 'Live Demo',
     title: 'VIP Data Concierge',
+    heroAlt: 'A central AI agent hub connected to two isolated vaults that cannot reach each other',
     subtitle: 'A Zero-Trust AI Agent that routes queries to isolated databases based on user identity. Built on GCP with Hub-and-Spoke networking, Private Service Connect, and Vertex AI.',
     back: 'Back to Portfolio',
     viewSource: 'View Source Code',
@@ -198,6 +199,7 @@ export default {
     },
     hubSpoke: {
       title: 'Hub-and-Spoke Topology',
+      figureAlt: 'Left: every network peered with every other in a dense mesh. Right: the same networks each linked once to a central hub.',
       why: 'The alternative is VPC Peering: a direct link between every pair of networks. With 3 VPCs you need 3 peerings. With 10 VPCs, you need 45. With 50, you need 1,225. It does not scale, and peering does not support transitive routing, so if A peers with B and B peers with C, A still cannot reach C.',
       how: 'Network Connectivity Center (NCC) acts as a central router. Each VPC registers as a "spoke" and the hub automatically exchanges routes between all of them. Adding a new department is one command, not a matrix of peering connections. Routes appear instantly via BGP.',
       useCases: 'Enterprise networks connecting regional offices, multi-cloud setups bridging AWS and GCP, gaming companies isolating game servers by region while sharing a central matchmaking service.',
