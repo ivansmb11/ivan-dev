@@ -55,7 +55,7 @@ const projects = computed(() => [
 </script>
 
 <template>
-  <section id="portfolio" aria-labelledby="portfolio-heading" class="py-24 md:py-32">
+  <section id="portfolio" aria-labelledby="portfolio-heading" class="py-16 md:py-32">
     <div class="container-site">
       <div v-motion="reveal()" class="flex flex-col gap-5 md:gap-6">
         <SectionChip>{{ t('portfolio.label') }}</SectionChip>
@@ -125,7 +125,7 @@ const projects = computed(() => [
 
           <div
             v-else
-            class="relative isolate flex aspect-[4/3] flex-col items-center justify-start gap-4 overflow-hidden rounded-md border border-dashed border-muted/60 p-8 pt-14 text-center md:pt-20"
+            class="relative isolate flex aspect-[4/3] flex-col items-center max-md:aspect-auto max-md:min-h-[20rem] max-md:flex-1 justify-start gap-4 overflow-hidden rounded-md border border-dashed border-muted/60 p-8 pt-14 text-center md:pt-20"
           >
             <AssetSlot id="project-coming-soon" class="absolute inset-0 -z-10" position="bottom" />
             <span class="absolute top-4 left-4 rounded-[2px] bg-mist px-2 py-1 text-[11px] font-medium uppercase leading-none tracking-[0.02em] text-graphite">

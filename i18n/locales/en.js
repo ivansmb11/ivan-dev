@@ -420,6 +420,8 @@ export default {
   },
   swipe: {
     goTo: 'Show {n} of {total}',
+    prev: 'Previous',
+    next: 'Next',
   },
   dock: {
     label: 'Quick actions',

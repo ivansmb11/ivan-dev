@@ -97,7 +97,7 @@ onBeforeUnmount(() => observer?.disconnect())
 </script>
 
 <template>
-  <section id="career" aria-labelledby="career-heading" class="py-24 md:py-32">
+  <section id="career" aria-labelledby="career-heading" class="py-16 md:py-32">
     <div class="container-site">
       <div v-motion="reveal()" class="flex flex-col gap-6 lg:grid lg:grid-cols-12 lg:gap-8">
         <div class="lg:col-span-3 lg:pt-[0.6rem]">

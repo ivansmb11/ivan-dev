@@ -1,8 +1,9 @@
 <script setup>
 import { ref, watch, onBeforeUnmount } from 'vue'
+import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 import { scrollBehavior } from '@/motion'
 
-// Counter and dots under a `.swipe-track` list. Phones only, like the track itself.
+// Arrows, counter and dots under a `.swipe-track` list. Phones only, like the track itself.
 const props = defineProps({
   track: { type: Object, default: null },
   count: { type: Number, required: true },
@@ -60,9 +61,29 @@ const pad = (n) => String(n).padStart(2, '0')
 
 <template>
   <div class="mt-5 flex items-center justify-between gap-4 md:hidden">
-    <p class="text-[13px] font-semibold tabular-nums tracking-[0.02em] text-graphite" aria-hidden="true">
-      <span class="text-ink">{{ pad(index + 1) }}</span> / {{ pad(count) }}
-    </p>
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        class="grid size-11 cursor-pointer place-items-center rounded-[3px] border border-line text-ink transition-[opacity,border-color] duration-300 active:translate-y-px disabled:cursor-default disabled:opacity-35"
+        :aria-label="t('swipe.prev')"
+        :disabled="index === 0"
+        @click="go(index - 1)"
+      >
+        <ArrowLeft :size="17" :stroke-width="2" aria-hidden="true" />
+      </button>
+      <p class="min-w-[3.25rem] text-center text-[13px] font-semibold tabular-nums tracking-[0.02em] text-graphite" aria-hidden="true">
+        <span class="text-ink">{{ pad(index + 1) }}</span> / {{ pad(count) }}
+      </p>
+      <button
+        type="button"
+        class="grid size-11 cursor-pointer place-items-center rounded-[3px] bg-ink text-paper transition-opacity duration-300 active:translate-y-px disabled:cursor-default disabled:opacity-35"
+        :aria-label="t('swipe.next')"
+        :disabled="index === count - 1"
+        @click="go(index + 1)"
+      >
+        <ArrowRight :size="17" :stroke-width="2" aria-hidden="true" />
+      </button>
+    </div>
     <div class="-mr-1.5 flex items-center" role="group" :aria-label="label">
       <button
         v-for="i in count"

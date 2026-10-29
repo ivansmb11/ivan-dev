@@ -63,7 +63,7 @@ const achievements = computed(() => [
 </script>
 
 <template>
-  <section id="achievements" aria-labelledby="achievements-heading" class="py-24 md:py-32">
+  <section id="achievements" aria-labelledby="achievements-heading" class="py-16 md:py-32">
     <div class="container-site">
       <div v-motion="reveal()" class="flex flex-col gap-5 md:gap-6">
         <SectionChip>{{ t('achievements.label') }}</SectionChip>
@@ -121,12 +121,12 @@ const achievements = computed(() => [
             </p>
           </div>
 
-          <div v-if="item.url" class="mt-6 flex items-end">
+          <div v-if="item.url" class="mt-6 flex items-end max-md:mt-auto max-md:pt-6">
             <a
               :href="item.url"
               target="_blank"
               rel="noopener noreferrer"
-              class="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm font-medium uppercase tracking-[0.01em]"
+              class="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm max-md:whitespace-normal font-medium uppercase tracking-[0.01em]"
             >
               <span class="link-underline group-hover/link:bg-[length:100%_1px]">{{ item.linkLabel ?? t('achievements.verify') }}</span>
               <ArrowUpRight :size="16" :stroke-width="2" aria-hidden="true" class="transition-[color,translate] duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 group-hover/link:text-accent" />

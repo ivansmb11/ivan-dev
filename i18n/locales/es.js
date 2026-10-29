@@ -432,6 +432,8 @@ export default {
   },
   swipe: {
     goTo: 'Ver {n} de {total}',
+    prev: 'Anterior',
+    next: 'Siguiente',
   },
   dock: {
     label: 'Accesos rápidos',

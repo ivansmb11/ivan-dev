@@ -94,12 +94,11 @@
   .swipe-track {
     --bleed: clamp(1.25rem, 4vw, 3.5rem);
     display: flex;
-    align-items: flex-start;
     gap: 1rem;
     margin-inline: calc(var(--bleed) * -1);
     /* Room for focus rings and card shadows, which the scroll container would otherwise clip */
     padding: 0.5rem var(--bleed) 2.5rem;
-    margin-block: -0.5rem -2.5rem;
+    margin-block: 1.5rem -2.5rem;
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
@@ -109,9 +108,17 @@
   .swipe-track::-webkit-scrollbar {
     display: none;
   }
+  /* Cards stretch to the tallest one, and a fling stops at the next card instead of skipping past it.
+     The per-card scroll reveal is cancelled here: cards fading in as they slide sideways read as lag.
+     Without its transform a card is no longer a containing block, so position: relative keeps sr-only
+     labels in later cards from being placed off to the right of the page and widening the phone viewport. */
   .swipe-track > * {
+    position: relative;
     flex: 0 0 min(86%, 26rem);
     scroll-snap-align: start;
+    scroll-snap-stop: always;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

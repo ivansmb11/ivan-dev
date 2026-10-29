@@ -11,21 +11,30 @@ const { t } = useI18n()
 
 const pastHero = ref(false)
 const typing = ref(false)
+const readingDown = ref(false)
 const progress = ref(0)
 const current = ref(0)
 const copied = ref(false)
 let observer = null
 let frame = 0
 let copiedTimer = 0
+let lastY = 0
 
 // The on-screen keyboard and a fixed bar fight over the bottom of the screen, so the dock steps aside.
-const visible = computed(() => pastHero.value && !typing.value)
+// It also hides while scrolling down, where it would cover what's being read, and returns on the first scroll up.
+const visible = computed(() => pastHero.value && !typing.value && !readingDown.value)
 
 function measure() {
   frame = 0
   const max = document.documentElement.scrollHeight - window.innerHeight
   progress.value = max > 0 ? Math.min(1, window.scrollY / max) : 0
   pastHero.value = window.scrollY > window.innerHeight * 0.6
+  const y = window.scrollY
+  // The last stretch of the page is the footer, which leaves room for it.
+  if (max - y < 120) readingDown.value = false
+  else if (Math.abs(y - lastY) > 8) readingDown.value = y > lastY
+  else return
+  lastY = y
 }
 
 function onScroll() {
