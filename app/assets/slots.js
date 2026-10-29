@@ -37,6 +37,15 @@ export const slots = {
   'vibebify-receipt': { label: 'Receipt cutout with lightning sticker, transparent', size: '600 × 1451' },
 
   'contact-backdrop': { label: 'Contact form backdrop', size: '2400 × 1400' },
+
+  'blog-aie26-stage': { label: 'AI Engineer 2026 post, main stage in New York (also the cover)', size: '2000 × 1333' },
+  'blog-aie26-sign': { label: 'AI Engineer 2026 post, at the AIE letters', size: '1294 × 1724' },
+  'blog-aie26-badge': { label: 'AI Engineer 2026 post, conference badge', size: '970 × 1724' },
+  'blog-aie26-datadog': { label: 'AI Engineer 2026 post, Datadog office in New York', size: '1294 × 1724' },
+  'blog-aie26-google-server': { label: "AI Engineer 2026 post, Google's first computer at Stanford", size: '1294 × 1724' },
+  'blog-aie26-google-garage': { label: "AI Engineer 2026 post, Google's founders garage", size: '1294 × 1724' },
+  'blog-aie26-stanford': { label: 'AI Engineer 2026 post, biking into Stanford', size: '1294 × 1724' },
+  'blog-aie26-facebook': { label: 'AI Engineer 2026 post, first Facebook office plaque', size: '1294 × 1724' },
 }
 
 // The ?v= is the file's ETag, so replacing a file under the same name gets past the CDN cache.

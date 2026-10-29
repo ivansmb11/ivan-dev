@@ -6,6 +6,7 @@ export default {
     career: 'Career',
     achievements: 'Achievements',
     contact: 'Contact',
+    blog: 'Blog',
     menu: 'Menu',
     close: 'Close',
     skip: 'Skip to content',
@@ -147,6 +148,7 @@ export default {
       location: 'New York City',
     },
     verify: 'Certificate',
+    readPost: 'Read the write-up',
   },
   contact: {
     label: 'Get in touch',
@@ -418,6 +420,15 @@ export default {
       act: 'Tool calls run after the text: hand off to a human, end the chat, or add an abuse strike.',
     },
   },
+  blog: {
+    kicker: 'Notes & reflections',
+    title: 'Blog',
+    intro: 'Notes from conferences, trips and a few years of building fintech products, now mostly with AI.',
+    backHome: 'Back to home',
+    back: 'Back to blog',
+    read: 'Read the post',
+    minRead: '{n} min read',
+  },
   swipe: {
     goTo: 'Show {n} of {total}',
     prev: 'Previous',
@@ -438,6 +449,7 @@ export default {
     rights: '© {year} Ivan Mendoza. All rights reserved.',
     backToTop: 'Back to top',
     agents: 'Plain-text version for AI agents',
+    blog: 'Blog',
   },
   boot: {
     skip: 'skip',

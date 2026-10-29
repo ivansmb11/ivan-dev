@@ -6,6 +6,7 @@ export default {
     career: "Trayectoria",
     achievements: "Logros",
     contact: "Contacto",
+    blog: "Blog",
     menu: "Menú",
     close: "Cerrar",
     skip: "Saltar al contenido",
@@ -159,6 +160,7 @@ export default {
       location: "Nueva York",
     },
     verify: "Certificado",
+    readPost: "Leer la crónica",
   },
   contact: {
     label: "Contáctame",
@@ -430,6 +432,15 @@ export default {
       act: 'Las tool calls corren después del texto: pasar a un humano, terminar el chat o sumar un strike por abuso.',
     },
   },
+  blog: {
+    kicker: "Notas y reflexiones",
+    title: "Blog",
+    intro: "Notas de conferencias, viajes y algunos años construyendo productos fintech, ahora casi siempre con IA.",
+    backHome: "Volver al inicio",
+    back: "Volver al blog",
+    read: "Leer el post",
+    minRead: "{n} min de lectura",
+  },
   swipe: {
     goTo: 'Ver {n} de {total}',
     prev: 'Anterior',
@@ -450,6 +461,7 @@ export default {
     rights: "© {year} Ivan Mendoza. Todos los derechos reservados.",
     backToTop: "Volver arriba",
     agents: "Versión en texto plano para agentes de IA",
+    blog: "Blog",
   },
   boot: {
     skip: 'saltar',

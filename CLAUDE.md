@@ -40,10 +40,11 @@ Every component also runs on the server during `nuxt generate`, where `window`, 
 ```
 app/
 ├── app.vue                      # Root: skip link, intro loader, shortcuts, navbar, <NuxtPage>, agent badge
-├── pages/                       # index (home), concierge, vibebify, agent-platform, agents, [...slug] (redirects home)
+├── pages/                       # index (home), concierge, vibebify, agent-platform, agents, blog/ (index, [slug]), [...slug] (redirects home)
 ├── composables/useTheme.js      # Light default, opt-in dark; toggles html.dark
 ├── motion.js                    # reveal() / enter() variants for v-motion (respect reduced motion)
-├── content/links.js             # Email, socials, home section ids
+├── content/links.js             # Email, socials, home section ids, menu pages
+├── content/blog.js              # Blog posts: slug, date, cover slot, en/es text as blocks (h, p, quote, photo, gallery)
 ├── assets/
 │   ├── css/main.css             # Tailwind import, design tokens (@theme), dark palette (html.dark), utilities
 │   ├── slots.js                 # Image slot manifest (id → label, recommended size), slotSrc / assetUrl
@@ -90,6 +91,8 @@ Additionally, some content is hardcoded in Vue components (not i18n):
 - `app/components/CareerSection.vue`: job entries array (image slot ids)
 - `app/components/PortfolioSection.vue`: project entries (tags, GitHub and case-study links)
 - `app/components/TrustedSection.vue`: logo strip entries
+
+Blog posts live in `app/content/blog.js`, with both languages side by side (not in the locale files). A new post also needs its route in `nitro.prerender.routes`, `public/sitemap.xml` and an entry under "Writing" in `agents.vue`; its photos are `blog-*` slots in `slots.js` (webp in `app/assets/images/`, then `npm run assets:sync`).
 
 **Never update content in only one place.** Always check all locations above.
 

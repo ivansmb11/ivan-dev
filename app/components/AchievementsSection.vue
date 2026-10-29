@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
+import { ArrowRight, ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
@@ -24,6 +24,8 @@ const achievements = computed(() => [
     date: t('achievements.nyc2026.date'),
     location: t('achievements.nyc2026.location'),
     url: '',
+    to: '/blog/ai-engineer-2026',
+    linkLabel: t('achievements.readPost'),
     credential: '',
     type: 'conference',
   },
@@ -121,7 +123,17 @@ const achievements = computed(() => [
             </p>
           </div>
 
-          <div v-if="item.url" class="mt-6 flex items-end max-md:mt-auto max-md:pt-6">
+          <div v-if="item.to" class="mt-6 flex items-end max-md:mt-auto max-md:pt-6">
+            <NuxtLink
+              :to="item.to"
+              class="group/link -mb-2 inline-flex min-h-11 items-center gap-1.5 whitespace-nowrap text-sm max-md:whitespace-normal font-medium uppercase tracking-[0.01em]"
+            >
+              <span class="link-underline group-hover/link:bg-[length:100%_1px]">{{ item.linkLabel }}</span>
+              <ArrowRight :size="16" :stroke-width="2" aria-hidden="true" class="transition-[color,translate] duration-300 group-hover/link:translate-x-0.5 group-hover/link:text-accent" />
+              <span class="sr-only">: {{ item.title }}</span>
+            </NuxtLink>
+          </div>
+          <div v-else-if="item.url" class="mt-6 flex items-end max-md:mt-auto max-md:pt-6">
             <a
               :href="item.url"
               target="_blank"

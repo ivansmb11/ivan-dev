@@ -17,3 +17,6 @@ export const sections = [
   { key: 'nav.achievements', id: 'achievements' },
   { key: 'nav.contact', id: 'contact' },
 ]
+
+// Standalone pages, listed in the menu after the home sections.
+export const pages = [{ key: 'nav.blog', to: '/blog' }]

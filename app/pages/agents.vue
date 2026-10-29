@@ -147,6 +147,15 @@ AI Engineer Code Summit, New York City, 2025
 
 ---
 
+## Writing
+
+### More hands, same products (Más manos, mismos productos)
+Date: Oct 28, 2026
+URL: https://ivanmendoza.dev/blog/ai-engineer-2026
+Summary: A personal reflection, in English and Spanish, on AI Engineer 2026 in New York and a few days of sessions in San Francisco with the Zazpay engineering team. Covers hallway conversations with engineers from JPMorgan Chase, Amazon and Google; Laurie Voss's talk on the rise of the product engineer; the idea that AI gave engineers more capacity while products still look alike; the difference between New York and San Francisco; and what being an AI engineer means to Ivan: using AI as the core of the workflow to build solutions that weren't possible before.
+
+---
+
 ## Stats
 - 4+ Years of Experience
 - 3 Companies

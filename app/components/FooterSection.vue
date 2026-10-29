@@ -134,6 +134,9 @@ function toTop() {
             >{{ t('footer.source') }}<ArrowUpRight :size="13" aria-hidden="true" /></a>
           </li>
           <li>
+            <NuxtLink to="/blog" class="link-underline inline-block py-1">{{ t('footer.blog') }}</NuxtLink>
+          </li>
+          <li>
             <NuxtLink to="/agents" class="link-underline inline-block py-1">{{ t('footer.agents') }}</NuxtLink>
           </li>
           <li class="py-1">{{ t('footer.rights', { year }) }}</li>

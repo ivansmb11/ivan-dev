@@ -3,7 +3,7 @@ import { scrollBehavior } from '@/motion'
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { Sun, Moon } from 'lucide-vue-next'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
-import { sections, socials, email } from '@/content/links'
+import { sections, pages, socials, email } from '@/content/links'
 import { useTheme } from '@/composables/useTheme'
 
 const emit = defineEmits(['menu-change'])
@@ -182,6 +182,16 @@ onUnmounted(() => {
               {{ t(link.key) }}
               <AsteriskMark class="size-6 text-accent opacity-0 transition-opacity group-hover:opacity-100" />
             </a>
+          </li>
+          <li v-for="page in pages" :key="page.to" class="border-b border-line">
+            <NuxtLink
+              :to="page.to"
+              class="group flex items-center justify-between py-3 font-display text-display-md uppercase transition-colors hover:text-accent"
+              @click="menuOpen = false"
+            >
+              {{ t(page.key) }}
+              <AsteriskMark class="size-6 text-accent opacity-0 transition-opacity group-hover:opacity-100" />
+            </NuxtLink>
           </li>
         </ul>
 
