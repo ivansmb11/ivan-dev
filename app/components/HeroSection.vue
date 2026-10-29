@@ -106,14 +106,16 @@ function toContact() {
           class="group flex w-full gap-3 bg-onyx p-2 text-white md:w-[clamp(19rem,25vw,23.5rem)]"
           @click.prevent="toContact"
         >
-          <span class="relative aspect-[1/0.95] w-[36%] shrink-0 overflow-hidden bg-ember">
-            <AssetSlot
-              id="hero-portrait"
-              tone="ember"
-              fit="contain"
-              compact
-              class="absolute top-[3%] left-1/2 aspect-[1231/1278] w-[155%] -translate-x-1/2"
+          <!-- The cutout is already the whole hero, so the card carries the brand mark instead of a second face -->
+          <span aria-hidden="true" class="card-tile relative grid aspect-[1/0.95] w-[36%] shrink-0 place-items-center overflow-hidden">
+            <AsteriskMark
+              class="size-[62%] text-white transition-transform duration-700 ease-out-quint group-hover:scale-110 motion-safe:animate-[spin_18s_linear_infinite]"
+              :weight="1.8"
             />
+            <span class="absolute top-2 left-2 flex size-2">
+              <span class="absolute inset-0 animate-ping rounded-full bg-white/70" />
+              <span class="relative size-2 rounded-full bg-white" />
+            </span>
           </span>
           <span class="flex min-w-0 flex-1 flex-col justify-between py-1 pr-1">
             <span class="flex items-start justify-between gap-2">
@@ -170,6 +172,12 @@ function toContact() {
   .hero-tagline {
     max-width: clamp(9.5rem, calc(50vw - 17svh - clamp(1.25rem, 4vw, 3.5rem) - 1.5rem), 22rem);
   }
+}
+
+.card-tile {
+  background:
+    radial-gradient(70% 70% at 30% 25%, var(--color-ember-bright), transparent 70%),
+    linear-gradient(135deg, var(--color-ember), var(--color-accent-deep));
 }
 
 .ghost-name {

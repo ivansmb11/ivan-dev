@@ -8,6 +8,7 @@ import PortfolioSection from '@/components/PortfolioSection.vue'
 import AchievementsSection from '@/components/AchievementsSection.vue'
 import ContactSection from '@/components/ContactSection.vue'
 import FooterSection from '@/components/FooterSection.vue'
+import MobileDock from '@/components/MobileDock.vue'
 </script>
 
 <template>
@@ -23,5 +24,6 @@ import FooterSection from '@/components/FooterSection.vue'
       <ContactSection />
     </main>
     <FooterSection />
+    <MobileDock />
   </div>
 </template>

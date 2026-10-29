@@ -4,9 +4,11 @@ import { ArrowRight } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
+import SwipeDots from '@/components/ui/SwipeDots.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
+const track = ref(null)
 
 const jobs = computed(() => [
   {
@@ -111,7 +113,7 @@ onBeforeUnmount(() => observer?.disconnect())
       </div>
 
       <!-- Subgrid rows keep photos, roles and descriptions on shared baselines across the three cards. -->
-      <ol class="mt-14 grid grid-cols-1 gap-x-5 gap-y-16 md:mt-20 md:grid-cols-3 md:gap-y-0 lg:gap-x-6">
+      <ol ref="track" class="swipe-track mt-14 grid grid-cols-1 gap-x-5 gap-y-16 md:mt-20 md:grid-cols-3 md:gap-y-0 lg:gap-x-6">
         <li
           v-for="(job, i) in jobs"
           :key="job.key"
@@ -254,6 +256,7 @@ onBeforeUnmount(() => observer?.disconnect())
           </template>
         </li>
       </ol>
+      <SwipeDots :track="track" :count="jobs.length" :label="t('career.label')" />
     </div>
   </section>
 </template>

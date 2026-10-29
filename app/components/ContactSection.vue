@@ -1,6 +1,6 @@
 <script setup>
-import { reactive } from 'vue'
-import { ArrowUpRight } from 'lucide-vue-next'
+import { reactive, ref, onBeforeUnmount } from 'vue'
+import { ArrowUpRight, Check, Copy } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
@@ -37,6 +37,24 @@ const fieldClass =
 const hasBackdrop = !!slotSrc('contact-backdrop')
 
 const form = reactive({ name: '', email: '', message: '' })
+
+// On a phone, mailto often opens an app nobody set up; copying the address is the faster path.
+const copied = ref(false)
+let copiedTimer = 0
+
+async function copyEmail() {
+  try {
+    await navigator.clipboard.writeText(email)
+  } catch {
+    return
+  }
+  navigator.vibrate?.(8)
+  copied.value = true
+  clearTimeout(copiedTimer)
+  copiedTimer = setTimeout(() => (copied.value = false), 2000)
+}
+
+onBeforeUnmount(() => clearTimeout(copiedTimer))
 
 function submit() {
   const name = form.name.trim()
@@ -83,6 +101,18 @@ function submit() {
                 <span class="absolute inset-0 animate-ping rounded-full bg-accent/60" />
                 <span class="relative size-2 rounded-full bg-accent" />
               </span>
+              <template v-if="card.key === 'email'">
+                <button
+                  type="button"
+                  class="-my-3 -mr-2.5 grid size-11 cursor-pointer place-items-center text-graphite transition-colors hover:text-ink active:translate-y-px md:hidden"
+                  :aria-label="t('contact.copyEmail')"
+                  @click="copyEmail"
+                >
+                  <Check v-if="copied" :size="17" :stroke-width="2.2" class="text-accent" aria-hidden="true" />
+                  <Copy v-else :size="17" :stroke-width="2" aria-hidden="true" />
+                </button>
+                <span class="sr-only" aria-live="polite">{{ copied ? t('contact.emailCopied') : '' }}</span>
+              </template>
             </dt>
             <dd class="min-w-0 text-[15px] leading-snug font-bold tracking-tight sm:text-lg">
               <a

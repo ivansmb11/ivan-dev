@@ -74,7 +74,7 @@ function toContact() {
 </script>
 
 <template>
-  <section id="about" class="py-24 md:py-36">
+  <section id="about" class="py-16 sm:py-24 md:py-36">
     <div class="container-site">
       <div class="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-6 gap-y-10 md:flex md:items-end md:gap-8">
         <!-- 63% keeps "BUILDING FINTECH" on one line at every lg+ width, like the reference's 3-line heading -->

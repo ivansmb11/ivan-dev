@@ -88,6 +88,33 @@
   }
 }
 
+/* Phones only: a list of cards becomes a swipeable row that bleeds to the screen edges and snaps card by
+   card. Left unlayered on purpose so it beats the list's own grid utilities; from md the grid is untouched. */
+@media (max-width: 47.99rem) {
+  .swipe-track {
+    --bleed: clamp(1.25rem, 4vw, 3.5rem);
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-inline: calc(var(--bleed) * -1);
+    /* Room for focus rings and card shadows, which the scroll container would otherwise clip */
+    padding: 0.5rem var(--bleed) 2.5rem;
+    margin-block: -0.5rem -2.5rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--bleed);
+    scrollbar-width: none;
+  }
+  .swipe-track::-webkit-scrollbar {
+    display: none;
+  }
+  .swipe-track > * {
+    flex: 0 0 min(86%, 26rem);
+    scroll-snap-align: start;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: clip;

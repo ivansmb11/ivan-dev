@@ -8,6 +8,7 @@ const route = useRoute()
 const pastHero = ref(false)
 
 // On home it would sit on top of the hero's "Let's talk" card, so it waits until the hero is mostly scrolled away.
+// On phones the home page's MobileDock carries the same link, so the badge stays out of its way there.
 const visible = computed(() => route.path !== '/' || pastHero.value)
 
 function onScroll() {
@@ -35,6 +36,7 @@ onUnmounted(() => window.removeEventListener('scroll', onScroll))
       v-if="visible"
       to="/agents"
       :title="t('footer.agents')"
+      :class="route.path === '/' && 'max-md:hidden'"
       class="group fixed right-4 bottom-4 z-30 flex items-center gap-2 whitespace-nowrap rounded-md bg-card px-3 py-2 text-xs font-medium text-ink shadow-[0_6px_20px_-8px_var(--color-night)] ring-1 ring-ink/10 transition-[opacity,translate,background-color,color] duration-300 hover:-translate-y-0.5 hover:bg-ink hover:text-paper active:translate-y-0"
     >
       <Bot :size="15" :stroke-width="2" aria-hidden="true" class="text-accent transition-colors group-hover:text-paper" />

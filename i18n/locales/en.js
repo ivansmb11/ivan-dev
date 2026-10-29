@@ -161,6 +161,8 @@ export default {
     statusLabel: 'Status:',
     emailLabel: 'Email:',
     elsewhereLabel: 'Elsewhere:',
+    copyEmail: 'Copy email address',
+    emailCopied: 'Email copied',
     form: {
       chip: 'Contact me',
       headingLead: "Let's build",
@@ -415,6 +417,14 @@ export default {
       generate: 'Gemini 2.5 Flash streams the reply back over SSE, behind the security preamble and the agent\'s guardrails.',
       act: 'Tool calls run after the text: hand off to a human, end the chat, or add an abuse strike.',
     },
+  },
+  swipe: {
+    goTo: 'Show {n} of {total}',
+  },
+  dock: {
+    label: 'Quick actions',
+    share: 'Share this site',
+    copied: 'Link copied',
   },
   agent: {
     fab: 'Are you an AI agent?',

@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ArrowUpRight, Play } from 'lucide-vue-next'
 import { NuxtLink } from '#components'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
@@ -7,10 +7,12 @@ import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
+import SwipeDots from '@/components/ui/SwipeDots.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
 const year = new Date().getFullYear()
+const track = ref(null)
 
 const projects = computed(() => [
   {
@@ -67,12 +69,12 @@ const projects = computed(() => [
       </div>
 
       <!-- Each project spans two subgrid rows (media, text) so both cards in a row share heights. -->
-      <ul class="mt-14 grid grid-cols-1 gap-x-5 md:mt-20 md:grid-cols-2 lg:gap-x-8">
+      <ul ref="track" class="swipe-track mt-14 grid grid-cols-1 gap-x-5 md:mt-20 md:grid-cols-2 lg:gap-x-8">
         <li
           v-for="(project, i) in projects"
           :key="project.key"
           v-motion="reveal((i % 2) * 140)"
-          class="flex flex-col pb-14 last:pb-0 md:row-span-2 md:grid md:grid-cols-1 md:grid-rows-subgrid md:gap-y-0 md:pb-0"
+          class="flex flex-col md:row-span-2 md:grid md:grid-cols-1 md:grid-rows-subgrid md:gap-y-0"
           :class="i >= 2 ? 'md:mt-20 lg:mt-24' : ''"
         >
           <component
@@ -166,6 +168,7 @@ const projects = computed(() => [
           </div>
         </li>
       </ul>
+      <SwipeDots :track="track" :count="projects.length" :label="t('portfolio.label')" />
     </div>
   </section>
 </template>

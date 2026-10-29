@@ -173,6 +173,8 @@ export default {
     statusLabel: "Estado:",
     emailLabel: "Correo:",
     elsewhereLabel: "En redes:",
+    copyEmail: "Copiar correo",
+    emailCopied: "Correo copiado",
     form: {
       chip: "Contáctame",
       headingLead: "Construyamos",
@@ -427,6 +429,14 @@ export default {
       generate: 'Gemini 2.5 Flash transmite la respuesta por SSE, detrás del preámbulo de seguridad y los guardrails del agente.',
       act: 'Las tool calls corren después del texto: pasar a un humano, terminar el chat o sumar un strike por abuso.',
     },
+  },
+  swipe: {
+    goTo: 'Ver {n} de {total}',
+  },
+  dock: {
+    label: 'Accesos rápidos',
+    share: 'Compartir este sitio',
+    copied: 'Enlace copiado',
   },
   agent: {
     fab: '¿Eres un agente de IA?',

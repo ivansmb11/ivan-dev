@@ -1,13 +1,15 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { ArrowUpRight, Hash, MapPin } from 'lucide-vue-next'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
+import SwipeDots from '@/components/ui/SwipeDots.vue'
 import { slotSrc } from '@/assets/slots'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
+const track = ref(null)
 
 // A labeled placeholder needs more room than the final logo to stay legible.
 const logoBox = (id) => (slotSrc(id) ? 'h-10 w-36' : 'h-20 w-48')
@@ -75,7 +77,7 @@ const achievements = computed(() => [
       </div>
 
       <!-- Subgrid rows keep logos, titles and certificate links level across cards whose titles differ in length. -->
-      <ul class="mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-0">
+      <ul ref="track" class="swipe-track mt-14 grid grid-cols-1 gap-4 md:mt-20 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-0">
         <li
           v-for="(item, i) in achievements"
           :key="item.key"
@@ -133,6 +135,7 @@ const achievements = computed(() => [
           </div>
         </li>
       </ul>
+      <SwipeDots :track="track" :count="achievements.length" :label="t('achievements.label')" />
     </div>
   </section>
 </template>
