@@ -65,6 +65,10 @@ export default {
       "Un Agente de IA con Zero-Trust en GCP que enruta consultas a bases de datos aisladas según la identidad del usuario. Redes VPC Hub-and-Spoke con NCC, Private Service Connect, Vertex AI Gemini y LangChain Function Calling.",
     agentPlatform:
       "Una plataforma multi-tenant para construir, probar y publicar agentes de soporte con IA especializados. Deploys versionados con rollback, RAG híbrido sobre pgvector, guardrails en capas, un gate de evals calificado por un LLM, un inbox para humanos y un widget que se integra con una línea. NestJS, React 19 y Gemini en Vertex AI.",
+    breach: 'Construido en un día con tres compañeros en el hackathon de Kavak x OpenAI x Primero AI sobre recursive self-improvement. Pruebas de seguridad continuas que aprenden de lo que se les escapa: cuando una debilidad se pasa, un autor con IA escribe un check nuevo, una compuerta de seguridad lo valida, una persona lo aprueba y la siguiente corrida la encuentra. Llevé el harness del agente, la infraestructura y el knowledge graph de vulnerabilidades.',
+    hackathon: 'Hackathon',
+    thirdPlace: '3er lugar general, RSI Hackathon 2026',
+    readStory: 'Leer la historia',
     comingSoon: "Próximamente",
     comingSoonText:
       "Mantente al tanto para más proyectos. Siempre estoy trabajando en algo nuevo y emocionante.",

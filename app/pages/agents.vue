@@ -82,6 +82,11 @@ Skills: Spring Boot, Java, PostgreSQL, Vue.js, Agile/Lean
 
 ## Projects
 
+### BREACH
+Built in one day by a team of four (Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro and Ivan) at the Kavak x OpenAI x Primero AI hackathon on recursive self-improvement, Mexico City, November 9, 2026. Third place overall. Continuous security testing for live apps you are authorized to test: a library of checks runs against the target and every finding is confirmed by reproducing it. When a weakness slips through, an AI author writes a new check, a safety gate validates it, a person approves it, and the next run catches it. Ivan owned the agent harness, the infrastructure and the vulnerability knowledge graph.
+Tech: RSI, AI Agents, Security, Knowledge Graph, Evals
+Story: https://ivanmendoza.dev/blog/kavak-openai-hackathon
+
 ### Agent Platform
 A multi-tenant platform where a business runs a team of specialized AI support agents. Each tenant gets several agents, each with its own prompt, knowledge, guardrails and API keys. Agent changes go through drafts and ship as semver-tagged deploys with one-click rollback. Context: append-only event log with a sliding window, plus knowledge that goes into the prompt whole when small and switches to hybrid RAG (Gemini embeddings on pgvector and Postgres full-text, merged with reciprocal rank fusion) when large, always filtered per agent. Safety: a fixed security preamble, typed per-agent guardrails, an input sanitizer for injection payloads, a Gemini tool-call abuse detector with three-strike auto-close, and a multilingual human-handoff detector that runs before any LLM call. Quality: a 55-case eval suite across 12 categories, scored by rule checks plus a Gemini judge validated against a human-labeled golden set, shown as a soft gate before deploys. Also a playground pinned to live or draft versions, a human inbox with take-over, analytics, and a dependency-free Shadow DOM widget that streams AI replies over SSE. Built with NestJS 11, Prisma 7, PostgreSQL 16 + pgvector, Redis, Gemini 2.5 Flash on Vertex AI, React 19 + Vite, React Flow, Firebase Auth, Cloud Run and Cloud SQL.
 Tech: NestJS, React 19, Vertex AI, pgvector, RAG, Evals

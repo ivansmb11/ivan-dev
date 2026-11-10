@@ -8,6 +8,7 @@ import SectionChip from '@/components/ui/SectionChip.vue'
 import SplitHeading from '@/components/ui/SplitHeading.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
 import SwipeDots from '@/components/ui/SwipeDots.vue'
+import BronzeMedal from '@/components/ui/BronzeMedal.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
@@ -15,6 +16,18 @@ const year = new Date().getFullYear()
 const track = ref(null)
 
 const projects = computed(() => [
+  {
+    key: 'breach',
+    kind: 'framed',
+    slot: 'blog-hack26-team',
+    title: 'BREACH',
+    description: t('portfolio.breach'),
+    tags: ['RSI', 'AI Agents', 'Security', 'Knowledge Graph', 'Evals'],
+    caseStudy: '/blog/kavak-openai-hackathon',
+    cta: t('portfolio.readStory'),
+    label: t('portfolio.hackathon'),
+    medal: { place: 3, text: t('portfolio.thirdPlace') },
+  },
   {
     key: 'agentPlatform',
     kind: 'framed',
@@ -43,13 +56,6 @@ const projects = computed(() => [
     tags: ['GCP', 'Vertex AI', 'LangChain', 'Cloud Run', 'PostgreSQL', 'Zero-Trust'],
     github: 'https://github.com/ivansmb11/vip-data-concierge',
     caseStudy: '/concierge',
-  },
-  {
-    key: 'soon',
-    kind: 'soon',
-    title: t('portfolio.comingSoon'),
-    description: t('portfolio.comingSoonText'),
-    tags: [t('portfolio.inProgress', 'In progress')],
   },
 ])
 </script>
@@ -81,8 +87,13 @@ const projects = computed(() => [
             v-if="project.kind === 'framed'"
             :is="project.caseStudy ? NuxtLink : 'div'"
             v-bind="project.caseStudy ? { to: project.caseStudy, tabindex: -1, 'aria-hidden': 'true' } : {}"
-            class="group block bg-card p-2 shadow-[0_18px_40px_-24px_var(--color-night)] shadow-night/35 sm:p-3"
+            class="group relative block bg-card p-2 shadow-[0_18px_40px_-24px_var(--color-night)] shadow-night/35 sm:p-3"
           >
+            <BronzeMedal
+              v-if="project.medal"
+              :place="project.medal.place"
+              class="absolute -top-4 right-4 z-10 h-20 w-auto drop-shadow-[0_8px_14px_rgba(90,46,18,0.35)] sm:right-6 sm:h-24"
+            />
             <span class="block overflow-hidden">
               <AssetSlot
                 :id="project.slot"
@@ -96,7 +107,7 @@ const projects = computed(() => [
                 <AsteriskMark class="size-3.5 shrink-0 text-accent" />
                 <span class="truncate">{{ project.title }}</span>
               </span>
-              <span class="shrink-0">/{{ t('portfolio.sideProject') }}</span>
+              <span class="shrink-0">/{{ project.label ?? t('portfolio.sideProject') }}</span>
             </span>
           </component>
 
@@ -141,6 +152,9 @@ const projects = computed(() => [
             <h3 class="font-display text-2xl font-bold uppercase leading-none tracking-[-0.035em] md:text-[1.75rem]">
               {{ project.title }}
             </h3>
+            <p v-if="project.medal" class="mt-3 text-[13px] font-semibold uppercase tracking-[0.02em] text-ink">
+              {{ project.medal.text }}
+            </p>
             <p class="mt-3 max-w-[38rem] text-[15px] leading-relaxed text-graphite">{{ project.description }}</p>
             <ul class="mt-5 flex flex-wrap gap-1.5">
               <li
@@ -151,7 +165,7 @@ const projects = computed(() => [
             </ul>
             <div class="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">
               <ArrowButton v-if="project.caseStudy" :to="project.caseStudy">
-                {{ t('portfolio.caseStudy') }}<span class="sr-only">: {{ project.title }}</span>
+                {{ project.cta ?? t('portfolio.caseStudy') }}<span class="sr-only">: {{ project.title }}</span>
               </ArrowButton>
               <a
                 v-if="project.github"
