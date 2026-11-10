@@ -1,9 +1,10 @@
 <script setup>
 import { computed } from 'vue'
-import { ArrowLeft } from 'lucide-vue-next'
+import { ArrowLeft, Trophy } from 'lucide-vue-next'
 import PageHeader from '@/components/ui/PageHeader.vue'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
+import BronzeMedal from '@/components/ui/BronzeMedal.vue'
 import { enter, reveal } from '@/motion'
 import { findPost, readMinutes } from '@/content/blog'
 import { slotSrc } from '@/assets/slots'
@@ -49,6 +50,21 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
         </NuxtLink>
 
         <PageHeader v-motion="enter(100)" class="mt-6 md:mt-8" :title="entry.title" :kicker="entry.kicker" />
+
+        <ul v-if="entry.badges?.length" v-motion="enter(150)" class="mt-10 flex flex-wrap gap-3 md:mt-12">
+          <li v-for="badge in entry.badges" :key="badge.text" class="glass flex items-center gap-3 rounded-full py-2 pr-6 pl-3 md:gap-4 md:pr-7">
+            <BronzeMedal
+              v-if="badge.medal === 'bronze'"
+              :place="badge.place"
+              class="-mt-7 -mb-1 h-[4.5rem] w-auto shrink-0 drop-shadow-[0_6px_10px_rgba(90,46,18,0.28)] md:-mt-9 md:h-[5.25rem]"
+            />
+            <Trophy v-else :size="18" :stroke-width="2.25" aria-hidden="true" class="ml-1 shrink-0 text-accent" />
+            <span class="flex flex-col gap-1.5">
+              <span v-if="badge.note" class="text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-graphite md:text-xs">{{ badge.note }}</span>
+              <span class="text-base font-bold uppercase leading-none tracking-[-0.01em] text-ink md:text-lg">{{ badge.text }}</span>
+            </span>
+          </li>
+        </ul>
 
         <p v-motion="enter(200)" class="mt-8 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-graphite md:mt-10">
           <time :datetime="post.date">{{ date }}</time>

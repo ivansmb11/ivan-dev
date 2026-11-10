@@ -1,7 +1,9 @@
 // Blog posts, newest first. Each post carries its own English and Spanish text: long-form copy is easier to
 // keep in sync side by side than spread across en.js and es.js, and vue-i18n would read "@", "{" and "|"
 // in prose as message syntax. Blocks: h (heading), p, quote, photo (an AssetSlot id from slots.js; `tall`
-// for portrait shots) and gallery (two or more portrait photos side by side).
+// for portrait shots) and gallery (two or more portrait photos side by side). Optional `badges` per language:
+// results shown as chips under the title and on the /blog card, `{ text }` with a trophy or
+// `{ text, note, medal: 'bronze', place }` with a medal and a small line above the text.
 
 export const posts = [
   {
@@ -11,10 +13,11 @@ export const posts = [
     en: {
       title: 'Every miss becomes a check',
       kicker: 'Kavak x OpenAI x Primero AI hackathon',
+      badges: [{ text: '3rd place overall', note: 'RSI Hackathon 2026', medal: 'bronze', place: 3 }],
       description:
-        'How four engineers from Culiacán built BREACH in one day at the Kavak x OpenAI x Primero AI hackathon: continuous security testing that learns from what it misses. Third place overall, first in the AI category.',
+        'Third place overall and first in the AI category at the Kavak x OpenAI x Primero AI hackathon: how four engineers from Culiacán built BREACH in one day, continuous security testing that learns from what it misses.',
       lede:
-        'On November 9 we spent ten hours at Kavak\'s offices on Reforma, in Mexico City, building a system that gets better at finding security holes every time it misses one. We took third place overall and first in the AI category. This is how it went.',
+        'We won third place overall and first place in the AI category at the Kavak x OpenAI x Primero AI hackathon. On November 9 we spent ten hours at Kavak\'s offices on Reforma, in Mexico City, building a system that gets better at finding security holes every time it misses one. This is how it went.',
       blocks: [
         { type: 'h', text: 'Outsiders in Mexico City' },
         {
@@ -113,10 +116,11 @@ export const posts = [
     es: {
       title: 'Cada falla se vuelve un check',
       kicker: 'Hackathon Kavak x OpenAI x Primero AI',
+      badges: [{ text: '3er lugar general', note: 'RSI Hackathon 2026', medal: 'bronze', place: 3 }],
       description:
-        'Cómo cuatro ingenieros de Culiacán construimos BREACH en un día en el hackathon de Kavak x OpenAI x Primero AI: pruebas de seguridad continuas que aprenden de lo que se les escapa. Tercer lugar general y primero en la categoría de AI.',
+        'Tercer lugar general y primero en la categoría de AI en el hackathon de Kavak x OpenAI x Primero AI: cómo cuatro ingenieros de Culiacán construimos BREACH en un día, pruebas de seguridad continuas que aprenden de lo que se les escapa.',
       lede:
-        'El 9 de noviembre pasamos diez horas en el corporativo de Kavak, en Reforma, Ciudad de México, construyendo un sistema que mejora para encontrar huecos de seguridad cada vez que se le escapa uno. Quedamos en tercer lugar general y en primero en la categoría de AI. Así fue.',
+        'Ganamos el tercer lugar general y el primer lugar en la categoría de AI en el hackathon de Kavak x OpenAI x Primero AI. El 9 de noviembre pasamos diez horas en el corporativo de Kavak, en Reforma, Ciudad de México, construyendo un sistema que mejora para encontrar huecos de seguridad cada vez que se le escapa uno. Así fue.',
       blocks: [
         { type: 'h', text: 'Outsiders en la Ciudad de México' },
         {

@@ -1,8 +1,9 @@
 <script setup>
 import { computed } from 'vue'
-import { ArrowLeft, ArrowUpRight } from 'lucide-vue-next'
+import { ArrowLeft, ArrowUpRight, Trophy } from 'lucide-vue-next'
 import PageHeader from '@/components/ui/PageHeader.vue'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
+import BronzeMedal from '@/components/ui/BronzeMedal.vue'
 import { enter, reveal } from '@/motion'
 import { posts, readMinutes } from '@/content/blog'
 
@@ -57,6 +58,20 @@ const entries = computed(() => {
                 <span>{{ t('blog.minRead', { n: post.minutes }) }}</span>
               </p>
               <h2 class="text-2xl leading-tight font-bold tracking-[-0.02em] uppercase md:text-[2rem]">{{ post.entry.title }}</h2>
+              <ul v-if="post.entry.badges?.length" class="flex flex-wrap gap-2">
+                <li
+                  v-for="badge in post.entry.badges"
+                  :key="badge.text"
+                  class="glass-tint inline-flex items-center gap-2 rounded-full py-1 pr-3.5 pl-1.5 text-xs font-bold uppercase leading-none tracking-[0.01em] text-ink md:text-[13px]"
+                >
+                  <BronzeMedal
+                    v-if="badge.medal === 'bronze'"
+                    :place="badge.place"
+                    class="-mt-3 h-10 w-auto shrink-0 drop-shadow-[0_3px_5px_rgba(90,46,18,0.25)]"
+                  />
+                  <Trophy v-else :size="13" :stroke-width="2.25" aria-hidden="true" class="ml-1 shrink-0 text-accent" />{{ badge.text }}
+                </li>
+              </ul>
               <p class="max-w-[36rem] text-base leading-relaxed text-graphite">{{ post.entry.description }}</p>
               <span class="mt-auto inline-flex items-center gap-1.5 pt-2 text-sm font-medium uppercase tracking-[0.01em]">
                 <span class="link-underline group-hover:bg-[length:100%_1px]">{{ t('blog.read') }}</span>
