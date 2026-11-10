@@ -40,7 +40,7 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
 <template>
   <main id="main" tabindex="-1" class="outline-none">
     <article>
-      <header class="container-site pt-32 md:pt-40">
+      <header class="container-site pt-24 md:pt-28">
         <NuxtLink
           to="/blog"
           class="group -ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm font-medium uppercase tracking-[0.01em] text-graphite transition-colors hover:text-ink"
@@ -49,7 +49,7 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
           <span class="link-underline">{{ t('blog.back') }}</span>
         </NuxtLink>
 
-        <PageHeader v-motion="enter(100)" class="mt-6 md:mt-8" :title="entry.title" :kicker="entry.kicker" />
+        <PageHeader v-motion="enter(100)" class="mt-4 md:mt-5" :title="entry.title" :kicker="entry.kicker" />
 
         <ul v-if="entry.badges?.length" v-motion="enter(150)" class="mt-10 flex flex-wrap gap-3 md:mt-12">
           <li v-for="badge in entry.badges" :key="badge.text" class="glass flex items-center gap-3 rounded-full py-2 pr-6 pl-3 md:gap-4 md:pr-7">
