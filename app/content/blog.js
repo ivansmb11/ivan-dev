@@ -7,7 +7,7 @@ export const posts = [
   {
     slug: 'kavak-openai-hackathon',
     date: '2026-11-10',
-    cover: 'blog-hack26-cover',
+    cover: 'blog-hack26-team',
     en: {
       title: 'Every miss becomes a check',
       kicker: 'Kavak x OpenAI x Primero AI hackathon',
@@ -24,6 +24,13 @@ export const posts = [
         {
           type: 'p',
           text: 'We were four: Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro and me. A very multidisciplinary team, with very different backgrounds, which turned out to be exactly what a ten-hour build needs.',
+        },
+        {
+          type: 'gallery',
+          photos: [
+            { slot: 'blog-hack26-poster', caption: 'RSI Hackathon, November 9' },
+            { slot: 'blog-hack26-notebook', caption: 'Building at Kavak, with the event notebook' },
+          ],
         },
 
         { type: 'h', text: 'The problem' },
@@ -84,6 +91,7 @@ export const posts = [
           type: 'p',
           text: 'We took third place overall and first place in the AI category.',
         },
+        { type: 'photo', slot: 'blog-hack26-team', caption: 'The team, with BREACH on our laptops' },
 
         { type: 'h', text: 'What came after' },
         {
@@ -118,6 +126,13 @@ export const posts = [
         {
           type: 'p',
           text: 'Fuimos cuatro: Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro y yo. Un equipo muy multidisciplinario, con experiencias muy distintas, que resultó ser justo lo que necesita una construcción de diez horas.',
+        },
+        {
+          type: 'gallery',
+          photos: [
+            { slot: 'blog-hack26-poster', caption: 'RSI Hackathon, 9 de noviembre' },
+            { slot: 'blog-hack26-notebook', caption: 'Construyendo en Kavak, con la libreta del evento' },
+          ],
         },
 
         { type: 'h', text: 'El problema' },
@@ -178,6 +193,7 @@ export const posts = [
           type: 'p',
           text: 'Quedamos en tercer lugar general y en primer lugar en la categoría de AI.',
         },
+        { type: 'photo', slot: 'blog-hack26-team', caption: 'El equipo, con BREACH en nuestras laptops' },
 
         { type: 'h', text: 'Lo que vino después' },
         {
