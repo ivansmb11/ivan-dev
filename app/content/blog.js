@@ -1,7 +1,8 @@
 // Blog posts, newest first. Each post carries its own English and Spanish text: long-form copy is easier to
 // keep in sync side by side than spread across en.js and es.js, and vue-i18n would read "@", "{" and "|"
 // in prose as message syntax. Blocks: h (heading), p, quote, photo (an AssetSlot id from slots.js; `tall`
-// for portrait shots) and gallery (two or more portrait photos side by side). Optional `badges` per language:
+// for portrait shots) and gallery (two or more portrait photos side by side). Photos take a visible `caption`,
+// or only an `alt` when they should show without one. Optional `badges` per language:
 // results shown as chips under the title and on the /blog card, `{ text }` with a trophy or
 // `{ text, note, medal: 'bronze', place }` with a medal and a small line above the text.
 
@@ -31,8 +32,8 @@ export const posts = [
         {
           type: 'gallery',
           photos: [
-            { slot: 'blog-hack26-poster', caption: 'The brief for the day: agent systems that learn and build new systems' },
-            { slot: 'blog-hack26-notebook', caption: 'My desk at Kavak: the agent working on screen, the event notebook beside it' },
+            { slot: 'blog-hack26-poster', alt: 'RSI Hackathon poster by Kavak and OpenAI, November 9' },
+            { slot: 'blog-hack26-notebook', alt: 'A laptop running the agent next to the Kavak x OpenAI x Primero RSI notebook' },
           ],
         },
 
@@ -94,7 +95,7 @@ export const posts = [
           type: 'p',
           text: 'We took third place overall and first place in the AI category.',
         },
-        { type: 'photo', slot: 'blog-hack26-team', caption: 'The four of us, each holding a piece of BREACH: the landing page, the coverage curve, the vulnerability map and the architecture' },
+        { type: 'photo', slot: 'blog-hack26-team', alt: 'The four team members holding laptops that show BREACH' },
 
         { type: 'h', text: 'What came after' },
         {
@@ -134,8 +135,8 @@ export const posts = [
         {
           type: 'gallery',
           photos: [
-            { slot: 'blog-hack26-poster', caption: 'La consigna del día: sistemas de agentes que aprenden y construyen nuevos sistemas' },
-            { slot: 'blog-hack26-notebook', caption: 'Mi lugar en Kavak: el agente trabajando en pantalla y la libreta del evento a un lado' },
+            { slot: 'blog-hack26-poster', alt: 'Póster del RSI Hackathon de Kavak y OpenAI, 9 de noviembre' },
+            { slot: 'blog-hack26-notebook', alt: 'Una laptop con el agente corriendo junto a la libreta RSI de Kavak x OpenAI x Primero' },
           ],
         },
 
@@ -197,7 +198,7 @@ export const posts = [
           type: 'p',
           text: 'Quedamos en tercer lugar general y en primer lugar en la categoría de AI.',
         },
-        { type: 'photo', slot: 'blog-hack26-team', caption: 'Los cuatro, cada uno con una parte de BREACH: la landing, la curva de cobertura, el mapa de vulnerabilidades y la arquitectura' },
+        { type: 'photo', slot: 'blog-hack26-team', alt: 'Los cuatro integrantes del equipo con laptops que muestran BREACH' },
 
         { type: 'h', text: 'Lo que vino después' },
         {

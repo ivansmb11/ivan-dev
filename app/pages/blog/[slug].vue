@@ -105,8 +105,8 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
               class="my-12 bg-card p-2 md:my-16 md:p-3"
               :class="[frameShadow, block.tall ? 'mx-auto max-w-[26rem]' : 'md:-mx-16 lg:-mx-32']"
             >
-              <AssetSlot :id="block.slot" :alt="block.caption" class="w-full" :class="block.tall ? 'aspect-[3/4]' : 'aspect-[3/2]'" />
-              <figcaption class="mt-2 flex items-center gap-1.5 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+              <AssetSlot :id="block.slot" :alt="block.alt ?? block.caption" class="w-full" :class="block.tall ? 'aspect-[3/4]' : 'aspect-[3/2]'" />
+              <figcaption v-if="block.caption" class="mt-2 flex items-center gap-1.5 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
                 <AsteriskMark class="size-3 shrink-0 text-accent" />
                 <span>{{ block.caption }}</span>
               </figcaption>
@@ -114,8 +114,8 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
 
             <div v-else-if="block.type === 'gallery'" v-motion="reveal()" class="my-12 grid grid-cols-2 gap-2 md:-mx-16 md:my-16 md:gap-3 lg:-mx-32">
               <figure v-for="photo in block.photos" :key="photo.slot" class="flex flex-col bg-card p-1.5 md:p-2.5" :class="frameShadow">
-                <AssetSlot :id="photo.slot" :alt="photo.caption" class="aspect-[3/4] w-full" />
-                <figcaption class="mt-1.5 flex flex-1 items-start gap-1.5 bg-mist-soft px-2.5 py-2 text-xs leading-snug text-graphite md:mt-2.5 md:text-[13px]">
+                <AssetSlot :id="photo.slot" :alt="photo.alt ?? photo.caption" class="aspect-[3/4] w-full" />
+                <figcaption v-if="photo.caption" class="mt-1.5 flex flex-1 items-start gap-1.5 bg-mist-soft px-2.5 py-2 text-xs leading-snug text-graphite md:mt-2.5 md:text-[13px]">
                   <AsteriskMark class="mt-[0.2em] size-2.5 shrink-0 text-accent" />
                   <span>{{ photo.caption }}</span>
                 </figcaption>
