@@ -149,6 +149,11 @@ AI Engineer Code Summit, New York City, 2025
 
 ## Writing
 
+### Every miss becomes a check (Cada falla se vuelve un check)
+Date: Nov 10, 2026
+URL: https://ivanmendoza.dev/blog/kavak-openai-hackathon
+Summary: A write-up, in English and Spanish, of the Kavak x OpenAI x Primero AI hackathon in Mexico City (November 9, 2026, around 20 teams, theme: recursive self-improvement and agentic systems). Ivan's team of four from Culiacán, Sinaloa (Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro and Ivan) built BREACH, continuous security testing that turns every missed weakness into a new verified check through an AI author, a safety gate and human approval. During the day it went from 1 to 12 of 51 known weaknesses with zero false alarms, two of them caught by checks the loop wrote itself. Ivan owned the agent harness, the infrastructure and the vulnerability knowledge graph suggested by mentor Paco Melker. The team took third place overall and first place in the AI category. After the event Ivan added an unattended learning loop with a hold-out set and a control that doesn't learn.
+
 ### More hands, same products (Más manos, mismos productos)
 Date: Oct 28, 2026
 URL: https://ivanmendoza.dev/blog/ai-engineer-2026

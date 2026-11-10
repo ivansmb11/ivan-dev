@@ -5,6 +5,199 @@
 
 export const posts = [
   {
+    slug: 'kavak-openai-hackathon',
+    date: '2026-11-10',
+    cover: 'blog-hack26-cover',
+    en: {
+      title: 'Every miss becomes a check',
+      kicker: 'Kavak x OpenAI x Primero AI hackathon',
+      description:
+        'How four engineers from Culiacán built BREACH in one day at the Kavak x OpenAI x Primero AI hackathon: continuous security testing that learns from what it misses. Third place overall, first in the AI category.',
+      lede:
+        'On November 9 we spent ten hours at Kavak\'s offices on Reforma, in Mexico City, building a system that gets better at finding security holes every time it misses one. We took third place overall and first in the AI category. This is how it went.',
+      blocks: [
+        { type: 'h', text: 'Outsiders in Mexico City' },
+        {
+          type: 'p',
+          text: 'The hackathon was organized by Kavak, OpenAI and Primero AI, and the theme was recursive self-improvement (RSI) and agentic systems. There were around 20 teams, and as far as we could tell every other one was from Mexico City. We came from Culiacán, Sinaloa. We were the outsiders, and we said so in the pitch.',
+        },
+        {
+          type: 'p',
+          text: 'We were four: Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro and me. A very multidisciplinary team, with very different backgrounds, which turned out to be exactly what a ten-hour build needs.',
+        },
+
+        { type: 'h', text: 'The problem' },
+        {
+          type: 'p',
+          text: "We've seen several cyberattacks up close, at very large companies. I won't name them. What they taught us is that keeping a company's infrastructure and products safe from attackers matters more now than ever, and the AI boom made it worse. Today anyone, working 24/7 with AI, can find a vulnerability and attack it.",
+        },
+        {
+          type: 'p',
+          text: "AI made writing code almost free, but it didn't make reviewing it free. Companies pick fast and good, and give up safe. Apps get shipped every day, and a security audit once a year arrives already out of date.",
+        },
+        {
+          type: 'quote',
+          text: "A smarter model doesn't know what's broken in your app today. You only get that by touching the target.",
+          cite: 'From our pitch',
+        },
+
+        { type: 'h', text: 'What we built' },
+        {
+          type: 'p',
+          text: 'We called it BREACH: continuous security testing for live apps you are authorized to test. Every run executes a library of checks and confirms each finding by reproducing it, so a result is evidence, not a model\'s opinion. It only runs against targets with a written scope, and anything outside that scope gets rejected.',
+        },
+        {
+          type: 'p',
+          text: 'I focused on the agent harness: how the agents are organized, which tools they get, and what they can and can\'t touch. I also took all of the infrastructure, so what we showed was running live, and the knowledge graph of known vulnerabilities, which comes up again in a moment.',
+        },
+
+        { type: 'h', text: 'Where the RSI comes in' },
+        {
+          type: 'p',
+          text: 'To me, RSI is the ability of agents to go back over a problem they already worked on and do it better, by improving their prompts, their tools, the agents themselves, the models they use or the effort they spend. The key is that it isn\'t retrying the same prompt until it gets lucky.',
+        },
+        {
+          type: 'p',
+          text: 'In BREACH it works like this. We measure the system against an exam of known weaknesses on test apps. When it misses one, that miss becomes a work order: an AI author writes a new check, a safety gate validates it, a person approves it, and the next run finds what the previous one missed. The expensive reasoning happens once and stays behind as a cheap test that reruns forever.',
+        },
+        {
+          type: 'p',
+          text: 'During the day what it found went from 1 to 4, 8, 9, 10 and finally 12 of 51 known weaknesses, while the exam itself grew from 9 cases to 51. Zero false alarms on the trap cases we planted. And two of those checks were written by the loop itself, in production: the team only approved them.',
+        },
+
+        { type: 'h', text: 'The conversation that changed the day' },
+        {
+          type: 'p',
+          text: 'The key moment was a conversation with Paco Melker, one of the mentors. He gave us a very clear insight on which models to use and how to put it all together, and one idea in particular: we needed a knowledge graph of vulnerabilities to detect them faster.',
+        },
+        {
+          type: 'p',
+          text: "That's the piece I ended up owning. Every known vulnerability and incident lives there, including the ones being exploited in real attacks, so the agents start from what's already known instead of figuring it out from scratch. And when a known weakness isn't covered by any check yet, it becomes another gap for the loop to close. His feedback and mentorship were a big part of why this project actually came together.",
+        },
+
+        { type: 'h', text: 'The pitch and the result' },
+        {
+          type: 'p',
+          text: 'We presented as what we were: outsiders from Culiacán who had seen the problem from up close. What convinced the judges, as far as we can tell, was how viable the product was and how far along it was for something we had started only a few hours earlier.',
+        },
+        {
+          type: 'p',
+          text: 'We took third place overall and first place in the AI category.',
+        },
+
+        { type: 'h', text: 'What came after' },
+        {
+          type: 'p',
+          text: 'Two points are not a curve, and an honest judge will say so. So after the event I kept going on the loop. Now it runs unattended for several iterations: measure, pick a miss, write a check, pass the gate, measure again. A third of the exam is held out and never shown to the author, so we can see whether a check written for one case also catches cases it never saw. And there is a control that doesn\'t learn, so if the curve goes up, it went up because of the learning and not because of luck.',
+        },
+
+        { type: 'h', text: 'What I take home' },
+        {
+          type: 'p',
+          text: 'Many things, but mostly my teammates. We had very different expertise, and even so, or maybe because of it, we made a great team and delivered a great project together.',
+        },
+        {
+          type: 'p',
+          text: 'We hope this opportunity has an impact, both on organizations that need to keep up with their own security and on our own lives.',
+        },
+      ],
+    },
+    es: {
+      title: 'Cada falla se vuelve un check',
+      kicker: 'Hackathon Kavak x OpenAI x Primero AI',
+      description:
+        'Cómo cuatro ingenieros de Culiacán construimos BREACH en un día en el hackathon de Kavak x OpenAI x Primero AI: pruebas de seguridad continuas que aprenden de lo que se les escapa. Tercer lugar general y primero en la categoría de AI.',
+      lede:
+        'El 9 de noviembre pasamos diez horas en el corporativo de Kavak, en Reforma, Ciudad de México, construyendo un sistema que mejora para encontrar huecos de seguridad cada vez que se le escapa uno. Quedamos en tercer lugar general y en primero en la categoría de AI. Así fue.',
+      blocks: [
+        { type: 'h', text: 'Outsiders en la Ciudad de México' },
+        {
+          type: 'p',
+          text: 'El hackathon lo organizaron Kavak, OpenAI y Primero AI, y el tema fue recursive self-improvement (RSI) y sistemas agénticos. Había alrededor de 20 equipos y, hasta donde vimos, todos los demás eran de la Ciudad de México. Nosotros veníamos de Culiacán, Sinaloa. Éramos los outsiders, y así lo dijimos en el pitch.',
+        },
+        {
+          type: 'p',
+          text: 'Fuimos cuatro: Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro y yo. Un equipo muy multidisciplinario, con experiencias muy distintas, que resultó ser justo lo que necesita una construcción de diez horas.',
+        },
+
+        { type: 'h', text: 'El problema' },
+        {
+          type: 'p',
+          text: 'Hemos visto de cerca varios ciberataques en empresas muy grandes. No voy a decir cuáles. Lo que nos dejaron claro es que mantener a salvo la infraestructura y los productos de una empresa importa hoy más que nunca, y con el boom de la IA creció bastante. Ahora cualquier persona, operando 24/7 con IA, puede encontrar una vulnerabilidad y atacarla.',
+        },
+        {
+          type: 'p',
+          text: 'La IA hizo que escribir código sea casi gratis, pero no hizo que revisarlo sea gratis. Las empresas eligen rápido y bueno, y sacrifican seguro. Las apps salen todos los días, y una auditoría de seguridad una vez al año ya llega vieja.',
+        },
+        {
+          type: 'quote',
+          text: 'Un modelo más listo no sabe qué está roto en tu app hoy. Eso solo se obtiene tocando el objetivo.',
+          cite: 'De nuestro pitch',
+        },
+
+        { type: 'h', text: 'Lo que construimos' },
+        {
+          type: 'p',
+          text: 'Le pusimos BREACH: pruebas de seguridad continuas para apps en producción que estás autorizado a probar. Cada corrida ejecuta una biblioteca de checks y confirma cada hallazgo reproduciéndolo, así que un resultado es evidencia, no la opinión de un modelo. Solo corre contra objetivos con un alcance por escrito, y todo lo que esté fuera de ese alcance se rechaza.',
+        },
+        {
+          type: 'p',
+          text: 'Yo me enfoqué en el harness del agente: cómo se organizan los agentes, qué herramientas reciben y qué pueden y qué no pueden tocar. También llevé toda la infraestructura, para que lo que mostramos estuviera corriendo en vivo, y el knowledge graph de vulnerabilidades conocidas, del que hablo en un momento.',
+        },
+
+        { type: 'h', text: 'Dónde entra el RSI' },
+        {
+          type: 'p',
+          text: 'Para mí, RSI es la capacidad de los agentes de regresar a un problema que ya atendieron y resolverlo mejor, mejorando sus prompts, sus herramientas, los agentes mismos, los modelos que usan o el esfuerzo que le dedican. La clave es que no se trata de reintentar el mismo prompt hasta que salga bien por suerte.',
+        },
+        {
+          type: 'p',
+          text: 'En BREACH funciona así. Medimos el sistema contra un examen de debilidades conocidas en apps de prueba. Cuando se le escapa una, esa falla se vuelve una orden de trabajo: un autor con IA escribe un check nuevo, una compuerta de seguridad lo valida, una persona lo aprueba y la siguiente corrida encuentra lo que la anterior no vio. El razonamiento caro se paga una vez y queda como un test barato que se repite siempre.',
+        },
+        {
+          type: 'p',
+          text: 'Durante el día lo encontrado pasó de 1 a 4, 8, 9, 10 y al final 12 de 51 debilidades conocidas, mientras el examen mismo crecía de 9 casos a 51. Cero falsas alarmas en los casos trampa que pusimos. Y dos de esos checks los escribió el propio loop, en producción: el equipo solo los aprobó.',
+        },
+
+        { type: 'h', text: 'La plática que cambió el día' },
+        {
+          type: 'p',
+          text: 'El momento clave fue cuando hablamos con Paco Melker, uno de los mentores. Nos dio un insight muy claro sobre qué tipo de modelos usar y cómo armar todo esto, y una idea en particular: teníamos que tener un knowledge graph de vulnerabilidades para ser más rápidos en detectarlas.',
+        },
+        {
+          type: 'p',
+          text: 'Esa fue la pieza que terminé llevando yo. Ahí viven las vulnerabilidades e incidencias conocidas, incluidas las que se están explotando en ataques reales, así que los agentes arrancan de lo que ya se sabe en lugar de descubrirlo desde cero. Y cuando una debilidad conocida todavía no la cubre ningún check, se vuelve otro hueco que el loop tiene que cerrar. Su feedback y su mentoría fueron clave para que este proyecto se materializara.',
+        },
+
+        { type: 'h', text: 'El pitch y el resultado' },
+        {
+          type: 'p',
+          text: 'Nos presentamos como lo que éramos: outsiders de Culiacán que habíamos visto el problema de cerca. Lo que convenció a los jueces, hasta donde entendemos, fue la viabilidad del producto y lo avanzado que estaba para algo que habíamos empezado apenas unas horas antes.',
+        },
+        {
+          type: 'p',
+          text: 'Quedamos en tercer lugar general y en primer lugar en la categoría de AI.',
+        },
+
+        { type: 'h', text: 'Lo que vino después' },
+        {
+          type: 'p',
+          text: 'Dos puntos no son una curva, y un juez honesto te lo va a decir. Así que después del evento seguí con el loop. Ahora corre solo durante varias iteraciones: mide, escoge una falla, escribe un check, pasa la compuerta y vuelve a medir. Un tercio del examen se aparta y el autor nunca lo ve, para saber si un check escrito para un caso también atrapa casos que no conocía. Y hay un control que no aprende, así que si la curva sube, subió por el aprendizaje y no por suerte.',
+        },
+
+        { type: 'h', text: 'Lo que me llevo' },
+        {
+          type: 'p',
+          text: 'Bastantes cosas, pero sobre todo a mis compañeros. Teníamos expertise muy distinta y aun así, o tal vez por eso, hicimos un gran equipo y entre todos entregamos un gran proyecto.',
+        },
+        {
+          type: 'p',
+          text: 'Esperamos que esta oportunidad genere impacto, tanto en las organizaciones que necesitan mantener su seguridad al día como en nuestra propia vida.',
+        },
+      ],
+    },
+  },
+  {
     slug: 'ai-engineer-2026',
     date: '2026-10-28',
     cover: 'blog-aie26-stage',

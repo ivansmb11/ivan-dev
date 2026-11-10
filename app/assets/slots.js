@@ -38,6 +38,8 @@ export const slots = {
 
   'contact-backdrop': { label: 'Contact form backdrop', size: '2400 × 1400' },
 
+  'blog-hack26-cover': { label: 'Kavak x OpenAI x Primero AI hackathon post, the team (also the cover)', size: '2000 × 1333' },
+
   'blog-aie26-stage': { label: 'AI Engineer 2026 post, main stage in New York (also the cover)', size: '2000 × 1333' },
   'blog-aie26-sign': { label: 'AI Engineer 2026 post, at the AIE letters', size: '1294 × 1724' },
   'blog-aie26-badge': { label: 'AI Engineer 2026 post, conference badge', size: '970 × 1724' },
