@@ -31,8 +31,8 @@ export const posts = [
         {
           type: 'gallery',
           photos: [
-            { slot: 'blog-hack26-poster', caption: 'RSI Hackathon, November 9' },
-            { slot: 'blog-hack26-notebook', caption: 'Building at Kavak, with the event notebook' },
+            { slot: 'blog-hack26-poster', caption: 'The brief for the day: agent systems that learn and build new systems' },
+            { slot: 'blog-hack26-notebook', caption: 'My desk at Kavak: the agent working on screen, the event notebook beside it' },
           ],
         },
 
@@ -94,7 +94,7 @@ export const posts = [
           type: 'p',
           text: 'We took third place overall and first place in the AI category.',
         },
-        { type: 'photo', slot: 'blog-hack26-team', caption: 'The team, with BREACH on our laptops' },
+        { type: 'photo', slot: 'blog-hack26-team', caption: 'The four of us, each holding a piece of BREACH: the landing page, the coverage curve, the vulnerability map and the architecture' },
 
         { type: 'h', text: 'What came after' },
         {
@@ -134,8 +134,8 @@ export const posts = [
         {
           type: 'gallery',
           photos: [
-            { slot: 'blog-hack26-poster', caption: 'RSI Hackathon, 9 de noviembre' },
-            { slot: 'blog-hack26-notebook', caption: 'Construyendo en Kavak, con la libreta del evento' },
+            { slot: 'blog-hack26-poster', caption: 'La consigna del día: sistemas de agentes que aprenden y construyen nuevos sistemas' },
+            { slot: 'blog-hack26-notebook', caption: 'Mi lugar en Kavak: el agente trabajando en pantalla y la libreta del evento a un lado' },
           ],
         },
 
@@ -197,7 +197,7 @@ export const posts = [
           type: 'p',
           text: 'Quedamos en tercer lugar general y en primer lugar en la categoría de AI.',
         },
-        { type: 'photo', slot: 'blog-hack26-team', caption: 'El equipo, con BREACH en nuestras laptops' },
+        { type: 'photo', slot: 'blog-hack26-team', caption: 'Los cuatro, cada uno con una parte de BREACH: la landing, la curva de cobertura, el mapa de vulnerabilidades y la arquitectura' },
 
         { type: 'h', text: 'Lo que vino después' },
         {
