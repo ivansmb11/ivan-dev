@@ -16,9 +16,9 @@ export const posts = [
       kicker: 'Kavak x OpenAI x Primero AI hackathon',
       badges: [{ text: '3rd place overall', note: 'RSI Hackathon 2026', medal: 'bronze', place: 3 }],
       description:
-        'Third place overall and first in the AI category at the Kavak x OpenAI x Primero AI hackathon: how four engineers from Culiacán built BREACH in one day, continuous security testing that learns from what it misses.',
+        'Third place overall at the Kavak x OpenAI x Primero AI hackathon: how four engineers from Culiacán built BREACH in one day, continuous security testing that learns from what it misses.',
       lede:
-        'We won third place overall and first place in the AI category at the Kavak x OpenAI x Primero AI hackathon. On November 9 we spent ten hours at Kavak\'s offices on Reforma, in Mexico City, building a system that gets better at finding security holes every time it misses one. This is how it went.',
+        'We won third place overall at the Kavak x OpenAI x Primero AI hackathon. On November 9 we spent ten hours at Kavak\'s offices on Reforma, in Mexico City, building a system that gets better at finding security holes every time it misses one. This is how it went.',
       blocks: [
         { type: 'h', text: 'Outsiders in Mexico City' },
         {
@@ -79,7 +79,7 @@ export const posts = [
         { type: 'h', text: 'The conversation that changed the day' },
         {
           type: 'p',
-          text: 'The key moment was a conversation with Paco Melker, one of the mentors. He gave us a very clear insight on which models to use and how to put it all together, and one idea in particular: we needed a knowledge graph of vulnerabilities to detect them faster.',
+          text: 'The key moment was a conversation with Paco Mekler, one of the mentors. He gave us a very clear insight on which models to use and how to put it all together, and one idea in particular: we needed a knowledge graph of vulnerabilities to detect them faster.',
         },
         {
           type: 'p',
@@ -93,7 +93,7 @@ export const posts = [
         },
         {
           type: 'p',
-          text: 'We took third place overall and first place in the AI category.',
+          text: 'We took third place overall, out of around 20 teams.',
         },
         { type: 'photo', slot: 'blog-hack26-team', alt: 'The four team members holding laptops that show BREACH' },
 
@@ -119,9 +119,9 @@ export const posts = [
       kicker: 'Hackathon Kavak x OpenAI x Primero AI',
       badges: [{ text: '3er lugar general', note: 'RSI Hackathon 2026', medal: 'bronze', place: 3 }],
       description:
-        'Tercer lugar general y primero en la categoría de AI en el hackathon de Kavak x OpenAI x Primero AI: cómo cuatro ingenieros de Culiacán construimos BREACH en un día, pruebas de seguridad continuas que aprenden de lo que se les escapa.',
+        'Tercer lugar general en el hackathon de Kavak x OpenAI x Primero AI: cómo cuatro ingenieros de Culiacán construimos BREACH en un día, pruebas de seguridad continuas que aprenden de lo que se les escapa.',
       lede:
-        'Ganamos el tercer lugar general y el primer lugar en la categoría de AI en el hackathon de Kavak x OpenAI x Primero AI. El 9 de noviembre pasamos diez horas en el corporativo de Kavak, en Reforma, Ciudad de México, construyendo un sistema que mejora para encontrar huecos de seguridad cada vez que se le escapa uno. Así fue.',
+        'Ganamos el tercer lugar general en el hackathon de Kavak x OpenAI x Primero AI. El 9 de noviembre pasamos diez horas en el corporativo de Kavak, en Reforma, Ciudad de México, construyendo un sistema que mejora para encontrar huecos de seguridad cada vez que se le escapa uno. Así fue.',
       blocks: [
         { type: 'h', text: 'Outsiders en la Ciudad de México' },
         {
@@ -182,7 +182,7 @@ export const posts = [
         { type: 'h', text: 'La plática que cambió el día' },
         {
           type: 'p',
-          text: 'El momento clave fue cuando hablamos con Paco Melker, uno de los mentores. Nos dio un insight muy claro sobre qué tipo de modelos usar y cómo armar todo esto, y una idea en particular: teníamos que tener un knowledge graph de vulnerabilidades para ser más rápidos en detectarlas.',
+          text: 'El momento clave fue cuando hablamos con Paco Mekler, uno de los mentores. Nos dio un insight muy claro sobre qué tipo de modelos usar y cómo armar todo esto, y una idea en particular: teníamos que tener un knowledge graph de vulnerabilidades para ser más rápidos en detectarlas.',
         },
         {
           type: 'p',
@@ -196,7 +196,7 @@ export const posts = [
         },
         {
           type: 'p',
-          text: 'Quedamos en tercer lugar general y en primer lugar en la categoría de AI.',
+          text: 'Quedamos en tercer lugar general, entre alrededor de 20 equipos.',
         },
         { type: 'photo', slot: 'blog-hack26-team', alt: 'Los cuatro integrantes del equipo con laptops que muestran BREACH' },
 
