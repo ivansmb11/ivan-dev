@@ -73,7 +73,11 @@ export const posts = [
         },
         {
           type: 'p',
-          text: 'During the day what it found went from 1 to 4, 8, 9, 10 and finally 12 of 51 known weaknesses, while the exam itself grew from 9 cases to 51. Zero false alarms on the trap cases we planted. And two of those checks were written by the loop itself, in production: the team only approved them.',
+          text: 'For most of the day the progress was slow: from 1 to 12 of 51 known weaknesses, while the exam itself grew from 9 cases to 51. Then, around six in the evening, the loop really kicked in. In about 15 minutes the AI author wrote 16 new checks, Nicolás approved them, and the next run jumped to 27. Our last measurement in production before the deadline was 28 of 51, with zero false alarms on the 7 trap cases we planted.',
+        },
+        {
+          type: 'p',
+          text: "At 27 it hit a ceiling. Writing a check from the outside, one request at a time, can't reach the weaknesses hidden behind a login. So we changed method: on our test apps, the AI author got a logged-in session to work with. In our local lab that took it to 34 of 51, the number on our pitch slide. In production, as an outside attacker, it stayed at 28.",
         },
 
         { type: 'h', text: 'The conversation that changed the day' },
@@ -176,7 +180,11 @@ export const posts = [
         },
         {
           type: 'p',
-          text: 'Durante el día lo encontrado pasó de 1 a 4, 8, 9, 10 y al final 12 de 51 debilidades conocidas, mientras el examen mismo crecía de 9 casos a 51. Cero falsas alarmas en los casos trampa que pusimos. Y dos de esos checks los escribió el propio loop, en producción: el equipo solo los aprobó.',
+          text: 'Durante casi todo el día el avance fue lento: de 1 a 12 de 51 debilidades conocidas, mientras el examen mismo crecía de 9 casos a 51. Luego, como a las seis de la tarde, el loop arrancó de verdad. En unos 15 minutos el autor con IA escribió 16 checks nuevos, Nicolás los aprobó y la siguiente corrida saltó a 27. Nuestra última medición en producción antes del cierre fue 28 de 51, con cero falsas alarmas en los 7 casos trampa que pusimos.',
+        },
+        {
+          type: 'p',
+          text: 'En 27 topó con un techo. Escribir un check desde afuera, una petición a la vez, no alcanza las debilidades que están detrás de un login. Así que cambiamos de método: en nuestras apps de prueba, el autor con IA recibió una sesión iniciada para trabajar. En nuestro laboratorio local eso lo llevó a 34 de 51, la cifra de nuestra slide del pitch. En producción, como atacante externo, se quedó en 28.',
         },
 
         { type: 'h', text: 'La plática que cambió el día' },
