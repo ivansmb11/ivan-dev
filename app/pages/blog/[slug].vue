@@ -5,6 +5,7 @@ import PageHeader from '@/components/ui/PageHeader.vue'
 import AssetSlot from '@/components/ui/AssetSlot.vue'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import BronzeMedal from '@/components/ui/BronzeMedal.vue'
+import CoverageChart from '@/components/blog/CoverageChart.vue'
 import { enter, reveal } from '@/motion'
 import { findPost, readMinutes } from '@/content/blog'
 import { slotSrc } from '@/assets/slots'
@@ -21,6 +22,8 @@ const minutes = computed(() => readMinutes(entry.value))
 const date = computed(() =>
   new Intl.DateTimeFormat(locale.value, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(`${post.date}T00:00:00Z`)),
 )
+
+const charts = { 'hack26-coverage': CoverageChart }
 
 const coverSrc = slotSrc(post.cover)
 useSeoMeta({
@@ -110,6 +113,14 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
                 <AsteriskMark class="size-3 shrink-0 text-accent" />
                 <span>{{ block.caption }}</span>
               </figcaption>
+            </figure>
+
+            <figure
+              v-else-if="block.type === 'chart' && charts[block.id]"
+              v-motion="reveal()"
+              class="my-12 border border-line bg-card p-5 md:-mx-8 md:my-16 md:p-8"
+            >
+              <component :is="charts[block.id]" />
             </figure>
 
             <div v-else-if="block.type === 'gallery'" v-motion="reveal()" class="my-12 grid grid-cols-2 gap-2 md:-mx-16 md:my-16 md:gap-3 lg:-mx-32">

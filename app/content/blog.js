@@ -2,7 +2,8 @@
 // keep in sync side by side than spread across en.js and es.js, and vue-i18n would read "@", "{" and "|"
 // in prose as message syntax. Blocks: h (heading), p, quote, photo (an AssetSlot id from slots.js; `tall`
 // for portrait shots) and gallery (two or more portrait photos side by side). Photos take a visible `caption`,
-// or only an `alt` when they should show without one. Optional `badges` per language:
+// or only an `alt` when they should show without one. chart: a post-specific chart component from `charts` in
+// pages/blog/[slug].vue, by id. Optional `badges` per language:
 // results shown as chips under the title and on the /blog card, `{ text }` with a trophy or
 // `{ text, note, medal: 'bronze', place }` with a medal and a small line above the text.
 
@@ -79,6 +80,7 @@ export const posts = [
           type: 'p',
           text: "At 27 it hit a ceiling. Writing a check from the outside, one request at a time, can't reach the weaknesses hidden behind a login. So we changed method: on our test apps, the AI author got a logged-in session to work with. In our local lab that took it to 34 of 51, the number on our pitch slide. In production, as an outside attacker, it stayed at 28.",
         },
+        { type: 'chart', id: 'hack26-coverage' },
 
         { type: 'h', text: 'The conversation that changed the day' },
         {
@@ -186,6 +188,7 @@ export const posts = [
           type: 'p',
           text: 'En 27 topó con un techo. Escribir un check desde afuera, una petición a la vez, no alcanza las debilidades que están detrás de un login. Así que cambiamos de método: en nuestras apps de prueba, el autor con IA recibió una sesión iniciada para trabajar. En nuestro laboratorio local eso lo llevó a 34 de 51, la cifra de nuestra slide del pitch. En producción, como atacante externo, se quedó en 28.',
         },
+        { type: 'chart', id: 'hack26-coverage' },
 
         { type: 'h', text: 'La plática que cambió el día' },
         {
