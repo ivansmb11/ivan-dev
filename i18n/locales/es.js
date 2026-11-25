@@ -20,7 +20,6 @@ export default {
       "AI Engineer construyendo agentes para fintech regulada. No confío en que el modelo sea seguro, pongo la garantía alrededor: identidad, sandboxes, reglas de cumplimiento, evals y auditoría.",
     location: "Ciudad de México, MX",
     tagline: "Construyo agentes de IA para fintech regulada, con las garantías fuera del modelo",
-    featuredType: "Proyecto personal",
     letsTalk: "Hablemos",
     role: "AI Engineer {'|'} Agentes para fintech",
     scroll: "Desliza para explorar",

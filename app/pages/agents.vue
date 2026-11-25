@@ -108,12 +108,6 @@ Tech: RSI, AI Agents, Security, Knowledge Graph, Evals
 Demonstrates: self-improving agents with a safety gate and a human approval step, so the system learns without shipping checks nobody verified.
 Story: https://ivanmendoza.dev/blog/kavak-openai-hackathon
 
-### Agent Platform
-A multi-tenant platform where a business runs a team of specialized AI support agents. Each tenant gets several agents, each with its own prompt, knowledge, guardrails and API keys. Agent changes go through drafts and ship as semver-tagged deploys with one-click rollback. Context: append-only event log with a sliding window, plus knowledge that goes into the prompt whole when small and switches to hybrid RAG (Gemini embeddings on pgvector and Postgres full-text, merged with reciprocal rank fusion) when large, always filtered per agent. Safety: a fixed security preamble, typed per-agent guardrails, an input sanitizer for injection payloads, a Gemini tool-call abuse detector with three-strike auto-close, and a multilingual human-handoff detector that runs before any LLM call. Quality: a 55-case eval suite across 12 categories, scored by rule checks plus a Gemini judge validated against a human-labeled golden set, shown as a soft gate before deploys. Also a playground pinned to live or draft versions, a human inbox with take-over, analytics, and a dependency-free Shadow DOM widget that streams AI replies over SSE. Built with NestJS 11, Prisma 7, PostgreSQL 16 + pgvector, Redis, Gemini 2.5 Flash on Vertex AI, React 19 + Vite, React Flow, Firebase Auth, Cloud Run and Cloud SQL.
-Tech: NestJS, React 19, Vertex AI, pgvector, RAG, Evals
-Demonstrates: agents shipped like software, with versioned deploys, rollback, an eval gate and guardrails enforced before the model answers.
-Showcase: https://ivanmendoza.dev/agent-platform
-
 ### Vibebify
 A music-focused social media web app with a punk/rock aesthetic. Sign in with Spotify, explore your listening stats, share posts about songs, follow other users, view your Genre DNA, compete in song duels, and maintain daily posting streaks. Early-inspired by Receiptify (https://github.com/michellexliu/receiptify) by Michelle Liu. Built with Next.js 16, TypeScript, Supabase (PostgreSQL + RLS), Spotify OAuth, React Aria, Tailwind CSS v4, Zod v4, Bun, and deployed on Vercel. Client-first architecture with direct Supabase calls, only 3 API routes for server secrets.
 Tech: Next.js 16, Supabase, PostgreSQL, Spotify API, Social Media
@@ -128,6 +122,12 @@ Tech: GCP, Vertex AI, LangChain, Cloud Run, PostgreSQL, Zero-Trust
 Demonstrates: agent access governed by identity, enforced by the network and the server rather than the prompt.
 GitHub: https://github.com/ivansmb11/vip-data-concierge
 Showcase: https://ivanmendoza.dev/concierge
+
+### Agent Platform
+A multi-tenant platform where a business runs a team of specialized AI support agents. Each tenant gets several agents, each with its own prompt, knowledge, guardrails and API keys. Agent changes go through drafts and ship as semver-tagged deploys with one-click rollback. Context: append-only event log with a sliding window, plus knowledge that goes into the prompt whole when small and switches to hybrid RAG (Gemini embeddings on pgvector and Postgres full-text, merged with reciprocal rank fusion) when large, always filtered per agent. Safety: a fixed security preamble, typed per-agent guardrails, an input sanitizer for injection payloads, a Gemini tool-call abuse detector with three-strike auto-close, and a multilingual human-handoff detector that runs before any LLM call. Quality: a 55-case eval suite across 12 categories, scored by rule checks plus a Gemini judge validated against a human-labeled golden set, shown as a soft gate before deploys. Also a playground pinned to live or draft versions, a human inbox with take-over, analytics, and a dependency-free Shadow DOM widget that streams AI replies over SSE. Built with NestJS 11, Prisma 7, PostgreSQL 16 + pgvector, Redis, Gemini 2.5 Flash on Vertex AI, React 19 + Vite, React Flow, Firebase Auth, Cloud Run and Cloud SQL.
+Tech: NestJS, React 19, Vertex AI, pgvector, RAG, Evals
+Demonstrates: agents shipped like software, with versioned deploys, rollback, an eval gate and guardrails enforced before the model answers.
+Showcase: https://ivanmendoza.dev/agent-platform
 
 ---
 
