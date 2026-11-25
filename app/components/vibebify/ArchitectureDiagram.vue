@@ -179,7 +179,8 @@ onBeforeUnmount(() => observer?.disconnect())
         <MoveHorizontal :size="14" aria-hidden="true" />{{ t('hero.scroll') }}
       </p>
       <div class="grid gap-3 lg:grid-cols-12">
-        <div class="relative min-w-0 border border-line bg-mist-soft lg:col-span-8">
+        <!-- Square glass on purpose: the corner crosshairs mark a blueprint pane -->
+        <div class="glass relative min-w-0 lg:col-span-8">
           <svg
             v-for="corner in corners"
             :key="corner"
@@ -354,7 +355,7 @@ onBeforeUnmount(() => observer?.disconnect())
           <li
             v-for="item in legend"
             :key="item.key"
-            class="inline-flex items-center gap-2 rounded-[3px] bg-mist px-2.5 py-1.5 text-xs font-medium text-ink"
+            class="glass inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-medium text-ink"
           >
             <span aria-hidden="true" class="w-5 shrink-0" :class="item.swatch" />
             {{ t(`vibebify.${item.key}`) }}

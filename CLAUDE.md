@@ -33,17 +33,19 @@ npm run assets:sync  # Upload app/assets and public/ icons to Supabase, rewrite 
 Every component also runs on the server during `nuxt generate`, where `window`, `document` and storage don't exist.
 - Read browser state (`localStorage`, `sessionStorage`, `matchMedia`, scroll) only in `onMounted` or event handlers, never in `setup`.
 - The first client render must match the prerendered HTML: start from the server's value and correct it in `onMounted` (see `booted` / `hydrated` in `app.vue` and `useTheme().sync()`).
-- Anything that must apply before paint (saved theme, intro already seen, old `/#/` links) lives in the inline `beforePaint` script in `nuxt.config.ts`.
+- Anything that must apply before paint (saved theme, glass setting, intro already seen, old `/#/` links) lives in the inline `beforePaint` script in `nuxt.config.ts`.
 
 ### Structure
 
 ```
 app/
 ├── app.vue                      # Root: skip link, intro loader, shortcuts, navbar, <NuxtPage>, agent badge
-├── pages/                       # index (home), concierge, vibebify, agent-platform, agents, blog/ (index, [slug]), [...slug] (redirects home)
+├── pages/                       # index (home), concierge, vibebify, agent-platform, gecko, agents, blog/ (index, [slug]), [...slug] (redirects home)
 ├── composables/useTheme.js      # Light default, opt-in dark; toggles html.dark
+├── composables/useGlass.js      # Glass on / reduced / off (menu, G key); toggles html.glass-reduced / html.glass-off
 ├── motion.js                    # reveal() / enter() variants for v-motion (respect reduced motion)
 ├── content/links.js             # Email, socials, home section ids, menu pages
+├── content/gecko.js             # Gecko case study: story chapters, domain map, use cases, loops (en/es side by side)
 ├── content/blog.js              # Blog posts: slug, date, cover slot, en/es text as blocks (h, p, quote, photo, gallery)
 ├── assets/
 │   ├── css/main.css             # Tailwind import, design tokens (@theme), dark palette (html.dark), utilities
@@ -53,8 +55,8 @@ app/
 └── components/
     ├── ui/                      # AssetSlot, AsteriskMark, SectionChip, SplitHeading, ArrowButton, PageHeader
     ├── HeroSection.vue … FooterSection.vue   # Home sections, in pages/index.vue order
-    ├── concierge/, vibebify/    # Case-study page components
-    └── BootSequence.vue, KeyboardShortcuts.vue, AgentFab.vue
+    ├── concierge/, vibebify/, gecko/   # Case-study page components (gecko: animated story, map, loops)
+    └── BootSequence.vue, KeyboardShortcuts.vue, AgentFab.vue, AmbientBackdrop.vue (fixed light layer the glass bends)
 i18n/locales/                    # en.js, es.js
 nuxt.config.ts                   # Modules, <head> (title, description, fonts, beforePaint script), i18n, prerender routes
 public/                          # Favicons, robots.txt, sitemap.xml
@@ -65,7 +67,8 @@ scripts/sync-assets.mjs          # Uploads assets to Supabase Storage, writes bu
 
 Visual source of truth: a Framer "Personal Portfolio" reference (orange hero, off-white paper, heavy uppercase display type, gray chips with a red-orange asterisk).
 - Tokens live in `app/assets/css/main.css` `@theme`: `paper`, `card`, `mist`, `mist-soft`, `line`, `muted`, `graphite`, `ink` (neutrals), `onyx` (fixed near-black), `ember-deep` / `ember` / `ember-bright` (hero and footer orange), `accent` / `accent-deep`, `night`. Display sizes: `text-display-hero|xl|lg|md`. Utilities: `container-site`, `link-underline`, `placeholder-hatch`.
-- Light is the default. Dark mode is opt-in (navbar toggle, menu, `D` key): `html.dark` overrides only the neutral tokens. To stay dark-safe, use `bg-card` (not `bg-white`) for raised surfaces, `text-paper` on `bg-ink`, and fixed colors (`text-white`, `bg-onyx`, `text-onyx`) only on the orange hero/footer, photos and `bg-night`. No `theme === 'dark'` branches in components.
+- Material: liquid glass. Raised surfaces (cards, frames, panels, chips, modals) use the `glass` utility with `rounded-glass`; anything nested inside glass uses `glass-tint` and `rounded-glass-inner`, never a second `glass`. `glass-thick` is for glass with busy content right behind its text (menu, contact form). `glass` owns box-shadow, so don't add `shadow-*` or `ring-*` to it. All of it reads `--glass-*` variables in `main.css`, which the dark theme, the visitor's glass setting and `prefers-reduced-transparency` retune; style through those, not per component. Long-form text, photos and the orange hero/footer stay solid.
+- Light is the default. Dark mode is opt-in (navbar toggle, menu, `D` key): `html.dark` overrides only the neutral tokens. To stay dark-safe, use `glass` (or `bg-card` where a surface must stay solid, never `bg-white`) for raised surfaces, `text-paper` on `bg-ink`, and fixed colors (`text-white`, `bg-onyx`, `text-onyx`) only on the orange hero/footer, photos and `bg-night`. No `theme === 'dark'` branches in components.
 - Images are served from the public `assets` bucket of the Supabase project `ivan-dev` (`ctqzhlionfyyhujzzped`), not bundled. `app/assets/bucket.json` lists what's in the bucket; `slotSrc(id)` and `assetUrl(path)` in `app/assets/slots.js` turn it into URLs. After adding or replacing an image (locally in `app/assets/` or straight in the bucket), run `npm run assets:sync` and commit `bucket.json`.
 - Layout images go through `AssetSlot` with an id from `app/assets/slots.js`. Until `images/<id>.<ext>` is in the bucket it renders a labeled placeholder. Case-study screenshots use `assetUrl('<page>/…')` (`vibebify/`, `agent-platform/`), diagram logos `assetUrl('logos/…')`. Favicons live under `meta/` in the bucket (copies stay in `public/` for `/favicon.ico`).
 

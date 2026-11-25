@@ -72,7 +72,6 @@ const stack = [
   { name: 'Vercel', key: 'hosting', category: 'Hosting' },
 ]
 
-const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
 
 // Keeps the decorative "(06)" counter on the same line as the last word, so it never wraps alone.
 function splitLast(text) {
@@ -112,17 +111,17 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
     </header>
 
     <div class="container-site mt-12 md:mt-16">
-      <figure v-motion="enter(400)" class="bg-card p-2 md:p-3" :class="frameShadow">
+      <figure v-motion="enter(400)" class="glass rounded-glass p-2 md:p-3">
         <img
           :src="landingImg"
           :alt="t('vibebify.landingAlt', 'Vibebify landing page')"
           width="3020"
           height="1724"
-          class="block h-auto w-full bg-mist"
+          class="block h-auto w-full overflow-hidden rounded-glass-inner bg-mist"
           loading="eager"
           fetchpriority="high"
         />
-        <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+        <figcaption class="mt-2 flex items-center justify-between gap-4 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
           <span class="flex items-center gap-1.5 uppercase text-ink">
             <AsteriskMark class="size-3 text-accent" />Vibebify
           </span>
@@ -132,10 +131,10 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
     </div>
 
     <section aria-labelledby="vb-origin" class="container-site mt-20 md:mt-32">
-      <div v-motion="reveal()" class="grid gap-8 bg-mist p-6 sm:p-8 md:p-12 lg:grid-cols-12 lg:gap-10">
+      <div v-motion="reveal()" class="glass grid gap-8 rounded-glass p-6 sm:p-8 md:p-12 lg:grid-cols-12 lg:gap-10">
         <div class="flex flex-col justify-between gap-10 lg:col-span-4">
           <h2 id="vb-origin">
-            <SectionChip class="bg-card! text-ink!">{{ t('vibebify.inspirationLabel') }}</SectionChip>
+            <SectionChip tone="tint">{{ t('vibebify.inspirationLabel') }}</SectionChip>
           </h2>
           <AssetSlot id="vibebify-receipt" class="hidden aspect-[2/3] w-full max-w-52 lg:block dark:mix-blend-lighten" fit="contain" />
         </div>
@@ -178,10 +177,10 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
             :aria-selected="activeFeature === i"
             aria-controls="vb-feature-panel"
             :tabindex="activeFeature === i ? 0 : -1"
-            class="group flex min-h-11 w-full cursor-pointer items-start gap-3.5 rounded-[3px] border-l-[3px] px-4 py-3.5 text-left transition-colors duration-200 active:translate-y-px"
+            class="group flex min-h-11 w-full cursor-pointer items-start gap-3.5 rounded-glass border-l-[3px] px-4 py-3.5 text-left transition-colors duration-200 active:translate-y-px"
             :class="activeFeature === i
               ? 'border-accent bg-ink text-paper'
-              : 'border-transparent bg-card text-ink hover:border-line hover:bg-mist'"
+              : 'glass border-transparent text-ink hover:bg-card/80'"
             @click="selectFeature(i)"
           >
             <component
@@ -213,8 +212,8 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
           :aria-labelledby="`vb-tab-${current.key}`"
           class="min-w-0 lg:col-span-8"
         >
-          <figure class="bg-card p-2 md:p-3" :class="frameShadow">
-            <div class="relative aspect-[3020/1720] overflow-hidden bg-mist">
+          <figure class="glass rounded-glass p-2 md:p-3">
+            <div class="relative aspect-[3020/1720] overflow-hidden rounded-glass-inner bg-mist">
               <transition
                 enter-active-class="transition-opacity duration-300 ease-out"
                 enter-from-class="opacity-0"
@@ -233,7 +232,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
                 />
               </transition>
             </div>
-            <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+            <figcaption class="mt-2 flex items-center justify-between gap-4 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
               <span class="flex min-w-0 items-center gap-1.5 uppercase text-ink">
                 <AsteriskMark class="size-3 shrink-0 text-accent" />
                 <span class="truncate">{{ t(`vibebify.features.${current.key}.title`) }}</span>
@@ -263,7 +262,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
         <li
           v-for="tech in stack"
           :key="tech.name"
-          class="flex min-h-32 flex-col justify-between gap-6 bg-card p-4 md:p-5 lg:min-h-40"
+          class="flex min-h-32 flex-col justify-between gap-6 glass rounded-glass p-4 md:p-5 lg:min-h-40"
         >
           <span class="text-[13px] text-graphite">{{ t(`vibebify.stackCategories.${tech.key}`, tech.category) }}</span>
           <span class="text-base leading-tight font-bold tracking-[-0.01em] uppercase md:text-lg">{{ tech.name }}</span>

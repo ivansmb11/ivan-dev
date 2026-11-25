@@ -9,6 +9,7 @@ import SplitHeading from '@/components/ui/SplitHeading.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
 import SwipeDots from '@/components/ui/SwipeDots.vue'
 import BronzeMedal from '@/components/ui/BronzeMedal.vue'
+import GeckoCover from '@/components/gecko/GeckoCover.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
@@ -16,6 +17,16 @@ const year = new Date().getFullYear()
 const track = ref(null)
 
 const projects = computed(() => [
+  {
+    key: 'gecko',
+    kind: 'framed',
+    cover: GeckoCover,
+    title: 'Gecko',
+    description: t('portfolio.gecko'),
+    tags: ['AI Agents', 'Evals', 'Policies', 'TypeScript', 'Hono', 'Claude'],
+    caseStudy: '/gecko',
+    label: t('portfolio.platform'),
+  },
   {
     key: 'breach',
     kind: 'framed',
@@ -87,22 +98,28 @@ const projects = computed(() => [
             v-if="project.kind === 'framed'"
             :is="project.caseStudy ? NuxtLink : 'div'"
             v-bind="project.caseStudy ? { to: project.caseStudy, tabindex: -1, 'aria-hidden': 'true' } : {}"
-            class="group relative block bg-card p-2 shadow-[0_18px_40px_-24px_var(--color-night)] shadow-night/35 sm:p-3"
+            class="glass group relative block rounded-glass p-2 sm:p-3"
           >
             <BronzeMedal
               v-if="project.medal"
               :place="project.medal.place"
               class="absolute -top-4 right-4 z-10 h-20 w-auto drop-shadow-[0_8px_14px_rgba(90,46,18,0.35)] sm:right-6 sm:h-24"
             />
-            <span class="block overflow-hidden">
+            <span class="block overflow-hidden rounded-glass-inner">
+              <component
+                :is="project.cover"
+                v-if="project.cover"
+                class="aspect-[4/3] w-full transition-transform duration-700 ease-out-quint group-hover:scale-[1.02]"
+              />
               <AssetSlot
+                v-else
                 :id="project.slot"
                 :alt="`${project.title} preview`"
                 class="aspect-[4/3] w-full transition-transform duration-700 ease-out-quint"
                 :class="project.caseStudy ? 'group-hover:scale-[1.02]' : ''"
               />
             </span>
-            <span class="mt-2 flex items-center justify-between gap-3 bg-mist-soft px-3 py-2.5 text-[13px] text-graphite sm:mt-3 sm:text-[15px]">
+            <span class="glass-tint mt-2 flex items-center justify-between gap-3 rounded-glass-inner px-3 py-2.5 text-[13px] text-graphite sm:mt-3 sm:text-[15px]">
               <span class="flex min-w-0 items-center gap-2 uppercase text-ink">
                 <AsteriskMark class="size-3.5 shrink-0 text-accent" />
                 <span class="truncate">{{ project.title }}</span>
@@ -115,7 +132,7 @@ const projects = computed(() => [
             v-else-if="project.kind === 'video'"
             :to="project.caseStudy"
             :aria-label="`${project.title}: ${t('portfolio.watchDemo')}`"
-            class="group relative isolate block aspect-[4/3] overflow-hidden rounded-md bg-night text-white md:aspect-auto"
+            class="group relative isolate block aspect-[4/3] overflow-hidden rounded-glass bg-night text-white md:aspect-auto"
           >
             <!-- The play button sits dead center, so the placeholder's slot label moves to the top edge (no effect once the image exists). -->
             <AssetSlot
@@ -136,10 +153,10 @@ const projects = computed(() => [
 
           <div
             v-else
-            class="relative isolate flex aspect-[4/3] flex-col items-center max-md:aspect-auto max-md:min-h-[20rem] max-md:flex-1 justify-start gap-4 overflow-hidden rounded-md border border-dashed border-muted/60 p-8 pt-14 text-center md:pt-20"
+            class="relative isolate flex aspect-[4/3] flex-col items-center max-md:aspect-auto max-md:min-h-[20rem] max-md:flex-1 justify-start gap-4 overflow-hidden rounded-glass border border-dashed border-muted/60 p-8 pt-14 text-center md:pt-20"
           >
             <AssetSlot id="project-coming-soon" class="absolute inset-0 -z-10" position="bottom" />
-            <span class="absolute top-4 left-4 rounded-[2px] bg-mist px-2 py-1 text-[11px] font-medium uppercase leading-none tracking-[0.02em] text-graphite">
+            <span class="glass absolute top-4 left-4 rounded-full px-2.5 py-1 text-[11px] font-medium uppercase leading-none tracking-[0.02em] text-graphite">
               {{ project.tags[0] }}
             </span>
             <h3 class="font-display text-2xl font-bold uppercase leading-none tracking-[-0.035em] md:text-[1.75rem]">
@@ -160,7 +177,7 @@ const projects = computed(() => [
               <li
                 v-for="tag in project.tags"
                 :key="tag"
-                class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+                class="glass-tint rounded-full px-2.5 py-1 text-[11px] leading-none text-graphite"
               >{{ tag }}</li>
             </ul>
             <div class="mt-auto flex flex-wrap items-center gap-x-6 gap-y-3 pt-6">

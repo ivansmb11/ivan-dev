@@ -121,7 +121,7 @@ const pad = (n) => String(n).padStart(2, '0')
         :class="corner"
       ><path d="M6 0v12M0 6h12" stroke="currentColor" stroke-width="1" /></svg>
 
-      <div ref="canvas" class="canvas-grid overflow-x-auto rounded-[3px] border border-line bg-card">
+      <div ref="canvas" class="canvas-grid glass overflow-x-auto">
         <svg
           viewBox="50 0 700 522"
           role="img"
@@ -224,7 +224,7 @@ const pad = (n) => String(n).padStart(2, '0')
           :id="`node-${id}-toggle`"
           type="button"
           class="group flex min-h-11 w-full cursor-pointer items-center gap-3 px-3 py-2.5 text-left text-sm font-medium transition-colors duration-300"
-          :class="activeNode === id ? 'bg-ink text-paper' : 'hover:bg-mist'"
+          :class="activeNode === id ? 'bg-ink text-paper' : 'hover:glass-tint'"
           :aria-expanded="activeNode === id"
           :aria-controls="`node-${id}-detail`"
           @click="toggle(id)"

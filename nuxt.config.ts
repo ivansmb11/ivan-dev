@@ -10,7 +10,7 @@ const fonts = 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,4
 // Runs before first paint. Old hash-router links (/#/concierge) jump to the real page before anything
 // renders, and the saved theme and the intro's "already seen" flag apply without a flash. The prerendered
 // HTML can't know either one, so components read them back only after hydration.
-const beforePaint = `(function(){var d=document.documentElement,h=location.hash;if(h.indexOf('#/')===0){location.replace(h.slice(1));return}try{if(localStorage.getItem('theme-choice')==='dark')d.classList.add('dark');if(sessionStorage.getItem('boot-done'))d.classList.add('booted')}catch(e){}})()`
+const beforePaint = `(function(){var d=document.documentElement,h=location.hash;if(h.indexOf('#/')===0){location.replace(h.slice(1));return}try{if(localStorage.getItem('theme-choice')==='dark')d.classList.add('dark');var g=localStorage.getItem('glass');if(g==='reduced'||g==='off')d.classList.add('glass-'+g);if(sessionStorage.getItem('boot-done'))d.classList.add('booted')}catch(e){}})()`
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-10-27',
@@ -75,7 +75,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static',
     prerender: {
-      routes: ['/', '/concierge', '/vibebify', '/agent-platform', '/agents', '/blog', '/blog/kavak-openai-hackathon', '/blog/ai-engineer-2026'],
+      routes: ['/', '/concierge', '/vibebify', '/agent-platform', '/gecko', '/agents', '/blog', '/blog/kavak-openai-hackathon', '/blog/ai-engineer-2026'],
       autoSubfolderIndex: false,
     },
   },
