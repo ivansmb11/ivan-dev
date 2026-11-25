@@ -95,10 +95,10 @@ export default {
       location: 'Mexico City, Mexico',
       mode: 'On-site',
       description: [
-        'Build MCP servers that let agents work with financial systems under identity-based access, least privilege and a full audit trail. Read-only by default; critical actions wait for a person. [MÉTRICA PENDIENTE: equipos o agentes que los usan]',
-        'Run autonomous agents in production for financial operations: the agent decides, schedules its own follow-up and hands off to a person, while compliance rules are enforced outside the model so they hold even if the prompt fails. [MÉTRICA PENDIENTE: resultado público del agente]',
+        'Build MCP servers that let agents work with financial systems under identity-based access, least privilege and a full audit trail. Read-only by default; critical actions wait for a person.',
+        'Run autonomous agents in production for financial operations: the agent decides, schedules its own follow-up and hands off to a person, while compliance rules are enforced outside the model so they hold even if the prompt fails.',
         'Ship agents like software: evals before every release, cohort rollouts with rollback, a cost budget per run and an audit log of every action.',
-        'Build engineering agents: multi-agent PR review where independent verifiers try to refute every finding, so only signal reaches the PR, and docs that update themselves behind a CI quality gate. They run sandboxed and never see real credentials. [MÉTRICA PENDIENTE: PRs revisados o tiempo ahorrado, si es público]',
+        'Build engineering agents: multi-agent PR review where independent verifiers try to refute every finding, so only signal reaches the PR, and docs that update themselves behind a CI quality gate. They run sandboxed and never see real credentials.',
       ].join('\n'),
       skills: 'Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes',
       previous: {
@@ -108,8 +108,8 @@ export default {
         mode: 'Hybrid',
         description: [
           'Owned the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating from 1.2K+ reviews, shipping to Play Store, App Store and App Gallery.',
-          'Designed the KYC onboarding flow and the integrations with verification and risk providers that approve applicants and catch fraud. [MÉTRICA PENDIENTE: tiempo de onboarding o tasa de aprobación, si es público]',
-          "Drove the team's adoption of AI-assisted development (Cursor, Claude Code) and the engineering process changes around it. [MÉTRICA PENDIENTE: adopción o impacto en entrega]",
+          'Designed the KYC onboarding flow and the integrations with verification and risk providers that approve applicants and catch fraud.',
+          "Drove the team's adoption of AI-assisted development (Cursor, Claude Code) and the engineering process changes around it.",
           'Represented the team at the AI Engineer Code Summit 2025 in New York.',
         ].join('\n'),
         skills: 'React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD',
