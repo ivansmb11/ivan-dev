@@ -46,7 +46,7 @@ const pad = (n) => String(n).padStart(2, '0')
   <div class="flex flex-col gap-20 md:gap-28">
     <div
       v-motion="reveal()"
-      class="grid grid-cols-1 gap-6 rounded-[3px] bg-mist p-6 sm:p-8 md:p-10 lg:grid-cols-12 lg:gap-6 lg:p-12"
+      class="glass grid grid-cols-1 gap-6 rounded-glass p-6 sm:p-8 md:p-10 lg:grid-cols-12 lg:gap-6 lg:p-12"
     >
       <div class="flex flex-col justify-between gap-8 lg:col-span-3">
         <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.02em] lg:items-start">
@@ -73,10 +73,8 @@ const pad = (n) => String(n).padStart(2, '0')
         <li
           v-for="(p, i) in principles"
           :key="p.id"
-          class="rounded-[3px] border bg-card transition-[border-color,box-shadow] duration-300"
-          :class="expandedCard === p.id
-            ? 'border-ink shadow-[0_18px_40px_-28px_color-mix(in_oklch,var(--color-onyx)_35%,transparent)]'
-            : 'border-line hover:border-graphite'"
+          class="glass rounded-glass outline outline-transparent transition-[outline-color] duration-300"
+          :class="expandedCard === p.id ? 'outline-ink/70' : 'hover:outline-ink/25'"
         >
           <button
             :id="`principle-${p.id}-toggle`"
@@ -86,7 +84,7 @@ const pad = (n) => String(n).padStart(2, '0')
             :aria-controls="`principle-${p.id}-panel`"
             @click="toggleCard(p.id)"
           >
-            <span class="grid size-11 shrink-0 place-items-center rounded-[3px] bg-mist text-accent">
+            <span class="glass-tint grid size-11 shrink-0 place-items-center rounded-xl text-accent">
               <component :is="p.icon" :size="20" :stroke-width="1.75" aria-hidden="true" />
             </span>
             <span class="min-w-0 flex-1">
@@ -96,8 +94,8 @@ const pad = (n) => String(n).padStart(2, '0')
               </span>
             </span>
             <span
-              class="grid size-8 shrink-0 place-items-center rounded-[2px] transition-colors duration-300"
-              :class="expandedCard === p.id ? 'bg-accent text-white' : 'bg-mist text-ink group-hover:bg-ink group-hover:text-paper'"
+              class="grid size-8 shrink-0 place-items-center rounded-full transition-colors duration-300"
+              :class="expandedCard === p.id ? 'bg-accent text-white' : 'glass-tint text-ink group-hover:bg-ink group-hover:text-paper'"
             >
               <Plus
                 :size="16"

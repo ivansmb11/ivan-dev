@@ -22,7 +22,6 @@ useSeoMeta({
   twitterImage: assetUrl('meta/og-concierge.jpg'),
 })
 
-const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
 
 const REPO_URL = 'https://github.com/ivansmb11/vip-data-concierge'
 const portfolioRoute = { path: '/', hash: '#portfolio' }
@@ -104,7 +103,7 @@ function scrollToSection(id) {
             <li v-for="(section, i) in sections" :key="section.id">
               <button
                 type="button"
-                class="group inline-flex min-h-11 cursor-pointer items-center gap-2.5 whitespace-nowrap rounded-[3px] bg-mist px-4 text-xs font-medium uppercase tracking-[0.02em] text-ink transition-colors duration-300 hover:bg-ink hover:text-paper active:translate-y-px"
+                class="group inline-flex min-h-11 cursor-pointer items-center gap-2.5 glass whitespace-nowrap rounded-full px-4 text-xs font-medium uppercase tracking-[0.02em] text-ink transition-colors duration-300 hover:bg-ink hover:text-paper active:translate-y-px"
                 @click="scrollToSection(section.id)"
               >
                 <span class="tabular-nums text-graphite transition-colors duration-300 group-hover:text-paper/60">0{{ i + 1 }}</span>
@@ -117,14 +116,14 @@ function scrollToSection(id) {
     </header>
 
     <div class="container-site mt-12 mb-20 md:mt-16 md:mb-28">
-      <figure v-motion="enter(400)" class="bg-card p-2 md:p-3" :class="frameShadow">
+      <figure v-motion="enter(400)" class="glass rounded-glass p-2 md:p-3">
         <AssetSlot
           id="concierge-hero"
           :alt="t('concierge.heroAlt')"
-          class="aspect-[1659/948] bg-mist"
+          class="aspect-[1659/948] overflow-hidden rounded-glass-inner bg-mist"
           eager
         />
-        <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+        <figcaption class="mt-2 flex items-center justify-between gap-4 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
           <span class="flex items-center gap-1.5 uppercase text-ink">
             <AsteriskMark class="size-3 text-accent" />VIP Data Concierge
           </span>

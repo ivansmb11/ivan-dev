@@ -47,12 +47,12 @@ const entries = computed(() => {
         <li v-for="post in entries" :key="post.slug" v-motion="reveal()">
           <NuxtLink
             :to="`/blog/${post.slug}`"
-            class="group grid gap-6 bg-card p-3 transition-colors hover:bg-mist md:grid-cols-12 md:gap-10 md:p-4"
+            class="glass group grid gap-6 rounded-glass p-3 transition-colors hover:bg-card/80 md:grid-cols-12 md:gap-10 md:p-4"
           >
-            <AssetSlot :id="post.cover" :alt="post.entry.title" class="aspect-[16/10] w-full md:col-span-5" />
+            <AssetSlot :id="post.cover" :alt="post.entry.title" class="aspect-[16/10] w-full overflow-hidden rounded-glass-inner md:col-span-5" />
             <div class="flex flex-col gap-4 px-2 pb-3 md:col-span-7 md:px-0 md:py-4 md:pr-4">
               <p class="flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] text-graphite">
-                <span class="rounded-[2px] bg-mist px-2 py-1 leading-none text-ink group-hover:bg-card">{{ post.entry.kicker }}</span>
+                <span class="glass-tint rounded-full px-2.5 py-1 leading-none text-ink">{{ post.entry.kicker }}</span>
                 <time :datetime="post.date">{{ post.dateLabel }}</time>
                 <span aria-hidden="true" class="text-muted">/</span>
                 <span>{{ t('blog.minRead', { n: post.minutes }) }}</span>

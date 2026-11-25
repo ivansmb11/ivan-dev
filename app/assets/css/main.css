@@ -1,5 +1,7 @@
 /* Hallmark · studied: yes · DNA-source: image (Framer "Personal Portfolio" reference, Dribbble 27497608)
- * tone: bold editorial · anchor hue: ember 40° · display + body: Inter (opsz 14..32, display cut at large sizes)
+ * tone: bold editorial on liquid glass · anchor hue: ember 40° · display + body: Inter (opsz 14..32, display cut at large sizes)
+ * material: raised surfaces are frosted glass (`glass`) over a fixed ember light layer (AmbientBackdrop.vue);
+ * surfaces nested inside glass are a tint (`glass-tint`), never a second blur. Technique after Glisse (MIT).
  */
 @import "tailwindcss";
 
@@ -51,12 +53,48 @@
 
   --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 
+  /* Glass corners: outer surfaces, and anything nested one padding step inside them */
+  --radius-glass: 1.25rem;
+  --radius-glass-inner: 0.75rem;
+
   --animate-marquee: marquee 45s linear infinite;
 
   @keyframes marquee {
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+}
+
+/* Frosted glass for raised surfaces. Everything it reads is a --glass-* variable, so the dark theme, the visitor's
+   glass setting and prefers-reduced-transparency retune it in one place (see :root and html.dark below).
+   It owns box-shadow (rim, specular top edge, hairline, drop), so don't combine it with shadow-* or ring-*. */
+@utility glass {
+  background-color: var(--glass-fill);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-shine),
+    inset 0 0 0 1px var(--glass-rim),
+    0 0 0 1px var(--glass-edge),
+    var(--glass-drop);
+}
+
+/* More frost and a denser fill, for glass that has busy content right behind its text: the full-screen menu,
+   the contact form over its photo */
+@utility glass-thick {
+  background-color: var(--glass-fill-thick);
+  -webkit-backdrop-filter: var(--glass-filter-thick);
+  backdrop-filter: var(--glass-filter-thick);
+  box-shadow:
+    inset 0 1px 0 0 var(--glass-shine),
+    inset 0 0 0 1px var(--glass-rim),
+    0 0 0 1px var(--glass-edge),
+    var(--glass-drop);
+}
+
+/* A surface inside glass: tinted, not blurred again, since stacked blur turns to mud and doubles the GPU cost */
+@utility glass-tint {
+  background-color: var(--glass-tint);
 }
 
 @utility container-site {
@@ -125,6 +163,55 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+}
+
+:root {
+  --glass-fill: oklch(100% 0 0 / 0.56);
+  --glass-tint: oklch(12.2% 0 0 / 0.05);
+  --glass-rim: oklch(100% 0 0 / 0.7);
+  --glass-shine: oklch(100% 0 0 / 0.95);
+  --glass-edge: oklch(35% 0.04 40 / 0.07);
+  --glass-drop: 0 18px 40px -24px oklch(35% 0.1 40 / 0.4);
+  --glass-filter: blur(18px) saturate(1.7);
+  --glass-fill-thick: oklch(97.6% 0 0 / 0.72);
+  --glass-filter-thick: blur(40px) saturate(1.8);
+}
+
+html.dark {
+  --glass-fill: oklch(22% 0.014 45 / 0.5);
+  --glass-tint: oklch(100% 0 0 / 0.06);
+  --glass-rim: oklch(100% 0 0 / 0.1);
+  --glass-shine: oklch(100% 0 0 / 0.2);
+  --glass-edge: oklch(0% 0 0 / 0.35);
+  --glass-drop: 0 20px 44px -24px oklch(0% 0 0 / 0.75);
+  --glass-fill-thick: oklch(15.5% 0.011 45 / 0.72);
+}
+
+/* Visitor setting (menu, G key): "reduced" keeps the material but makes it nearly opaque and stills the light */
+html.glass-reduced {
+  --glass-fill: color-mix(in oklch, var(--color-card) 88%, transparent);
+  --glass-filter: blur(24px) saturate(1.3);
+  --glass-fill-thick: color-mix(in oklch, var(--color-paper) 92%, transparent);
+}
+
+/* "off", and the OS asking for less transparency: solid surfaces, no light layer (AmbientBackdrop hides itself) */
+html.glass-off {
+  --glass-fill: var(--color-card);
+  --glass-tint: var(--color-mist);
+  --glass-filter: none;
+  --glass-fill-thick: var(--color-paper);
+  --glass-filter-thick: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root,
+  html.dark,
+  html.glass-reduced {
+    --glass-fill: var(--color-card);
+    --glass-tint: var(--color-mist);
+    --glass-filter: none;
+    --glass-fill-thick: var(--color-paper);
+    --glass-filter-thick: none;
+  }
 }
 
 /* Dark option: warm near-black tinted toward the ember hue so it stays on-brand. Orange, accent and onyx do not change. */

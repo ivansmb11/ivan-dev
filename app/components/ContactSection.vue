@@ -31,7 +31,7 @@ const fields = [
 ]
 
 const fieldClass =
-  'block w-full rounded-[3px] border border-transparent bg-paper px-3 text-base text-ink transition-colors duration-200 placeholder:text-graphite hover:border-line focus:border-accent sm:text-sm'
+  'glass-tint block w-full rounded-xl border border-transparent px-3.5 text-base text-ink transition-colors duration-200 placeholder:text-graphite hover:border-ink/15 focus:border-accent sm:text-sm'
 
 // The band reuses the backdrop photo once it exists; until then a plain ember band reads better than a second placeholder.
 const hasBackdrop = !!slotSrc('contact-backdrop')
@@ -86,7 +86,7 @@ function submit() {
           <div
             v-for="card in cards"
             :key="card.key"
-            class="relative isolate flex min-w-0 flex-col justify-between gap-6 overflow-hidden rounded-[3px] bg-mist p-3.5 sm:aspect-[16/11] sm:p-5 lg:aspect-[16/15]"
+            class="relative isolate flex min-w-0 flex-col justify-between gap-6 glass overflow-hidden rounded-glass p-3.5 sm:aspect-[16/11] sm:p-5 lg:aspect-[16/15]"
             :class="card.wide ? 'col-span-2 min-h-32 sm:col-span-1' : 'aspect-[16/15]'"
           >
             <AssetSlot
@@ -146,7 +146,7 @@ function submit() {
     </div>
 
     <div class="container-site mt-24 md:mt-32">
-      <div v-motion="reveal()" class="relative isolate overflow-hidden rounded-md bg-night text-white">
+      <div v-motion="reveal()" class="relative isolate overflow-hidden rounded-glass bg-night text-white">
         <AssetSlot id="contact-backdrop" tone="dark" position="50% 40%" class="absolute inset-0 -z-20" />
         <div aria-hidden="true" class="backdrop-scrim absolute inset-0 -z-10" />
 
@@ -170,13 +170,14 @@ function submit() {
             </div>
           </div>
 
-          <!-- In dark the card is about 1.07:1 against the night backdrop; the faint white ring keeps its edge and disappears beside the white light-mode card. -->
+          <!-- Thick glass with a denser fill: over the dark photo the shared fill turns gray and drops placeholders
+               below 4.5:1. Only the fill is overridden, so glass off still removes the blur. -->
           <form
             aria-labelledby="contact-form-title"
-            class="w-full max-w-sm rounded-[4px] bg-card p-1.5 text-ink shadow-[0_30px_60px_-30px_var(--color-night)] ring-1 ring-white/15 lg:col-start-1 lg:row-start-1"
+            class="glass-thick [--glass-fill-thick:color-mix(in_oklch,var(--color-card)_86%,transparent)] w-full max-w-sm rounded-glass p-1.5 text-ink lg:col-start-1 lg:row-start-1"
             @submit.prevent="submit"
           >
-            <div class="relative isolate flex h-20 items-center justify-center overflow-hidden rounded-[2px] bg-ember-deep text-white">
+            <div class="relative isolate flex h-20 items-center justify-center overflow-hidden rounded-[0.875rem] bg-ember-deep text-white">
               <template v-if="hasBackdrop">
                 <AssetSlot id="contact-backdrop" compact position="15% 25%" class="absolute inset-0 -z-20" />
                 <div aria-hidden="true" class="absolute inset-0 -z-10 bg-night/40" />
@@ -223,7 +224,7 @@ function submit() {
 
               <button
                 type="submit"
-                class="mt-5 flex min-h-11 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-[2px] bg-ink px-4 text-sm font-medium uppercase tracking-[0.02em] text-paper transition-colors duration-300 hover:bg-accent-deep hover:text-white active:translate-y-px"
+                class="mt-5 flex min-h-11 w-full cursor-pointer items-center justify-center whitespace-nowrap rounded-full bg-ink px-4 text-sm font-medium uppercase tracking-[0.02em] text-paper transition-colors duration-300 hover:bg-accent-deep hover:text-white active:translate-y-px"
               >{{ t('contact.form.submit') }}</button>
               <p class="mt-3 text-center text-xs text-graphite">{{ t('contact.form.note') }}</p>
             </div>

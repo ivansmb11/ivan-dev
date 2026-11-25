@@ -89,9 +89,9 @@ function toContact() {
 
       <div class="mt-14 grid gap-10 md:mt-20 lg:grid-cols-12 lg:gap-8">
         <figure v-motion="reveal(100)" class="w-full max-w-[26rem] lg:col-span-5 lg:max-w-none">
-          <div class="bg-card p-2 shadow-[0_18px_40px_-24px_var(--color-night)] shadow-night/35 sm:p-3 lg:sticky lg:top-28">
-            <AssetSlot id="about-portrait" alt="Ivan Mendoza" class="aspect-[5/6] w-full" />
-            <figcaption class="mt-2 flex items-center justify-between gap-3 bg-mist-soft px-3 py-2.5 text-[13px] text-graphite sm:mt-3 sm:text-[15px]">
+          <div class="glass rounded-glass p-2 sm:p-3 lg:sticky lg:top-28">
+            <AssetSlot id="about-portrait" alt="Ivan Mendoza" class="aspect-[5/6] w-full overflow-hidden rounded-glass-inner" />
+            <figcaption class="glass-tint mt-2 flex items-center justify-between gap-3 rounded-glass-inner px-3 py-2.5 text-[13px] text-graphite sm:mt-3 sm:text-[15px]">
               <span class="flex min-w-0 items-center gap-2 uppercase text-ink">
                 <AsteriskMark class="size-3.5 shrink-0 text-accent" />
                 <span class="truncate">Ivan Mendoza</span>
@@ -105,7 +105,7 @@ function toContact() {
           <!-- onyx, not ink: ink flips to near-white in the dark theme and would wash out the white text -->
           <div
             v-motion="reveal(150)"
-            class="relative isolate flex min-h-[20rem] flex-col justify-end overflow-hidden rounded-[4px] p-6 text-white md:min-h-[24rem] md:p-10 dark:border dark:border-line"
+            class="relative isolate flex min-h-[20rem] flex-col justify-end overflow-hidden rounded-glass p-6 text-white md:min-h-[24rem] md:p-10 dark:border dark:border-line"
           >
             <AssetSlot id="about-role-card" tone="dark" compact alt="" class="absolute inset-0 -z-20" />
             <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-t from-onyx/90 via-onyx/55 to-onyx/10" />
@@ -127,10 +127,10 @@ function toContact() {
           <div
             ref="counterEl"
             v-motion="reveal()"
-            class="relative isolate overflow-hidden rounded-[4px] bg-card p-6 md:p-8"
+            class="glass relative isolate overflow-hidden rounded-glass p-6 md:p-8"
           >
-            <AssetSlot id="about-texture" tone="white" compact class="absolute inset-0 -z-20" />
-            <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-r from-card/85 via-card/60 to-card/30" />
+            <!-- Faint, so the glass still shows the light behind it; the stats sit on the frost, not on the photo -->
+            <AssetSlot id="about-texture" tone="white" compact class="absolute inset-0 -z-20 opacity-25 mix-blend-multiply dark:mix-blend-screen" />
             <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.01em] text-ink">
               <AsteriskMark class="size-3.5 text-accent" :weight="2" />{{ t('about.statsLabel') }}
             </p>

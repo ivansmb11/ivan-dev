@@ -143,7 +143,7 @@ function measureOverhang() {
           <AssetSlot
             :id="job.slot"
             :alt="t('career.photoAlt', { company: job.company }, `Ivan Mendoza, ${job.company}`)"
-            class="aspect-[4/3] w-full rounded-[3px]"
+            class="aspect-[4/3] w-full overflow-hidden rounded-glass"
           />
 
           <!-- Zero height on md+ keeps the turning cube out of the shared row sizing, so the neighbours never shift. -->
@@ -156,7 +156,7 @@ function measureOverhang() {
             <button
               type="button"
               :aria-pressed="turned"
-              class="group absolute top-0 right-0 z-10 inline-flex items-center gap-1.5 rounded-[2px] border border-line bg-paper px-2 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-graphite transition-colors duration-300 hover:border-accent hover:text-accent"
+              class="group absolute top-0 right-0 z-10 glass inline-flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-graphite transition-colors duration-300 hover:text-accent"
               @pointerenter="onArrowEnter"
               @pointerleave="onArrowLeave"
               @pointerdown="lastPointer = $event.pointerType"
@@ -191,8 +191,8 @@ function measureOverhang() {
                 v-for="(face, f) in [job, job.previous]"
                 :key="f"
                 ref="faceEls"
-                class="bg-paper [backface-visibility:hidden]"
-                :class="f === 0 ? 'relative' : 'absolute inset-x-0 top-0'"
+                class="transition-opacity duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] [backface-visibility:hidden]"
+                :class="[f === 0 ? 'relative' : 'absolute inset-x-0 top-0', (f === 1) === turned ? 'opacity-100' : 'opacity-30']"
                 :style="{ transform: `rotateY(${f * 90}deg) translateZ(50cqw)` }"
                 :inert="(f === 1) !== turned"
                 :aria-hidden="(f === 1) !== turned"
@@ -203,7 +203,7 @@ function measureOverhang() {
                   </p>
                   <span
                     v-if="f === 0"
-                    class="shrink-0 rounded-[2px] bg-accent-deep px-2 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-white"
+                    class="shrink-0 rounded-full bg-accent-deep px-2.5 py-1 text-[11px] font-semibold uppercase leading-none tracking-[0.04em] text-white"
                   >{{ t('career.present') }}</span>
                 </div>
 
@@ -233,16 +233,9 @@ function measureOverhang() {
                   <li
                     v-for="skill in face.skills"
                     :key="skill"
-                    class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+                    class="glass-tint rounded-full px-2.5 py-1 text-[11px] leading-none text-graphite"
                   >{{ skill }}</li>
                 </ul>
-
-                <!-- Fades the face that is turning away, which is what sells the depth. -->
-                <span
-                  aria-hidden="true"
-                  class="pointer-events-none absolute inset-0 bg-paper transition-opacity duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)]"
-                  :class="(f === 1) === turned ? 'opacity-0' : 'opacity-70'"
-                />
               </div>
             </div>
           </div>
@@ -280,7 +273,7 @@ function measureOverhang() {
               <li
                 v-for="skill in job.skills"
                 :key="skill"
-                class="rounded-[2px] bg-mist px-2 py-1 text-[11px] leading-none text-graphite"
+                class="glass-tint rounded-full px-2.5 py-1 text-[11px] leading-none text-graphite"
               >{{ skill }}</li>
             </ul>
           </template>

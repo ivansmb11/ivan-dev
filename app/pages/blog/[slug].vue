@@ -37,7 +37,6 @@ useSeoMeta({
   articlePublishedTime: post.date,
 })
 
-const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
 </script>
 
 <template>
@@ -95,7 +94,7 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
               {{ block.text }}
             </p>
 
-            <figure v-else-if="block.type === 'quote'" v-motion="reveal()" class="my-12 border-l-[3px] border-accent bg-mist px-6 py-7 md:px-10 md:py-9">
+            <figure v-else-if="block.type === 'quote'" v-motion="reveal()" class="glass my-12 rounded-glass px-6 py-7 md:px-10 md:py-9">
               <blockquote class="text-xl leading-snug font-semibold tracking-[-0.01em] text-ink md:text-2xl">
                 "{{ block.text }}"
               </blockquote>
@@ -105,11 +104,11 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
             <figure
               v-else-if="block.type === 'photo'"
               v-motion="reveal()"
-              class="my-12 bg-card p-2 md:my-16 md:p-3"
-              :class="[frameShadow, block.tall ? 'mx-auto max-w-[26rem]' : 'md:-mx-16 lg:-mx-32']"
+              class="my-12 glass rounded-glass p-2 md:my-16 md:p-3"
+              :class="[block.tall ? 'mx-auto max-w-[26rem]' : 'md:-mx-16 lg:-mx-32']"
             >
-              <AssetSlot :id="block.slot" :alt="block.alt ?? block.caption" class="w-full" :class="block.tall ? 'aspect-[3/4]' : 'aspect-[3/2]'" />
-              <figcaption v-if="block.caption" class="mt-2 flex items-center gap-1.5 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+              <AssetSlot :id="block.slot" :alt="block.alt ?? block.caption" class="w-full overflow-hidden rounded-glass-inner" :class="block.tall ? 'aspect-[3/4]' : 'aspect-[3/2]'" />
+              <figcaption v-if="block.caption" class="mt-2 flex items-center gap-1.5 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
                 <AsteriskMark class="size-3 shrink-0 text-accent" />
                 <span>{{ block.caption }}</span>
               </figcaption>
@@ -118,15 +117,15 @@ const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-ni
             <figure
               v-else-if="block.type === 'chart' && charts[block.id]"
               v-motion="reveal()"
-              class="my-12 border border-line bg-card p-5 md:-mx-8 md:my-16 md:p-8"
+              class="glass my-12 rounded-glass p-5 md:-mx-8 md:my-16 md:p-8"
             >
               <component :is="charts[block.id]" />
             </figure>
 
             <div v-else-if="block.type === 'gallery'" v-motion="reveal()" class="my-12 grid grid-cols-2 gap-2 md:-mx-16 md:my-16 md:gap-3 lg:-mx-32">
-              <figure v-for="photo in block.photos" :key="photo.slot" class="flex flex-col bg-card p-1.5 md:p-2.5" :class="frameShadow">
-                <AssetSlot :id="photo.slot" :alt="photo.alt ?? photo.caption" class="aspect-[3/4] w-full" />
-                <figcaption v-if="photo.caption" class="mt-1.5 flex flex-1 items-start gap-1.5 bg-mist-soft px-2.5 py-2 text-xs leading-snug text-graphite md:mt-2.5 md:text-[13px]">
+              <figure v-for="photo in block.photos" :key="photo.slot" class="flex flex-col glass rounded-glass p-1.5 md:p-2.5">
+                <AssetSlot :id="photo.slot" :alt="photo.alt ?? photo.caption" class="aspect-[3/4] w-full overflow-hidden rounded-[0.875rem]" />
+                <figcaption v-if="photo.caption" class="mt-1.5 flex flex-1 items-start gap-1.5 glass-tint rounded-glass-inner px-2.5 py-2 text-xs leading-snug text-graphite md:mt-2.5 md:text-[13px]">
                   <AsteriskMark class="mt-[0.2em] size-2.5 shrink-0 text-accent" />
                   <span>{{ photo.caption }}</span>
                 </figcaption>
