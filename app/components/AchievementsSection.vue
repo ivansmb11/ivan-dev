@@ -12,7 +12,7 @@ const { t } = useI18n()
 const track = ref(null)
 
 // A labeled placeholder needs more room than the final logo to stay legible.
-const logoBox = (id, wide) => (slotSrc(id) ? (wide ? 'h-10 w-60' : 'h-10 w-36') : 'h-20 w-48')
+const logoBox = (id, wide) => (slotSrc(id) ? (wide ? 'h-12 w-72 max-w-full' : 'h-10 w-36') : 'h-20 w-48')
 
 const achievements = computed(() => [
   {
