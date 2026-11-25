@@ -14,6 +14,7 @@ export const slots = {
   'logo-anahuac': { label: 'Universidad Anáhuac logo, transparent PNG', size: 'max 600 × 160' },
   'logo-google-cloud': { label: 'Google Cloud logo, transparent PNG', size: 'max 600 × 160' },
   'logo-ai-engineer': { label: 'AI Engineer logo, transparent PNG', size: 'max 600 × 160' },
+  'logo-kavak-openai-primero': { label: 'Kavak x OpenAI x Primero lockup, transparent PNG', size: 'max 600 × 160' },
 
   'about-portrait': { label: 'About portrait, motion blur', size: '900 × 1080' },
   'about-texture': { label: 'Stats card background texture', size: '1000 × 1400' },

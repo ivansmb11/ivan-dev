@@ -19,12 +19,11 @@ export default {
   hero: {
     greeting: "Hola, soy {name}.",
     subtitle:
-      "AI Engineer y Lead de Mobile y Frontend construyendo productos fintech, desde agentes de IA y servidores MCP hasta apps móviles y plataformas escalables.",
+      "AI Engineer construyendo agentes para fintech regulada. No confío en que el modelo sea seguro, pongo la garantía alrededor: identidad, sandboxes, reglas de cumplimiento, evals y auditoría.",
     location: "Ciudad de México, MX",
-    tagline: "Construyo productos fintech, desde apps móviles hasta plataformas escalables",
-    featuredType: "Proyecto personal",
+    tagline: "Construyo agentes de IA para fintech regulada, con las garantías fuera del modelo",
     letsTalk: "Hablemos",
-    role: "AI Engineer {'|'} Mobile & Frontend Lead",
+    role: "AI Engineer {'|'} Agentes para fintech",
     scroll: "Desliza para explorar",
   },
   trusted: {
@@ -33,18 +32,16 @@ export default {
   about: {
     label: "Conóceme",
     title: "Sobre mí",
-    headingLead: "Construyendo fintech",
-    headingRest: "del móvil a la plataforma",
-    roleCardText: "Construyo agentes de IA, servidores MCP y herramientas con LLMs, con enfoque en agentic coding y productividad del desarrollador.",
+    headingLead: "Agentes confiables",
+    headingRest: "en fintech regulada",
+    thesis: "No confío en que el modelo sea seguro. Pongo la garantía alrededor.",
+    roleCardText: "Construyo agentes de IA y servidores MCP para entornos regulados, con los controles fuera del modelo: identidad, sandbox, presupuestos, evals y auditoría.",
     statsLabel: "En números",
-    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial, donde construyo agentes de IA, servidores MCP y herramientas con LLMs para ingeniería y operaciones financieras. También soy responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas entre Google Play y App Store, incluyendo el flujo de onboarding KYC y las integraciones con proveedores que aprueban solicitantes y detectan fraude.",
-    bio2: "Más allá de escribir código, me enfoco en elevar cómo trabajan los equipos de ingeniería: mejorando procesos, elevando estándares de calidad de código e impulsando la adopción de herramientas de desarrollo asistido por IA. Previamente en General Electric Aerospace, donde construí servicios backend en Spring Boot y Java.",
+    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial. Construyo agentes de IA, servidores MCP y agentes de ingeniería que corren en producción bajo reglas regulatorias. El acceso se rige por identidad y mínimo privilegio, las reglas de cumplimiento se aplican fuera del modelo, cada release pasa evals y cada acción deja rastro de auditoría.",
+    bio2: "Vengo de mobile. Sigo a cargo de la arquitectura móvil y frontend de una app con más de 120 mil descargas y 4.8 estrellas en App Store, incluyendo el flujo de onboarding KYC y las integraciones con proveedores que aprueban solicitantes y detectan fraude. Antes construí apps de crédito en Presta Vale y servicios backend en Spring Boot y Java en GE Aerospace.",
     education: "Educación",
     educationText:
       "Ingeniería en Tecnologías de la Información y Negocios Digitales en la Universidad Anáhuac, Querétaro. Líder electo del consejo estudiantil del programa de Ingeniería.",
-    experience: "Experiencia",
-    experienceText:
-      "AI Engineer en ZAZPAY, una fintech BNPL, construyendo agentes y servidores MCP, y responsable de la app móvil con más de 120 mil descargas entre Google Play y App Store.",
     location: "Ubicación",
     locationText:
       "Originario de Sinaloa, México. Actualmente en la Ciudad de México.",
@@ -77,6 +74,11 @@ export default {
     comingSoonText:
       "Mantente al tanto para más proyectos. Siempre estoy trabajando en algo nuevo y emocionante.",
     inProgress: 'En progreso',
+    shows: 'Qué demuestra',
+    showsBreach: 'Agentes que se mejoran solos con una compuerta de seguridad y aprobación humana, para que el sistema aprenda sin publicar checks que nadie verificó.',
+    showsAgentPlatform: 'Agentes publicados como software: deploys versionados, rollback, un gate de evals y guardrails que se aplican antes de que el modelo responda.',
+    showsVibebify: 'Un producto completo de punta a punta: OAuth, modelo de datos con row-level security, funciones sociales, desplegado y en vivo.',
+    showsConcierge: 'Acceso del agente gobernado por identidad: el modelo solo recibe las herramientas del departamento del usuario, y lo garantizan la red y el servidor, no el prompt.',
   },
   stats: {
     years: 'Años de Experiencia',
@@ -99,16 +101,24 @@ export default {
       period: "Ago 2026 - Presente",
       location: "Ciudad de México, México",
       mode: "Presencial",
-      description:
-        "Construyo agentes de IA y herramientas con LLMs para una fintech BNPL: los servidores MCP principales que usan nuestros desarrolladores, servidores MCP que auditan todas las operaciones financieras y agentes que resuelven tareas de ingeniería dentro del código. Hice el onboarding de los principales proveedores de IA de la empresa. Sigo a cargo de la arquitectura móvil y frontend.",
+      description: [
+        'Construyo servidores MCP que dejan a los agentes trabajar con sistemas financieros con acceso por identidad, mínimo privilegio y auditoría completa. Solo lectura por defecto; las acciones críticas esperan a una persona. [MÉTRICA PENDIENTE: equipos o agentes que los usan]',
+        'Opero agentes autónomos en producción para operaciones financieras: el agente decide, agenda su propio seguimiento y escala a una persona, mientras las reglas de cumplimiento se aplican fuera del modelo para que se sostengan aunque el prompt falle. [MÉTRICA PENDIENTE: resultado público del agente]',
+        'Publico agentes como software: evals antes de cada release, despliegue por cohortes con rollback, presupuesto de costo por ejecución y bitácora de cada acción.',
+        'Construyo agentes de ingeniería: revisión de PRs multiagente donde verificadores independientes intentan refutar cada hallazgo para que al PR solo llegue señal, y documentación que se actualiza sola con un quality gate en CI. Corren en sandbox y nunca ven credenciales reales. [MÉTRICA PENDIENTE: PRs revisados o tiempo ahorrado, si es público]',
+      ].join('\n'),
       skills: "Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes",
       previous: {
         role: "Lead Software Engineer",
         period: "Jun 2023 - Ago 2026",
         duration: "3 años 3 meses",
         mode: "Híbrido",
-        description:
-          "Responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas (100 mil en Google Play y 20 mil en App Store) y 4.8 estrellas en App Store con más de 1.2 mil calificaciones, publicando versiones en Play Store, App Store y App Gallery. Diseñé el flujo de onboarding KYC y las integraciones con proveedores de verificación y riesgo que aprueban solicitantes y detectan fraude. Impulsé mejoras en procesos de ingeniería, promoví la adopción temprana de desarrollo asistido por IA (Cursor, Claude Code) y representé al equipo en el AI Engineer Code Summit en NYC.",
+        description: [
+          'Responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas (100 mil en Google Play y 20 mil en App Store) y 4.8 estrellas en App Store con más de 1.2 mil calificaciones, publicando en Play Store, App Store y App Gallery.',
+          'Diseñé el flujo de onboarding KYC y las integraciones con proveedores de verificación y riesgo que aprueban solicitantes y detectan fraude. [MÉTRICA PENDIENTE: tiempo de onboarding o tasa de aprobación, si es público]',
+          'Impulsé la adopción de desarrollo asistido por IA en el equipo (Cursor, Claude Code) y los cambios de proceso alrededor. [MÉTRICA PENDIENTE: adopción o impacto en entrega]',
+          'Representé al equipo en el AI Engineer Code Summit 2025 en Nueva York.',
+        ].join('\n'),
         skills: "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD",
       },
     },
@@ -154,6 +164,12 @@ export default {
       issuer: "Google Skills · 5 badges · Liga Oro",
       date: "2022 - 2026",
       linkLabel: "Ver todas mis badges en Google Skills",
+    },
+    hackathon2026: {
+      title: "3er lugar general, RSI Hackathon",
+      issuer: "Kavak x OpenAI x Primero AI",
+      date: "Nov 2026",
+      location: "Ciudad de México",
     },
     nyc2026: {
       title: "AI Engineer New York",

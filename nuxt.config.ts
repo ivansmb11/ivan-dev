@@ -1,9 +1,9 @@
 import tailwindcss from '@tailwindcss/vite'
 import { assetUrl } from './app/assets/slots'
 
-const title = 'Ivan Mendoza | AI Engineer | Mobile & Frontend Lead'
+const title = 'Ivan Mendoza | AI Engineer | Agents for regulated fintech'
 const description =
-  'AI Engineer and Mobile & Frontend Lead building fintech products, from AI agents and MCP servers to mobile apps and scalable platforms.'
+  "AI Engineer building agents for regulated fintech. I don't trust the model to be safe, I put the guarantee around it: identity, sandboxes, compliance rules, evals and audit trails."
 
 const fonts = 'https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..900&display=swap'
 
@@ -40,7 +40,7 @@ export default defineNuxtConfig({
         { property: 'og:image', content: assetUrl('meta/og-home.jpg') },
         { property: 'og:image:width', content: '1200' },
         { property: 'og:image:height', content: '630' },
-        { property: 'og:image:alt', content: 'Ivan Mendoza, AI Engineer, Mobile & Frontend Lead' },
+        { property: 'og:image:alt', content: 'Ivan Mendoza, AI Engineer, agents for regulated fintech' },
         { name: 'twitter:card', content: 'summary_large_image' },
         { name: 'twitter:image', content: assetUrl('meta/og-home.jpg') },
       ],

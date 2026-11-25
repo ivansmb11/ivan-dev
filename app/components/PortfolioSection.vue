@@ -33,6 +33,7 @@ const projects = computed(() => [
     slot: 'blog-hack26-team',
     title: 'BREACH',
     description: t('portfolio.breach'),
+    shows: t('portfolio.showsBreach'),
     tags: ['RSI', 'AI Agents', 'Security', 'Knowledge Graph', 'Evals'],
     caseStudy: '/blog/kavak-openai-hackathon',
     cta: t('portfolio.readStory'),
@@ -40,20 +41,12 @@ const projects = computed(() => [
     medal: { place: 3, text: t('portfolio.thirdPlace') },
   },
   {
-    key: 'agentPlatform',
-    kind: 'framed',
-    slot: 'project-agent-platform',
-    title: 'Agent Platform',
-    description: t('portfolio.agentPlatform'),
-    tags: ['NestJS', 'React 19', 'Vertex AI', 'pgvector', 'RAG', 'Evals'],
-    caseStudy: '/agent-platform',
-  },
-  {
     key: 'vibebify',
     kind: 'framed',
     slot: 'project-vibebify',
     title: 'Vibebify',
     description: t('portfolio.vibebify'),
+    shows: t('portfolio.showsVibebify'),
     tags: ['Next.js 16', 'Supabase', 'PostgreSQL', 'Spotify API', 'Social Media'],
     github: 'https://github.com/ivansmb11/vibebify',
     caseStudy: '/vibebify',
@@ -64,9 +57,20 @@ const projects = computed(() => [
     slot: 'project-concierge',
     title: 'VIP Data Concierge',
     description: t('portfolio.vipConcierge'),
+    shows: t('portfolio.showsConcierge'),
     tags: ['GCP', 'Vertex AI', 'LangChain', 'Cloud Run', 'PostgreSQL', 'Zero-Trust'],
     github: 'https://github.com/ivansmb11/vip-data-concierge',
     caseStudy: '/concierge',
+  },
+  {
+    key: 'agentPlatform',
+    kind: 'framed',
+    slot: 'project-agent-platform',
+    title: 'Agent Platform',
+    description: t('portfolio.agentPlatform'),
+    shows: t('portfolio.showsAgentPlatform'),
+    tags: ['NestJS', 'React 19', 'Vertex AI', 'pgvector', 'RAG', 'Evals'],
+    caseStudy: '/agent-platform',
   },
 ])
 </script>
@@ -173,6 +177,9 @@ const projects = computed(() => [
               {{ project.medal.text }}
             </p>
             <p class="mt-3 max-w-[38rem] text-[15px] leading-relaxed text-graphite">{{ project.description }}</p>
+            <p v-if="project.shows" class="mt-3 max-w-[38rem] text-[15px] leading-relaxed text-ink">
+              <span class="font-semibold">{{ t('portfolio.shows') }}:</span> {{ project.shows }}
+            </p>
             <ul class="mt-5 flex flex-wrap gap-1.5">
               <li
                 v-for="tag in project.tags"

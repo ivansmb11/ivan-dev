@@ -26,7 +26,7 @@ import PageHeader from '@/components/ui/PageHeader.vue'
 
         <pre class="glass block min-w-0 rounded-glass p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink [overflow-wrap:anywhere] md:p-8 lg:col-span-8">
 # Ivan Mendoza
-## AI Engineer | Mobile & Frontend Lead
+## AI Engineer | Agents for regulated fintech
 
 Location: Mexico City, MX
 Email: ivanmendozabaca@gmail.com
@@ -40,7 +40,19 @@ Website: https://ivanmendoza.dev
 
 ## Summary
 
-AI Engineer at a Mexican BNPL and commercial-lending fintech, building AI agents, MCP servers and LLM tooling for engineering and financial operations. Also owns the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating (1.2K+ reviews), including the KYC onboarding flow and the provider integrations that approve applicants and catch fraud. Focused on enterprise-grade agentic coding and agentic-first solutions to accelerate delivery and elevate developer productivity.
+AI Engineer at a Mexican BNPL and commercial-lending fintech, building AI agents, MCP servers and engineering agents that run in production under regulatory rules. Also owns the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating (1.2K+ reviews), including the KYC onboarding flow and the provider integrations that approve applicants and catch fraud.
+
+---
+
+## Approach
+
+"Don't trust the model to be safe, put the guarantee around it." Control lives outside the model instead of in the prompt:
+- Agent access governed by identity, least privilege and full audit trails
+- Compliance guardrails enforced outside the model, so rules hold even if the prompt fails
+- Critical actions wait for human approval
+- Agents run sandboxed with restricted network and never see real credentials
+- Evals before every release, cohort rollouts with rollback, a cost budget per run
+- Multi-agent review where independent verifiers try to refute every finding, so only signal reaches the PR
 
 ---
 
@@ -57,13 +69,21 @@ Elected student council leader for the Engineering program.
 ### v3.1 | ZAZPAY | AI Engineer (Full-time)
 Period: Aug 2026 - Present
 Location: Mexico City, Mexico | On-site
-Description: Build AI agents and LLM tooling for a BNPL fintech: the core MCP servers our developers use, MCP servers that audit every financial operation, and agents that take on engineering tasks inside the codebase. Onboarded the company's main AI providers. Still own the mobile and frontend architecture.
+Description:
+- Builds MCP servers that let agents work with financial systems under identity-based access, least privilege and a full audit trail. Read-only by default; critical actions wait for a person.
+- Runs autonomous agents in production for financial operations: the agent decides, schedules its own follow-up and hands off to a person, while compliance rules are enforced outside the model.
+- Ships agents like software: evals before every release, cohort rollouts with rollback, a cost budget per run and an audit log of every action.
+- Builds engineering agents: multi-agent PR review with adversarial verifiers, and docs that update themselves behind a CI quality gate. They run sandboxed and never see real credentials.
 Skills: Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes
 
 ### v3.0 | ZAZPAY | Lead Software Engineer (Full-time)
 Period: Jun 2023 - Aug 2026 (3 yrs 3 mos)
 Location: Mexico City Metropolitan Area | Hybrid
-Description: Owned the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating from 1.2K+ reviews, shipping releases across Play Store, App Store, and App Gallery. Designed the KYC onboarding flow and the integrations with verification and risk providers that approve applicants and catch fraud. Drove engineering process improvements, championed AI-assisted development (Cursor, Claude Code), and represented the team at the AI Engineer Code Summit in NYC.
+Description:
+- Owned the mobile and frontend architecture of an app with 120K+ downloads (100K+ on Google Play, 20K+ on the App Store) and a 4.8 App Store rating from 1.2K+ reviews, shipping to Play Store, App Store and App Gallery.
+- Designed the KYC onboarding flow and the integrations with verification and risk providers that approve applicants and catch fraud.
+- Drove the team's adoption of AI-assisted development (Cursor, Claude Code) and the engineering process changes around it.
+- Represented the team at the AI Engineer Code Summit 2025 in New York.
 Skills: React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD
 
 ### v2.0 | PRESTA VALE | Software Engineer (Full-time)
@@ -90,16 +110,13 @@ Showcase: https://ivanmendoza.dev/gecko
 ### BREACH
 Built in one day by a team of four (Nicolás Cárdenas, José Daniel Sainz, Gustavo Aispuro and Ivan) at the Kavak x OpenAI x Primero AI hackathon on recursive self-improvement, Mexico City, November 9, 2026. Third place overall. Continuous security testing for live apps you are authorized to test: a library of checks runs against the target and every finding is confirmed by reproducing it. When a weakness slips through, an AI author writes a new check, a safety gate validates it, a person approves it, and the next run catches it. Ivan owned the agent harness, the infrastructure and the vulnerability knowledge graph.
 Tech: RSI, AI Agents, Security, Knowledge Graph, Evals
+Demonstrates: self-improving agents with a safety gate and a human approval step, so the system learns without shipping checks nobody verified.
 Story: https://ivanmendoza.dev/blog/kavak-openai-hackathon
-
-### Agent Platform
-A multi-tenant platform where a business runs a team of specialized AI support agents. Each tenant gets several agents, each with its own prompt, knowledge, guardrails and API keys. Agent changes go through drafts and ship as semver-tagged deploys with one-click rollback. Context: append-only event log with a sliding window, plus knowledge that goes into the prompt whole when small and switches to hybrid RAG (Gemini embeddings on pgvector and Postgres full-text, merged with reciprocal rank fusion) when large, always filtered per agent. Safety: a fixed security preamble, typed per-agent guardrails, an input sanitizer for injection payloads, a Gemini tool-call abuse detector with three-strike auto-close, and a multilingual human-handoff detector that runs before any LLM call. Quality: a 55-case eval suite across 12 categories, scored by rule checks plus a Gemini judge validated against a human-labeled golden set, shown as a soft gate before deploys. Also a playground pinned to live or draft versions, a human inbox with take-over, analytics, and a dependency-free Shadow DOM widget that streams AI replies over SSE. Built with NestJS 11, Prisma 7, PostgreSQL 16 + pgvector, Redis, Gemini 2.5 Flash on Vertex AI, React 19 + Vite, React Flow, Firebase Auth, Cloud Run and Cloud SQL.
-Tech: NestJS, React 19, Vertex AI, pgvector, RAG, Evals
-Showcase: https://ivanmendoza.dev/agent-platform
 
 ### Vibebify
 A music-focused social media web app with a punk/rock aesthetic. Sign in with Spotify, explore your listening stats, share posts about songs, follow other users, view your Genre DNA, compete in song duels, and maintain daily posting streaks. Early-inspired by Receiptify (https://github.com/michellexliu/receiptify) by Michelle Liu. Built with Next.js 16, TypeScript, Supabase (PostgreSQL + RLS), Spotify OAuth, React Aria, Tailwind CSS v4, Zod v4, Bun, and deployed on Vercel. Client-first architecture with direct Supabase calls, only 3 API routes for server secrets.
 Tech: Next.js 16, Supabase, PostgreSQL, Spotify API, Social Media
+Demonstrates: a full product end to end, from OAuth and a data model with row-level security to a live deploy.
 GitHub: https://github.com/ivansmb11/vibebify
 Live: https://vibebify.ivanmendoza.dev
 Showcase: https://ivanmendoza.dev/vibebify
@@ -107,12 +124,26 @@ Showcase: https://ivanmendoza.dev/vibebify
 ### VIP Data Concierge
 A Zero-Trust AI Agent on GCP that routes queries to isolated databases based on user identity. Hub-and-Spoke VPC networking with NCC, Private Service Connect, Vertex AI Gemini, and LangChain Function Calling.
 Tech: GCP, Vertex AI, LangChain, Cloud Run, PostgreSQL, Zero-Trust
+Demonstrates: agent access governed by identity, enforced by the network and the server rather than the prompt.
 GitHub: https://github.com/ivansmb11/vip-data-concierge
 Showcase: https://ivanmendoza.dev/concierge
+
+### Agent Platform
+A multi-tenant platform where a business runs a team of specialized AI support agents. Each tenant gets several agents, each with its own prompt, knowledge, guardrails and API keys. Agent changes go through drafts and ship as semver-tagged deploys with one-click rollback. Context: append-only event log with a sliding window, plus knowledge that goes into the prompt whole when small and switches to hybrid RAG (Gemini embeddings on pgvector and Postgres full-text, merged with reciprocal rank fusion) when large, always filtered per agent. Safety: a fixed security preamble, typed per-agent guardrails, an input sanitizer for injection payloads, a Gemini tool-call abuse detector with three-strike auto-close, and a multilingual human-handoff detector that runs before any LLM call. Quality: a 55-case eval suite across 12 categories, scored by rule checks plus a Gemini judge validated against a human-labeled golden set, shown as a soft gate before deploys. Also a playground pinned to live or draft versions, a human inbox with take-over, analytics, and a dependency-free Shadow DOM widget that streams AI replies over SSE. Built with NestJS 11, Prisma 7, PostgreSQL 16 + pgvector, Redis, Gemini 2.5 Flash on Vertex AI, React 19 + Vite, React Flow, Firebase Auth, Cloud Run and Cloud SQL.
+Tech: NestJS, React 19, Vertex AI, pgvector, RAG, Evals
+Demonstrates: agents shipped like software, with versioned deploys, rollback, an eval gate and guardrails enforced before the model answers.
+Showcase: https://ivanmendoza.dev/agent-platform
 
 ---
 
 ## Achievements
+
+### 3rd place overall, RSI Hackathon
+Issuer: Kavak x OpenAI x Primero AI
+Date: Nov 2026
+Location: Mexico City
+Project: BREACH
+Story: https://ivanmendoza.dev/blog/kavak-openai-hackathon
 
 ### AI Engineer New York
 Issuer: AI Engineer

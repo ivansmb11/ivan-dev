@@ -67,15 +67,15 @@ function toContact() {
 
         <NuxtLink
           v-motion="enter(500)"
-          to="/agent-platform"
+          to="/blog/kavak-openai-hackathon"
           class="group hidden w-[clamp(10.5rem,13vw,14rem)] shrink-0 bg-white p-2 text-onyx shadow-2xl shadow-onyx/40 transition-transform duration-500 hover:-translate-y-1 md:block max-lg:portrait:hidden [@media(max-height:719px)]:hidden"
         >
-          <AssetSlot id="hero-featured-project" alt="Agent Platform" tone="ember" class="aspect-[6/7] w-full" />
+          <AssetSlot id="blog-hack26-poster" alt="BREACH, RSI Hackathon" tone="ember" class="aspect-[6/7] w-full" />
           <span class="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-0.5 bg-onyx/[0.06] px-2 py-1.5 text-[13px] text-onyx/70">
             <span class="flex items-center gap-1.5 uppercase">
-              <AsteriskMark class="size-3 text-accent" />Agent Platform
+              <AsteriskMark class="size-3 text-accent" />BREACH
             </span>
-            <span class="whitespace-nowrap">/{{ t('hero.featuredType') }}</span>
+            <span class="whitespace-nowrap">/{{ t('portfolio.hackathon') }}</span>
           </span>
         </NuxtLink>
       </div>
