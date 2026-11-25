@@ -73,6 +73,11 @@ export default {
     comingSoonText:
       "Mantente al tanto para más proyectos. Siempre estoy trabajando en algo nuevo y emocionante.",
     inProgress: 'En progreso',
+    shows: 'Qué demuestra',
+    showsBreach: 'Agentes que se mejoran solos con una compuerta de seguridad y aprobación humana, para que el sistema aprenda sin publicar checks que nadie verificó.',
+    showsAgentPlatform: 'Agentes publicados como software: deploys versionados, rollback, un gate de evals y guardrails que se aplican antes de que el modelo responda.',
+    showsVibebify: 'Un producto completo de punta a punta: OAuth, modelo de datos con row-level security, funciones sociales, desplegado y en vivo.',
+    showsConcierge: 'Acceso del agente gobernado por identidad: el modelo solo recibe las herramientas del departamento del usuario, y lo garantizan la red y el servidor, no el prompt.',
   },
   stats: {
     years: 'Años de Experiencia',

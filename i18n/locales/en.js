@@ -65,6 +65,11 @@ export default {
     comingSoon: 'More Coming Soon',
     comingSoonText: "Stay tuned for more projects. I'm always working on something new and exciting.",
     inProgress: 'In progress',
+    shows: 'What it shows',
+    showsBreach: 'Self-improving agents with a safety gate and a human approval step, so the system learns without shipping checks nobody verified.',
+    showsAgentPlatform: 'Agents shipped like software: versioned deploys, rollback, an eval gate and guardrails enforced before the model answers.',
+    showsVibebify: 'A full product end to end: OAuth, a data model with row-level security, social features, deployed and live.',
+    showsConcierge: 'Agent access governed by identity: the model only gets the tools for the user’s department, enforced by the network and the server, not the prompt.',
   },
   stats: {
     years: 'Years Experience',
