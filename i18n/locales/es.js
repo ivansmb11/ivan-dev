@@ -95,16 +95,24 @@ export default {
       period: "Ago 2026 - Presente",
       location: "Ciudad de México, México",
       mode: "Presencial",
-      description:
-        "Construyo agentes de IA y herramientas con LLMs para una fintech BNPL: los servidores MCP principales que usan nuestros desarrolladores, servidores MCP que auditan todas las operaciones financieras y agentes que resuelven tareas de ingeniería dentro del código. Hice el onboarding de los principales proveedores de IA de la empresa. Sigo a cargo de la arquitectura móvil y frontend.",
+      description: [
+        'Construyo servidores MCP que dejan a los agentes trabajar con sistemas financieros con acceso por identidad, mínimo privilegio y auditoría completa. Solo lectura por defecto; las acciones críticas esperan a una persona. [MÉTRICA PENDIENTE: equipos o agentes que los usan]',
+        'Opero agentes autónomos en producción para operaciones financieras: el agente decide, agenda su propio seguimiento y escala a una persona, mientras las reglas de cumplimiento se aplican fuera del modelo para que se sostengan aunque el prompt falle. [MÉTRICA PENDIENTE: resultado público del agente]',
+        'Publico agentes como software: evals antes de cada release, despliegue por cohortes con rollback, presupuesto de costo por ejecución y bitácora de cada acción.',
+        'Construyo agentes de ingeniería: revisión de PRs multiagente donde verificadores independientes intentan refutar cada hallazgo para que al PR solo llegue señal, y documentación que se actualiza sola con un quality gate en CI. Corren en sandbox y nunca ven credenciales reales. [MÉTRICA PENDIENTE: PRs revisados o tiempo ahorrado, si es público]',
+      ].join('\n'),
       skills: "Claude, Gemini, MCP, LangChain, LangSmith, Langfuse, Evals, GCP, Kubernetes",
       previous: {
         role: "Lead Software Engineer",
         period: "Jun 2023 - Ago 2026",
         duration: "3 años 3 meses",
         mode: "Híbrido",
-        description:
-          "Responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas (100 mil en Google Play y 20 mil en App Store) y 4.8 estrellas en App Store con más de 1.2 mil calificaciones, publicando versiones en Play Store, App Store y App Gallery. Diseñé el flujo de onboarding KYC y las integraciones con proveedores de verificación y riesgo que aprueban solicitantes y detectan fraude. Impulsé mejoras en procesos de ingeniería, promoví la adopción temprana de desarrollo asistido por IA (Cursor, Claude Code) y representé al equipo en el AI Engineer Code Summit en NYC.",
+        description: [
+          'Responsable de la arquitectura móvil y frontend de una app con más de 120 mil descargas (100 mil en Google Play y 20 mil en App Store) y 4.8 estrellas en App Store con más de 1.2 mil calificaciones, publicando en Play Store, App Store y App Gallery.',
+          'Diseñé el flujo de onboarding KYC y las integraciones con proveedores de verificación y riesgo que aprueban solicitantes y detectan fraude. [MÉTRICA PENDIENTE: tiempo de onboarding o tasa de aprobación, si es público]',
+          'Impulsé la adopción de desarrollo asistido por IA en el equipo (Cursor, Claude Code) y los cambios de proceso alrededor. [MÉTRICA PENDIENTE: adopción o impacto en entrega]',
+          'Representé al equipo en el AI Engineer Code Summit 2025 en Nueva York.',
+        ].join('\n'),
         skills: "React Native, Expo, TypeScript, Node.js, NestJS, PostgreSQL, Docker, CI/CD",
       },
     },

@@ -10,6 +10,8 @@ import { reveal } from '@/motion'
 const { t } = useI18n()
 const track = ref(null)
 
+const bullets = (key) => t(key).split('\n')
+
 const jobs = computed(() => [
   {
     key: 'zazpay',
@@ -20,7 +22,7 @@ const jobs = computed(() => [
     period: t('career.zazpay.period'),
     location: t('career.zazpay.location'),
     mode: t('career.zazpay.mode'),
-    description: t('career.zazpay.description'),
+    description: bullets('career.zazpay.description'),
     skills: t('career.zazpay.skills').split(', '),
     current: true,
     previous: {
@@ -30,7 +32,7 @@ const jobs = computed(() => [
       period: t('career.zazpay.previous.period'),
       duration: t('career.zazpay.previous.duration'),
       mode: t('career.zazpay.previous.mode'),
-      description: t('career.zazpay.previous.description'),
+      description: bullets('career.zazpay.previous.description'),
       skills: t('career.zazpay.previous.skills').split(', '),
     },
   },
@@ -44,7 +46,7 @@ const jobs = computed(() => [
     duration: t('career.prestavale.duration'),
     location: t('career.prestavale.location'),
     mode: t('career.prestavale.mode'),
-    description: t('career.prestavale.description'),
+    description: bullets('career.prestavale.description'),
     skills: t('career.prestavale.skills').split(', '),
     current: false,
   },
@@ -58,7 +60,7 @@ const jobs = computed(() => [
     duration: t('career.ge.duration'),
     location: t('career.ge.location'),
     mode: t('career.ge.mode'),
-    description: t('career.ge.description'),
+    description: bullets('career.ge.description'),
     skills: t('career.ge.skills').split(', '),
     current: false,
   },
@@ -203,7 +205,13 @@ onBeforeUnmount(() => observer?.disconnect())
                   </p>
                 </div>
 
-                <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ face.description }}</p>
+                <p v-if="face.description.length === 1" class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ face.description[0] }}</p>
+                <ul v-else class="mt-5 flex max-w-[34rem] flex-col gap-2 text-sm leading-relaxed text-graphite">
+                  <li v-for="line in face.description" :key="line" class="flex gap-2">
+                    <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 bg-accent" />
+                    <span>{{ line }}</span>
+                  </li>
+                </ul>
 
                 <ul class="mt-5 flex flex-wrap content-start gap-1.5">
                   <li
@@ -244,7 +252,13 @@ onBeforeUnmount(() => observer?.disconnect())
               </p>
             </div>
 
-            <p class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.description }}</p>
+            <p v-if="job.description.length === 1" class="mt-5 max-w-[34rem] text-sm leading-relaxed text-graphite">{{ job.description[0] }}</p>
+            <ul v-else class="mt-5 flex max-w-[34rem] flex-col gap-2 text-sm leading-relaxed text-graphite">
+              <li v-for="line in job.description" :key="line" class="flex gap-2">
+                <span aria-hidden="true" class="mt-[0.6em] size-1 shrink-0 bg-accent" />
+                <span>{{ line }}</span>
+              </li>
+            </ul>
 
             <ul class="mt-5 flex flex-wrap content-start gap-1.5">
               <li
