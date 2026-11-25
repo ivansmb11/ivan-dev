@@ -12,9 +12,23 @@ const { t } = useI18n()
 const track = ref(null)
 
 // A labeled placeholder needs more room than the final logo to stay legible.
-const logoBox = (id) => (slotSrc(id) ? 'h-10 w-36' : 'h-20 w-48')
+const logoBox = (id, wide) => (slotSrc(id) ? (wide ? 'h-10 w-60' : 'h-10 w-36') : 'h-20 w-48')
 
 const achievements = computed(() => [
+  {
+    key: 'hackathon2026',
+    slot: 'logo-kavak-openai-primero',
+    brand: 'Kavak x OpenAI x Primero',
+    wideLogo: true,
+    title: t('achievements.hackathon2026.title'),
+    issuer: t('achievements.hackathon2026.issuer'),
+    date: t('achievements.hackathon2026.date'),
+    location: t('achievements.hackathon2026.location'),
+    url: '',
+    to: '/blog/kavak-openai-hackathon',
+    linkLabel: t('achievements.readPost'),
+    credential: '',
+  },
   {
     key: 'nyc2026',
     slot: 'logo-ai-engineer',
@@ -100,7 +114,7 @@ const achievements = computed(() => [
               fit="contain"
               position="left center"
               class="min-w-0"
-              :class="logoBox(item.slot)"
+              :class="logoBox(item.slot, item.wideLogo)"
             />
             <span class="shrink-0 whitespace-nowrap rounded-[2px] bg-mist px-2 py-1 text-xs leading-none text-ink">{{ item.date }}</span>
           </div>

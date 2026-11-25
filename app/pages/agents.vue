@@ -133,6 +133,13 @@ Showcase: https://ivanmendoza.dev/concierge
 
 ## Achievements
 
+### 3rd place overall, RSI Hackathon
+Issuer: Kavak x OpenAI x Primero AI
+Date: Nov 2026
+Location: Mexico City
+Project: BREACH
+Story: https://ivanmendoza.dev/blog/kavak-openai-hackathon
+
 ### AI Engineer New York
 Issuer: AI Engineer
 Date: Oct 2026

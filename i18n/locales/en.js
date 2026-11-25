@@ -153,6 +153,12 @@ export default {
       date: '2022 - 2026',
       linkLabel: 'See all my badges on Google Skills',
     },
+    hackathon2026: {
+      title: '3rd place overall, RSI Hackathon',
+      issuer: 'Kavak x OpenAI x Primero AI',
+      date: 'Nov 2026',
+      location: 'Mexico City',
+    },
     nyc2026: {
       title: 'AI Engineer New York',
       issuer: 'AI Engineer',
