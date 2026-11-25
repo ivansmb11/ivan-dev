@@ -40,11 +40,12 @@ Every component also runs on the server during `nuxt generate`, where `window`, 
 ```
 app/
 ├── app.vue                      # Root: skip link, intro loader, shortcuts, navbar, <NuxtPage>, agent badge
-├── pages/                       # index (home), concierge, vibebify, agent-platform, agents, blog/ (index, [slug]), [...slug] (redirects home)
+├── pages/                       # index (home), concierge, vibebify, agent-platform, gecko, agents, blog/ (index, [slug]), [...slug] (redirects home)
 ├── composables/useTheme.js      # Light default, opt-in dark; toggles html.dark
 ├── composables/useGlass.js      # Glass on / reduced / off (menu, G key); toggles html.glass-reduced / html.glass-off
 ├── motion.js                    # reveal() / enter() variants for v-motion (respect reduced motion)
 ├── content/links.js             # Email, socials, home section ids, menu pages
+├── content/gecko.js             # Gecko case study: story chapters, domain map, use cases, loops (en/es side by side)
 ├── content/blog.js              # Blog posts: slug, date, cover slot, en/es text as blocks (h, p, quote, photo, gallery)
 ├── assets/
 │   ├── css/main.css             # Tailwind import, design tokens (@theme), dark palette (html.dark), utilities
@@ -54,7 +55,7 @@ app/
 └── components/
     ├── ui/                      # AssetSlot, AsteriskMark, SectionChip, SplitHeading, ArrowButton, PageHeader
     ├── HeroSection.vue … FooterSection.vue   # Home sections, in pages/index.vue order
-    ├── concierge/, vibebify/    # Case-study page components
+    ├── concierge/, vibebify/, gecko/   # Case-study page components (gecko: animated story, map, loops)
     └── BootSequence.vue, KeyboardShortcuts.vue, AgentFab.vue, AmbientBackdrop.vue (fixed light layer the glass bends)
 i18n/locales/                    # en.js, es.js
 nuxt.config.ts                   # Modules, <head> (title, description, fonts, beforePaint script), i18n, prerender routes

@@ -9,6 +9,7 @@ import SplitHeading from '@/components/ui/SplitHeading.vue'
 import ArrowButton from '@/components/ui/ArrowButton.vue'
 import SwipeDots from '@/components/ui/SwipeDots.vue'
 import BronzeMedal from '@/components/ui/BronzeMedal.vue'
+import GeckoCover from '@/components/gecko/GeckoCover.vue'
 import { reveal } from '@/motion'
 
 const { t } = useI18n()
@@ -16,6 +17,16 @@ const year = new Date().getFullYear()
 const track = ref(null)
 
 const projects = computed(() => [
+  {
+    key: 'gecko',
+    kind: 'framed',
+    cover: GeckoCover,
+    title: 'Gecko',
+    description: t('portfolio.gecko'),
+    tags: ['AI Agents', 'Evals', 'Policies', 'TypeScript', 'Hono', 'Claude'],
+    caseStudy: '/gecko',
+    label: t('portfolio.platform'),
+  },
   {
     key: 'breach',
     kind: 'framed',
@@ -95,7 +106,13 @@ const projects = computed(() => [
               class="absolute -top-4 right-4 z-10 h-20 w-auto drop-shadow-[0_8px_14px_rgba(90,46,18,0.35)] sm:right-6 sm:h-24"
             />
             <span class="block overflow-hidden rounded-glass-inner">
+              <component
+                :is="project.cover"
+                v-if="project.cover"
+                class="aspect-[4/3] w-full transition-transform duration-700 ease-out-quint group-hover:scale-[1.02]"
+              />
               <AssetSlot
+                v-else
                 :id="project.slot"
                 :alt="`${project.title} preview`"
                 class="aspect-[4/3] w-full transition-transform duration-700 ease-out-quint"
