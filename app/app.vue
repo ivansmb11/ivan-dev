@@ -4,10 +4,13 @@ import NavbarComponent from '@/components/NavbarComponent.vue'
 import BootSequence from '@/components/BootSequence.vue'
 import KeyboardShortcuts from '@/components/KeyboardShortcuts.vue'
 import AgentFab from '@/components/AgentFab.vue'
+import AmbientBackdrop from '@/components/AmbientBackdrop.vue'
 import { useTheme } from '@/composables/useTheme'
+import { useGlass } from '@/composables/useGlass'
 
 const { t, locale, setLocale } = useI18n()
 const { sync: syncTheme } = useTheme()
+const { sync: syncGlass } = useGlass()
 
 const booted = ref(false)
 // The prerendered HTML can't know whether the intro will play, so nothing is inert until the client decides.
@@ -19,6 +22,7 @@ useHead({ htmlAttrs: { lang: locale } })
 onMounted(() => {
   hydrated.value = true
   syncTheme()
+  syncGlass()
   const preferred = localStorage.getItem('locale') || (navigator.language.startsWith('es') ? 'es' : 'en')
   if (preferred !== locale.value) setLocale(preferred)
 })
@@ -40,6 +44,7 @@ function skipToContent() {
     @click.prevent="skipToContent"
   >{{ t('nav.skip') }}</a>
 
+  <AmbientBackdrop />
   <BootSequence v-if="!booted" @done="booted = true" />
   <KeyboardShortcuts />
 

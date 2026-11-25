@@ -5,9 +5,11 @@ import { X } from 'lucide-vue-next'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import { sections } from '@/content/links'
 import { useTheme } from '@/composables/useTheme'
+import { useGlass } from '@/composables/useGlass'
 
 const { t, locale, setLocale } = useI18n()
 const { toggle: toggleTheme } = useTheme()
+const { cycle: cycleGlass } = useGlass()
 const router = useRouter()
 const route = useRoute()
 
@@ -20,6 +22,7 @@ const shortcuts = [
   { keys: ['1-6'], desc: 'shortcuts.jump' },
   { keys: ['L'], desc: 'shortcuts.language' },
   { keys: ['D'], desc: 'shortcuts.theme' },
+  { keys: ['G'], desc: 'shortcuts.glass' },
   { keys: ['T'], desc: 'shortcuts.top' },
   { keys: ['Esc'], desc: 'shortcuts.close' },
 ]
@@ -77,6 +80,11 @@ function onKey(e) {
     return
   }
 
+  if (key === 'g') {
+    cycleGlass()
+    return
+  }
+
   if (key === 't') {
     window.scrollTo({ top: 0, behavior: scrollBehavior() })
   }
@@ -107,14 +115,14 @@ onUnmounted(() => window.removeEventListener('keydown', onKey, true))
   >
     <div
       v-if="open"
-      class="fixed inset-0 z-[9000] flex items-center justify-center bg-onyx/50 p-4"
+      class="fixed inset-0 z-[9000] flex items-center justify-center bg-onyx/40 p-4"
       @click.self="open = false"
     >
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="shortcuts-title"
-        class="w-full max-w-sm rounded-md border border-line bg-card p-6 text-ink shadow-[0_24px_60px_-28px_var(--color-night)]"
+        class="glass w-full max-w-sm rounded-glass p-6 text-ink"
       >
         <div class="flex items-center justify-between gap-4">
           <h2 id="shortcuts-title" class="flex items-center gap-2 text-sm font-bold uppercase tracking-[0.01em]">
@@ -125,21 +133,21 @@ onUnmounted(() => window.removeEventListener('keydown', onKey, true))
             ref="closeButton"
             type="button"
             :aria-label="t('nav.close')"
-            class="-mr-2 grid size-11 cursor-pointer place-items-center rounded-[3px] text-graphite transition-colors hover:bg-mist hover:text-ink active:bg-line"
+            class="-mr-2 grid size-11 cursor-pointer place-items-center rounded-full text-graphite transition-colors hover:glass-tint hover:text-ink active:bg-line"
             @click="open = false"
           >
             <X :size="18" aria-hidden="true" />
           </button>
         </div>
 
-        <dl class="mt-4 divide-y divide-line border-y border-line">
+        <dl class="mt-4 divide-y divide-ink/8 border-y border-ink/8">
           <div v-for="s in shortcuts" :key="s.desc" class="flex items-center justify-between gap-4 py-2.5">
             <dt class="text-sm text-graphite">{{ t(s.desc) }}</dt>
             <dd class="flex gap-1">
               <kbd
                 v-for="k in s.keys"
                 :key="k"
-                class="min-w-7 rounded-[3px] bg-mist px-2 py-1 text-center font-sans text-xs font-semibold text-ink"
+                class="glass-tint min-w-7 rounded-md px-2 py-1 text-center font-sans text-xs font-semibold text-ink"
               >{{ k }}</kbd>
             </dd>
           </div>

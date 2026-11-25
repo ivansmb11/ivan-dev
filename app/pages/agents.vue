@@ -24,7 +24,7 @@ import PageHeader from '@/components/ui/PageHeader.vue'
           </div>
         </div>
 
-        <pre class="block min-w-0 border border-line bg-card p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink [overflow-wrap:anywhere] md:p-8 lg:col-span-8">
+        <pre class="glass block min-w-0 rounded-glass p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink [overflow-wrap:anywhere] md:p-8 lg:col-span-8">
 # Ivan Mendoza
 ## AI Engineer | Mobile & Frontend Lead
 

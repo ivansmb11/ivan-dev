@@ -68,7 +68,6 @@ const stack = [
 
 const steps = ['ingest', 'decide', 'retrieve', 'generate', 'act']
 
-const frameShadow = 'shadow-[0_24px_48px_-28px_color-mix(in_oklch,var(--color-night)_45%,transparent)]'
 
 // Keeps the decorative "(08)" counter on the same line as the last word, so it never wraps alone.
 function splitLast(text) {
@@ -102,17 +101,17 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
     </header>
 
     <div class="container-site mt-12 md:mt-16">
-      <figure v-motion="enter(400)" class="bg-card p-2 md:p-3" :class="frameShadow">
+      <figure v-motion="enter(400)" class="glass rounded-glass p-2 md:p-3">
         <img
           :src="overviewImg"
           :alt="t('agentPlatform.heroAlt')"
           width="2400"
           height="1500"
-          class="block h-auto w-full bg-mist"
+          class="block h-auto w-full overflow-hidden rounded-glass-inner bg-mist"
           loading="eager"
           fetchpriority="high"
         />
-        <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+        <figcaption class="mt-2 flex items-center justify-between gap-4 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
           <span class="flex items-center gap-1.5 uppercase text-ink">
             <AsteriskMark class="size-3 text-accent" />{{ t('agentPlatform.heroCaption') }}
           </span>
@@ -122,9 +121,9 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
     </div>
 
     <section aria-labelledby="ap-idea" class="container-site mt-20 md:mt-32">
-      <div v-motion="reveal()" class="grid gap-8 bg-mist p-6 sm:p-8 md:p-12 lg:grid-cols-12 lg:gap-10">
+      <div v-motion="reveal()" class="glass grid gap-8 rounded-glass p-6 sm:p-8 md:p-12 lg:grid-cols-12 lg:gap-10">
         <h2 id="ap-idea" class="lg:col-span-4">
-          <SectionChip class="bg-card! text-ink!">{{ t('agentPlatform.ideaLabel') }}</SectionChip>
+          <SectionChip tone="tint">{{ t('agentPlatform.ideaLabel') }}</SectionChip>
         </h2>
         <p class="max-w-[46rem] text-lg leading-[1.55] font-medium tracking-[-0.01em] text-ink md:text-[1.375rem] lg:col-span-8">
           {{ t('agentPlatform.ideaText') }}
@@ -160,10 +159,10 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
             :aria-selected="activeFeature === i"
             aria-controls="ap-feature-panel"
             :tabindex="activeFeature === i ? 0 : -1"
-            class="group flex min-h-11 w-full cursor-pointer items-start gap-3.5 rounded-[3px] border-l-[3px] px-4 py-3.5 text-left transition-colors duration-200 active:translate-y-px"
+            class="group flex min-h-11 w-full cursor-pointer items-start gap-3.5 rounded-glass border-l-[3px] px-4 py-3.5 text-left transition-colors duration-200 active:translate-y-px"
             :class="activeFeature === i
               ? 'border-accent bg-ink text-paper'
-              : 'border-transparent bg-card text-ink hover:border-line hover:bg-mist'"
+              : 'glass border-transparent text-ink hover:bg-card/80'"
             @click="selectFeature(i)"
           >
             <component
@@ -195,8 +194,8 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
           :aria-labelledby="`ap-tab-${current.key}`"
           class="min-w-0 lg:col-span-8"
         >
-          <figure class="bg-card p-2 md:p-3" :class="frameShadow">
-            <div class="relative aspect-[16/10] overflow-hidden bg-mist">
+          <figure class="glass rounded-glass p-2 md:p-3">
+            <div class="relative aspect-[16/10] overflow-hidden rounded-glass-inner bg-mist">
               <transition
                 enter-active-class="transition-opacity duration-300 ease-out"
                 enter-from-class="opacity-0"
@@ -215,7 +214,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
                 />
               </transition>
             </div>
-            <figcaption class="mt-2 flex items-center justify-between gap-4 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+            <figcaption class="mt-2 flex items-center justify-between gap-4 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
               <span class="flex min-w-0 items-center gap-1.5 uppercase text-ink">
                 <AsteriskMark class="size-3 shrink-0 text-accent" />
                 <span class="truncate">{{ t(`agentPlatform.features.${current.key}.title`) }}</span>
@@ -245,7 +244,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
         <li
           v-for="tech in stack"
           :key="tech.name"
-          class="flex min-h-32 flex-col justify-between gap-6 bg-card p-4 md:p-5 lg:min-h-40"
+          class="flex min-h-32 flex-col justify-between gap-6 glass rounded-glass p-4 md:p-5 lg:min-h-40"
         >
           <span class="text-[13px] text-graphite">{{ t(`agentPlatform.stackCategories.${tech.key}`) }}</span>
           <span class="text-base leading-tight font-bold tracking-[-0.01em] uppercase md:text-lg">{{ tech.name }}</span>
@@ -262,17 +261,17 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
       </div>
 
       <div class="mt-10 grid gap-8 md:mt-16 lg:grid-cols-12 lg:gap-10">
-        <figure v-motion="reveal()" class="min-w-0 self-start bg-card p-2 md:p-3 lg:col-span-8" :class="frameShadow">
+        <figure v-motion="reveal()" class="min-w-0 self-start glass rounded-glass p-2 md:p-3 lg:col-span-8">
           <img
             :src="architectureImg"
             :alt="t('agentPlatform.archAlt')"
             width="2180"
             height="880"
-            class="block h-auto w-full bg-mist"
+            class="block h-auto w-full overflow-hidden rounded-glass-inner bg-mist"
             loading="lazy"
             decoding="async"
           />
-          <figcaption class="mt-2 flex items-center gap-1.5 bg-mist-soft px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
+          <figcaption class="mt-2 flex items-center gap-1.5 glass-tint rounded-glass-inner px-3 py-2 text-[13px] text-graphite md:mt-3 md:text-sm">
             <AsteriskMark class="size-3 shrink-0 text-accent" />
             <span class="truncate">{{ t('agentPlatform.archCaption') }}</span>
           </figcaption>
@@ -281,7 +280,7 @@ const counterClass = 'ml-2 hidden align-top text-[0.28em] leading-none font-semi
         <div v-motion="reveal(120)" class="min-w-0 lg:col-span-4">
           <h3 class="text-sm font-semibold uppercase tracking-[0.01em] text-ink">{{ t('agentPlatform.archStepsTitle') }}</h3>
           <ol class="mt-5 flex flex-col gap-1.5">
-            <li v-for="(step, i) in steps" :key="step" class="flex gap-3.5 bg-card p-4">
+            <li v-for="(step, i) in steps" :key="step" class="flex gap-3.5 glass rounded-glass p-4">
               <span aria-hidden="true" class="mt-0.5 shrink-0 text-xs font-medium tabular-nums text-accent">{{ pad(i + 1) }}</span>
               <span class="text-[15px] leading-relaxed text-graphite">{{ t(`agentPlatform.archSteps.${step}`) }}</span>
             </li>

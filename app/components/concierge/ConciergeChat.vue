@@ -34,11 +34,11 @@ const scenarios = [
 
 <template>
   <div class="grid grid-cols-1 gap-4 lg:grid-cols-12 lg:gap-6">
-    <figure v-motion="reveal()" class="rounded-[3px] bg-onyx p-2 text-white lg:col-span-8 dark:ring-1 dark:ring-line">
+    <figure v-motion="reveal()" class="rounded-glass bg-onyx p-2 text-white lg:col-span-8 dark:ring-1 dark:ring-line">
       <iframe
         :src="`https://www.youtube.com/embed/${YOUTUBE_ID}?rel=0`"
         :title="`${t('concierge.title')} | ${t('concierge.demoTitle')}`"
-        class="block aspect-video w-full rounded-[2px] border-0 bg-night"
+        class="block aspect-video w-full rounded-glass-inner border-0 bg-night"
         loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
@@ -56,7 +56,7 @@ const scenarios = [
       <li
         v-for="s in scenarios"
         :key="s.label"
-        class="flex min-h-[11rem] flex-col justify-between gap-6 rounded-[3px] bg-mist p-5 lg:min-h-0"
+        class="flex min-h-[11rem] flex-col justify-between gap-6 glass rounded-glass p-5 lg:min-h-0"
       >
         <div class="flex items-start justify-between gap-3">
           <h3 class="text-sm text-graphite">{{ t(s.labelKey, s.label) }}:</h3>
@@ -76,7 +76,7 @@ const scenarios = [
       </li>
     </ul>
 
-    <p class="flex items-start gap-3 rounded-[3px] border border-l-[3px] border-line border-l-accent bg-card p-4 text-sm leading-relaxed text-graphite sm:p-5 lg:col-span-8">
+    <p class="flex items-start gap-3 glass rounded-glass p-4 text-sm leading-relaxed text-graphite sm:p-5 lg:col-span-8">
       <Shield :size="18" :stroke-width="1.75" aria-hidden="true" class="mt-0.5 shrink-0 text-accent" />
       <span>{{ t('concierge.securityNote') }}</span>
     </p>

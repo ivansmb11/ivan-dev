@@ -5,11 +5,13 @@ import { Sun, Moon } from 'lucide-vue-next'
 import AsteriskMark from '@/components/ui/AsteriskMark.vue'
 import { sections, pages, socials, email } from '@/content/links'
 import { useTheme } from '@/composables/useTheme'
+import { useGlass, GLASS_LEVELS } from '@/composables/useGlass'
 
 const emit = defineEmits(['menu-change'])
 
 const { t, locale, setLocale } = useI18n()
 const { theme, toggle: toggleTheme } = useTheme()
+const { glass, apply: setGlass } = useGlass()
 const router = useRouter()
 const route = useRoute()
 
@@ -81,7 +83,7 @@ onUnmounted(() => {
       ? 'text-white [&_:focus-visible]:outline-white!'
       : menuOpen
         ? 'text-ink'
-        : 'bg-paper/85 text-ink shadow-[0_1px_0_var(--color-line)] backdrop-blur-md'"
+        : 'glass text-ink'"
   >
     <nav class="container-site flex h-[5.25rem] items-center justify-between gap-6" aria-label="Primary">
       <a
@@ -167,13 +169,13 @@ onUnmounted(() => {
       v-if="menuOpen"
       id="site-menu"
       ref="menuPanel"
-      class="fixed inset-0 z-40 overflow-y-auto bg-paper text-ink"
+      class="glass-thick fixed inset-0 z-40 overflow-y-auto text-ink"
       role="dialog"
       :aria-label="t('nav.menu')"
     >
       <div class="container-site flex min-h-full flex-col justify-between gap-12 pt-28 pb-10">
         <ul class="flex flex-col">
-          <li v-for="link in sections" :key="link.id" class="border-b border-line">
+          <li v-for="link in sections" :key="link.id" class="border-b border-ink/10">
             <a
               :href="hrefFor(link.id)"
               class="group flex items-center justify-between py-3 font-display text-display-md uppercase transition-colors hover:text-accent"
@@ -183,7 +185,7 @@ onUnmounted(() => {
               <AsteriskMark class="size-6 text-accent opacity-0 transition-opacity group-hover:opacity-100" />
             </a>
           </li>
-          <li v-for="page in pages" :key="page.to" class="border-b border-line">
+          <li v-for="page in pages" :key="page.to" class="border-b border-ink/10">
             <NuxtLink
               :to="page.to"
               class="group flex items-center justify-between py-3 font-display text-display-md uppercase transition-colors hover:text-accent"
@@ -224,6 +226,19 @@ onUnmounted(() => {
                 <Moon v-else :size="16" aria-hidden="true" />
                 {{ theme === 'dark' ? t('nav.lightMode') : t('nav.darkMode') }}
               </button>
+              <div class="flex items-center gap-1.5" role="group" :aria-label="t('nav.glass')">
+                <span class="text-graphite" aria-hidden="true">{{ t('nav.glass') }}:</span>
+                <template v-for="(level, i) in GLASS_LEVELS" :key="level">
+                  <span v-if="i" aria-hidden="true" class="text-muted">/</span>
+                  <button
+                    type="button"
+                    class="min-h-11 cursor-pointer px-1"
+                    :class="glass === level ? 'text-ink' : 'text-graphite hover:text-ink'"
+                    :aria-pressed="glass === level"
+                    @click="setGlass(level)"
+                  >{{ t(`nav.glassLevels.${level}`) }}</button>
+                </template>
+              </div>
             </div>
             <a :href="`mailto:${email}`" class="link-underline w-fit text-base font-medium">{{ email }}</a>
           </div>

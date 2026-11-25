@@ -121,10 +121,10 @@ function toContact() {
           <div
             ref="counterEl"
             v-motion="reveal(100)"
-            class="relative isolate flex min-h-[22rem] flex-col justify-between overflow-hidden rounded-[4px] bg-card p-6 pt-9 sm:row-span-2 sm:min-h-[26rem] md:p-8 md:pt-10"
+            class="relative isolate flex min-h-[22rem] flex-col justify-between glass overflow-hidden rounded-glass p-6 pt-9 sm:row-span-2 sm:min-h-[26rem] md:p-8 md:pt-10"
           >
-            <AssetSlot id="about-texture" tone="white" compact class="absolute inset-0 -z-20" />
-            <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-b from-card/55 via-card/25 to-card/85" />
+            <!-- Faint, so the glass still shows the light behind it; the stats sit on the frost, not on the photo -->
+            <AssetSlot id="about-texture" tone="white" compact class="absolute inset-0 -z-20 opacity-25 mix-blend-multiply dark:mix-blend-screen" />
 
             <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.01em] text-ink">
               <AsteriskMark class="size-3.5 text-accent" :weight="2" />{{ t('about.statsLabel') }}
@@ -145,7 +145,7 @@ function toContact() {
           <!-- dark:border: the onyx-shaded bottom is ~1:1 against the dark page, so the card edge needs a rule there -->
           <div
             v-motion="reveal(180)"
-            class="relative isolate flex aspect-[7/6] flex-col items-center justify-between overflow-hidden rounded-[4px] p-6 pt-9 text-center text-white md:pt-10 dark:border dark:border-line"
+            class="relative isolate flex aspect-[7/6] flex-col items-center justify-between overflow-hidden rounded-glass p-6 pt-9 text-center text-white md:pt-10 dark:border dark:border-line"
           >
             <AssetSlot id="about-role-card" tone="dark" compact alt="" class="absolute inset-0 -z-20" />
             <!-- onyx, not ink: ink flips to near-white in the dark theme and would wash out the white text -->
@@ -164,7 +164,7 @@ function toContact() {
             v-for="(item, i) in highlights"
             :key="item.key"
             v-motion="reveal(220 + i * 60)"
-            class="flex flex-col rounded-[4px] bg-card p-6 md:p-8"
+            class="glass flex flex-col rounded-glass p-6 md:p-8"
           >
             <component :is="item.icon" :size="22" :stroke-width="1.75" class="shrink-0 text-accent" aria-hidden="true" />
             <h3 class="mt-7 text-[15px] font-semibold uppercase tracking-[0.01em] text-ink">{{ item.title }}</h3>

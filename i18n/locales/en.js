@@ -13,6 +13,8 @@ export default {
     lightMode: 'Switch to light mode',
     darkMode: 'Switch to dark mode',
     language: 'Language',
+    glass: 'Glass',
+    glassLevels: { on: 'On', reduced: 'Reduced', off: 'Off' },
   },
   hero: {
     greeting: "Hi, I'm {name}.",
@@ -464,6 +466,7 @@ export default {
     jump: 'Jump to section',
     language: 'Switch language',
     theme: 'Switch light or dark mode',
+    glass: 'Cycle glass: on, reduced, off',
     top: 'Scroll to top',
     close: 'Close this panel',
     hint: 'Press ? to show or hide',

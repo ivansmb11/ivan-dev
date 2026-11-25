@@ -13,6 +13,8 @@ export default {
     lightMode: 'Cambiar a modo claro',
     darkMode: 'Cambiar a modo oscuro',
     language: 'Idioma',
+    glass: 'Vidrio',
+    glassLevels: { on: 'Activado', reduced: 'Reducido', off: 'Desactivado' },
   },
   hero: {
     greeting: "Hola, soy {name}.",
@@ -476,6 +478,7 @@ export default {
     jump: 'Ir a una sección',
     language: 'Cambiar idioma',
     theme: 'Cambiar entre modo claro y oscuro',
+    glass: 'Cambiar vidrio: activado, reducido, desactivado',
     top: 'Volver arriba',
     close: 'Cerrar este panel',
     hint: 'Presiona ? para mostrar u ocultar',

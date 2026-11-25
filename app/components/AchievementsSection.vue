@@ -84,7 +84,7 @@ const achievements = computed(() => [
           v-for="(item, i) in achievements"
           :key="item.key"
           v-motion="reveal(i * 120)"
-          class="group relative isolate flex flex-col overflow-hidden rounded-[3px] bg-card p-6 sm:p-7 lg:row-span-3 lg:nth-[n+3]:mt-6 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
+          class="group relative isolate flex flex-col glass overflow-hidden rounded-glass p-6 sm:p-7 lg:row-span-3 lg:nth-[n+3]:mt-6 lg:grid lg:grid-cols-1 lg:grid-rows-subgrid lg:gap-y-0"
         >
           <AssetSlot
             id="achievement-stamp"
@@ -102,7 +102,7 @@ const achievements = computed(() => [
               class="min-w-0"
               :class="logoBox(item.slot)"
             />
-            <span class="shrink-0 whitespace-nowrap rounded-[2px] bg-mist px-2 py-1 text-xs leading-none text-ink">{{ item.date }}</span>
+            <span class="shrink-0 glass-tint whitespace-nowrap rounded-full px-2.5 py-1 text-xs leading-none text-ink">{{ item.date }}</span>
           </div>
 
           <div class="mt-8 md:mt-10">
