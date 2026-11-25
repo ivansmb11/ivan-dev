@@ -70,6 +70,8 @@ const jobs = computed(() => [
 const turned = ref(false)
 const faceEls = ref([])
 const faceHeights = ref([])
+const cubes = ref([])
+const overhang = ref(0)
 let hoverLocked = false
 let lastPointer = ''
 let observer
@@ -92,10 +94,23 @@ function onArrowClick() {
 onMounted(() => {
   observer = new ResizeObserver(() => {
     faceHeights.value = faceEls.value.map((el) => el.offsetHeight)
+    measureOverhang()
   })
   faceEls.value.forEach((el) => observer.observe(el))
+  observer.observe(track.value)
 })
 onBeforeUnmount(() => observer?.disconnect())
+
+// The cube sits outside the grid's row sizing on md+, so when its taller face runs past the other cards
+// the list has to reserve that space itself, or the next section slides under it. The taller face is
+// used either way, so turning the cube never moves the page.
+function measureOverhang() {
+  const [cube] = cubes.value
+  if (!cube || !track.value) return
+  const cubeBottom = cube.getBoundingClientRect().top + Math.max(0, ...faceHeights.value)
+  const listBottom = track.value.getBoundingClientRect().bottom - overhang.value
+  overhang.value = Math.max(0, Math.ceil(cubeBottom - listBottom))
+}
 </script>
 
 <template>
@@ -115,7 +130,7 @@ onBeforeUnmount(() => observer?.disconnect())
       </div>
 
       <!-- Subgrid rows keep photos, roles and descriptions on shared baselines across the three cards. -->
-      <ol ref="track" class="swipe-track mt-14 grid grid-cols-1 gap-x-5 gap-y-16 md:mt-20 md:grid-cols-3 md:gap-y-0 lg:gap-x-6">
+      <ol ref="track" :style="overhang ? { paddingBottom: `${overhang}px` } : undefined" class="swipe-track mt-14 grid grid-cols-1 gap-x-5 gap-y-16 md:mt-20 md:grid-cols-3 md:gap-y-0 lg:gap-x-6">
         <li
           v-for="(job, i) in jobs"
           :key="job.key"
@@ -134,6 +149,7 @@ onBeforeUnmount(() => observer?.disconnect())
           <!-- Zero height on md+ keeps the turning cube out of the shared row sizing, so the neighbours never shift. -->
           <div
             v-if="job.previous"
+            ref="cubes"
             class="relative mt-6 [container-type:inline-size] [perspective:1800px] transition-[height] duration-[900ms] ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
             :style="faceHeights.length ? { height: `${faceHeights[turned ? 1 : 0]}px` } : undefined"
           >
