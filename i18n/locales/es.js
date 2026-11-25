@@ -33,16 +33,14 @@ export default {
     title: "Sobre mí",
     headingLead: "Agentes confiables",
     headingRest: "en fintech regulada",
+    thesis: "No confío en que el modelo sea seguro. Pongo la garantía alrededor.",
     roleCardText: "Construyo agentes de IA y servidores MCP para entornos regulados, con los controles fuera del modelo: identidad, sandbox, presupuestos, evals y auditoría.",
     statsLabel: "En números",
-    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial. Construyo agentes de IA, servidores MCP y agentes de ingeniería que corren en producción bajo reglas regulatorias. Mi regla: no confiar en que el modelo sea seguro, poner la garantía alrededor. El acceso se rige por identidad y mínimo privilegio, las reglas de cumplimiento se aplican fuera del modelo, cada release pasa evals y cada acción deja rastro de auditoría.",
+    bio1: "AI Engineer en una fintech mexicana de BNPL y crédito comercial. Construyo agentes de IA, servidores MCP y agentes de ingeniería que corren en producción bajo reglas regulatorias. El acceso se rige por identidad y mínimo privilegio, las reglas de cumplimiento se aplican fuera del modelo, cada release pasa evals y cada acción deja rastro de auditoría.",
     bio2: "Vengo de mobile. Sigo a cargo de la arquitectura móvil y frontend de una app con más de 120 mil descargas y 4.8 estrellas en App Store, incluyendo el flujo de onboarding KYC y las integraciones con proveedores que aprueban solicitantes y detectan fraude. Antes construí apps de crédito en Presta Vale y servicios backend en Spring Boot y Java en GE Aerospace.",
     education: "Educación",
     educationText:
       "Ingeniería en Tecnologías de la Información y Negocios Digitales en la Universidad Anáhuac, Querétaro. Líder electo del consejo estudiantil del programa de Ingeniería.",
-    experience: "Experiencia",
-    experienceText:
-      "AI Engineer en ZAZPAY, una fintech BNPL, con agentes y servidores MCP en producción. Antes, Lead Software Engineer detrás de una app con más de 120 mil descargas.",
     location: "Ubicación",
     locationText:
       "Originario de Sinaloa, México. Actualmente en la Ciudad de México.",
