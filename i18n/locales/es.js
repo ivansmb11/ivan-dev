@@ -17,12 +17,12 @@ export default {
   hero: {
     greeting: "Hola, soy {name}.",
     subtitle:
-      "AI Engineer y Lead de Mobile y Frontend construyendo productos fintech, desde agentes de IA y servidores MCP hasta apps móviles y plataformas escalables.",
+      "AI Engineer construyendo agentes para fintech regulada. No confío en que el modelo sea seguro, pongo la garantía alrededor: identidad, sandboxes, reglas de cumplimiento, evals y auditoría.",
     location: "Ciudad de México, MX",
-    tagline: "Construyo productos fintech, desde apps móviles hasta plataformas escalables",
+    tagline: "Construyo agentes de IA para fintech regulada, con las garantías fuera del modelo",
     featuredType: "Proyecto personal",
     letsTalk: "Hablemos",
-    role: "AI Engineer {'|'} Mobile & Frontend Lead",
+    role: "AI Engineer {'|'} Agentes para fintech",
     scroll: "Desliza para explorar",
   },
   trusted: {

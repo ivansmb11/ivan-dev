@@ -16,12 +16,12 @@ export default {
   },
   hero: {
     greeting: "Hi, I'm {name}.",
-    subtitle: 'AI Engineer and Mobile & Frontend Lead building fintech products, from AI agents and MCP servers to mobile apps and scalable platforms.',
+    subtitle: "AI Engineer building agents for regulated fintech. I don't trust the model to be safe, I put the guarantee around it: identity, sandboxes, compliance rules, evals and audit trails.",
     location: 'Mexico City, MX',
-    tagline: 'I build fintech products, from mobile apps to scalable platforms',
+    tagline: 'I build AI agents for regulated fintech, with the guarantees outside the model',
     featuredType: 'Side project',
     letsTalk: "Let's talk",
-    role: "AI Engineer {'|'} Mobile & Frontend Lead",
+    role: "AI Engineer {'|'} Agents for fintech",
     scroll: 'Scroll to explore',
   },
   trusted: {
